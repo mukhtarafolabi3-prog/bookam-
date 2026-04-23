@@ -29,7 +29,6 @@ body{
   height:100vh;
 }
 
-/* BOX */
 .box{
   background:white;
   width:100%;
@@ -40,17 +39,10 @@ body{
   text-align:center;
 }
 
-h2{
-  color:var(--dark);
-  margin-bottom:5px;
-}
+h2{ color:var(--dark); margin-bottom:5px; }
 
-p{
-  color:var(--muted);
-  margin-bottom:20px;
-}
+p{ color:var(--muted); margin-bottom:20px; }
 
-/* INPUTS */
 input, select{
   width:100%;
   padding:12px;
@@ -60,7 +52,6 @@ input, select{
   outline:none;
 }
 
-/* BUTTON */
 button{
   width:100%;
   padding:12px;
@@ -75,7 +66,6 @@ button:hover{
   background:var(--dark);
 }
 
-/* SMALL INFO */
 .info{
   font-size:13px;
   color:var(--muted);
@@ -119,7 +109,7 @@ button:hover{
 
 </div>
 
-<!-- PAYSTACK -->
+<!-- PAYSTACK SCRIPT -->
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
 <script>
@@ -130,6 +120,16 @@ document.getElementById("vtuForm").addEventListener("submit", function(e){
   let network = document.getElementById("network").value;
   let type = document.getElementById("type").value;
   let amount = document.getElementById("amount").value;
+
+  if(!phone || !amount){
+    alert("Please fill all fields");
+    return;
+  }
+
+  if(typeof PaystackPop === "undefined"){
+    alert("Paystack failed to load. Check internet.");
+    return;
+  }
 
   let handler = PaystackPop.setup({
     key: "pk_live_2bc3134481d019ee905a4c89c35eccca8fa2b6c8",
@@ -146,10 +146,33 @@ document.getElementById("vtuForm").addEventListener("submit", function(e){
     },
 
     callback: function(response){
+
       alert("Payment successful! Ref: " + response.reference);
 
-      // Later: connect VTU API here
-      console.log({ phone, network, type, amount });
+      // IMPORTANT: backend call (for airtime delivery)
+      fetch("http://localhost:3000/api/vtu/airtime", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          reference: response.reference,
+          phone: phone,
+          network: network,
+          type: type,
+          amount: amount
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message || "Processed successfully");
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(err);
+        alert("Error processing airtime");
+      });
+
     },
 
     onClose: function(){
