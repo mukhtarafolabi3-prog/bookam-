@@ -1,14 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bookam</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bookam - All-in-One Booking Platform</title>
+
+<style>
+:root{
+  --purple:#7c3aed;
+  --dark:#5b21b6;
+  --bg:#f9fafb;
+  --text:#1f1f2e;
+  --muted:#6b7280;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* NAVBAR */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background:white;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  color:var(--dark);
+}
+
+.nav-links{
+  display:flex;
+  list-style:none;
+  gap:20px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:var(--text);
+}
+
+.nav-links a:hover{
+  color:var(--purple);
+}
+
+.cta-btn{
+  background:var(--purple);
+  color:white;
+  padding:8px 15px;
+  border-radius:6px;
+  text-decoration:none;
+}
+
+.menu-toggle{
+  display:none;
+  font-size:24px;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:80px 30px;
+}
+
+.hero-text h1{
+  font-size:45px;
+  color:var(--dark);
+}
+
+.hero-text p{
+  margin:15px 0;
+  color:var(--muted);
+}
+
+.btn{
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:6px;
+  text-decoration:none;
+}
+
+.btn-primary{
+  background:var(--purple);
+  color:white;
+}
+
+.btn-outline{
+  border:1px solid var(--purple);
+  color:var(--purple);
+  margin-left:10px;
+}
+
+/* SECTIONS */
+.section{
+  padding:70px 20px;
+  text-align:center;
+}
+
+.section h2{
+  font-size:28px;
+  margin-bottom:10px;
+  color:var(--dark);
+}
+
+.section p{
+  color:var(--muted);
+  max-width:700px;
+  margin:auto;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+}
+
+.card a{
+  display:inline-block;
+  margin-top:10px;
+  background:var(--purple);
+  color:white;
+  padding:8px 12px;
+  border-radius:6px;
+  text-decoration:none;
+}
+
+/* CTA */
+.cta{
+  background:var(--purple);
+  color:white;
+  padding:60px;
+  text-align:center;
+}
+
+/* CONTACT */
+.socials a{
+  margin:0 10px;
+  color:var(--purple);
+  text-decoration:none;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:20px;
+  background:white;
+  margin-top:30px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .hero{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .nav-links{
+    position:absolute;
+    top:60px;
+    right:-100%;
+    flex-direction:column;
+    background:white;
+    padding:20px;
+    transition:0.3s;
+  }
+
+  .nav-links.active{
+    right:0;
+  }
+
+  .menu-toggle{
+    display:block;
+  }
+}
+</style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <header class="navbar">
   <h2 class="logo">Bookam</h2>
 
@@ -16,81 +216,111 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="services.html">Services</a></li>
-    <li><a href="bookam.html">Why Bookam</a></li>
+    <li><a href="">Why Us</a></li>
     <li><a href="Contact.html">Contact</a></li>
   </ul>
 
-  <a class="cta-btn" href="get.html">Get Started</a>
-
+  <a href="#services" class="cta-btn">Get Started</a>
   <div class="menu-toggle" id="menuToggle">☰</div>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-text">
-    <h1>All-in-One Booking Platform</h1>
-    <p>Book events, hotels, tickets, and digital services in one place.</p>
+    <h1>Book Everything in One Place</h1>
+    <p>Tickets, hotels, airtime & events — simple, fast, and secure.</p>
 
-    <div class="hero-buttons">
-      <a href="#services" class="btn-primary">Start Exploring</a>
-      <a href="#why" class="btn-outline">Why Bookam</a>
-    </div>
-  </div>
-
-  <div class="hero-img">
-    <img src="images/hero.png" alt="Bookam platform preview">
+    <a href="#services" class="btn btn-primary">Start Now</a>
+    <a href="#about" class="btn btn-outline">Learn More</a>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="section">
-  <h2>What is Bookam?</h2>
-  <p>Bookam is a modern platform that combines bookings, tickets, hotels, and digital services into one seamless experience.</p>
+<section class="section" id="about">
+  <h2>About Bookam</h2>
+  <p>
+    Bookam is a modern digital platform that connects users to booking services,
+    events, and VTU services in one seamless system.
+  </p>
 </section>
 
 <!-- SERVICES -->
-<section id="services" class="section">
+<section class="section" id="services">
   <h2>Our Services</h2>
 
   <div class="grid">
-    <div class="card"><h3>🎟 Tickets</h3><p>Manage events with QR entry.</p></div>
-    <div class="card"><h3>🏨 Hotels</h3><p>Book verified accommodations.</p></div>
-    <div class="card"><h3>🏛 Venues</h3><p>Find event spaces easily.</p></div>
-    <div class="card"><h3>🏆 Contests</h3><p>Run voting competitions.</p></div>
-    <div class="card"><h3>📱 VTU</h3><p>Buy airtime & data instantly.</p></div>
+
+    <div class="card">
+      <h3>🎟 Tickets</h3>
+      <p>Buy event tickets instantly.</p>
+      <a href="ticket.html">Buy Ticket</a>
+    </div>
+
+    <div class="card">
+      <h3>📱 VTU</h3>
+      <p>Airtime & data recharge.</p>
+      <a href="data.html">Recharge</a>
+    </div>
+
+    <div class="card">
+      <h3>🏨 Hotels</h3>
+      <p>Book accommodations easily.</p>
+      <a href="#">Coming Soon</a>
+    </div>
+
+    <div class="card">
+      <h3>🏆 Events</h3>
+      <p>Manage and attend events.</p>
+      <a href="#">Coming Soon</a>
+    </div>
+
   </div>
 </section>
 
 <!-- WHY -->
-<section id="why" class="section">
+<section class="section" id="why">
   <h2>Why Choose Bookam?</h2>
 
   <div class="grid">
-    <div class="card"><h3>⚡ Simple</h3><p>Everything in one place.</p></div>
-    <div class="card"><h3>🔒 Secure</h3><p>Safe payments.</p></div>
-    <div class="card"><h3>🚀 Fast</h3><p>Instant booking.</p></div>
-    <div class="card"><h3>💬 Support</h3><p>24/7 help.</p></div>
+    <div class="card"><h3>⚡ Fast</h3><p>Instant booking system</p></div>
+    <div class="card"><h3>🔒 Secure</h3><p>Safe payments</p></div>
+    <div class="card"><h3>🎯 Simple</h3><p>Easy to use</p></div>
+    <div class="card"><h3>💬 Support</h3><p>24/7 support</p></div>
   </div>
 </section>
 
+<!-- CTA -->
+<section class="cta">
+  <h2>Start Using Bookam Today</h2>
+  <p>Join thousands of users already booking smarter.</p>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <h2>Contact Us</h2>
+
+  <p>Email: Bookam26@gmail.com</p>
+  <p>Phone: 08078734469</p>
+
+  <div class="socials">
+    <a href="https://www.tiktok.com/@justbookam">TikTok</a>
+    <a href="https://x.com/justbookam">X</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 Bookam. All rights reserved.</p>
+  <p>© 2026 Bookam. Built for convenience.</p>
 </footer>
 
 <script>
-  const menuToggle = document.getElementById("menuToggle");
+const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 
 menuToggle.addEventListener("click", () => {
   navLinks.classList.toggle("active");
 });
-
-
-document.querySelectorAll(".nav-links a").forEach(link => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("active");
-  });
-});
 </script>
+
 </body>
 </html>

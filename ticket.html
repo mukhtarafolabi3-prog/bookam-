@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy Ticket - Bookam</title>
+
+<style>
+body{
+  font-family:Arial;
+  background:#f9fafb;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.box{
+  background:white;
+  padding:30px;
+  width:100%;
+  max-width:420px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+h2{
+  color:#5b21b6;
+  text-align:center;
+}
+
+p{
+  text-align:center;
+  color:#6b7280;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:1px solid #ddd;
+  border-radius:8px;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  background:#7c3aed;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#5b21b6;
+}
+
+.price{
+  text-align:center;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+  <h2>Bookam Event Ticket</h2>
+  <p>Secure your seat instantly</p>
+
+  <div class="price">Price: ₦5,000 per ticket</div>
+
+  <form id="ticketForm">
+
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="email" id="email" placeholder="Email Address" required>
+    <input type="number" id="qty" value="1" min="1">
+
+    <button type="submit">Pay Now</button>
+
+  </form>
+
+</div>
+
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+<script>
+document.getElementById("ticketForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let email = document.getElementById("email").value;
+  let qty = document.getElementById("qty").value;
+
+  let price = 5000;
+  let total = qty * price;
+
+  let handler = PaystackPop.setup({
+    key: "pk_live_2bc3134481d019ee905a4c89c35eccca8fa2b6c8",
+    email: email,
+    amount: total * 100,
+    currency: "NGN",
+
+    callback: function(response){
+      alert("Payment successful! Ref: " + response.reference);
+      window.location.href = "success.html";
+    },
+
+    onClose: function(){
+      alert("Transaction cancelled");
+    }
+  });
+
+  handler.openIframe();
+});
+</script>
+
+</body>
+</html>
