@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bookam</title>
+
+<style>
+:root {
+  --primary: #7c3aed;
+  --dark: #111827;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --bg: #f9fafb;
+  --card: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* GLOBAL CONTAINER (PRO DEV STYLE) */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  background: white;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.btn {
+  background: var(--primary);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* HERO */
+.hero {
+  padding: 80px 0;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: 42px;
+  color: var(--dark);
+  line-height: 1.2;
+}
+
+.hero p {
+  margin-top: 15px;
+  color: var(--muted);
+}
+
+.hero img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* SECTION */
+.section {
+  padding: 70px 0;
+}
+
+.section-title {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: var(--dark);
+}
+
+.section-sub {
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+
+/* ABOUT */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.about-img img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.card {
+  background: var(--card);
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* FEATURES */
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.feature {
+  background: white;
+  border: 1px solid #eee;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+/* STATS */
+.stats {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.stat {
+  flex: 1;
+  padding: 14px;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.stat h3 {
+  color: var(--primary);
+}
+
+/* MOBILE */
+.menu {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+
+  .hero-grid,
+  .about-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    right: -100%;
+    background: white;
+    width: 200px;
+    flex-direction: column;
+    padding: 15px;
+    transition: 0.3s;
+    border: 1px solid #eee;
+  }
+
+  .nav-links.active {
+    right: 20px;
+  }
+
+  .menu {
+    display: block;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="container nav-inner">
+    <div class="logo">Bookam</div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+        <li><a href="bookam.html">Why Bookam</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <a class="btn" href="get.html">Get Started</a>
+
+    <div class="menu" id="menu">☰</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+
+    <div>
+      <h1>All-in-One Booking Platform for Modern Users</h1>
+      <p>Book events, hotels, tickets, and digital services in one clean ecosystem.</p>
+      <br>
+      <a class="btn" href="#">Explore Platform</a>
+    </div>
+
+    <img src="images/about.png" alt="preview">
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+  <div class="container about-grid">
+
+    <div class="about-img">
+      <img src="images/about.png" alt="">
+    </div>
+
+    <div>
+      <h2 class="section-title">What is Bookam?</h2>
+      <p class="section-sub">
+        A modern digital ecosystem designed to simplify booking and service access.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <h3>5K+</h3>
+          <p>Users</p>
+        </div>
+        <div class="stat">
+          <h3>1K+</h3>
+          <p>Bookings</p>
+        </div>
+        <div class="stat">
+          <h3>99%</h3>
+          <p>Trust</p>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feature">Smart Ticketing</div>
+        <div class="feature">Hotel Booking</div>
+        <div class="feature">VTU Services</div>
+        <div class="feature">Event Management</div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+const menu = document.getElementById("menu");
+const navLinks = document.getElementById("navLinks");
+
+menu.onclick = () => {
+  navLinks.classList.toggle("active");
+};
+</script>
+
+</body>
+</html>

@@ -9,41 +9,88 @@
 
 <body>
 
-<header>
-  <nav class="navbar">
+<header class="navbar">
+  <h2 class="logo">Bookam</h2>
 
-    <!-- LOGO IMAGE -->
-    <div class="logo">
-      <a href="#">
-        <img src="image/logo.jpeg" alt="Bookam Logo">
-      </a>
-    </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="bookam.html">Why Bookam</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
 
-    <!-- NAV LINKS -->
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Books</a></li>
-      <li><a href="#">Categories</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
+  <a class="cta-btn" href="get.html">Get Started</a>
 
-    <!-- MOBILE MENU ICON -->
-    <div class="menu-toggle" id="menuToggle">
-      ☰
-    </div>
-
-  </nav>
+  <div class="menu-toggle" id="menuToggle">☰</div>
 </header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <h1>All-in-One Booking Platform</h1>
+    <p>Book events, hotels, tickets, and digital services in one place.</p>
+
+    <div class="hero-buttons">
+      <a href="#services" class="btn-primary">Start Exploring</a>
+      <a href="#why" class="btn-outline">Why Bookam</a>
+    </div>
+  </div>
+
+  <div class="hero-img">
+    <img src="images/hero.png" alt="Bookam platform preview">
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <h2>What is Bookam?</h2>
+  <p>Bookam is a modern platform that combines bookings, tickets, hotels, and digital services into one seamless experience.</p>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section">
+  <h2>Our Services</h2>
+
+  <div class="grid">
+    <div class="card"><h3>🎟 Tickets</h3><p>Manage events with QR entry.</p></div>
+    <div class="card"><h3>🏨 Hotels</h3><p>Book verified accommodations.</p></div>
+    <div class="card"><h3>🏛 Venues</h3><p>Find event spaces easily.</p></div>
+    <div class="card"><h3>🏆 Contests</h3><p>Run voting competitions.</p></div>
+    <div class="card"><h3>📱 VTU</h3><p>Buy airtime & data instantly.</p></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why" class="section">
+  <h2>Why Choose Bookam?</h2>
+
+  <div class="grid">
+    <div class="card"><h3>⚡ Simple</h3><p>Everything in one place.</p></div>
+    <div class="card"><h3>🔒 Secure</h3><p>Safe payments.</p></div>
+    <div class="card"><h3>🚀 Fast</h3><p>Instant booking.</p></div>
+    <div class="card"><h3>💬 Support</h3><p>24/7 help.</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Bookam. All rights reserved.</p>
+</footer>
 
 <script>
   const menuToggle = document.getElementById("menuToggle");
-  const navLinks = document.getElementById("navLinks");
+const navLinks = document.getElementById("navLinks");
 
-  menuToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
+
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("active");
   });
+});
 </script>
-
 </body>
 </html>
