@@ -149,7 +149,6 @@ document.getElementById("vtuForm").addEventListener("submit", function(e){
 
       alert("Payment successful! Ref: " + response.reference);
 
-      // IMPORTANT: backend call (for airtime delivery)
       fetch("http://localhost:3000/api/vtu/airtime", {
         method: "POST",
         headers: {
