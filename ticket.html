@@ -75,23 +75,29 @@ button:hover{
   <div class="price">Price: ₦100 per ticket</div>
 
   <form id="ticketForm">
-
     <input type="text" id="name" placeholder="Full Name" required>
     <input type="email" id="email" placeholder="Email Address" required>
     <input type="number" id="qty" value="1" min="1">
-
     <button type="submit">Pay Now</button>
-
   </form>
 
 </div>
 
+<!-- Paystack -->
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+
 <script>
+(function(){
+  emailjs.init("YOUR_PUBLIC_KEY"); // replace with your EmailJS public key
+})();
+
 document.getElementById("ticketForm").addEventListener("submit", function(e){
   e.preventDefault();
 
+  let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
   let qty = document.getElementById("qty").value;
 
@@ -106,7 +112,27 @@ document.getElementById("ticketForm").addEventListener("submit", function(e){
 
     callback: function(response){
       alert("Payment successful! Ref: " + response.reference);
-       },
+
+      // Send to USER
+      emailjs.send("service_9l7h8qj", "template_1g5m9s8", {
+        name: name,
+        email: email,
+        qty: qty,
+        reference: response.reference
+      });
+
+      // Send to ADMIN (YOU)
+      emailjs.send("service_9l7h8qj", "template_1g5m9s8", {
+  name: name,
+  email: "Bookam26@gmail.com",
+  qty: qty,
+  reference: response.reference,
+  event: "Bookam Event Ticket",   
+  message: "New event registration received" 
+});
+
+      });
+    },
 
     onClose: function(){
       alert("Transaction cancelled");
