@@ -3,82 +3,121 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Buy Ticket - Bookam</title>
+<title>Bookam Ticket</title>
 
 <style>
+*{
+  box-sizing:border-box;
+}
+
 body{
   font-family:Arial;
-  background:#f9fafb;
+  background:#f3f4f6;
+  margin:0;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
+  min-height:100vh;
+  padding:15px;
 }
 
 .box{
   background:white;
-  padding:30px;
+  padding:25px;
   width:100%;
   max-width:420px;
   border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
 h2{
-  color:#5b21b6;
   text-align:center;
+  color:#5b21b6;
+  margin-bottom:5px;
 }
 
 p{
   text-align:center;
   color:#6b7280;
+  font-size:14px;
+  margin-bottom:15px;
 }
 
-input{
+.price{
+  text-align:center;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+input, select{
   width:100%;
   padding:12px;
-  margin:10px 0;
+  margin:8px 0;
   border:1px solid #ddd;
   border-radius:8px;
+  font-size:14px;
 }
 
 button{
   width:100%;
-  padding:12px;
+  padding:13px;
   background:#7c3aed;
   color:white;
   border:none;
   border-radius:8px;
+  font-size:15px;
   cursor:pointer;
+  margin-top:10px;
 }
 
 button:hover{
   background:#5b21b6;
 }
 
-.price{
-  text-align:center;
-  font-weight:bold;
-  margin-bottom:10px;
+/* 📱 Mobile tweaks */
+@media(max-width:480px){
+  .box{
+    padding:20px;
+  }
+
+  h2{
+    font-size:20px;
+  }
+
+  button{
+    font-size:14px;
+  }
 }
 </style>
-
 </head>
 
 <body>
 
 <div class="box">
 
-  <h2>Bookam Event Ticket</h2>
+  <h2>Bookam Ticket</h2>
   <p>Secure your seat instantly</p>
 
-  <div class="price">Price: ₦100 per ticket</div>
+  <div class="price">₦100 per ticket</div>
 
   <form id="ticketForm">
+
     <input type="text" id="name" placeholder="Full Name" required>
+
     <input type="email" id="email" placeholder="Email Address" required>
+
+    <!-- ✅ Event Dropdown -->
+    <select id="event" required>
+      <option value="">Select Event</option>
+      <option value="Music Concert">Music Concert</option>
+      <option value="Tech Seminar">Tech Seminar</option>
+      <option value="Business Conference">Business Conference</option>
+    </select>
+
     <input type="number" id="qty" value="1" min="1">
+
     <button type="submit">Pay Now</button>
+
   </form>
 
 </div>
@@ -91,7 +130,7 @@ button:hover{
 
 <script>
 (function(){
-  emailjs.init("YOUR_PUBLIC_KEY"); // replace with your EmailJS public key
+  emailjs.init("YOUR_PUBLIC_KEY"); // 🔁 replace this
 })();
 
 document.getElementById("ticketForm").addEventListener("submit", function(e){
@@ -99,13 +138,14 @@ document.getElementById("ticketForm").addEventListener("submit", function(e){
 
   let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
-  let qty = document.getElementById("qty").value;
+  let eventName = document.getElementById("event").value;
+  let qty = parseInt(document.getElementById("qty").value);
 
   let price = 100;
   let total = qty * price;
 
   let handler = PaystackPop.setup({
-    key: "pk_live_2bc3134481d019ee905a4c89c35eccca8fa2b6c8",
+    key: "pk_test_xxxxxxxxxxxxxxxxx", // ⚠️ use test first
     email: email,
     amount: total * 100,
     currency: "NGN",
@@ -113,30 +153,33 @@ document.getElementById("ticketForm").addEventListener("submit", function(e){
     callback: function(response){
       alert("Payment successful! Ref: " + response.reference);
 
-      // Send to USER
+      // ✅ EMAIL TO USER
       emailjs.send("service_9l7h8qj", "template_1g5m9s8", {
         name: name,
         email: email,
         qty: qty,
-        reference: response.reference
+        reference: response.reference,
+        amount: total,
+        event: eventName
       });
 
-      // Send to ADMIN (YOU)
+      // ✅ EMAIL TO ADMIN
       emailjs.send("service_9l7h8qj", "template_1g5m9s8", {
-  name: name,
-  email: "Bookam26@gmail.com",
-  qty: qty,
-  reference: response.reference,
-  event: "Bookam Event Ticket",   
-  message: "New event registration received" 
-});
-
+        name: name,
+        email: "Bookam26@gmail.com",
+        qty: qty,
+        reference: response.reference,
+        amount: total,
+        event: eventName,
+        message: "New event registration"
       });
+
     },
 
     onClose: function(){
       alert("Transaction cancelled");
     }
+
   });
 
   handler.openIframe();
