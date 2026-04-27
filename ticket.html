@@ -6,22 +6,17 @@
 <title>Bookam Ticket</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
-
 body{
   font-family:Arial;
   background:#f3f4f6;
-  margin:0;
   display:flex;
   justify-content:center;
   align-items:center;
   min-height:100vh;
-  padding:15px;
+  margin:0;
 }
 
-.box{
+.card{
   background:white;
   padding:25px;
   width:100%;
@@ -33,20 +28,11 @@ body{
 h2{
   text-align:center;
   color:#5b21b6;
-  margin-bottom:5px;
 }
 
 p{
   text-align:center;
   color:#6b7280;
-  font-size:14px;
-  margin-bottom:15px;
-}
-
-.price{
-  text-align:center;
-  font-weight:bold;
-  margin-bottom:15px;
 }
 
 input, select{
@@ -55,7 +41,6 @@ input, select{
   margin:8px 0;
   border:1px solid #ddd;
   border-radius:8px;
-  font-size:14px;
 }
 
 button{
@@ -65,75 +50,51 @@ button{
   color:white;
   border:none;
   border-radius:8px;
-  font-size:15px;
   cursor:pointer;
-  margin-top:10px;
 }
 
 button:hover{
   background:#5b21b6;
-}
-
-/* 📱 Mobile tweaks */
-@media(max-width:480px){
-  .box{
-    padding:20px;
-  }
-
-  h2{
-    font-size:20px;
-  }
-
-  button{
-    font-size:14px;
-  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="card">
 
-  <h2>Bookam Ticket</h2>
-  <p>Secure your seat instantly</p>
+<h2>Bookam Ticket</h2>
+<p>Secure your seat instantly</p>
 
-  <div class="price">₦100 per ticket</div>
+<form id="form">
 
-  <form id="ticketForm">
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="email" id="email" placeholder="Email Address" required>
 
-    <input type="text" id="name" placeholder="Full Name" required>
+<select id="event" required>
+  <option value="">Select Event</option>
+  <option value="Music Concert">Music Concert</option>
+  <option value="Tech Seminar">Tech Seminar</option>
+  <option value="Business Conference">Business Conference</option>
+</select>
 
-    <input type="email" id="email" placeholder="Email Address" required>
+<input type="number" id="qty" value="1" min="1">
 
-    <!-- ✅ Event Dropdown -->
-    <select id="event" required>
-      <option value="">Select Event</option>
-      <option value="Music Concert">Music Concert</option>
-      <option value="Tech Seminar">Tech Seminar</option>
-      <option value="Business Conference">Business Conference</option>
-    </select>
+<button type="submit">Pay Now</button>
 
-    <input type="number" id="qty" value="1" min="1">
-
-    <button type="submit">Pay Now</button>
-
-  </form>
+</form>
 
 </div>
 
-<!-- Paystack -->
 <script src="https://js.paystack.co/v1/inline.js"></script>
-
-<!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
 
 <script>
-(function(){
-  emailjs.init("YOUR_PUBLIC_KEY"); // 🔁 replace this
-})();
+emailjs.init("YOUR_PUBLIC_KEY");
 
-document.getElementById("ticketForm").addEventListener("submit", function(e){
+const ADMIN_EMAIL = "Bookam26@gmail.com";
+
+document.getElementById("form").addEventListener("submit", function(e){
   e.preventDefault();
 
   let name = document.getElementById("name").value;
@@ -141,49 +102,63 @@ document.getElementById("ticketForm").addEventListener("submit", function(e){
   let eventName = document.getElementById("event").value;
   let qty = parseInt(document.getElementById("qty").value);
 
-  let price = 100;
-  let total = qty * price;
+  let total = qty * 100;
 
   let handler = PaystackPop.setup({
-    key: "pk_test_xxxxxxxxxxxxxxxxx", // ⚠️ use test first
+    key: "pk_live_2bc3134481d019ee905a4c89c35eccca8fa2b6c8",
     email: email,
     amount: total * 100,
     currency: "NGN",
 
     callback: function(response){
-      alert("Payment successful! Ref: " + response.reference);
 
-      // ✅ EMAIL TO USER
-      emailjs.send("service_9l7h8qj", "template_1g5m9s8", {
-        name: name,
-        email: email,
-        qty: qty,
-        reference: response.reference,
-        amount: total,
-        event: eventName
-      });
-
-      // ✅ EMAIL TO ADMIN
-      emailjs.send("service_9l7h8qj", "template_1g5m9s8", {
-        name: name,
-        email: "Bookam26@gmail.com",
-        qty: qty,
-        reference: response.reference,
-        amount: total,
+      let data = {
+        name,
+        email,
         event: eventName,
-        message: "New event registration"
-      });
+        qty,
+        reference: response.reference
+      };
 
+      localStorage.setItem("bookingData", JSON.stringify(data));
+
+      sendEmails(data);
+
+      window.location.href = "confirm.html";
     },
 
     onClose: function(){
-      alert("Transaction cancelled");
+      alert("Payment cancelled");
     }
-
   });
 
   handler.openIframe();
 });
+
+// 📧 EMAIL FUNCTION
+function sendEmails(data){
+
+  // USER EMAIL
+  emailjs.send("service_9l7h8qj", "template_user", {
+    to_email: data.email,
+    to_name: data.name,
+    event: data.event,
+    qty: data.qty,
+    reference: data.reference
+  });
+
+  // ADMIN EMAIL
+  emailjs.send("service_9l7h8qj", "template_admin", {
+    to_email: ADMIN_EMAIL,
+    customer_name: data.name,
+    customer_email: data.email,
+    event: data.event,
+    qty: data.qty,
+    reference: data.reference,
+    message: "New booking received"
+  });
+
+}
 </script>
 
 </body>

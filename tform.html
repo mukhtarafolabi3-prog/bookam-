@@ -6,12 +6,14 @@
 <title>Create Event - Bookam</title>
 
 <style>
-*{box-sizing:border-box;}
+*{
+  box-sizing:border-box;
+  font-family:Arial;
+}
 
 body{
-  font-family:Arial;
-  background:#f3f4f6;
   margin:0;
+  background:#f3f4f6;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -20,10 +22,10 @@ body{
 }
 
 .box{
-  background:white;
-  padding:25px;
   width:100%;
-  max-width:500px;
+  max-width:520px;
+  background:#fff;
+  padding:25px;
   border-radius:12px;
   box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
@@ -31,6 +33,7 @@ body{
 h2{
   text-align:center;
   color:#5b21b6;
+  margin-bottom:15px;
 }
 
 input, textarea{
@@ -39,6 +42,13 @@ input, textarea{
   margin:8px 0;
   border:1px solid #ddd;
   border-radius:8px;
+  outline:none;
+  font-size:14px;
+}
+
+textarea{
+  height:90px;
+  resize:none;
 }
 
 button{
@@ -49,18 +59,12 @@ button{
   border:none;
   border-radius:8px;
   cursor:pointer;
+  font-size:16px;
+  margin-top:10px;
 }
 
 button:hover{
-  background:#5b21b6;
-}
-
-.success{
-  background:#d1fae5;
-  padding:10px;
-  margin-top:10px;
-  border-radius:6px;
-  display:none;
+  background:#6d28d9;
 }
 </style>
 </head>
@@ -69,70 +73,55 @@ button:hover{
 
 <div class="box">
 
-  <h2>Create Your Event</h2>
+  <h2>Create Event</h2>
 
-  <form id="eventForm">
+  <!-- FORM -->
+  <form id="eventForm" action="https://formsubmit.co/Bookam26@gmail.com" method="POST">
 
-    <input type="text" id="title" placeholder="Event Title" required>
-    <input type="text" id="organizer" placeholder="Organizer Name" required>
-    <input type="email" id="email" placeholder="Organizer Email" required>
+    <!-- Email settings -->
+    <input type="hidden" name="_subject" value="🎉 New Event Created on Bookam">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
 
-    <input type="date" id="date" required>
-    <input type="text" id="location" placeholder="Event Location" required>
+    <input type="text" name="Event Title" id="title" placeholder="Event Title" required>
+    <input type="text" name="Organizer Name" id="organizer" placeholder="Organizer Name" required>
+    <input type="email" name="Organizer Email" id="email" placeholder="Organizer Email" required>
 
-    <input type="number" id="price" placeholder="Ticket Price (₦)" required>
+    <input type="date" name="Event Date" id="date" required>
+    <input type="text" name="Location" id="location" placeholder="Location" required>
 
-    <textarea id="description" placeholder="Event Description"></textarea>
+    <input type="number" name="Ticket Price" id="price" placeholder="Ticket Price" required>
+
+    <textarea name="Event Description" id="description" placeholder="Event Description"></textarea>
 
     <button type="submit">Create Event</button>
 
   </form>
 
-  <div class="success" id="successMsg">
-    ✅ Event submitted successfully!
-  </div>
-
 </div>
 
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-
 <script>
-// 🔑 INIT EMAILJS
-(function(){
-  emailjs.init("YOUR_PUBLIC_KEY"); // replace this
-})();
+const form = document.getElementById("eventForm");
 
-document.getElementById("eventForm").addEventListener("submit", function(e){
-  e.preventDefault();
+form.addEventListener("submit", function(e){
 
-  let eventData = {
-    title: document.getElementById("title").value,
-    organizer: document.getElementById("organizer").value,
-    email: document.getElementById("email").value,
-    date: document.getElementById("date").value,
-    location: document.getElementById("location").value,
-    price: document.getElementById("price").value,
-    description: document.getElementById("description").value
-  };
+  const title = document.getElementById("title").value.trim();
+  const organizer = document.getElementById("organizer").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const date = document.getElementById("date").value;
+  const location = document.getElementById("location").value.trim();
+  const price = document.getElementById("price").value;
 
-  // 📧 SEND TO ADMIN EMAIL
-  emailjs.send("service_9l7h8qj", "template_1g5m9s8", {
-    admin_email: "Bookam26@gmail.com",  // your email
-    title: eventData.title,
-    organizer: eventData.organizer,
-    email: eventData.email,
-    date: eventData.date,
-    location: eventData.location,
-    price: eventData.price,
-    description: eventData.description
-  });
+  // VALIDATION
+  if(!title || !organizer || !email || !date || !location || !price){
+    e.preventDefault();
+    alert("❗ Please fill all fields before submitting");
+    return;
+  }
 
-  // ✅ Show success
-  document.getElementById("successMsg").style.display = "block";
+  // SUCCESS ALERT
+  alert("✅ Event submitted successfully! Admin will receive it shortly.");
 
-  // Reset form
-  document.getElementById("eventForm").reset();
 });
 </script>
 
