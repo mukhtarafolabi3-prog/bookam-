@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contest Entry - Bookam</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  margin:0;
+  background:#f3f4f6;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  padding:15px;
+}
+
+.box{
+  width:100%;
+  max-width:520px;
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+h2{
+  text-align:center;
+  color:#7c3aed;
+  margin-bottom:15px;
+}
+
+input, textarea{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border:1px solid #ddd;
+  border-radius:8px;
+  outline:none;
+  font-size:14px;
+}
+
+textarea{
+  height:100px;
+  resize:none;
+}
+
+button{
+  width:100%;
+  padding:13px;
+  background:#7c3aed;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:16px;
+  margin-top:10px;
+}
+
+button:hover{
+  background:#6d28d9;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <h2>Contest Entry Form</h2>
+
+  <form id="contestForm" action="https://formsubmit.co/Bookam26@gmail.com" method="POST">
+
+    <!-- Email settings -->
+    <input type="hidden" name="_subject" value="🏆 New Contest Entry - Bookam">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+
+    <input type="text" name="Full Name" id="name" placeholder="Your Full Name" required>
+
+    <input type="email" name="Email" id="email" placeholder="Your Email" required>
+
+    <input type="text" name="Contest Name" id="contest" placeholder="Contest Name" required>
+
+    <input type="text" name="Phone Number" id="phone" placeholder="Phone Number" required>
+
+    <input type="date" name="Entry Date" id="date" required>
+
+    <textarea name="Submission Details" id="details" placeholder="Write your submission / idea here..." required></textarea>
+
+    <button type="submit">Submit Entry</button>
+
+  </form>
+
+</div>
+
+<script>
+const form = document.getElementById("contestForm");
+
+form.addEventListener("submit", function(e){
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const contest = document.getElementById("contest").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const date = document.getElementById("date").value;
+  const details = document.getElementById("details").value.trim();
+
+  if(!name || !email || !contest || !phone || !date || !details){
+    e.preventDefault();
+    alert("❗ Please fill all fields before submitting");
+    return;
+  }
+
+  alert("🏆 Contest entry submitted successfully! Admin will review it.");
+});
+</script>
+
+</body>
+</html>
