@@ -38,10 +38,54 @@ body{
   box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 
-.navbar img{
+/* LOGO WATER EFFECT */
+.logo-water{
+  position:relative;
   width:150px;
+  overflow:hidden;
 }
 
+.logo-water img{
+  width:100%;
+  position:relative;
+  z-index:2;
+}
+
+.water{
+  position:absolute;
+  bottom:-120%;
+  left:0;
+  width:100%;
+  height:220%;
+  background:linear-gradient(180deg,#a855f7,#7c3aed,#5b21b6);
+  animation:pour 4s infinite ease-in-out;
+  opacity:0.9;
+  z-index:1;
+}
+
+.water::before{
+  content:"";
+  position:absolute;
+  top:-40px;
+  width:200%;
+  height:60px;
+  background:rgba(255,255,255,0.2);
+  border-radius:50%;
+  animation:wave 3s linear infinite;
+}
+
+@keyframes pour{
+  0%{ transform:translateY(120px); }
+  50%{ transform:translateY(-20px); }
+  100%{ transform:translateY(120px); }
+}
+
+@keyframes wave{
+  0%{ transform:translateX(0); }
+  100%{ transform:translateX(-50%); }
+}
+
+/* NAV */
 .nav-links{
   display:flex;
   list-style:none;
@@ -90,8 +134,6 @@ body{
 .hero::after{
   content:"";
   position:absolute;
-  top:0;
-  left:0;
   width:100%;
   height:100%;
   background:rgba(0,0,0,0.55);
@@ -105,7 +147,6 @@ body{
   text-align:center;
   color:white;
   z-index:2;
-  max-width:700px;
 }
 
 .hero-content h1{
@@ -153,9 +194,7 @@ body{
 }
 
 /* SLIDER */
-.slider{
-  overflow:hidden;
-}
+.slider{ overflow:hidden; }
 
 .track{
   display:flex;
@@ -171,14 +210,8 @@ body{
   padding:20px;
   border-radius:10px;
   box-shadow:0 5px 15px rgba(0,0,0,0.05);
-  transition:0.3s;
 }
 
-.card:hover{
-  transform:translateY(-8px);
-}
-
-/* CARD BUTTON */
 .card a{
   display:inline-block;
   margin-top:10px;
@@ -187,7 +220,35 @@ body{
   color:white;
   border-radius:6px;
   text-decoration:none;
-  font-size:14px;
+}
+
+/* CTA */
+.cta-section{
+  padding:70px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#7c3aed,#5b21b6);
+  color:white;
+}
+
+.cta-buttons{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  margin-top:30px;
+  flex-wrap:wrap;
+}
+
+.cta-box{
+  background:white;
+  color:#111;
+  padding:25px;
+  border-radius:12px;
+  width:260px;
+}
+
+.cta-box .btn-outline{
+  border:1px solid #7c3aed;
+  color:#7c3aed;
 }
 
 /* FEATURES */
@@ -210,7 +271,7 @@ footer{
   background:white;
 }
 
-/* ANIMATION */
+/* ANIMATIONS */
 @keyframes slide{
   0%{transform:translateX(0);}
   100%{transform:translateX(-50%);}
@@ -223,147 +284,134 @@ footer{
 
 /* MOBILE */
 @media(max-width:768px){
-  .menu-toggle{display:block;}
 
-  .nav-links{
-    position:absolute;
-    top:60px;
-    right:-100%;
-    flex-direction:column;
-    background:white;
-    padding:20px;
-    width:200px;
-    transition:0.3s;
-  }
+.navbar{ padding:10px 15px; }
 
-  .nav-links.active{
-    right:0;
-  }
+.logo-water{ width:120px; }
 
-  .cta-btn{
-    display:none;
-  }
+.menu-toggle{ display:block; }
 
-  .hero-content h1{
-    font-size:28px;
-  }
+.nav-links{
+  position:absolute;
+  top:60px;
+  right:-100%;
+  flex-direction:column;
+  background:white;
+  padding:20px;
+  width:200px;
+  transition:0.3s;
+  box-shadow:0 10px 20px rgba(0,0,0,0.1);
+}
+
+.nav-links.active{ right:0; }
+
+.cta-btn{ display:none; }
+
+.hero{ height:70vh; }
+
+.hero-content{ width:90%; }
+
+.hero-content h1{ font-size:26px; }
+
+.hero-content p{ font-size:14px; }
+
+.card{ min-width:200px; }
+
+.cta-buttons{
+  flex-direction:column;
+  align-items:center;
+}
+
+.cta-box{ width:90%; }
+
+.feature-grid{ grid-template-columns:1fr; }
+
+}
+
+@media(max-width:480px){
+
+.hero-content h1{ font-size:22px; }
+
+.card{ min-width:180px; }
+
+.logo-water{ width:100px; }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <header class="navbar">
-  <img src="image/BOOK.png">
+
+  <div class="logo-water">
+    <div class="water"></div>
+    <img src="image/BOOK.png">
+  </div>
 
   <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">Home</a></li>
+    <li><a href="#">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="tform.html">Events</a></li>
     <li><a href="contest.html">Contests</a></li>
-    <li><a href="contact.html">Contact</a></li>
   </ul>
 
   <a href="#" class="cta-btn">Get Started</a>
   <div class="menu-toggle" id="menuToggle">☰</div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
-
   <div class="image-slider">
     <img src="image/mm.jpeg">
     <img src="image/ss.jpeg">
   </div>
 
   <div class="hero-content">
-    <h1>Bookam – One Platform, Endless Bookings</h1>
+    <h1>BookAm – One Platform, Endless Bookings</h1>
     <p>Events, contests & tickets made simple and fast.</p>
-
-    <a href="#" class="btn btn-primary">Start Now</a>
-    <a href="#" class="btn btn-outline">Learn More</a>
   </div>
-
 </section>
 
-<!-- EVENTS -->
 <section class="section">
   <h2>🔥 Featured Events</h2>
-
   <div class="slider">
     <div class="track">
-
-      <div class="card">
-        <h3>Davido Concert</h3>
-        <a href="ticket.html">Book Now</a>
-      </div>
-
-      <div class="card">
-        <h3>Tech Summit</h3>
-        <a href="ticket.html">Book Now</a>
-      </div>
-
-      <div class="card">
-        <h3>Summer Party</h3>
-        <a href="ticket.html">Book Now</a>
-      </div>
-
-      <div class="card">
-        <h3>Fashion Show</h3>
-        <a href="ticket.html">Book Now</a>
-      </div>
-
-      <!-- duplicate for loop -->
-      <div class="card">
-        <h3>Davido Concert</h3>
-        <a href="ticket.html">Book Now</a>
-      </div>
-
-      <div class="card">
-        <h3>Tech Summit</h3>
-        <a href="ticket.html">Book Now</a>
-      </div>
-
+      <div class="card"><h3>Davido Concert</h3><a href="tform.html">Book Now</a></div>
+      <div class="card"><h3>Tech Summit</h3><a href="tform.html">Book Now</a></div>
+      <div class="card"><h3>Summer Party</h3><a href="tform.html">Book Now</a></div>
+      <div class="card"><h3>Fashion Show</h3><a href="tform.html">Book Now</a></div>
     </div>
   </div>
 </section>
 
-<!-- CONTEST -->
 <section class="section">
   <h2>🏆 Contest Zone</h2>
-
   <div class="slider">
     <div class="track">
-
-      <div class="card">
-        <h3>Dance Battle</h3>
-        <a href="contest.html">Join Now</a>
-      </div>
-
-      <div class="card">
-        <h3>Music Challenge</h3>
-        <a href="contest.html">Join Now</a>
-      </div>
-
-      <div class="card">
-        <h3>Hackathon</h3>
-        <a href="contest.html">Join Now</a>
-      </div>
-
-      <div class="card">
-        <h3>Quiz Contest</h3>
-        <a href="contest.html">Join Now</a>
-      </div>
-
+      <div class="card"><h3>Dance Battle</h3><a href="contest.html">Join Now</a></div>
+      <div class="card"><h3>Music Challenge</h3><a href="contest.html">Join Now</a></div>
+      <div class="card"><h3>Hackathon</h3><a href="contest.html">Join Now</a></div>
+      <div class="card"><h3>Quiz Contest</h3><a href="contest.html">Join Now</a></div>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
+<section class="cta-section">
+  <h2>🚀 Get Started with Bookam</h2>
+  <div class="cta-buttons">
+    <div class="cta-box">
+      <h3>🎉 Host an Event</h3>
+      <a href="tform.html" class="btn btn-primary">Get Started</a>
+    </div>
+    <div class="cta-box">
+      <h3>🏆 Join a Contest</h3>
+      <a href="contest.html" class="btn btn-outline">Get Started</a>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <h2>⚡ Why Choose Bookam</h2>
-
   <div class="feature-grid">
     <div class="feature-card"><h3>Fast Booking</h3></div>
     <div class="feature-card"><h3>Secure Payment</h3></div>
@@ -376,7 +424,6 @@ footer{
 </footer>
 
 <script>
-// MENU TOGGLE
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 
