@@ -13,18 +13,22 @@ body{
   margin:0;
   font-family: Arial;
   background: linear-gradient(135deg, #6c2bd9, #4e1fa8);
-  height:100vh;
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
+  padding:20px;
+  box-sizing:border-box;
 }
 
 .container{
   display:flex;
   gap:20px;
-  width:900px;
+  width:100%;
+  max-width:900px;
 }
 
+/* CARD STYLE */
 .card{
   background:#fff;
   padding:20px;
@@ -45,6 +49,7 @@ h2{
   margin-bottom:15px;
 }
 
+/* OPTIONS */
 .option{
   margin:12px 0;
 }
@@ -61,6 +66,7 @@ label{
   color:#444;
 }
 
+/* PROGRESS BAR */
 .bar{
   height:6px;
   background:#ddd;
@@ -76,6 +82,7 @@ label{
   transition:0.3s;
 }
 
+/* BUTTON */
 button{
   width:100%;
   padding:12px;
@@ -98,8 +105,47 @@ button:hover{
   margin-top:10px;
 }
 
+/* CHART */
 canvas{
   max-width:100%;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px){
+  .container{
+    flex-direction:column;
+  }
+
+  .left, .right{
+    width:100%;
+  }
+
+  canvas{
+    height:300px !important;
+  }
+}
+
+@media (max-width: 480px){
+  .card{
+    padding:15px;
+  }
+
+  h2{
+    font-size:18px;
+  }
+
+  button{
+    font-size:14px;
+    padding:10px;
+  }
+
+  label{
+    font-size:14px;
+  }
+
+  .count{
+    font-size:12px;
+  }
 }
 </style>
 </head>
@@ -108,7 +154,7 @@ canvas{
 
 <div class="container">
 
-<!-- LEFT -->
+<!-- LEFT PANEL -->
 <div class="card left">
 
 <h2>Vote System</h2>
@@ -143,7 +189,7 @@ canvas{
 
 </div>
 
-<!-- RIGHT -->
+<!-- RIGHT PANEL -->
 <div class="card right">
 <h2>Payment Analytics</h2>
 <canvas id="pieChart"></canvas>
