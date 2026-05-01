@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bookam - All-in-One Booking Platform</title>
+<title>Bookam - Booking Platform</title>
 
 <style>
 :root{
@@ -18,7 +18,7 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial;
+  font-family:Arial, sans-serif;
 }
 
 body{
@@ -36,11 +36,10 @@ body{
   position:sticky;
   top:0;
   z-index:1000;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 
-.logo{
-  color:var(--dark);
-}
+.navbar img{ height:60px; }
 
 .nav-links{
   display:flex;
@@ -51,10 +50,6 @@ body{
 .nav-links a{
   text-decoration:none;
   color:var(--text);
-}
-
-.nav-links a:hover{
-  color:var(--purple);
 }
 
 .cta-btn{
@@ -77,10 +72,13 @@ body{
   align-items:center;
   justify-content:space-between;
   padding:80px 30px;
+  gap:40px;
 }
 
+.hero-text{ max-width:500px; }
+
 .hero-text h1{
-  font-size:45px;
+  font-size:42px;
   color:var(--dark);
 }
 
@@ -89,6 +87,10 @@ body{
   color:var(--muted);
 }
 
+.hero-img{ width:400px; }
+.hero-img img{ width:100%; }
+
+/* BUTTONS */
 .btn{
   display:inline-block;
   padding:10px 18px;
@@ -107,7 +109,7 @@ body{
   margin-left:10px;
 }
 
-/* SECTIONS */
+/* SECTION */
 .section{
   padding:70px 20px;
   text-align:center;
@@ -119,16 +121,10 @@ body{
   color:var(--dark);
 }
 
-.section p{
-  color:var(--muted);
-  max-width:700px;
-  margin:auto;
-}
-
-/* GRID */
+/* GRID (EVENTS + CONTEST) */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
   gap:20px;
   margin-top:30px;
 }
@@ -137,6 +133,7 @@ body{
   background:white;
   padding:20px;
   border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
   transition:0.3s;
 }
 
@@ -149,24 +146,44 @@ body{
   margin-top:10px;
   background:var(--purple);
   color:white;
-  padding:8px 12px;
-  border-radius:6px;
+  padding:6px 12px;
+  border-radius:5px;
   text-decoration:none;
 }
 
-/* CTA */
-.cta{
-  background:var(--purple);
+/* WHY CHOOSE */
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:20px;
+  margin-top:30px;
+}
+
+.feature-card{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  text-align:left;
+  transition:0.3s;
+}
+
+.feature-card:hover{
+  transform:translateY(-5px);
+}
+
+.feature-card h3{
+  margin-bottom:10px;
+  color:var(--dark);
+}
+
+/* ADS */
+.ads{
+  background:linear-gradient(135deg,var(--purple),var(--dark));
   color:white;
-  padding:60px;
+  padding:50px 20px;
   text-align:center;
-}
-
-/* CONTACT */
-.socials a{
-  margin:0 10px;
-  color:var(--purple);
-  text-decoration:none;
+  margin-top:40px;
 }
 
 /* FOOTER */
@@ -179,11 +196,14 @@ footer{
 
 /* MOBILE */
 @media(max-width:768px){
-
   .hero{
     flex-direction:column;
     text-align:center;
   }
+
+  .hero-img{ width:100%; }
+
+  .menu-toggle{ display:block; }
 
   .nav-links{
     position:absolute;
@@ -192,16 +212,13 @@ footer{
     flex-direction:column;
     background:white;
     padding:20px;
+    width:200px;
     transition:0.3s;
   }
 
-  .nav-links.active{
-    right:0;
-  }
+  .nav-links.active{ right:0; }
 
-  .menu-toggle{
-    display:block;
-  }
+  .cta-btn{ display:none; }
 }
 </style>
 </head>
@@ -210,117 +227,151 @@ footer{
 
 <!-- NAVBAR -->
 <header class="navbar">
-  <h2 class="logo">Bookam</h2>
+  <img src="image/BOOK.png" alt="Bookam Logo">
 
   <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="services.html">Services</a></li>
-    <li><a href="bookam.html">Why Bookam</a></li>
-    <li><a href="tform.html"> Event Booking</a></li>
-          <li><a href="confrom.html"> Contest Booking</a></li>
- <li><a href="Contact.html">Contact</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#contest">Contest</a></li>
+    <li><a href="#">Contact</a></li>
   </ul>
 
-  <a href="#services" class="cta-btn">Get Started</a>
+  <a href="#" class="cta-btn">Get Started</a>
   <div class="menu-toggle" id="menuToggle">☰</div>
 </header>
 
 <!-- HERO -->
-<section class="hero" id="home">
+<section class="hero">
   <div class="hero-text">
     <h1>Book Everything in One Place</h1>
-    <p>Tickets, hotels, airtime & events — simple, fast, and secure.</p>
+    <p>Tickets, contests & events — fast and secure.</p>
 
-    <a href="#services" class="btn btn-primary">Start Now</a>
-    <a href="#about" class="btn btn-outline">Learn More</a>
+    <a href="#events" class="btn btn-primary">Start Now</a>
+    <a href="#" class="btn btn-outline">Learn More</a>
+  </div>
+
+  <div class="hero-img">
+    <img src="image/mm.jpeg">
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="section" id="about">
-  <h2>About Bookam</h2>
-  <p>
-    Bookam is a modern digital platform that connects users to booking services,
-    events, and VTU services in one seamless system.
-  </p>
-</section>
-
-<!-- SERVICES -->
-<section class="section" id="services">
-  <h2>Our Services</h2>
+<!-- EVENTS -->
+<section class="section" id="events">
+  <h2>🔥 Featured Events</h2>
 
   <div class="grid">
 
     <div class="card">
-      <h3>🎟 Tickets</h3>
-      <p>Buy event tickets instantly.</p>
-      <a href="ticket.html">Buy Ticket</a>
-    </div>
-    <div class="card">
-      <h3>🎟 contest</h3>
-      <p>Buy event tickets instantly.</p>
-      <a href="contest.html">Buy Ticket</a>
+      <h3>Davido Concert</h3>
+      <p>Lagos • Dec 20</p>
+      <a href="ticket.html">Book Now</a>
     </div>
 
     <div class="card">
-      <h3>📱 VTU</h3>
-      <p>Airtime & data recharge.</p>
-      <a href="#">coming soon </a>
+      <h3>Tech Summit</h3>
+      <p>Abuja • Jan 15</p>
+      <a href="ticket.html">Book Now</a>
     </div>
 
     <div class="card">
-      <h3>🏨 Hotels</h3>
-      <p>Book accommodations easily.</p>
-      <a href="#">Coming Soon</a>
+      <h3>Summer Party</h3>
+      <p>Ibadan • Feb 10</p>
+      <a href="ticket.html">Book Now</a>
     </div>
 
     <div class="card">
-      <h3>🏆 Events</h3>
-      <p>Manage and attend events.</p>
-      <a href="#">Coming Soon</a>
+      <h3>Fashion Show</h3>
+      <p>Lagos • March 5</p>
+      <a href="ticket.html">Book Now</a>
+    </div>
+<div class="card">
+      <h3>Fashion Show</h3>
+      <p>Lagos • March 5</p>
+      <a href="ticket.html">Book Now</a>
+    </div>
+<div class="card">
+      <h3>Fashion Show</h3>
+      <p>Lagos • March 5</p>
+      <a href="ticket.html">Book Now</a>
     </div>
 
   </div>
 </section>
 
-<!-- WHY -->
-<section class="section" id="why">
-  <h2>Why Choose Bookam?</h2>
+<!-- CONTEST -->
+<section class="section" id="contest">
+  <h2>🏆 Contest Zone</h2>
 
   <div class="grid">
-    <div class="card"><h3>⚡ Fast</h3><p>Instant booking system</p></div>
-    <div class="card"><h3>🔒 Secure</h3><p>Safe payments</p></div>
-    <div class="card"><h3>🎯 Simple</h3><p>Easy to use</p></div>
-    <div class="card"><h3>💬 Support</h3><p>24/7 support</p></div>
+
+    <div class="card">
+      <h3>Dance Challenge</h3>
+      <p>Win ₦100,000</p>
+      <a href="contest.html">Join Now</a>
+    </div>
+
+    <div class="card">
+      <h3>Music Battle</h3>
+      <p>Win Studio Time</p>
+      <a href="contest.html">Join Now</a>
+    </div>
+
+    <div class="card">
+      <h3>Hackathon</h3>
+      <p>Win Cash Prize</p>
+      <a href="contest.html">Join Now</a>
+    </div>
+
+    <div class="card">
+      <h3>Quiz Contest</h3>
+      <p>Win ₦50,000</p>
+      <a href="contest.html">Join Now</a>
+    </div>
+
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta">
-  <h2>Start Using Bookam Today</h2>
-  <p>Join thousands of users already booking smarter.</p>
+<!-- WHY CHOOSE -->
+<section class="section">
+  <h2>⚡ Why Choose Bookam</h2>
+
+  <div class="feature-grid">
+
+    <div class="feature-card">
+      <h3>⚡ Fast Booking</h3>
+      <p>Book events instantly without stress.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🔒 Secure Payment</h3>
+      <p>Safe transactions powered by trusted gateways.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🎟 Instant Ticket</h3>
+      <p>Get your ticket immediately after payment.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>📢 Promotion</h3>
+      <p>Advertise your event to thousands of users.</p>
+    </div>
+
+  </div>
 </section>
 
-<!-- CONTACT -->
-<section class="section" id="contact">
-  <h2>Contact Us</h2>
-
-  <p>Email: Bookam26@gmail.com</p>
-  <p>Phone: 08078734469</p>
-
-  <div class="socials">
-    <a href="https://www.tiktok.com/@justbookam">TikTok</a>
-    <a href="https://x.com/justbookam">X</a>
-  </div>
+<!-- ADS -->
+<section class="ads">
+  <h2>📢 Promote Your Event on Bookam</h2>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 Bookam. Built for convenience.</p>
+  <p>© 2026 Bookam</p>
 </footer>
 
 <script>
+// MENU TOGGLE
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 

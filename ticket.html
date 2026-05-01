@@ -2,162 +2,179 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Bookam Event System</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bookam Ticket</title>
+
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <style>
 body{
-  font-family:Arial;
-  background:#f3f4f6;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
-  margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6c2bd9, #4e1fa8);
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.card{
-  background:white;
-  padding:25px;
-  width:100%;
-  max-width:420px;
-  border-radius:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+.container{
+    width:420px;
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
 h2{
-  text-align:center;
-  color:#5b21b6;
+    text-align:center;
+    color:#6c2bd9;
+    margin-bottom:10px;
 }
 
-p{
-  text-align:center;
-  color:#6b7280;
+small{
+    display:block;
+    text-align:center;
+    margin-bottom:15px;
+    color:#666;
 }
 
-input, select{
-  width:100%;
-  padding:12px;
-  margin:8px 0;
-  border:1px solid #ddd;
-  border-radius:8px;
+input, select, button{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border-radius:8px;
+    border:1px solid #ddd;
+    font-size:14px;
 }
 
 button{
-  width:100%;
-  padding:13px;
-  background:#7c3aed;
-  color:white;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
+    background:#6c2bd9;
+    color:white;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
 }
 
 button:hover{
-  background:#5b21b6;
+    background:#4e1fa8;
+}
+
+#status{
+    text-align:center;
+    font-size:13px;
+    margin-top:10px;
+    color:#333;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="container">
+    <h2>Bookam Event System</h2>
+    <small>Book your event and get instant confirmation</small>
 
-<h2>Bookam Ticket</h2>
-<p>Secure your seat instantly</p>
+    <input id="name" type="text" placeholder="Full Name">
+    <input id="email" type="email" placeholder="Email Address">
 
-<form id="form">
+    <select id="eventType">
+        <option value="">Select Event Type</option>
+        <option value="Wedding">Wedding</option>
+        <option value="Birthday">Birthday</option>
+        <option value="Conference">Conference</option>
+        <option value="Concert">Concert</option>
+        <option value="Party">Party</option>
+    </select>
 
-<input type="text" id="name" placeholder="Full Name" required>
-<input type="email" id="email" placeholder="Email Address" required>
+    <select id="location">
+        <option value="">Select Event Location</option>
+        <option value="Lagos">Lagos</option>
+        <option value="Abuja">Abuja</option>
+        <option value="Ibadan">Ibadan</option>
+        <option value="Port Harcourt">Port Harcourt</option>
+    </select>
 
-<select id="event" required>
-  <option value="">Select Event</option>
-  <option value="Music Concert">Music Concert</option>
-  <option value="Tech Seminar">Tech Seminar</option>
-  <option value="Business Conference">Business Conference</option>
-</select>
+    <input id="amount" type="number" placeholder="Event Budget (NGN)">
+    <input id="message" type="text" placeholder="Extra Requirements (optional)">
 
-<input type="number" id="qty" value="1" min="1">
+    <button onclick="payNow()">Pay & Book Event</button>
 
-<button type="submit">Pay Now</button>
-
-</form>
-
+    <p id="status"></p>
 </div>
 
-<script src="https://js.paystack.co/v1/inline.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-
 <script>
-emailjs.init("YOUR_PUBLIC_KEY");
+emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
 
-const ADMIN_EMAIL = "Bookam26@gmail.com";
+function generateRef(){
+    return "BOOKAM-EVT-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+}
 
-document.getElementById("form").addEventListener("submit", function(e){
-  e.preventDefault();
+function payNow(){
 
-  let name = document.getElementById("name").value;
-  let email = document.getElementById("email").value;
-  let eventName = document.getElementById("event").value;
-  let qty = parseInt(document.getElementById("qty").value);
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let eventType = document.getElementById("eventType").value;
+    let location = document.getElementById("location").value;
+    let amount = document.getElementById("amount").value;
+    let message = document.getElementById("message").value;
+    let status = document.getElementById("status");
 
-  let total = qty * 100;
-
-  let handler = PaystackPop.setup({
-    key: "pk_live_2bc3134481d019ee905a4c89c35eccca8fa2b6c8",
-    email: email,
-    amount: total * 100,
-    currency: "NGN",
-
-    callback: function(response){
-
-      let data = {
-        name,
-        email,
-        event: eventName,
-        qty,
-        reference: response.reference
-      };
-
-      localStorage.setItem("bookingData", JSON.stringify(data));
-
-      sendEmails(data);
-
-      window.location.href = "confirm.html";
-    },
-
-    onClose: function(){
-      alert("Payment cancelled");
+    if(!name || !email || !eventType || !location || !amount){
+        status.innerText = "Please fill all required event details";
+        return;
     }
-  });
 
-  handler.openIframe();
-});
+    let reference = generateRef();
 
-// 📧 EMAIL FUNCTION
-function sendEmails(data){
+    FlutterwaveCheckout({
+        public_key: "FLWPUBK-1f089f41dc074df0535643cda9bd2833-X",
+        tx_ref: reference,
+        amount: amount,
+        currency: "NGN",
+        payment_options: "card, banktransfer, ussd",
 
-  // USER EMAIL
-  emailjs.send("service_9l7h8qj", "template_user", {
-    to_email: data.email,
-    to_name: data.name,
-    event: data.event,
-    qty: data.qty,
-    reference: data.reference
-  });
+        customer: {
+            email: email,
+            name: name
+        },
 
-  // ADMIN EMAIL
-  emailjs.send("service_9l7h8qj", "template_admin", {
-    to_email: ADMIN_EMAIL,
-    customer_name: data.name,
-    customer_email: data.email,
-    event: data.event,
-    qty: data.qty,
-    reference: data.reference,
-    message: "New booking received"
-  });
+        callback: function(){
+            status.innerHTML = `
+                Payment Successful ✔<br>
+                <b>Event Reference:</b> ${reference}
+            `;
 
+            sendEmail(name, email, eventType, location, amount, message, reference);
+        },
+
+        onclose: function(){
+            status.innerText = "Payment window closed";
+        }
+    });
+}
+
+function sendEmail(name, email, eventType, location, amount, message, ref){
+
+    let data = {
+        user_name: name,
+        user_email: email,
+        event_type: eventType,
+        location: location,
+        amount: amount,
+        message: message,
+        reference: ref,
+        admin_email: "Bookam26@gmail.com"
+    };
+
+    emailjs.send("YOUR_SERVICE_ID", "YOUR_USER_TEMPLATE_ID", data);
+
+    emailjs.send("YOUR_SERVICE_ID", "YOUR_ADMIN_TEMPLATE_ID", data)
+    .then(() => {
+        alert("Event booked successfully! Reference sent to email.");
+    })
+    .catch(err => console.log(err));
 }
 </script>
 

@@ -2,95 +2,120 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Flutterwave Voting Analytics</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bookam Voting</title>
+
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 body{
+  margin:0;
   font-family: Arial;
-  background:#f3f4f6;
+  background: linear-gradient(135deg, #6c2bd9, #4e1fa8);
+  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
 }
 
-.box{
+.container{
+  display:flex;
+  gap:20px;
+  width:900px;
+}
+
+.card{
   background:#fff;
-  width:360px;
   padding:20px;
-  border-radius:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
-h3{
-  margin-bottom:5px;
+.left{
+  width:350px;
 }
 
-p{
-  color:#666;
-  font-size:14px;
+.right{
+  flex:1;
+}
+
+h2{
+  text-align:center;
+  margin-bottom:15px;
 }
 
 .option{
-  margin:15px 0;
+  margin:12px 0;
 }
 
 label{
   display:flex;
   align-items:center;
   gap:10px;
-  cursor:pointer;
 }
 
 .count{
   margin-left:auto;
-  font-size:12px;
+  font-size:13px;
+  color:#444;
 }
 
 .bar{
   height:6px;
   background:#ddd;
   border-radius:5px;
-  margin-top:5px;
   overflow:hidden;
+  margin-top:5px;
 }
 
 .fill{
   height:100%;
   width:0%;
-  background:#7c3aed;
-  transition:0.4s;
+  background:#6c2bd9;
+  transition:0.3s;
 }
 
 button{
   width:100%;
-  margin-top:15px;
   padding:12px;
+  margin-top:15px;
   border:none;
-  background:#7c3aed;
+  background:#6c2bd9;
   color:white;
   border-radius:8px;
   cursor:pointer;
+  font-weight:bold;
 }
 
 button:hover{
-  background:#5b21b6;
+  background:#4e1fa8;
+}
+
+#status{
+  text-align:center;
+  font-size:13px;
+  margin-top:10px;
+}
+
+canvas{
+  max-width:100%;
 }
 </style>
-
 </head>
 
 <body>
 
-<div class="box">
+<div class="container">
 
-<h3>The best dress</h3>
-<p>Select one option and pay ₦100 to vote</p>
+<!-- LEFT -->
+<div class="card left">
+
+<h2>Vote System</h2>
 
 <div class="option">
 <label>
-<input type="radio" name="vote" value="A"> A
+<input type="radio" name="vote" value="A"> Option A
 <span class="count" id="countA">0</span>
 </label>
 <div class="bar"><div class="fill" id="fillA"></div></div>
@@ -98,7 +123,7 @@ button:hover{
 
 <div class="option">
 <label>
-<input type="radio" name="vote" value="B"> B
+<input type="radio" name="vote" value="B"> Option B
 <span class="count" id="countB">0</span>
 </label>
 <div class="bar"><div class="fill" id="fillB"></div></div>
@@ -106,58 +131,101 @@ button:hover{
 
 <div class="option">
 <label>
-<input type="radio" name="vote" value="C"> C
+<input type="radio" name="vote" value="C"> Option C
 <span class="count" id="countC">0</span>
 </label>
 <div class="bar"><div class="fill" id="fillC"></div></div>
 </div>
 
-<button onclick="payAndVote()">Vote (₦100)</button>
+<button onclick="voteNow()">Vote (₦100)</button>
+
+<p id="status"></p>
 
 </div>
 
-<script src="https://js.paystack.co/v1/inline.js"></script>
+<!-- RIGHT -->
+<div class="card right">
+<h2>Payment Analytics</h2>
+<canvas id="pieChart"></canvas>
+</div>
+
+</div>
 
 <script>
-let votes = JSON.parse(localStorage.getItem("votes")) || {
-  A:0, B:0, C:0
-};
+
+let votes = JSON.parse(localStorage.getItem("votes")) || {A:0,B:0,C:0};
+let voted = localStorage.getItem("voted");
+
+const chart = new Chart(document.getElementById("pieChart"), {
+  type: "pie",
+  data: {
+    labels: ["Option A", "Option B", "Option C"],
+    datasets: [{
+      data: [votes.A, votes.B, votes.C],
+      backgroundColor: ["#6c2bd9", "#f97316", "#10b981"]
+    }]
+  }
+});
 
 updateUI();
 
-function payAndVote(){
+function generateRef(){
+  return "FWV-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+}
+
+function voteNow(){
 
   let selected = document.querySelector('input[name="vote"]:checked');
+  let status = document.getElementById("status");
+
+  if(voted){
+    status.innerText = "❌ You already voted on this device";
+    return;
+  }
 
   if(!selected){
-    alert("Select an option");
+    status.innerText = "Select an option first";
     return;
   }
 
   let option = selected.value;
+  let reference = generateRef();
 
-  let handler = PaystackPop.setup({
-    key: "pk_live_2bc3134481d019ee905a4c89c35eccca8fa2b6c8", // public key ONLY
-    email: "user@email.com",
-    amount: 100 * 100,
+  FlutterwaveCheckout({
+    public_key: "FLWPUBK-1f089f41dc074df0535643cda9bd2833-X",
+    tx_ref: reference,
+    amount: 100,
     currency: "NGN",
+    payment_options: "card, banktransfer, ussd",
 
-    callback: function(response){
-      votes[option]++;
-      localStorage.setItem("votes", JSON.stringify(votes));
-      updateUI();
-      alert("Vote successful!");
+    customer: {
+      email: "user@email.com",
+      name: "Voter"
     },
 
-    onClose: function(){
-      alert("Payment cancelled");
+    callback: function(){
+
+      votes[option]++;
+      localStorage.setItem("votes", JSON.stringify(votes));
+      localStorage.setItem("voted", "true");
+
+      voted = true;
+
+      updateUI();
+      updateChart();
+
+      status.innerText = "✅ Vote successful!";
+    },
+
+    onclose: function(){
+      status.innerText = "Payment closed";
     }
   });
 
-  handler.openIframe();
 }
 
 function updateUI(){
+
   let total = votes.A + votes.B + votes.C;
 
   document.getElementById("countA").innerText = votes.A;
@@ -168,6 +236,12 @@ function updateUI(){
   document.getElementById("fillB").style.width = total ? (votes.B/total*100)+"%" : "0%";
   document.getElementById("fillC").style.width = total ? (votes.C/total*100)+"%" : "0%";
 }
+
+function updateChart(){
+  chart.data.datasets[0].data = [votes.A, votes.B, votes.C];
+  chart.update();
+}
+
 </script>
 
 </body>
