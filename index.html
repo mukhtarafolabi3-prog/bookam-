@@ -31,7 +31,7 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 30px;
+  padding:12px 25px;
   background:white;
   position:sticky;
   top:0;
@@ -39,8 +39,32 @@ body{
   box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 
-.navbar img{ height:60px; }
+/* 🔥 BOLD ANIMATED LOGO */
+.navbar img{
+  width:170px;
+  height:auto;
+  object-fit:contain;
+  transform:scale(1.08);
+  filter:drop-shadow(0 0 15px rgba(124,58,237,0.6));
+  animation:logoPulse 2.8s ease-in-out infinite;
+}
 
+@keyframes logoPulse{
+  0%{
+    transform:scale(1.05);
+    filter:drop-shadow(0 0 10px rgba(124,58,237,0.4));
+  }
+  50%{
+    transform:scale(1.15);
+    filter:drop-shadow(0 0 20px rgba(124,58,237,0.8));
+  }
+  100%{
+    transform:scale(1.05);
+    filter:drop-shadow(0 0 10px rgba(124,58,237,0.4));
+  }
+}
+
+/* NAV LINKS */
 .nav-links{
   display:flex;
   list-style:none;
@@ -52,14 +76,21 @@ body{
   color:var(--text);
 }
 
+/* CTA */
 .cta-btn{
-  background:var(--purple);
+  background:linear-gradient(135deg,var(--purple),var(--dark));
   color:white;
-  padding:8px 15px;
-  border-radius:6px;
+  padding:10px 16px;
+  border-radius:8px;
   text-decoration:none;
+  transition:0.3s;
 }
 
+.cta-btn:hover{
+  transform:scale(1.05);
+}
+
+/* MENU */
 .menu-toggle{
   display:none;
   font-size:24px;
@@ -75,7 +106,9 @@ body{
   gap:40px;
 }
 
-.hero-text{ max-width:500px; }
+.hero-text{
+  max-width:500px;
+}
 
 .hero-text h1{
   font-size:42px;
@@ -87,8 +120,25 @@ body{
   color:var(--muted);
 }
 
-.hero-img{ width:400px; }
-.hero-img img{ width:100%; }
+/* HERO IMAGE */
+.hero-img{
+  width:420px;
+}
+
+.hero-img img{
+  width:100%;
+  border-radius:15px;
+  transform:scale(1.05);
+  box-shadow:0 20px 40px rgba(0,0,0,0.25);
+  border:3px solid rgba(124,58,237,0.3);
+  animation:imagePulse 4s infinite;
+}
+
+@keyframes imagePulse{
+  0%{transform:scale(1.05)}
+  50%{transform:scale(1.08)}
+  100%{transform:scale(1.05)}
+}
 
 /* BUTTONS */
 .btn{
@@ -96,6 +146,7 @@ body{
   padding:10px 18px;
   border-radius:6px;
   text-decoration:none;
+  transition:0.3s;
 }
 
 .btn-primary{
@@ -109,7 +160,11 @@ body{
   margin-left:10px;
 }
 
-/* SECTION */
+.btn:hover{
+  transform:scale(1.05);
+}
+
+/* SECTIONS */
 .section{
   padding:70px 20px;
   text-align:center;
@@ -121,15 +176,31 @@ body{
   color:var(--dark);
 }
 
-/* GRID (EVENTS + CONTEST) */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-  gap:20px;
-  margin-top:30px;
+/* SLIDER SYSTEM */
+.slider{
+  overflow:hidden;
+  padding:10px 0;
 }
 
+.track{
+  display:flex;
+  gap:20px;
+  width:max-content;
+  animation:scroll 18s linear infinite;
+}
+
+.slider:hover .track{
+  animation-play-state:paused;
+}
+
+@keyframes scroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
+/* CARD */
 .card{
+  min-width:250px;
   background:white;
   padding:20px;
   border-radius:10px;
@@ -138,7 +209,8 @@ body{
 }
 
 .card:hover{
-  transform:translateY(-5px);
+  transform:translateY(-10px) scale(1.05);
+  box-shadow:0 10px 25px rgba(0,0,0,0.12);
 }
 
 .card a{
@@ -151,7 +223,7 @@ body{
   text-decoration:none;
 }
 
-/* WHY CHOOSE */
+/* FEATURES */
 .feature-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
@@ -164,17 +236,11 @@ body{
   padding:25px;
   border-radius:12px;
   box-shadow:0 5px 15px rgba(0,0,0,0.05);
-  text-align:left;
   transition:0.3s;
 }
 
 .feature-card:hover{
-  transform:translateY(-5px);
-}
-
-.feature-card h3{
-  margin-bottom:10px;
-  color:var(--dark);
+  transform:translateY(-8px);
 }
 
 /* ADS */
@@ -191,7 +257,6 @@ footer{
   text-align:center;
   padding:20px;
   background:white;
-  margin-top:30px;
 }
 
 /* MOBILE */
@@ -216,9 +281,13 @@ footer{
     transition:0.3s;
   }
 
-  .nav-links.active{ right:0; }
+  .nav-links.active{
+    right:0;
+  }
 
-  .cta-btn{ display:none; }
+  .cta-btn{
+    display:none;
+  }
 }
 </style>
 </head>
@@ -231,8 +300,8 @@ footer{
 
   <ul class="nav-links" id="navLinks">
     <li><a href="#">Home</a></li>
-    <li><a href="#events">Events</a></li>
-    <li><a href="#contest">Contest</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Services</a></li>
     <li><a href="#">Contact</a></li>
   </ul>
 
@@ -243,7 +312,7 @@ footer{
 <!-- HERO -->
 <section class="hero">
   <div class="hero-text">
-    <h1>Book Everything in One Place</h1>
+    <h1>“Bookam – One Platform, Endless Bookings Powered for Your Lifestyle</h1>
     <p>Tickets, contests & events — fast and secure.</p>
 
     <a href="#events" class="btn btn-primary">Start Now</a>
@@ -256,78 +325,38 @@ footer{
 </section>
 
 <!-- EVENTS -->
-<section class="section" id="events">
+<section class="section">
   <h2>🔥 Featured Events</h2>
 
-  <div class="grid">
+  <div class="slider">
+    <div class="track">
+      <div class="card"><h3>Davido Concert</h3><p>Lagos • Dec 20</p><a href="ticket.html">Book Now</a></div>
+      <div class="card"><h3>Tech Summit</h3><p>Abuja • Jan 15</p><a href="ticket.html">Book Now</a></div>
+      <div class="card"><h3>Summer Party</h3><p>Ibadan • Feb 10</p><a href="ticket.html">Book Now</a></div>
+      <div class="card"><h3>Fashion Show</h3><p>Lagos • March 5</p><a href="ticket.html">Book Now</a></div>
 
-    <div class="card">
-      <h3>Davido Concert</h3>
-      <p>Lagos • Dec 20</p>
-      <a href="ticket.html">Book Now</a>
+      <!-- duplicate for smooth loop -->
+      <div class="card"><h3>Davido Concert</h3><p>Lagos • Dec 20</p><a href="ticket.html">Book Now</a></div>
+      <div class="card"><h3>Tech Summit</h3><p>Abuja • Jan 15</p><a href="ticket.html">Book Now</a></div>
     </div>
-
-    <div class="card">
-      <h3>Tech Summit</h3>
-      <p>Abuja • Jan 15</p>
-      <a href="ticket.html">Book Now</a>
-    </div>
-
-    <div class="card">
-      <h3>Summer Party</h3>
-      <p>Ibadan • Feb 10</p>
-      <a href="ticket.html">Book Now</a>
-    </div>
-
-    <div class="card">
-      <h3>Fashion Show</h3>
-      <p>Lagos • March 5</p>
-      <a href="ticket.html">Book Now</a>
-    </div>
-<div class="card">
-      <h3>Fashion Show</h3>
-      <p>Lagos • March 5</p>
-      <a href="ticket.html">Book Now</a>
-    </div>
-<div class="card">
-      <h3>Fashion Show</h3>
-      <p>Lagos • March 5</p>
-      <a href="ticket.html">Book Now</a>
-    </div>
-
   </div>
 </section>
 
 <!-- CONTEST -->
-<section class="section" id="contest">
+<section class="section">
   <h2>🏆 Contest Zone</h2>
 
-  <div class="grid">
+  <div class="slider">
+    <div class="track">
+      <div class="card"><h3>Dance Challenge</h3><p>Win ₦100,000</p><a href="contest.html">Join Now</a></div>
+      <div class="card"><h3>Music Battle</h3><p>Win Studio Time</p><a href="contest.html">Join Now</a></div>
+      <div class="card"><h3>Hackathon</h3><p>Win Cash Prize</p><a href="contest.html">Join Now</a></div>
+      <div class="card"><h3>Quiz Contest</h3><p>Win ₦50,000</p><a href="contest.html">Join Now</a></div>
 
-    <div class="card">
-      <h3>Dance Challenge</h3>
-      <p>Win ₦100,000</p>
-      <a href="contest.html">Join Now</a>
+      <!-- duplicate -->
+      <div class="card"><h3>Music Battle</h3><p>Win Studio Time</p><a href="contest.html">Join Now</a></div>
+      <div class="card"><h3>Hackathon</h3><p>Win Cash Prize</p><a href="contest.html">Join Now</a></div>
     </div>
-
-    <div class="card">
-      <h3>Music Battle</h3>
-      <p>Win Studio Time</p>
-      <a href="contest.html">Join Now</a>
-    </div>
-
-    <div class="card">
-      <h3>Hackathon</h3>
-      <p>Win Cash Prize</p>
-      <a href="contest.html">Join Now</a>
-    </div>
-
-    <div class="card">
-      <h3>Quiz Contest</h3>
-      <p>Win ₦50,000</p>
-      <a href="contest.html">Join Now</a>
-    </div>
-
   </div>
 </section>
 
@@ -336,42 +365,23 @@ footer{
   <h2>⚡ Why Choose Bookam</h2>
 
   <div class="feature-grid">
-
-    <div class="feature-card">
-      <h3>⚡ Fast Booking</h3>
-      <p>Book events instantly without stress.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>🔒 Secure Payment</h3>
-      <p>Safe transactions powered by trusted gateways.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>🎟 Instant Ticket</h3>
-      <p>Get your ticket immediately after payment.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>📢 Promotion</h3>
-      <p>Advertise your event to thousands of users.</p>
-    </div>
-
+    <div class="feature-card"><h3>Fast Booking</h3><p>Instant access</p></div>
+    <div class="feature-card"><h3>Secure Payment</h3><p>Safe checkout</p></div>
+    <div class="feature-card"><h3>Instant Ticket</h3><p>Auto delivery</p></div>
+    <div class="feature-card"><h3>Promotion</h3><p>Grow your event</p></div>
   </div>
 </section>
 
-<!-- ADS -->
 <section class="ads">
   <h2>📢 Promote Your Event on Bookam</h2>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <p>© 2026 Bookam</p>
 </footer>
 
 <script>
-// MENU TOGGLE
+// MENU
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 
