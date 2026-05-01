@@ -9,8 +9,8 @@
 :root{
   --purple:#7c3aed;
   --dark:#5b21b6;
-  --bg:#f9fafb;
-  --text:#1f1f2e;
+  --bg:#f8fafc;
+  --text:#1f2937;
   --muted:#6b7280;
 }
 
@@ -18,7 +18,7 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial, sans-serif;
+  font-family:'Segoe UI', sans-serif;
 }
 
 body{
@@ -31,206 +31,237 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 30px;
+  padding:15px 40px;
   background:white;
-  position:sticky;
-  top:0;
-  z-index:1000;
   box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 
-.navbar img{
-  height:60px;
+/* 🔥 LOGO WATER EFFECT */
+.logo-water{
+  position:relative;
+  width:140px;
+  overflow:hidden;
 }
 
+.logo-water img{
+  width:100%;
+  position:relative;
+  z-index:2;
+}
+
+/* PURPLE WATER */
+.water{
+  position:absolute;
+  bottom:-120%;
+  left:0;
+  width:100%;
+  height:220%;
+  background:linear-gradient(180deg,#a855f7,#7c3aed,#5b21b6);
+  animation:pour 4s infinite ease-in-out;
+  opacity:0.9;
+  filter:blur(1px);
+  z-index:1;
+}
+
+.water::before{
+  content:"";
+  position:absolute;
+  top:-40px;
+  left:0;
+  width:200%;
+  height:60px;
+  background:rgba(255,255,255,0.2);
+  border-radius:50%;
+  animation:wave 3s linear infinite;
+}
+
+@keyframes pour{
+  0%{ transform:translateY(120px); }
+  50%{ transform:translateY(-20px); }
+  100%{ transform:translateY(120px); }
+}
+
+@keyframes wave{
+  0%{ transform:translateX(0); }
+  100%{ transform:translateX(-50%); }
+}
+
+/* NAV LINKS */
 .nav-links{
   display:flex;
-  list-style:none;
   gap:20px;
+  list-style:none;
 }
 
 .nav-links a{
   text-decoration:none;
   color:var(--text);
+  font-weight:500;
 }
 
+.nav-links a:hover{
+  color:var(--purple);
+}
+
+/* CTA BUTTON FIX */
 .cta-btn{
-  background:var(--purple);
+  background:linear-gradient(135deg,var(--purple),var(--dark));
   color:white;
-  padding:8px 15px;
-  border-radius:6px;
+  padding:10px 16px;
+  border-radius:8px;
   text-decoration:none;
 }
 
 /* HERO */
 .hero{
   text-align:center;
-  padding:90px 20px;
-  background:linear-gradient(135deg,var(--purple),var(--dark));
-  color:white;
+  padding:80px 20px;
 }
 
 .hero h1{
-  font-size:45px;
+  font-size:42px;
+  color:var(--dark);
+  animation:fadeDown 1s ease;
 }
 
 .hero p{
   margin-top:15px;
-  max-width:600px;
-  margin:auto;
-  opacity:0.9;
+  color:var(--muted);
+  max-width:700px;
+  margin-left:auto;
+  margin-right:auto;
+  animation:fadeUp 1.2s ease;
 }
 
-/* STATS */
-.stats{
-  display:flex;
-  justify-content:center;
-  gap:40px;
-  flex-wrap:wrap;
-  padding:40px 20px;
-  background:white;
+/* ANIMATIONS */
+@keyframes fadeDown{
+  from{opacity:0; transform:translateY(-20px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
-.stat-box{
-  text-align:center;
-}
-
-.stat-box h2{
-  color:var(--purple);
-  font-size:30px;
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
 /* SECTION */
 .section{
-  padding:70px 20px;
+  padding:60px 30px;
   text-align:center;
 }
 
 .section h2{
-  color:var(--dark);
-  margin-bottom:10px;
+  margin-bottom:20px;
 }
 
-/* CARDS */
+/* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:20px;
-  margin-top:30px;
+  margin-top:40px;
 }
 
+/* CARD */
 .card{
   background:white;
   padding:25px;
   border-radius:12px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.05);
+  box-shadow:0 10px 25px rgba(0,0,0,0.05);
   transition:0.3s;
 }
 
 .card:hover{
-  transform:translateY(-8px);
+  transform:translateY(-10px);
 }
 
-/* MISSION */
-.mission{
-  max-width:800px;
-  margin:auto;
-  background:white;
-  padding:30px;
-  border-radius:12px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.05);
-}
-
-/* TEAM */
-.team{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-  margin-top:30px;
-}
-
-.member{
-  background:white;
-  padding:20px;
-  border-radius:12px;
-  text-align:center;
-}
-
-.member img{
-  width:80px;
-  height:80px;
-  border-radius:50%;
-  margin-bottom:10px;
-}
-
-/* CTA */
-.cta{
-  background:linear-gradient(135deg,var(--dark),var(--purple));
-  color:white;
-  padding:60px 20px;
-  text-align:center;
-  margin-top:40px;
-}
-
-.cta a{
+/* BUTTON */
+.btn{
   display:inline-block;
   margin-top:15px;
-  background:white;
-  color:var(--purple);
   padding:10px 18px;
+  background:var(--purple);
+  color:white;
   border-radius:6px;
   text-decoration:none;
-  font-weight:bold;
 }
 
 /* FOOTER */
 footer{
   text-align:center;
-  padding:20px;
+  padding:25px;
   background:white;
+  margin-top:40px;
+}
+
+/* MOBILE FIX */
+@media(max-width:768px){
+  .navbar{
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .nav-links{
+    flex-direction:column;
+    width:100%;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- NAVBAR FIXED -->
 <header class="navbar">
-  <img src="image/BOOK.png" alt="Bookam Logo">
 
-  <ul class="nav-links" id="navLinks">
+  <div class="logo-water">
+    <div class="water"></div>
+    <img src="image/BOOK.png">
+  </div>
+
+  <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
-      <li><a href="services.html">Services</a></li>
+    <li><a href="tform.html">Events</a></li>
+    <li><a href="contest.html">Contests</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
 
-  <a href="index.html#services" class="cta-btn">Get Started</a>
+  <a href="#" class="cta-btn">Get Started</a>
+
 </header>
 
 <!-- HERO -->
 <section class="hero">
   <h1>About Bookam</h1>
   <p>
-    A modern booking platform that connects people to events, tickets, hotels, and digital services — all in one place.
+    Bookam is a modern event booking platform that allows users to discover,
+    book, and pay for events, concerts, and contests easily in one place.
+    We connect people to experiences faster and smarter.
   </p>
 </section>
 
-<!-- STATS -->
-<section class="stats">
-  <div class="stat-box">
-    <h2>10K+</h2>
-    <p>Users</p>
-  </div>
+<!-- FEATURES -->
+<section class="section">
+  <h2>Why Bookam Exists</h2>
 
-  <div class="stat-box">
-    <h2>500+</h2>
-    <p>Events</p>
-  </div>
+  <div class="grid">
 
-  <div class="stat-box">
-    <h2>1K+</h2>
-    <p>Tickets Sold</p>
+    <div class="card">
+      <h3>🚀 Fast Booking</h3>
+      <p>Book tickets in seconds without stress or delays.</p>
+    </div>
+
+    <div class="card">
+      <h3>🔒 Secure Payment</h3>
+      <p>All payments are protected with trusted gateways.</p>
+    </div>
+
+    <div class="card">
+      <h3>🎟 Instant Tickets</h3>
+      <p>Get your ticket immediately after payment.</p>
+    </div>
+
   </div>
 </section>
 
@@ -238,59 +269,34 @@ footer{
 <section class="section">
   <h2>Our Mission</h2>
 
-  <div class="mission">
-    To simplify event booking and digital services by providing a fast, secure, and user-friendly platform for everyone.
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="section">
-  <h2>Why Choose Bookam?</h2>
-
   <div class="grid">
-    <div class="card">⚡ Fast Booking System</div>
-    <div class="card">🔐 Secure Payments</div>
-    <div class="card">🎟 Instant Ticket Delivery</div>
-    <div class="card">📱 Mobile Friendly</div>
-  </div>
-</section>
 
-<!-- TEAM -->
-<section class="section">
-  <h2>Meet Our Team</h2>
-
-  <div class="team">
-
-    <div class="member">
-      <img src="https://i.pravatar.cc/100?img=1">
-      <h3>Founder</h3>
-      <p>Product Vision & Strategy</p>
+    <div class="card">
+      <h3>🎯 Mission</h3>
+      <p>To simplify event booking and make entertainment accessible to everyone.</p>
     </div>
 
-    <div class="member">
-      <img src="https://i.pravatar.cc/100?img=2">
-      <h3>Developer</h3>
-      <p>Frontend & System Design</p>
+    <div class="card">
+      <h3>🌍 Vision</h3>
+      <p>To become Africa’s leading event booking platform.</p>
     </div>
 
-    <div class="member">
-      <img src="https://i.pravatar.cc/100?img=3">
-      <h3>Support</h3>
-      <p>Customer Experience</p>
+    <div class="card">
+      <h3>💡 Innovation</h3>
+      <p>We constantly improve with modern tech like payments & automation.</p>
     </div>
 
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta">
-  <h2>Ready to Start Booking?</h2>
-  <p>Join thousands of users already using Bookam</p>
-  <a href="index.html#services">Get Started</a>
+<section class="section">
+  <h2>Ready to Explore Events?</h2>
+  <a href="index.html" class="btn">Start Booking</a>
 </section>
 
 <footer>
-  <p>© 2026 Bookam. Built with passion.</p>
+  © 2026 Bookam — All Rights Reserved
 </footer>
 
 </body>

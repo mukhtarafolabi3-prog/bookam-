@@ -10,8 +10,8 @@
   --purple:#7c3aed;
   --dark:#5b21b6;
   --bg:#f9fafb;
-  --text:#ffffff;
-  --muted:#d1d5db;
+  --text:#111;
+  --muted:#6b7280;
 }
 
 *{
@@ -38,60 +38,10 @@ body{
   box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* 🔥 LOGO WATER EFFECT ADDED */
-.logo-water{
-  position:relative;
+.navbar img{
   width:150px;
-  overflow:hidden;
 }
 
-/* LOGO */
-.logo-water img{
-  width:100%;
-  position:relative;
-  z-index:2;
-}
-
-/* PURPLE WATER POUR */
-.water{
-  position:absolute;
-  bottom:-120%;
-  left:0;
-  width:100%;
-  height:220%;
-  background:linear-gradient(180deg,#a855f7,#7c3aed,#5b21b6);
-  animation:pour 4s infinite ease-in-out;
-  opacity:0.9;
-  filter:blur(1px);
-  z-index:1;
-}
-
-/* WAVE TOP */
-.water::before{
-  content:"";
-  position:absolute;
-  top:-40px;
-  left:0;
-  width:200%;
-  height:60px;
-  background:rgba(255,255,255,0.2);
-  border-radius:50%;
-  animation:wave 3s linear infinite;
-}
-
-/* ANIMATION */
-@keyframes pour{
-  0%{ transform:translateY(120px); }
-  50%{ transform:translateY(-20px); }
-  100%{ transform:translateY(120px); }
-}
-
-@keyframes wave{
-  0%{ transform:translateX(0); }
-  100%{ transform:translateX(-50%); }
-}
-
-/* NAV */
 .nav-links{
   display:flex;
   list-style:none;
@@ -124,7 +74,6 @@ body{
   overflow:hidden;
 }
 
-/* IMAGE SLIDER */
 .image-slider{
   display:flex;
   width:200%;
@@ -138,7 +87,6 @@ body{
   object-fit:cover;
 }
 
-/* DARK OVERLAY */
 .hero::after{
   content:"";
   position:absolute;
@@ -149,7 +97,6 @@ body{
   background:rgba(0,0,0,0.55);
 }
 
-/* TEXT */
 .hero-content{
   position:absolute;
   top:50%;
@@ -159,17 +106,15 @@ body{
   color:white;
   z-index:2;
   max-width:700px;
-  padding:20px;
 }
 
 .hero-content h1{
   font-size:42px;
-  margin-bottom:15px;
 }
 
 .hero-content p{
-  color:var(--muted);
-  margin-bottom:20px;
+  color:#d1d5db;
+  margin-top:10px;
 }
 
 /* BUTTONS */
@@ -179,6 +124,7 @@ body{
   border-radius:6px;
   text-decoration:none;
   margin:5px;
+  transition:0.3s;
 }
 
 .btn-primary{
@@ -191,20 +137,19 @@ body{
   color:white;
 }
 
-/* ANIMATION */
-@keyframes slide{
-  0%{transform:translateX(0);}
-  100%{transform:translateX(-50%);}
+.btn:hover{
+  transform:scale(1.05);
 }
 
-/* SECTIONS */
+/* SECTION */
 .section{
   padding:70px 20px;
   text-align:center;
 }
 
 .section h2{
-  color:#5b21b6;
+  color:var(--dark);
+  margin-bottom:20px;
 }
 
 /* SLIDER */
@@ -219,16 +164,30 @@ body{
   animation:scroll 20s linear infinite;
 }
 
-@keyframes scroll{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-50%)}
-}
-
+/* CARD */
 .card{
   min-width:250px;
   background:white;
   padding:20px;
   border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+}
+
+/* CARD BUTTON */
+.card a{
+  display:inline-block;
+  margin-top:10px;
+  padding:8px 14px;
+  background:var(--purple);
+  color:white;
+  border-radius:6px;
+  text-decoration:none;
+  font-size:14px;
 }
 
 /* FEATURES */
@@ -251,36 +210,43 @@ footer{
   background:white;
 }
 
+/* ANIMATION */
+@keyframes slide{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
+}
+
+@keyframes scroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
 /* MOBILE */
 @media(max-width:768px){
+  .menu-toggle{display:block;}
 
-.hero-content h1{
-  font-size:28px;
-}
+  .nav-links{
+    position:absolute;
+    top:60px;
+    right:-100%;
+    flex-direction:column;
+    background:white;
+    padding:20px;
+    width:200px;
+    transition:0.3s;
+  }
 
-.menu-toggle{
-  display:block;
-}
+  .nav-links.active{
+    right:0;
+  }
 
-.nav-links{
-  position:absolute;
-  top:60px;
-  right:-100%;
-  flex-direction:column;
-  background:white;
-  padding:20px;
-  width:200px;
-  transition:0.3s;
-}
+  .cta-btn{
+    display:none;
+  }
 
-.nav-links.active{
-  right:0;
-}
-
-.cta-btn{
-  display:none;
-}
-
+  .hero-content h1{
+    font-size:28px;
+  }
 }
 </style>
 </head>
@@ -289,20 +255,14 @@ footer{
 
 <!-- NAVBAR -->
 <header class="navbar">
-
-  <!-- 🔥 LOGO WITH WATER EFFECT -->
-  <div class="logo-water">
-    <div class="water"></div>
-    <img src="image/BOOK.png">
-  </div>
+  <img src="image/BOOK.png">
 
   <ul class="nav-links" id="navLinks">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">About</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
     <li><a href="tform.html">Events</a></li>
-        <li><a href="contest.html">Contests</a></li>
-
-    <li><a href="#">Contact</a></li>
+    <li><a href="contest.html">Contests</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
 
   <a href="#" class="cta-btn">Get Started</a>
@@ -319,7 +279,7 @@ footer{
 
   <div class="hero-content">
     <h1>Bookam – One Platform, Endless Bookings</h1>
-    <p>Tickets, contests & events — fast, secure, and modern booking system.</p>
+    <p>Events, contests & tickets made simple and fast.</p>
 
     <a href="#" class="btn btn-primary">Start Now</a>
     <a href="#" class="btn btn-outline">Learn More</a>
@@ -333,10 +293,69 @@ footer{
 
   <div class="slider">
     <div class="track">
-      <div class="card"><h3>Davido Concert</h3><p>Lagos • Dec 20</p></div>
-      <div class="card"><h3>Tech Summit</h3><p>Abuja • Jan 15</p></div>
-      <div class="card"><h3>Summer Party</h3><p>Ibadan • Feb 10</p></div>
-      <div class="card"><h3>Fashion Show</h3><p>Lagos • March 5</p></div>
+
+      <div class="card">
+        <h3>Davido Concert</h3>
+        <a href="tform.html">Book Now</a>
+      </div>
+
+      <div class="card">
+        <h3>Tech Summit</h3>
+        <a href="tform.html">Book Now</a>
+      </div>
+
+      <div class="card">
+        <h3>Summer Party</h3>
+        <a href="tform.html">Book Now</a>
+      </div>
+
+      <div class="card">
+        <h3>Fashion Show</h3>
+        <a href="tform.html">Book Now</a>
+      </div>
+
+      <!-- duplicate for loop -->
+      <div class="card">
+        <h3>Davido Concert</h3>
+        <a href="tform.html">Book Now</a>
+      </div>
+
+      <div class="card">
+        <h3>Tech Summit</h3>
+        <a href="tform.html">Book Now</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTEST -->
+<section class="section">
+  <h2>🏆 Contest Zone</h2>
+
+  <div class="slider">
+    <div class="track">
+
+      <div class="card">
+        <h3>Dance Battle</h3>
+        <a href="contest.html">Join Now</a>
+      </div>
+
+      <div class="card">
+        <h3>Music Challenge</h3>
+        <a href="contest.html">Join Now</a>
+      </div>
+
+      <div class="card">
+        <h3>Hackathon</h3>
+        <a href="contest.html">Join Now</a>
+      </div>
+
+      <div class="card">
+        <h3>Quiz Contest</h3>
+        <a href="contest.html">Join Now</a>
+      </div>
+
     </div>
   </div>
 </section>
@@ -349,7 +368,6 @@ footer{
     <div class="feature-card"><h3>Fast Booking</h3></div>
     <div class="feature-card"><h3>Secure Payment</h3></div>
     <div class="feature-card"><h3>Instant Ticket</h3></div>
-    <div class="feature-card"><h3>Event Growth</h3></div>
   </div>
 </section>
 
@@ -358,6 +376,7 @@ footer{
 </footer>
 
 <script>
+// MENU TOGGLE
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 
