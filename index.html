@@ -32,6 +32,7 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden; /* Prevents side-scrolling */
     }
 
     /* NAVBAR & LIQUID LOGO */
@@ -74,13 +75,8 @@
     }
 
     @keyframes wave-rotate {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .logo-water img {
@@ -118,14 +114,9 @@
       box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.3);
     }
 
-    .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.4);
-    }
-
     .menu-toggle {
       display: none;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       cursor: pointer;
       color: var(--purple);
     }
@@ -143,7 +134,7 @@
     .image-slider {
       position: absolute;
       display: flex;
-      width: 200%;
+      width: 500%; /* Total width for 5 images */
       height: 100%;
       animation: slide 25s infinite alternate ease-in-out;
       z-index: -1;
@@ -152,7 +143,7 @@
     .image-slider img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; /* FIXED: Prevents image stretching */
     }
 
     .hero::after {
@@ -168,7 +159,8 @@
       color: white;
       z-index: 10;
       max-width: 800px;
-      padding: 2rem;
+      padding: 2.5rem;
+      width: 90%;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(8px);
       border-radius: 24px;
@@ -176,7 +168,7 @@
     }
 
     .hero-content h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-size: clamp(2.2rem, 8vw, 4.5rem);
       line-height: 1.1;
       margin-bottom: 1rem;
       font-weight: 800;
@@ -231,39 +223,22 @@
       font-size: 1.5rem;
     }
 
-    /* CONTACT SECTION */
-    .contact-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3rem;
-      background: var(--white);
-      padding: 3rem;
-      border-radius: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      border: 1.5px solid #e5e7eb;
-      border-radius: 12px;
-      outline: none;
+    /* Styled Buttons for Events/Contests */
+    .card a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1.2rem;
+      border: 1.5px solid var(--purple);
+      color: var(--purple);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 700;
       transition: var(--transition);
     }
 
-    .contact-form input:focus {
-      border-color: var(--purple);
-    }
-
-    .contact-info div {
-      margin-bottom: 1.5rem;
-    }
-
-    .contact-info h4 {
-      color: var(--purple);
-      margin-bottom: 0.5rem;
+    .card a:hover {
+      background: var(--purple);
+      color: white;
     }
 
     /* CTA SECTION */
@@ -303,66 +278,67 @@
 
     /* ANIMATIONS */
     @keyframes slide {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-50%);
-      }
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-80%); } /* Shifted for 5 images */
     }
 
     @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-50%);
-      }
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-   @media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-    z-index: 1001; /* Stay above the sidebar */
-    cursor: pointer;
-  }
+    /* MOBILE RESPONSE */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+        z-index: 1001;
+      }
 
-  .nav-links {
-    position: fixed;
-     display: flex;
-    flex-direction: column;
-    background: white;
-    width: 80%; /* Occupies 80% of the screen width */
-    height: 100vh;
-    padding: 100px 2rem;
-    
-    transition: 0.5s ease-in-out;
-    
- 
-  }
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Hidden by default */
+        display: flex;
+        flex-direction: column;
+        background: white;
+        width: 80%;
+        height: 100vh;
+        padding: 100px 2rem;
+        transition: 0.4s ease-in-out;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        z-index: 1000;
+      }
 
-  
-  .nav-links li {
-    margin: 1.5rem 0;
-    text-align: left;
-  }
-
-  .nav-links a {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--text);
-  }
-}
-  
       .nav-links.active {
         right: 0;
+      }
+
+      .nav-links li {
+        margin: 1.5rem 0;
       }
 
       .cta-btn {
         display: none;
       }
+
+      .hero {
+        height: 70vh; /* Shorter for better mobile view */
+      }
+      
+      .card {
+        min-width: 260px;
+      }
+      
+      .cta-box {
+        width: 100%;
+      }
+    }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background: #111827;
+      color: white;
     }
   </style>
 </head>
@@ -392,8 +368,8 @@
       <img src="image/mm.jpeg" alt="Concert">
       <img src="image/ss.jpeg" alt="Event">
       <img src="image/mm1.jpeg" alt="Event">
-<img src="image/mm2.jpeg" alt="Event">
-<img src="image/mm3.jpeg" alt="Event">
+      <img src="image/mm2.jpeg" alt="Event">
+      <img src="image/mm3.jpeg" alt="Event">
     </div>
     <div class="hero-content">
       <h1>Events Made Simple.</h1>
@@ -437,23 +413,28 @@
       <div class="track">
         <div class="card">
           <h3>Davido Live</h3>
-          <p>Experience the King of Afrobeats.</p><a href="ticket.html">Book Ticket</a>
+          <p>Experience the King of Afrobeats.</p>
+          <a href="ticket.html">Book Ticket</a>
         </div>
         <div class="card">
           <h3>Tech Summit '26</h3>
-          <p>The future of AI and Web3.</p><a href="ticket.html">Book Ticket</a>
+          <p>The future of AI and Web3.</p>
+          <a href="ticket.html">Book Ticket</a>
         </div>
         <div class="card">
           <h3>Lagos Jazz Night</h3>
-          <p>A soulful evening of music.</p><a href="ticket.html">Book Ticket</a>
+          <p>A soulful evening of music.</p>
+          <a href="ticket.html">Book Ticket</a>
         </div>
         <div class="card">
           <h3>Fashion Week</h3>
-          <p>Runway shows and designers.</p><a href="ticket.html">Book Ticket</a>
+          <p>Runway shows and designers.</p>
+          <a href="ticket.html">Book Ticket</a>
         </div>
         <div class="card">
           <h3>Davido Live</h3>
-          <p>Experience the King of Afrobeats.</p><a href="ticket.html">Book Ticket</a>
+          <p>Experience the King of Afrobeats.</p>
+          <a href="ticket.html">Book Ticket</a>
         </div>
       </div>
     </div>
@@ -466,26 +447,28 @@
       <div class="track">
         <div class="card">
           <h3>Dance Battle</h3>
-          <p>Show your talent</p><a href="contest.html">Join Now</a>
+          <p>Show your talent</p>
+          <a href="contest.html">Join Now</a>
         </div>
         <div class="card">
           <h3>Music Challenge</h3>
-          <p>Compete and win</p><a href="contest.html">Join Now</a>
+          <p>Compete and win</p>
+          <a href="contest.html">Join Now</a>
         </div>
         <div class="card">
           <h3>Hackathon</h3>
-          <p>Build and win prizes</p><a href="contest.html">Join Now</a>
+          <p>Build and win prizes</p>
+          <a href="contest.html">Join Now</a>
         </div>
         <div class="card">
           <h3>Quiz Contest</h3>
-          <p>Test your brain</p><a href="contest.html">Join Now</a>
+          <p>Test your brain</p>
+          <a href="contest.html">Join Now</a>
         </div>
       </div>
     </div>
   </section>
 
-
- 
   <section class="cta-section">
     <h2>Ready to dive in?</h2>
     <div class="cta-buttons">
@@ -512,17 +495,16 @@
 
     menuToggle.onclick = () => {
       navLinks.classList.toggle("active");
-      menuToggle.textContent = navLinks.classList.contains("active") ? "✕" : "☰";
+      menuToggle.innerHTML = navLinks.classList.contains("active") ? "&#10005;" : "☰";
     };
 
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.onclick = () => {
         navLinks.classList.remove("active");
-        menuToggle.textContent = "☰";
+        menuToggle.innerHTML = "☰";
       };
     });
   </script>
 
 </body>
-
 </html>
