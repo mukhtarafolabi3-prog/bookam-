@@ -38,7 +38,6 @@ body{
   box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* LOGO WATER EFFECT */
 .logo-water{
   position:relative;
   width:150px;
@@ -108,7 +107,7 @@ body{
 
 .menu-toggle{
   display:none;
-  font-size:24px;
+  font-size:26px;
   cursor:pointer;
 }
 
@@ -123,7 +122,7 @@ body{
   display:flex;
   width:200%;
   height:100%;
-  animation:slide 18s linear infinite;
+  animation:slide 18s ease-in-out infinite;
 }
 
 .image-slider img{
@@ -223,7 +222,7 @@ body{
   text-decoration:none;
 }
 
-/* CTA SECTION */
+/* CTA */
 .cta-section{
   padding:70px 20px;
   text-align:center;
@@ -245,11 +244,6 @@ body{
   padding:25px;
   border-radius:12px;
   width:260px;
-}
-
-.cta-box .btn-outline{
-  border:1px solid #7c3aed;
-  color:#7c3aed;
 }
 
 /* FEATURES */
@@ -292,42 +286,39 @@ footer{
 /* MOBILE */
 @media(max-width:768px){
 
-.menu-toggle{
-  display:block;
-  font-size:26px;
-}
+  .menu-toggle{
+    display:block;
+  }
 
-.nav-links{
-  position:absolute;
-  top:60px;
-  right:-100%; /* 🔥 hides it outside screen */
-  flex-direction:column;
-  background:white;
-  width:220px;
-  padding:20px;
-  gap:15px;
-  transition:0.3s ease-in-out;
-  box-shadow:0 15px 30px rgba(0,0,0,0.15);
-  border-radius:10px 0 0 10px;
-}
-}
+  .nav-links{
+    position:absolute;
+    top:60px;
+    flex-direction:column;
+    background:white;
+    width:220px;
+    padding:20px;
+    gap:15px;
+    transition:0.3s ease-in-out;
+    box-shadow:0 15px 30px rgba(0,0,0,0.15);
+    border-radius:10px 0 0 10px;
+  }
 
-.nav-links.active{
-  right:0;
-}
+  .nav-links.active{
+    right:0;
+  }
 
-.cta-btn{
-  display:none;
-}
+  .cta-btn{
+    display:none;
+  }
 
-.hero-content h1{
-  font-size:28px;
-}
+  .hero-content h1{
+    font-size:28px;
+  }
 
-.hero-content p{
-  font-size:14px;
+  .hero-content p{
+    font-size:14px;
+  }
 }
-
 
 </style>
 </head>
@@ -337,25 +328,24 @@ footer{
 <header class="navbar">
   <div class="logo-water">
     <div class="water"></div>
-    <img src="image/BOOK.png">
+    <img src="image/BOOK.png" alt="Bookam Logo">
   </div>
 
   <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">Home</a></li>
+    <li><a href="#">Home</a></li>
     <li><a href="#services">Services</a></li>
-    <li><a href="tform.html">Events</a></li>
-    <li><a href="contest.html">Contests</a></li>
+    <li><a href="#">Events</a></li>
+    <li><a href="#">Contests</a></li>
   </ul>
 
   <a href="#" class="cta-btn">Get Started</a>
   <div class="menu-toggle" id="menuToggle">☰</div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <div class="image-slider">
-    <img src="image/mm.jpeg">
-    <img src="image/ss.jpeg">
+    <img src="image/mm.jpeg" alt="">
+    <img src="image/ss.jpeg" alt="">
   </div>
 
   <div class="hero-content">
@@ -363,96 +353,26 @@ footer{
     <p>Events, contests & tickets made simple and fast.</p>
   </div>
 </section>
-<!-- SERVICES (IMPROVED) -->
+
 <section class="section" id="services">
   <h2>💼 Our Services</h2>
-  <p style="max-width:700px; margin:10px auto; color:#6b7280;">
-    Bookam provides everything you need to discover, book, manage, and grow events, 
-    contests, and experiences — all in one powerful platform.
-  </p>
-
   <div class="feature-grid">
-
-    <div class="feature-card">
-      <h3>🎟 Event Ticket Booking</h3>
-      <p>Easily browse and book tickets for concerts, parties, tech events, and more in seconds.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>🏨 Hotel & Airbnb Booking</h3>
-      <p>Find and reserve comfortable stays near your events with seamless booking experience.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>💳 Secure Online Payments</h3>
-      <p>Pay safely using trusted gateways like Flutterwave with instant confirmation.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>🏆 Contest Management</h3>
-      <p>Create, manage, and join contests with real-time tracking and participation tools.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>📢 Event Promotion</h3>
-      <p>Promote your events to a wider audience and increase attendance effortlessly.</p>
-    </div>
-
+    <div class="feature-card"><h3>🎟 Event Booking</h3></div>
+    <div class="feature-card"><h3>🏨 Hotel Booking</h3></div>
+    <div class="feature-card"><h3>💳 Secure Payments</h3></div>
+    <div class="feature-card"><h3>🏆 Contest System</h3></div>
   </div>
 </section>
 
-<!-- EVENTS -->
 <section class="section">
   <h2>🔥 Featured Events</h2>
   <div class="slider">
     <div class="track">
-      <div class="card"><h3>Davido Concert</h3><a href="tform.html">Book Now</a></div>
-      <div class="card"><h3>Tech Summit</h3><a href="tform.html">Book Now</a></div>
-      <div class="card"><h3>Summer Party</h3><a href="tform.html">Book Now</a></div>
-      <div class="card"><h3>Fashion Show</h3><a href="tform.html">Book Now</a></div>
+      <div class="card"><h3>Concert</h3><a href="#">Book</a></div>
+      <div class="card"><h3>Summit</h3><a href="#">Book</a></div>
+      <div class="card"><h3>Party</h3><a href="#">Book</a></div>
+      <div class="card"><h3>Show</h3><a href="#">Book</a></div>
     </div>
-  </div>
-</section>
-
-<!-- CONTEST -->
-<section class="section">
-  <h2>🏆 Contest Zone</h2>
-  <div class="slider">
-    <div class="track">
-      <div class="card"><h3>Dance Battle</h3><a href="contest.html">Join Now</a></div>
-      <div class="card"><h3>Music Challenge</h3><a href="contest.html">Join Now</a></div>
-      <div class="card"><h3>Hackathon</h3><a href="contest.html">Join Now</a></div>
-      <div class="card"><h3>Quiz Contest</h3><a href="contest.html">Join Now</a></div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- CTA -->
-<section class="cta-section">
-  <h2>🚀 Get Started with Bookam</h2>
-
-  <div class="cta-buttons">
-    <div class="cta-box">
-      <h3>🎉 Host an Event</h3>
-      <a href="ticket.html" class="btn btn-primary">Get Started</a>
-    </div>
-
-    <div class="cta-box">
-      <h3>🏆 Join a Contest</h3>
-      <a href="contest.html" class="btn btn-outline">Get Started</a>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="section">
-  <h2>⚡ Why Choose Bookam</h2>
-  <div class="feature-grid">
-    <div class="feature-card"><h3>Fast Booking</h3></div>
-    <div class="feature-card"><h3>Secure Payment</h3></div>
-    <div class="feature-card"><h3>Instant Ticket</h3></div>
   </div>
 </section>
 
@@ -463,6 +383,11 @@ footer{
 <script>
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
+
 document.querySelectorAll(".nav-links a").forEach(link => {
   link.addEventListener("click", () => {
     navLinks.classList.remove("active");
