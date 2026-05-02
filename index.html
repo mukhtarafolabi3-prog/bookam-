@@ -331,10 +331,7 @@
 
   .nav-links {
     position: fixed;
-    top: 0;
-    right: -100%; 
-    
-    display: flex;
+     display: flex;
     flex-direction: column;
     background: white;
     width: 80%; /* Occupies 80% of the screen width */
@@ -342,15 +339,11 @@
     padding: 100px 2rem;
     
     transition: 0.5s ease-in-out;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    
+ 
   }
 
-  /* When the 'active' class is added via JavaScript */
-  .nav-links.active {
-    right: 0; /* Slide into view */
-  }
-
+  
   .nav-links li {
     margin: 1.5rem 0;
     text-align: left;
