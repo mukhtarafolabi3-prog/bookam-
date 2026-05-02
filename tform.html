@@ -1,132 +1,141 @@
-ol<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create Event - Bookam</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Event - Bookam</title>
 
-<style>
-*{
-  box-sizing:border-box;
-  font-family:Arial;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-body{
-  margin:0;
-  background:#f3f4f6;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
-  padding:15px;
-}
+    body {
+      margin: 0;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 15px;
+    }
 
-.box{
-  width:100%;
-  max-width:520px;
-  background:#fff;
-  padding:25px;
-  border-radius:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
+    .box {
+      width: 100%;
+      max-width: 520px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
 
-h2{
-  text-align:center;
-  color:#5b21b6;
-  margin-bottom:15px;
-}
+    h2 {
+      text-align: center;
+      color: #5b21b6;
+      margin-bottom: 20px;
+    }
 
-input, textarea{
-  width:100%;
-  padding:12px;
-  margin:8px 0;
-  border:1px solid #ddd;
-  border-radius:8px;
-  outline:none;
-  font-size:14px;
-}
+    label {
+      font-size: 13px;
+      color: #666;
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
 
-textarea{
-  height:90px;
-  resize:none;
-}
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+    }
 
-button{
-  width:100%;
-  padding:13px;
-  background:#7c3aed;
-  color:white;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:16px;
-  margin-top:10px;
-}
+    input:focus,
+    textarea:focus {
+      border-color: #7c3aed;
+    }
 
-button:hover{
-  background:#6d28d9;
-}
-</style>
+    textarea {
+      height: 90px;
+      resize: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      background: #7c3aed;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #6d28d9;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="box">
+  <div class="box">
+    <h2>Create Event</h2>
 
-  <h2>Create Event</h2>
+    <!-- FIXED: Added enctype="multipart/form-data" for file uploads -->
+    <form id="eventForm" action="https://formsubmit.co/Bookam26@gmail.com" method="POST" enctype="multipart/form-data">
 
-  <!-- FORM -->
-  <form id="eventForm" action="https://formsubmit.co/Bookam26@gmail.com" method="POST">
+      <!-- Email settings -->
+      <input type="hidden" name="_subject" value="🎉 New Event Created on Bookam">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <!-- Redirect after success (Optional) -->
+      <input type="hidden" name="_next" value="https://yourwebsite.com/thanks.html">
 
-    <!-- Email settings -->
-    <input type="hidden" name="_subject" value="🎉 New Event Created on Bookam">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
+      <input type="text" name="Event Title" placeholder="Event Title" required>
+      <input type="text" name="Organizer Name" placeholder="Organizer Name" required>
+      <input type="email" name="Organizer Email" placeholder="Organizer Email" required>
 
-    <input type="text" name="Event Title" id="title" placeholder="Event Title" required>
-    <input type="text" name="Organizer Name" id="organizer" placeholder="Organizer Name" required>
-    <input type="email" name="Organizer Email" id="email" placeholder="Organizer Email" required>
-    
-    <input type="file" name="Graphic Upload" id="file" accept="image/*" required>
-    <div class="note">
+      <label for="file">Event Graphic (Image)</label>
+      <input type="file" name="Graphic Upload" id="file" accept="image/*" required>
 
-    <input type="date" name="Event Date" id="date" required>
-    <input type="text" name="Location" id="location" placeholder="Location" required>
+      <label for="date">Event Date</label>
+      <input type="date" name="Event Date" id="date" required>
 
-    <input type="number" name="Ticket Price" id="price" placeholder="Ticket Price" required>
+      <input type="text" name="Location" placeholder="Location" required>
+      <input type="number" name="Ticket Price" placeholder="Ticket Price (e.g. 0 for free)" required>
 
-    <textarea name="Event Description" id="description" placeholder="Event Description"></textarea>
+      <textarea name="Event Description" placeholder="Event Description"></textarea>
 
-    <button type="submit">Create Event</button>
+      <button type="submit" id="submitBtn">Create Event</button>
+    </form>
+  </div>
 
-  </form>
+  <script>
+    const form = document.getElementById("eventForm");
 
-</div>
+    form.addEventListener("submit", function (e) {
+      // We don't preventDefault() here because FormSubmit needs to handle the redirect.
+      // If you preventDefault, the data never gets sent to the server.
 
-<script>
-const form = document.getElementById("eventForm");
+      const btn = document.getElementById("submitBtn");
+      btn.innerHTML = "Sending...";
+      btn.style.opacity = "0.7";
+      btn.disabled = true;
 
-form.addEventListener("submit", function(e){
-
-  const title = document.getElementById("title").value.trim();
-  const organizer = document.getElementById("organizer").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const date = document.getElementById("date").value;
-  const location = document.getElementById("location").value.trim();
-  const price = document.getElementById("price").value;
-
-  // VALIDATION
-  if(!title || !organizer || !email || !date || !location || !price){
-    e.preventDefault();
-    alert("❗ Please fill all fields before submitting");
-    return;
-  }
-
-  // SUCCESS ALERT
-  alert("✅ Event submitted successfully! Admin will receive it shortly.");
-
-});
-</script>
+      // Note: Browsers handle 'required' validation automatically before this script runs.
+      alert("Sending your event to Bookam Admin. Please wait for the confirmation page.");
+    });
+  </script>
 
 </body>
+
 </html>

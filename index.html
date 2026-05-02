@@ -1,399 +1,512 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bookam - Booking Platform</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookam - Events & Contests Made Easy</title>
 
-<style>
-:root{
-  --purple:#7c3aed;
-  --dark:#5b21b6;
-  --bg:#f9fafb;
-  --text:#111;
-  --muted:#6b7280;
-}
+  <style>
+    :root {
+      --purple: #7c3aed;
+      --dark: #5b21b6;
+      --bg: #f9fafb;
+      --text: #111827;
+      --muted: #6b7280;
+      --white: #ffffff;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
 
-body{
-  background:var(--bg);
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* NAVBAR */
-.navbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 25px;
-  background:white;
-  position:sticky;
-  top:0;
-  z-index:1000;
-  box-shadow:0 2px 10px rgba(0,0,0,0.05);
-}
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-.logo-water{
-  position:relative;
-  width:150px;
-  overflow:hidden;
-}
+    /* NAVBAR & LIQUID LOGO */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 5%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
 
-.logo-water img{
-  width:100%;
-  position:relative;
-  z-index:2;
-}
+    .logo-water {
+      position: relative;
+      width: 130px;
+      height: 45px;
+      overflow: hidden;
+      background: #eee;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.water{
-  position:absolute;
-  bottom:-120%;
-  left:0;
-  width:100%;
-  height:220%;
-  background:linear-gradient(180deg,#a855f7,#7c3aed,#5b21b6);
-  animation:pour 4s infinite ease-in-out;
-  opacity:0.9;
-  z-index:1;
-}
+    .water-wave {
+      position: absolute;
+      bottom: -100%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: var(--purple);
+      border-radius: 40%;
+      animation: wave-rotate 6s infinite linear;
+      opacity: 0.3;
+      z-index: 1;
+    }
 
-.water::before{
-  content:"";
-  position:absolute;
-  top:-40px;
-  left:0;
-  width:200%;
-  height:60px;
-  background:rgba(255,255,255,0.2);
-  border-radius:50%;
-  animation:wave 3s linear infinite;
-}
+    @keyframes wave-rotate {
+      from {
+        transform: rotate(0deg);
+      }
 
-@keyframes pour{
-  0%{ transform:translateY(120px); }
-  50%{ transform:translateY(-20px); }
-  100%{ transform:translateY(120px); }
-}
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-@keyframes wave{
-  0%{ transform:translateX(0); }
-  100%{ transform:translateX(-50%); }
-}
+    .logo-water img {
+      height: 32px;
+      position: relative;
+      z-index: 2;
+      mix-blend-mode: multiply;
+    }
 
-/* NAV */
-.nav-links{
-  display:flex;
-  list-style:none;
-  gap:20px;
-}
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
 
-.nav-links a{
-  text-decoration:none;
-  color:#111;
-}
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: var(--transition);
+    }
 
-.cta-btn{
-  background:linear-gradient(135deg,var(--purple),var(--dark));
-  color:white;
-  padding:10px 16px;
-  border-radius:8px;
-  text-decoration:none;
-}
+    .nav-links a:hover {
+      color: var(--purple);
+    }
 
-.menu-toggle{
-  display:none;
-  font-size:26px;
-  cursor:pointer;
-}
+    .cta-btn {
+      background: linear-gradient(135deg, var(--purple), var(--dark));
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.3);
+    }
 
-/* HERO */
-.hero{
-  position:relative;
-  height:85vh;
-  overflow:hidden;
-}
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.4);
+    }
 
-.image-slider{
-  display:flex;
-  width:200%;
-  height:100%;
-  animation:slide 18s ease-in-out infinite;
-}
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--purple);
+    }
 
-.image-slider img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      height: 85vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.hero::after{
-  content:"";
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.55);
-}
+    .image-slider {
+      position: absolute;
+      display: flex;
+      width: 200%;
+      height: 100%;
+      animation: slide 25s infinite alternate ease-in-out;
+      z-index: -1;
+    }
 
-.hero-content{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  text-align:center;
-  color:white;
-  z-index:2;
-}
+    .image-slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-.hero-content h1{
-  font-size:42px;
-}
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+    }
 
-.hero-content p{
-  color:#d1d5db;
-  margin-top:10px;
-}
+    .hero-content {
+      position: relative;
+      text-align: center;
+      color: white;
+      z-index: 10;
+      max-width: 800px;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
 
-/* BUTTONS */
-.btn{
-  display:inline-block;
-  padding:10px 18px;
-  border-radius:6px;
-  text-decoration:none;
-  margin:5px;
-  transition:0.3s;
-}
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
 
-.btn-primary{
-  background:var(--purple);
-  color:white;
-}
+    /* SECTION STYLING */
+    .section {
+      padding: 80px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-.btn-outline{
-  border:1px solid white;
-  color:white;
-}
+    .section h2 {
+      margin-bottom: 3rem;
+      font-size: 2.25rem;
+      text-align: center;
+      font-weight: 700;
+      color: #1f2937;
+    }
 
-.btn:hover{
-  transform:scale(1.05);
-}
+    /* SLIDER & TRACK */
+    .slider {
+      overflow: hidden;
+      padding: 20px 0;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
 
-/* SECTION */
-.section{
-  padding:70px 20px;
-  text-align:center;
-}
+    .track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: scroll 30s linear infinite;
+    }
 
-.section h2{
-  color:var(--dark);
-  margin-bottom:20px;
-}
+    .track:hover {
+      animation-play-state: paused;
+    }
 
-/* SLIDER */
-.slider{ overflow:hidden; }
+    .card {
+      min-width: 300px;
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      border: 1px solid #f3f4f6;
+    }
 
-.track{
-  display:flex;
-  gap:20px;
-  width:max-content;
-  animation:scroll 20s linear infinite;
-}
+    .card h3 {
+      margin-bottom: 0.75rem;
+      color: var(--purple);
+      font-size: 1.5rem;
+    }
 
-/* CARD */
-.card{
-  min-width:250px;
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
-}
+    /* CONTACT SECTION */
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      background: var(--white);
+      padding: 3rem;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
 
-.card a{
-  display:inline-block;
-  margin-top:10px;
-  padding:8px 14px;
-  background:var(--purple);
-  color:white;
-  border-radius:6px;
-  text-decoration:none;
-}
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 12px;
+      outline: none;
+      transition: var(--transition);
+    }
 
-/* CTA */
-.cta-section{
-  padding:70px 20px;
-  text-align:center;
-  background:linear-gradient(135deg,#7c3aed,#5b21b6);
-  color:white;
-}
+    .contact-form input:focus {
+      border-color: var(--purple);
+    }
 
-.cta-buttons{
-  display:flex;
-  justify-content:center;
-  gap:30px;
-  margin-top:30px;
-  flex-wrap:wrap;
-}
+    .contact-info div {
+      margin-bottom: 1.5rem;
+    }
 
-.cta-box{
-  background:white;
-  color:#111;
-  padding:25px;
-  border-radius:12px;
-  width:260px;
-}
+    .contact-info h4 {
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+    }
 
-/* FEATURES */
-.feature-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-}
+    /* CTA SECTION */
+    .cta-section {
+      padding: 100px 5%;
+      text-align: center;
+      background: linear-gradient(135deg, var(--purple), var(--dark));
+      color: white;
+    }
 
-.feature-card{
-  background:white;
-  padding:25px;
-  border-radius:12px;
-  transition:0.3s;
-}
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+    }
 
-.feature-card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 15px 30px rgba(124,58,237,0.25);
-}
+    .cta-box {
+      background: white;
+      color: var(--text);
+      padding: 3rem 2rem;
+      border-radius: 24px;
+      width: 340px;
+    }
 
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:20px;
-  background:white;
-}
+    .cta-box a {
+      display: block;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: var(--purple);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+    }
 
-/* ANIMATIONS */
-@keyframes slide{
-  0%{transform:translateX(0);}
-  100%{transform:translateX(-50%);}
-}
+    /* ANIMATIONS */
+    @keyframes slide {
+      0% {
+        transform: translateX(0);
+      }
 
-@keyframes scroll{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-50%)}
-}
+      100% {
+        transform: translateX(-50%);
+      }
+    }
 
-/* MOBILE */
-@media(max-width:768px){
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
 
-  .menu-toggle{
-    display:block;
-  }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
 
-  .nav-links{
-    position:absolute;
-    top:60px;
-    flex-direction:column;
-    background:white;
-    width:220px;
-    padding:20px;
-    gap:15px;
-    transition:0.3s ease-in-out;
-    box-shadow:0 15px 30px rgba(0,0,0,0.15);
-    border-radius:10px 0 0 10px;
-  }
+    @media(max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
 
-  .nav-links.active{
-    right:0;
-  }
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        flex-direction: column;
+        background: white;
+        width: 80%;
+        height: 100vh;
+        padding: 100px 2rem;
+        transition: 0.5s;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+      }
 
-  .cta-btn{
-    display:none;
-  }
+      .nav-links.active {
+        right: 0;
+      }
 
-  .hero-content h1{
-    font-size:28px;
-  }
-
-  .hero-content p{
-    font-size:14px;
-  }
-}
-
-</style>
+      .cta-btn {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="navbar">
-  <div class="logo-water">
-    <div class="water"></div>
-    <img src="image/BOOK.png" alt="Bookam Logo">
-  </div>
-
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#">Home</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#">Events</a></li>
-    <li><a href="#">Contests</a></li>
-  </ul>
-
-  <a href="#" class="cta-btn">Get Started</a>
-  <div class="menu-toggle" id="menuToggle">☰</div>
-</header>
-
-<section class="hero">
-  <div class="image-slider">
-    <img src="image/mm.jpeg" alt="">
-    <img src="image/ss.jpeg" alt="">
-  </div>
-
-  <div class="hero-content">
-    <h1>BookAm – One Platform, Endless Bookings</h1>
-    <p>Events, contests & tickets made simple and fast.</p>
-  </div>
-</section>
-
-<section class="section" id="services">
-  <h2>💼 Our Services</h2>
-  <div class="feature-grid">
-    <div class="feature-card"><h3>🎟 Event Booking</h3></div>
-    <div class="feature-card"><h3>🏨 Hotel Booking</h3></div>
-    <div class="feature-card"><h3>💳 Secure Payments</h3></div>
-    <div class="feature-card"><h3>🏆 Contest System</h3></div>
-  </div>
-</section>
-
-<section class="section">
-  <h2>🔥 Featured Events</h2>
-  <div class="slider">
-    <div class="track">
-      <div class="card"><h3>Concert</h3><a href="#">Book</a></div>
-      <div class="card"><h3>Summit</h3><a href="#">Book</a></div>
-      <div class="card"><h3>Party</h3><a href="#">Book</a></div>
-      <div class="card"><h3>Show</h3><a href="#">Book</a></div>
+  <nav class="navbar">
+    <div class="logo-water">
+      <div class="water-wave"></div>
+      <img src="image/BOOK.png" alt="Bookam Logo" onerror="this.src='https://via.placeholder.com/150x50?text=BOOKAM'">
     </div>
-  </div>
-</section>
 
-<footer>
-  <p>© 2026 Bookam</p>
-</footer>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#contests">Contests</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
 
-<script>
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
+    <a href="#" class="cta-btn">Get Started</a>
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </nav>
 
-menuToggle.addEventListener("click", () => {
-  navLinks.classList.toggle("active");
-});
+  <section class="hero" id="home">
+    <div class="image-slider">
+      <img src="image/mm.jpeg" alt="Concert">
+      <img src="image/ss.jpeg" alt="Event">
+      <img src="image/mm1.jpeg" alt="Event">
+<img src="image/mm2.jpeg" alt="Event">
+<img src="image/mm3.jpeg" alt="Event">
+    </div>
+    <div class="hero-content">
+      <h1>Events Made Simple.</h1>
+      <p>Your one-stop platform to book events, join contests, and secure instant tickets.</p>
+    </div>
+  </section>
 
-document.querySelectorAll(".nav-links a").forEach(link => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("active");
-  });
-});
-</script>
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <h2>Our Core Services</h2>
+    <div class="slider">
+      <div class="track">
+        <div class="card">
+          <h3>Event Booking</h3>
+          <p>Fast & secure booking system for any size.</p>
+        </div>
+        <div class="card">
+          <h3>Contest Entry</h3>
+          <p>Seamless participation in local contests.</p>
+        </div>
+        <div class="card">
+          <h3>Secure Pay</h3>
+          <p>Industry-standard payment encryption.</p>
+        </div>
+        <div class="card">
+          <h3>E-Tickets</h3>
+          <p>Instant delivery to your email and phone.</p>
+        </div>
+        <div class="card">
+          <h3>Event Booking</h3>
+          <p>Fast & secure booking system for any size.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="section" id="events" style="background: #fff;">
+    <h2>Upcoming Events</h2>
+    <div class="slider">
+      <div class="track">
+        <div class="card">
+          <h3>Davido Live</h3>
+          <p>Experience the King of Afrobeats.</p><a href="ticket.html">Book Ticket</a>
+        </div>
+        <div class="card">
+          <h3>Tech Summit '26</h3>
+          <p>The future of AI and Web3.</p><a href="ticket.html">Book Ticket</a>
+        </div>
+        <div class="card">
+          <h3>Lagos Jazz Night</h3>
+          <p>A soulful evening of music.</p><a href="ticket.html">Book Ticket</a>
+        </div>
+        <div class="card">
+          <h3>Fashion Week</h3>
+          <p>Runway shows and designers.</p><a href="ticket.html">Book Ticket</a>
+        </div>
+        <div class="card">
+          <h3>Davido Live</h3>
+          <p>Experience the King of Afrobeats.</p><a href="ticket.html">Book Ticket</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTESTS -->
+  <section class="section" id="contests">
+    <h2>🏆 Contest Zone</h2>
+    <div class="slider">
+      <div class="track">
+        <div class="card">
+          <h3>Dance Battle</h3>
+          <p>Show your talent</p><a href="contest.html">Join Now</a>
+        </div>
+        <div class="card">
+          <h3>Music Challenge</h3>
+          <p>Compete and win</p><a href="contest.html">Join Now</a>
+        </div>
+        <div class="card">
+          <h3>Hackathon</h3>
+          <p>Build and win prizes</p><a href="contest.html">Join Now</a>
+        </div>
+        <div class="card">
+          <h3>Quiz Contest</h3>
+          <p>Test your brain</p><a href="contest.html">Join Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+ 
+  <section class="cta-section">
+    <h2>Ready to dive in?</h2>
+    <div class="cta-buttons">
+      <div class="cta-box">
+        <h3>Host Event</h3>
+        <p>Tools to help you sell tickets and manage attendees like a pro.</p>
+        <a href="tform.html">Create Event</a>
+      </div>
+      <div class="cta-box">
+        <h3>Join Now</h3>
+        <p>Showcase your talent and win amazing prizes today.</p>
+        <a href="conf.html">View Contests</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Bookam Platform. Designed for the creators and the fans.</p>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.onclick = () => {
+      navLinks.classList.toggle("active");
+      menuToggle.textContent = navLinks.classList.contains("active") ? "✕" : "☰";
+    };
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.onclick = () => {
+        navLinks.classList.remove("active");
+        menuToggle.textContent = "☰";
+      };
+    });
+  </script>
 
 </body>
+
 </html>

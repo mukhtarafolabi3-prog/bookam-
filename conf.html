@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter the Contest - Bookam</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { margin: 0; background: #eeeff1; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        
+        .contest-card { 
+            width: 100%; 
+            max-width: 500px; 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+        }
+
+        .header { text-align: center; margin-bottom: 25px; }
+        .header h2 { color: #1e1b4b; margin: 0; }
+        .header p { color: #64748b; font-size: 14px; margin-top: 5px; }
+
+        label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 5px; }
+        
+        input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+            width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; transition: 0.2s;
+        }
+
+        input:focus, textarea:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
+
+        .checkbox-group { display: flex; align-items: flex-start; gap: 10px; margin: 10px 0 20px; }
+        .checkbox-group input { margin-top: 3px; }
+        .checkbox-group label { font-weight: 400; font-size: 13px; line-height: 1.4; }
+
+        button { 
+            width: 100%; padding: 14px; background: #4f46e5; color: white; border: none; border-radius: 8px; 
+            font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; 
+        }
+
+        button:hover { background: #4338ca; }
+        button:disabled { background: #94a3b8; cursor: not-allowed; }
+
+        .file-info { font-size: 11px; color: #94a3b8; margin-top: -10px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="contest-card">
+    <div class="header">
+        <h2>Contest Entry Form</h2>
+        <p>Complete the form below to enter the giveaway!</p>
+    </div>
+
+    <!-- Replace with your FormSubmit email or ID -->
+    <form id="contestForm" action="https://formsubmit.co/Bookam26@gmail.com" method="POST" enctype="multipart/form-data">
+        
+        <!-- FormSubmit Setup -->
+        <input type="hidden" name="_subject" value="🏆 New Contest Entry!">
+        <input type="hidden" name="_captcha" value="false">
+
+        <label for="name">Full Name</label>
+        <input type="text" name="Full Name" id="name" placeholder="John Doe" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" name="Email" id="email" placeholder="john@example.com" required>
+
+        <label for="phone">Phone Number (Optional)</label>
+        <input type="tel" name="Phone" id="phone" placeholder="+1 (555) 000-0000">
+
+        <label for="category">Entry Category</label>
+        <select name="Category" id="category">
+            <option value="Standard">Standard Entry</option>
+            <option value="Creative">Creative Submission</option>
+            <option value="Referral">Referral Entry</option>
+        </select>
+
+        <label for="entry_file">Upload Submission (Image/PDF)</label>
+        <input type="file" name="Submission File" id="entry_file" accept=".jpg,.png,.pdf">
+        <div class="file-info">Max size 5MB. Must be a .jpg, .png, or .pdf</div>
+
+        <label for="message">Why should you win? (Optional)</label>
+        <textarea name="Motivation" id="message" placeholder="Tell us a little bit about yourself..."></textarea>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="terms" name="Agreed to Terms" required>
+            <label for="terms">I agree to the official contest rules and privacy policy. I understand winners will be contacted via email.</label>
+        </div>
+
+        <button type="submit" id="submitBtn">Submit Entry</button>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById('contestForm');
+    const btn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', function() {
+        btn.innerText = 'Submitting...';
+        btn.disabled = true;
+        // The form will proceed to submit to FormSubmit.co
+    });
+</script>
+
+</body>
+</html>

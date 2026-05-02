@@ -1,293 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Flutterwave Voting Analytics</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Bookam | Afolabi Voting Analytics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://checkout.flutterwave.com/v3.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- External SDKs -->
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<style>
-body{
-  margin:0;
-  font-family: Arial;
-  background: linear-gradient(135deg, #6c2bd9, #4e1fa8);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  box-sizing:border-box;
-}
+    <style>
+        :root {
+            --primary: #6c2bd9;
+            --secondary: #f97316;
+            --success: #10b981;
+            --bg: linear-gradient(135deg, #6c2bd9, #4e1fa8);
+        }
 
-.container{
-  display:flex;
-  gap:20px;
-  width:100%;
-  max-width:900px;
-}
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-/* CARD STYLE */
-.card{
-  background:#fff;
-  padding:20px;
-  border-radius:15px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
-}
+        .container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            max-width: 950px;
+        }
 
-.left{
-  width:350px;
-}
+        .card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
 
-.right{
-  flex:1;
-}
+        .left { width: 380px; }
+        .right { flex: 1; display: flex; flex-direction: column; align-items: center; }
 
-h2{
-  text-align:center;
-  margin-bottom:15px;
-}
+        h2 { text-align: center; color: #1f2937; margin-bottom: 20px; }
 
-/* OPTIONS */
-.option{
-  margin:12px 0;
-}
+        .option { margin: 15px 0; border-bottom: 1px solid #f3f4f6; padding-bottom: 10px; }
+        label { display: flex; align-items: center; gap: 12px; cursor: pointer; font-weight: 500; }
+        
+        .count { margin-left: auto; font-weight: bold; color: var(--primary); }
 
-label{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
+        .bar { height: 8px; background: #eee; border-radius: 10px; margin-top: 8px; overflow: hidden; }
+        .fill { height: 100%; width: 0%; transition: width 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
-.count{
-  margin-left:auto;
-  font-size:13px;
-  color:#444;
-}
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-/* PROGRESS BAR */
-.bar{
-  height:6px;
-  background:#ddd;
-  border-radius:5px;
-  overflow:hidden;
-  margin-top:5px;
-}
+        button:hover { background: #5b21b6; transform: translateY(-2px); }
+        button:disabled { background: #9ca3af; cursor: not-allowed; }
 
-.fill{
-  height:100%;
-  width:0%;
-  background:#6c2bd9;
-  transition:0.3s;
-}
+        #status { text-align: center; font-size: 14px; margin-top: 15px; font-weight: 500; }
 
-/* BUTTON */
-button{
-  width:100%;
-  padding:12px;
-  margin-top:15px;
-  border:none;
-  background:#6c2bd9;
-  color:white;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:bold;
-}
+        canvas { max-width: 100% !important; max-height: 350px; }
 
-button:hover{
-  background:#4e1fa8;
-}
-
-#status{
-  text-align:center;
-  font-size:13px;
-  margin-top:10px;
-}
-
-/* CHART */
-canvas{
-  max-width:100%;
-}
-
-/* ================= MOBILE ================= */
-@media (max-width: 768px){
-  .container{
-    flex-direction:column;
-  }
-
-  .left, .right{
-    width:100%;
-  }
-
-  canvas{
-    height:300px !important;
-  }
-}
-
-@media (max-width: 480px){
-  .card{
-    padding:15px;
-  }
-
-  h2{
-    font-size:18px;
-  }
-
-  button{
-    font-size:14px;
-    padding:10px;
-  }
-
-  label{
-    font-size:14px;
-  }
-
-  .count{
-    font-size:12px;
-  }
-}
-</style>
+        @media (max-width: 850px) {
+            .container { flex-direction: column; }
+            .left { width: 100%; }
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
+    <!-- VOTING PANEL -->
+    <div class="card left">
+        <h2>Afolabi Voting</h2>
+        
+        <div class="option">
+            <label>
+                <input type="radio" name="vote" value="A"> Option A
+                <span class="count" id="countA">0</span>
+            </label>
+            <div class="bar"><div class="fill" id="fillA" style="background: var(--primary);"></div></div>
+        </div>
 
-<!-- LEFT PANEL -->
-<div class="card left">
+        <div class="option">
+            <label>
+                <input type="radio" name="vote" value="B"> Option B
+                <span class="count" id="countB">0</span>
+            </label>
+            <div class="bar"><div class="fill" id="fillB" style="background: var(--secondary);"></div></div>
+        </div>
 
-<h2>Vote System</h2>
+        <div class="option">
+            <label>
+                <input type="radio" name="vote" value="C"> Option C
+                <span class="count" id="countC">0</span>
+            </label>
+            <div class="bar"><div class="fill" id="fillC" style="background: var(--success);"></div></div>
+        </div>
 
-<div class="option">
-<label>
-<input type="radio" name="vote" value="A"> Option A
-<span class="count" id="countA">0</span>
-</label>
-<div class="bar"><div class="fill" id="fillA"></div></div>
-</div>
+        <button id="vBtn" onclick="voteNow()">Cast Vote (₦100)</button>
+        <p id="status"></p>
+    </div>
 
-<div class="option">
-<label>
-<input type="radio" name="vote" value="B"> Option B
-<span class="count" id="countB">0</span>
-</label>
-<div class="bar"><div class="fill" id="fillB"></div></div>
-</div>
-
-<div class="option">
-<label>
-<input type="radio" name="vote" value="C"> Option C
-<span class="count" id="countC">0</span>
-</label>
-<div class="bar"><div class="fill" id="fillC"></div></div>
-</div>
-
-<button onclick="voteNow()">Vote (₦100)</button>
-
-<p id="status"></p>
-
-</div>
-
-<!-- RIGHT PANEL -->
-<div class="card right">
-<h2>Payment Analytics</h2>
-<canvas id="pieChart"></canvas>
-</div>
-
+    <!-- ANALYTICS PANEL -->
+    <div class="card right">
+        <h2>Live Results</h2>
+        <canvas id="pieChart"></canvas>
+    </div>
 </div>
 
 <script>
+    // Initialize Data
+    let votes = JSON.parse(localStorage.getItem("afolabi_votes")) || {A:0, B:0, C:0};
+    let hasVoted = localStorage.getItem("afolabi_voted");
 
-let votes = JSON.parse(localStorage.getItem("votes")) || {A:0,B:0,C:0};
-let voted = localStorage.getItem("voted");
+    // Initialize Chart
+    const ctx = document.getElementById("pieChart").getContext('2d');
+    const chart = new Chart(ctx, {
+        type: "doughnut", // Changed to doughnut for a modern look
+        data: {
+            labels: ["Option A", "Option B", "Option C"],
+            datasets: [{
+                data: [votes.A, votes.B, votes.C],
+                backgroundColor: ["#6c2bd9", "#f97316", "#10b981"],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            plugins: { legend: { position: 'bottom' } }
+        }
+    });
 
-const chart = new Chart(document.getElementById("pieChart"), {
-  type: "pie",
-  data: {
-    labels: ["Option A", "Option B", "Option C"],
-    datasets: [{
-      data: [votes.A, votes.B, votes.C],
-      backgroundColor: ["#6c2bd9", "#f97316", "#10b981"]
-    }]
-  }
-});
+    // Initial Load
+    updateUI();
 
-updateUI();
+    function updateUI() {
+        let total = votes.A + votes.B + votes.C;
+        
+        const options = ['A', 'B', 'C'];
+        options.forEach(opt => {
+            document.getElementById(`count${opt}`).innerText = votes[opt];
+            let percent = total ? Math.round((votes[opt] / total) * 100) : 0;
+            document.getElementById(`fill${opt}`).style.width = percent + "%";
+        });
 
-function generateRef(){
-  return "FWV-" + Math.random().toString(36).substr(2, 9).toUpperCase();
-}
-
-function voteNow(){
-
-  let selected = document.querySelector('input[name="vote"]:checked');
-  let status = document.getElementById("status");
-
-  if(voted){
-    status.innerText = "❌ You already voted on this device";
-    return;
-  }
-
-  if(!selected){
-    status.innerText = "Select an option first";
-    return;
-  }
-
-  let option = selected.value;
-  let reference = generateRef();
-
-  FlutterwaveCheckout({
-    public_key: "FLWPUBK-1f089f41dc074df0535643cda9bd2833-X",
-    tx_ref: reference,
-    amount: 100,
-    currency: "NGN",
-    payment_options: "card, banktransfer, ussd",
-
-    customer: {
-      email: "user@email.com",
-      name: "Voter"
-    },
-
-    callback: function(){
-
-      votes[option]++;
-      localStorage.setItem("votes", JSON.stringify(votes));
-      localStorage.setItem("voted", "true");
-
-      voted = true;
-
-      updateUI();
-      updateChart();
-
-      status.innerText = "✅ Vote successful!";
-    },
-
-    onclose: function(){
-      status.innerText = "Payment closed";
+        if (hasVoted) {
+            document.getElementById("vBtn").disabled = true;
+            document.getElementById("vBtn").innerText = "Vote Recorded";
+        }
     }
-  });
 
-}
+    function voteNow() {
+        let selected = document.querySelector('input[name="vote"]:checked');
+        let status = document.getElementById("status");
+        let btn = document.getElementById("vBtn");
 
-function updateUI(){
+        if (!selected) {
+            status.style.color = "red";
+            status.innerText = "⚠️ Please select an option first";
+            return;
+        }
 
-  let total = votes.A + votes.B + votes.C;
+        btn.innerText = "Processing Payment...";
+        btn.disabled = true;
 
-  document.getElementById("countA").innerText = votes.A;
-  document.getElementById("countB").innerText = votes.B;
-  document.getElementById("countC").innerText = votes.C;
+        FlutterwaveCheckout({
+            public_key: "FLWPUBK-1f089f41dc074df0535643cda9bd2833-X",
+            tx_ref: "VOTE-" + Date.now(),
+            amount: 100,
+            currency: "NGN",
+            customer: { email: "voter@bookam.com", name: "Afolabi Voter" },
+            callback: function (data) {
+                if (data.status === "successful") {
+                    votes[selected.value]++;
+                    localStorage.setItem("afolabi_votes", JSON.stringify(votes));
+                    localStorage.setItem("afolabi_voted", "true");
+                    hasVoted = true;
 
-  document.getElementById("fillA").style.width = total ? (votes.A/total*100)+"%" : "0%";
-  document.getElementById("fillB").style.width = total ? (votes.B/total*100)+"%" : "0%";
-  document.getElementById("fillC").style.width = total ? (votes.C/total*100)+"%" : "0%";
-}
+                    updateUI();
+                    chart.data.datasets[0].data = [votes.A, votes.B, votes.C];
+                    chart.update();
 
-function updateChart(){
-  chart.data.datasets[0].data = [votes.A, votes.B, votes.C];
-  chart.update();
-}
-
+                    status.style.color = "green";
+                    status.innerText = "✅ Thank you! Your vote has been counted.";
+                }
+            },
+            onclose: function() {
+                if(!hasVoted) {
+                    btn.disabled = false;
+                    btn.innerText = "Cast Vote (₦100)";
+                    status.innerText = "";
+                }
+            }
+        });
+    }
 </script>
 
 </body>
