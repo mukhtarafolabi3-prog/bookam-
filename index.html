@@ -322,24 +322,47 @@
       }
     }
 
-    @media(max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
+   @media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    z-index: 1001; /* Stay above the sidebar */
+    cursor: pointer;
+  }
 
-      .nav-links {
-        position: fixed;
-        top: 0;
-     
-        flex-direction: column;
-        background: white;
-        width: 80%;
-        height: 100vh;
-        padding: 100px 2rem;
-        transition: 0.5s;
-        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
-      }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%; 
+    
+    display: flex;
+    flex-direction: column;
+    background: white;
+    width: 80%; /* Occupies 80% of the screen width */
+    height: 100vh;
+    padding: 100px 2rem;
+    
+    transition: 0.5s ease-in-out;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
 
+  /* When the 'active' class is added via JavaScript */
+  .nav-links.active {
+    right: 0; /* Slide into view */
+  }
+
+  .nav-links li {
+    margin: 1.5rem 0;
+    text-align: left;
+  }
+
+  .nav-links a {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+}
+  
       .nav-links.active {
         right: 0;
       }
