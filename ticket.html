@@ -105,13 +105,14 @@
     </div>
 
     <div class="form-group">
-        <label>Select Event Type</label>
+        <label>Select Ticket Type</label>
         <select id="eventType" onchange="updatePrice()">
-            <option value="">-- Choose Event --</option>
-            <!-- IMPORTANT: The 'value' must match the name in the 'prices' list below -->
-            <option value="afolabi event">Afolabi Event</option>
-            <option value="Wedding">Wedding Ceremony</option>
-            <option value="Birthday">Birthday Party</option>
+            <option value="">-- Select Ticket Type --</option>
+            <option value="afolabi event">VIP Price</option>
+            <option value="Wedding">Regular Price</option>
+            <option value="Birthday">Premium Price</option>
+                        <option value="Birthday">Other Price</option>
+
         </select>
     </div>
 
@@ -128,9 +129,9 @@
     // --- ADMIN CONFIGURATION ---
     // You add prices here. Make sure the name matches the "value" in the <select> tag above.
     const prices = {
-        "afolabi event": 100, 
-        "Wedding": 500000,
-        "Birthday": 150000
+        "VIP Price": 10000, 
+        "Regular Price": 200000,
+        "Premium Price": 150000
     };
 
     // Replace with your EmailJS Public Key

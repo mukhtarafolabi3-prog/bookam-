@@ -1,105 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enter the Contest - Bookam</title>
-    <style>
-        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { margin: 0; background: #eeeff1; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        
-        .contest-card { 
-            width: 100%; 
-            max-width: 500px; 
-            background: #fff; 
-            padding: 30px; 
-            border-radius: 16px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bookam Event Form</title>
 
-        .header { text-align: center; margin-bottom: 25px; }
-        .header h2 { color: #1e1b4b; margin: 0; }
-        .header p { color: #64748b; font-size: 14px; margin-top: 5px; }
+<style>
+:root{
+  --purple:#7c3aed;
+  --dark:#5b21b6;
+  --bg:#f3f4f6;
+}
 
-        label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 5px; }
-        
-        input[type="text"], input[type="email"], input[type="tel"], textarea, select {
-            width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; transition: 0.2s;
-        }
+*{
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
 
-        input:focus, textarea:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
+body{
+  margin:0;
+  background:var(--bg);
+  display:flex;
+  justify-content:center;
+  padding:20px;
+}
 
-        .checkbox-group { display: flex; align-items: flex-start; gap: 10px; margin: 10px 0 20px; }
-        .checkbox-group input { margin-top: 3px; }
-        .checkbox-group label { font-weight: 400; font-size: 13px; line-height: 1.4; }
+.container{
+  width:100%;
+  max-width:650px;
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
 
-        button { 
-            width: 100%; padding: 14px; background: #4f46e5; color: white; border: none; border-radius: 8px; 
-            font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; 
-        }
+h2{
+  text-align:center;
+  color:var(--purple);
+}
 
-        button:hover { background: #4338ca; }
-        button:disabled { background: #94a3b8; cursor: not-allowed; }
+input, textarea{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border:1px solid #ddd;
+  border-radius:8px;
+}
 
-        .file-info { font-size: 11px; color: #94a3b8; margin-top: -10px; margin-bottom: 15px; }
-    </style>
+input:focus, textarea:focus{
+  border-color:var(--purple);
+  outline:none;
+}
+
+button{
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.btn{
+  width:100%;
+  background:var(--purple);
+  color:white;
+  margin-top:10px;
+}
+
+.btn:hover{
+  background:var(--dark);
+}
+
+.small-btns{
+  display:flex;
+  gap:10px;
+}
+
+.small-btns button{
+  flex:1;
+  background:#eee;
+}
+
+.participants{
+  margin-top:10px;
+}
+
+.participant{
+  display:flex;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.participant span{
+  background:var(--purple);
+  color:white;
+  padding:10px;
+  border-radius:6px;
+  width:40px;
+  text-align:center;
+}
+
+.participant input{
+  flex:1;
+}
+</style>
 </head>
+
 <body>
 
-<div class="contest-card">
-    <div class="header">
-        <h2>Contest Entry Form</h2>
-        <p>Complete the form below to enter the giveaway!</p>
-    </div>
+<div class="container">
 
-    <!-- Replace with your FormSubmit email or ID -->
-    <form id="contestForm" action="https://formsubmit.co/Bookam26@gmail.com" method="POST" enctype="multipart/form-data">
-        
-        <!-- FormSubmit Setup -->
-        <input type="hidden" name="_subject" value="🏆 New Contest Entry!">
-        <input type="hidden" name="_captcha" value="false">
+<h2>Create Event</h2>
 
-        <label for="name">Full Name</label>
-        <input type="text" name="Full Name" id="name" placeholder="John Doe" required>
+<form id="eventForm"
+action="https://formsubmit.co/mukhtarafolabi3@gmail.com"
+method="POST">
 
-        <label for="email">Email Address</label>
-        <input type="email" name="Email" id="email" placeholder="john@example.com" required>
+<!-- SETTINGS -->
+<input type="hidden" name="_subject" value="🎉 New Event With Participants">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
 
-        <label for="phone">Phone Number (Optional)</label>
-        <input type="tel" name="Phone" id="phone" placeholder="+1 (555) 000-0000">
+<!-- EVENT INFO -->
+<input type="text" name="Event Title" placeholder="Event Title" required>
+<input type="text" name="Organizer Name" placeholder="Organizer Name" required>
+<input type="email" name="Organizer Email" placeholder="Organizer Email" required>
 
-        <label for="category">Entry Category</label>
-        <select name="Category" id="category">
-            <option value="Standard">Standard Entry</option>
-            <option value="Creative">Creative Submission</option>
-            <option value="Referral">Referral Entry</option>
-        </select>
+<textarea name="Description" placeholder="Event Description"></textarea>
 
-        <label for="entry_file">Upload Submission (Image/PDF)</label>
-        <input type="file" name="Submission File" id="entry_file" accept=".jpg,.png,.pdf">
-        <div class="file-info">Max size 5MB. Must be a .jpg, .png, or .pdf</div>
+<!-- PARTICIPANTS -->
+<h3>Participants</h3>
 
-        <label for="message">Why should you win? (Optional)</label>
-        <textarea name="Motivation" id="message" placeholder="Tell us a little bit about yourself..."></textarea>
+<div class="small-btns">
+  <button type="button" onclick="addParticipant()">Add +</button>
+  <button type="button" onclick="removeParticipant()">Remove -</button>
+</div>
 
-        <div class="checkbox-group">
-            <input type="checkbox" id="terms" name="Agreed to Terms" required>
-            <label for="terms">I agree to the official contest rules and privacy policy. I understand winners will be contacted via email.</label>
-        </div>
+<div id="participants" class="participants"></div>
 
-        <button type="submit" id="submitBtn">Submit Entry</button>
-    </form>
+<button type="submit" class="btn" id="btn">Send Event</button>
+
+</form>
+
 </div>
 
 <script>
-    const form = document.getElementById('contestForm');
-    const btn = document.getElementById('submitBtn');
+const container = document.getElementById("participants");
 
-    form.addEventListener('submit', function() {
-        btn.innerText = 'Submitting...';
-        btn.disabled = true;
-        // The form will proceed to submit to FormSubmit.co
-    });
+function addParticipant(){
+  const index = container.children.length;
+  const letter = String.fromCharCode(65 + index);
+
+  const div = document.createElement("div");
+  div.className = "participant";
+
+  div.innerHTML = `
+    <span>${letter}</span>
+    <input type="text" name="Participant ${letter}" placeholder="Name" required>
+  `;
+
+  container.appendChild(div);
+}
+
+function removeParticipant(){
+  if(container.children.length > 0){
+    container.removeChild(container.lastChild);
+  }
+}
+
+// default 4 participants
+for(let i=0;i<4;i++){
+  addParticipant();
+}
+
+document.getElementById("eventForm").addEventListener("submit", function(){
+  document.getElementById("btn").innerText = "Sending...";
+});
 </script>
 
 </body>

@@ -2,509 +2,411 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bookam - Events & Contests Made Easy</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bookam - Events & Contests Made Easy</title>
 
-  <style>
-    :root {
-      --purple: #7c3aed;
-      --dark: #5b21b6;
-      --bg: #f9fafb;
-      --text: #111827;
-      --muted: #6b7280;
-      --white: #ffffff;
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+<style>
+:root {
+  --purple: #7c3aed;
+  --dark: #5b21b6;
+  --bg: #f9fafb;
+  --text: #111827;
+  --white: #ffffff;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+html {
+  scroll-behavior: smooth;
+}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden; /* Prevents side-scrolling */
-    }
+body {
+  background: var(--bg);
+}
 
-    /* NAVBAR & LIQUID LOGO */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 5%;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-    }
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 5%;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
 
-    .logo-water {
-      position: relative;
-      width: 130px;
-      height: 45px;
-      overflow: hidden;
-      background: #eee;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+/* LOGO */
+.logo-water {
+  width: 200px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
 
-    .water-wave {
-      position: absolute;
-      bottom: -100%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: var(--purple);
-      border-radius: 40%;
-      animation: wave-rotate 6s infinite linear;
-      opacity: 0.3;
-      z-index: 1;
-    }
+.logo-water img {
+  height: 70px;
+  transform: scale(1.1);
+  transition: 0.3s;
+}
 
-    @keyframes wave-rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+.logo-water img:hover {
+  transform: scale(1.2);
+}
 
-    .logo-water img {
-      height: 32px;
-      position: relative;
-      z-index: 2;
-      mix-blend-mode: multiply;
-    }
+/* NAV LINKS */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
 
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-    }
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: bold;
+}
 
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 500;
-      transition: var(--transition);
-    }
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+}
 
-    .nav-links a:hover {
-      color: var(--purple);
-    }
+/* HERO */
+.hero {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .cta-btn {
-      background: linear-gradient(135deg, var(--purple), var(--dark));
-      color: white;
-      padding: 0.6rem 1.5rem;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: var(--transition);
-      box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.3);
-    }
+.image-slider {
+  position: absolute;
+  display: flex;
+  width: 200%;
+  height: 100%;
+  animation: slide 25s linear infinite;
+}
 
-    .menu-toggle {
-      display: none;
-      font-size: 1.8rem;
-      cursor: pointer;
-      color: var(--purple);
-    }
+.image-slider img {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+}
 
-    /* HERO SECTION */
-    .hero {
-      position: relative;
-      height: 85vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+}
 
-    .image-slider {
-      position: absolute;
-      display: flex;
-      width: 500%; /* Total width for 5 images */
-      height: 100%;
-      animation: slide 25s infinite alternate ease-in-out;
-      z-index: -1;
-    }
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
 
-    .image-slider img {
-      width: 100%;
-      height: 1500px;
-      object-fit: cover; /* FIXED: Prevents image stretching */
-    }
+.hero-content h1 {
+  font-size: 42px;
+}
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
-    }
+.hero-content p {
+  margin-top: 10px;
+  font-size: 16px;
+}
 
-    .hero-content {
-      position: relative;
-      text-align: center;
-      color: white;
-      z-index: 10;
-      max-width: 800px;
-      padding: 2.5rem;
-      width: 90%;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(8px);
-      border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
+/* ANIMATION */
+@keyframes slide {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
 
-    .hero-content h1 {
-      font-size: clamp(2.2rem, 8vw, 4.5rem);
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      font-weight: 800;
-    }
+/* SECTIONS */
+.section {
+  padding: 70px 5%;
+  max-width: 1200px;
+  margin: auto;
+}
 
-    /* SECTION STYLING */
-    .section {
-      padding: 80px 5%;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+.section h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
 
-    .section h2 {
-      margin-bottom: 3rem;
-      font-size: 2.25rem;
-      text-align: center;
-      font-weight: 700;
-      color: #1f2937;
-    }
+/* CARDS */
+.slider {
+  overflow: hidden;
+}
 
-    /* SLIDER & TRACK */
-    .slider {
-      overflow: hidden;
-      padding: 20px 0;
-      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    }
+.track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: scroll 30s linear infinite;
+}
 
-    .track {
-      display: flex;
-      gap: 24px;
-      width: max-content;
-      animation: scroll 30s linear infinite;
-    }
+.card {
+  min-width: 260px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
 
-    .track:hover {
-      animation-play-state: paused;
-    }
+.card h3 {
+  color: var(--purple);
+}
 
-    .card {
-      min-width: 300px;
-      background: var(--white);
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-      transition: var(--transition);
-      border: 1px solid #f3f4f6;
-    }
+.card a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: var(--purple);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+}
 
-    .card h3 {
-      margin-bottom: 0.75rem;
-      color: var(--purple);
-      font-size: 1.5rem;
-    }
+/* CTA */
+.cta-section {
+  background: linear-gradient(135deg, var(--purple), var(--dark));
+  color: white;
+  text-align: center;
+  padding: 70px 5%;
+}
 
-    /* Styled Buttons for Events/Contests */
-    .card a {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1.2rem;
-      border: 1.5px solid var(--purple);
-      color: var(--purple);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 700;
-      transition: var(--transition);
-    }
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
 
-    .card a:hover {
-      background: var(--purple);
-      color: white;
-    }
+.cta-box {
+  background: white;
+  color: black;
+  padding: 25px;
+  border-radius: 15px;
+  width: 280px;
+}
 
-    /* CTA SECTION */
-    .cta-section {
-      padding: 100px 5%;
-      text-align: center;
-      background: linear-gradient(135deg, var(--purple), var(--dark));
-      color: white;
-    }
+.cta-box a {
+  display: block;
+  margin-top: 15px;
+  background: var(--purple);
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+}
 
-    .cta-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin-top: 3rem;
-    }
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #111827;
+  color: white;
+}
 
-    .cta-box {
-      background: white;
-      color: var(--text);
-      padding: 3rem 2rem;
-      border-radius: 24px;
-      width: 340px;
-    }
+/* SCROLL */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
-    .cta-box a {
-      display: block;
-      margin-top: 1.5rem;
-      padding: 1rem;
-      background: var(--purple);
-      color: white;
-      text-decoration: none;
-      border-radius: 12px;
-      font-weight: 700;
-    }
+/* MOBILE */
+@media (max-width: 768px) {
 
-    /* ANIMATIONS */
-    @keyframes slide {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-80%); } /* Shifted for 5 images */
-    }
+  .menu-toggle {
+    display: block;
+  }
 
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+  .nav-links {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    width: 75%;
+    height: 100vh;
+    background: white;
+    flex-direction: column;
+    padding: 80px 20px;
+    transition: 0.3s;
+  }
 
-    /* MOBILE RESPONSE */
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-        z-index: 1001;
-      }
+  .nav-links.active {
+    right: 0;
+  }
 
-      .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%; /* Hidden by default */
-        display: flex;
-        flex-direction: column;
-        background: white;
-        width: 80%;
-        height: 100vh;
-        padding: 100px 2rem;
-        transition: 0.4s ease-in-out;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
-        z-index: 1000;
-      }
+  /* Bigger mobile logo */
+  .logo-water img {
+    height: 80px;
+  }
 
-      .nav-links.active {
-        right: 0;
-      }
+  .hero {
+    height: 70vh;
+  }
 
-      .nav-links li {
-        margin: 1.5rem 0;
-      }
+  .hero-content h1 {
+    font-size: 28px;
+  }
 
-      .cta-btn {
-        display: none;
-      }
+  .hero-content p {
+    font-size: 14px;
+  }
 
-      .hero {
-        height: 70vh; /* Shorter for better mobile view */
-      }
-      
-      .card {
-        min-width: 260px;
-      }
-      
-      .cta-box {
-        width: 100%;
-      }
-    }
+  .card {
+    min-width: 220px;
+  }
+}
 
-    footer {
-      padding: 2rem;
-      text-align: center;
-      background: #111827;
-      color: white;
-    }
-  </style>
+@media (max-width: 480px){
+  .logo-water img {
+    height: 72px;
+  }
+
+  .hero-content h1{
+    font-size: 22px;
+  }
+
+  .section h2{
+    font-size: 22px;
+  }
+
+  .card{
+    min-width: 200px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <nav class="navbar">
-    <div class="logo-water">
-      <div class="water-wave"></div>
-      <img src="image/BOOK.png" alt="Bookam Logo" onerror="this.src='https://via.placeholder.com/150x50?text=BOOKAM'">
-    </div>
+<!-- NAV -->
+<nav class="navbar">
 
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#events">Events</a></li>
-      <li><a href="#contests">Contests</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+  <div class="logo-water">
+    <img src="image/BOOK.png" alt="Bookam Logo">
+  </div>
 
-    <a href="#" class="cta-btn">Get Started</a>
-    <div class="menu-toggle" id="menuToggle">☰</div>
-  </nav>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#contests">Contests</a></li>
+  </ul>
 
-  <section class="hero" id="home">
-    <div class="image-slider">
-      <img src="image/mm.jpeg" alt="Concert">
-      <img src="image/ss.jpeg" alt="Event">
-      <img src="image/mm1.jpeg" alt="Event">
-      <img src="image/mm2.jpeg" alt="Event">
-      <img src="image/mm3.jpeg" alt="Event">
-    </div>
-    <div class="hero-content">
-      <h1>Events Made Simple.</h1>
-      <p>Your one-stop platform to book events, join contests, and secure instant tickets.</p>
-    </div>
-  </section>
+  <div class="menu-toggle" id="menuToggle">☰</div>
+</nav>
 
-  <!-- SERVICES -->
-  <section class="section" id="services">
-    <h2>Our Core Services</h2>
-    <div class="slider">
-      <div class="track">
-        <div class="card">
-          <h3>Event Booking</h3>
-          <p>Fast & secure booking system for any size.</p>
-        </div>
-        <div class="card">
-          <h3>Contest Entry</h3>
-          <p>Seamless participation in local contests.</p>
-        </div>
-        <div class="card">
-          <h3>Secure Pay</h3>
-          <p>Industry-standard payment encryption.</p>
-        </div>
-        <div class="card">
-          <h3>E-Tickets</h3>
-          <p>Instant delivery to your email and phone.</p>
-        </div>
-        <div class="card">
-          <h3>Event Booking</h3>
-          <p>Fast & secure booking system for any size.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- HERO -->
+<section class="hero" id="home">
 
-  <!-- EVENTS -->
-  <section class="section" id="events" style="background: #fff;">
-    <h2>Upcoming Events</h2>
-    <div class="slider">
-      <div class="track">
-        <div class="card">
-          <h3>Davido Live</h3>
-          <p>Experience the King of Afrobeats.</p>
-          <a href="ticket.html">Book Ticket</a>
-        </div>
-        <div class="card">
-          <h3>Tech Summit '26</h3>
-          <p>The future of AI and Web3.</p>
-          <a href="ticket.html">Book Ticket</a>
-        </div>
-        <div class="card">
-          <h3>Lagos Jazz Night</h3>
-          <p>A soulful evening of music.</p>
-          <a href="ticket.html">Book Ticket</a>
-        </div>
-        <div class="card">
-          <h3>Fashion Week</h3>
-          <p>Runway shows and designers.</p>
-          <a href="ticket.html">Book Ticket</a>
-        </div>
-        <div class="card">
-          <h3>Davido Live</h3>
-          <p>Experience the King of Afrobeats.</p>
-          <a href="ticket.html">Book Ticket</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="image-slider">
+    <img src="image/mm.jpeg" alt="">
+    <img src="image/ss.jpeg" alt="">
+    <img src="image/mm1.jpeg" alt="">
+    <img src="image/mm2.jpeg" alt="">
+    <img src="image/mm3.jpeg" alt="">
 
-  <!-- CONTESTS -->
-  <section class="section" id="contests">
-    <h2>🏆 Contest Zone</h2>
-    <div class="slider">
-      <div class="track">
-        <div class="card">
-          <h3>Dance Battle</h3>
-          <p>Show your talent</p>
-          <a href="contest.html">Join Now</a>
-        </div>
-        <div class="card">
-          <h3>Music Challenge</h3>
-          <p>Compete and win</p>
-          <a href="contest.html">Join Now</a>
-        </div>
-        <div class="card">
-          <h3>Hackathon</h3>
-          <p>Build and win prizes</p>
-          <a href="contest.html">Join Now</a>
-        </div>
-        <div class="card">
-          <h3>Quiz Contest</h3>
-          <p>Test your brain</p>
-          <a href="contest.html">Join Now</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- duplicate for smooth animation -->
+    <img src="image/mm.jpeg" alt="">
+    <img src="image/ss.jpeg" alt="">
+    <img src="image/mm1.jpeg" alt="">
+    <img src="image/mm2.jpeg" alt="">
+    <img src="image/mm3.jpeg" alt="">
+  </div>
 
-  <section class="cta-section">
-    <h2>Ready to dive in?</h2>
-    <div class="cta-buttons">
-      <div class="cta-box">
-        <h3>Host Event</h3>
-        <p>Tools to help you sell tickets and manage attendees like a pro.</p>
-        <a href="tform.html">Create Event</a>
-      </div>
-      <div class="cta-box">
-        <h3>Join Now</h3>
-        <p>Showcase your talent and win amazing prizes today.</p>
-        <a href="conf.html">View Contests</a>
-      </div>
-    </div>
-  </section>
+  <div class="hero-content">
+    <h1>Events Made Simple</h1>
+    <p>Book events, join contests, and get instant tickets</p>
+  </div>
 
-  <footer>
-    <p>&copy; 2026 Bookam Platform. Designed for the creators and the fans.</p>
-  </footer>
+</section>
 
-  <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
+<!-- SERVICES -->
+<section class="section" id="services">
+<h2>Our Services</h2>
 
-    menuToggle.onclick = () => {
-      navLinks.classList.toggle("active");
-      menuToggle.innerHTML = navLinks.classList.contains("active") ? "&#10005;" : "☰";
-    };
+<div class="slider">
+<div class="track">
+  <div class="card"><h3>Event Booking</h3></div>
+  <div class="card"><h3>Contest Entry</h3></div>
+  <div class="card"><h3>Secure Pay</h3></div>
+  <div class="card"><h3>E-Tickets</h3></div>
+</div>
+</div>
+</section>
 
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.onclick = () => {
-        navLinks.classList.remove("active");
-        menuToggle.innerHTML = "☰";
-      };
-    });
-  </script>
+<!-- EVENTS -->
+<section class="section" id="events">
+<h2>Upcoming Events</h2>
+
+<div class="slider">
+<div class="track">
+  <div class="card"><h3>Davido Live</h3><a href="ticket.html">Book Ticket</a></div>
+  <div class="card"><h3>Tech Summit</h3><a href="ticket.html">Book Ticket</a></div>
+  <div class="card"><h3>Fashion Week</h3><a href="ticket.html">Book Ticket</a></div>
+</div>
+</div>
+</section>
+
+<!-- CONTESTS -->
+<section class="section" id="contests">
+<h2>Contest Zone</h2>
+
+<div class="slider">
+<div class="track">
+  <div class="card"><h3>Dance Battle</h3><a href="contest.html">Vote</a></div>
+  <div class="card"><h3>Music Contest</h3><a href="contest.html">Vote</a></div>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+<h2>Ready to Start?</h2>
+
+<div class="cta-buttons">
+  <div class="cta-box">
+    <h3>Host Event</h3>
+    <a href="tform.html">Create Event</a>
+  </div>
+
+  <div class="cta-box">
+    <h3>Join Contest</h3>
+    <a href="conf.html">Join Now</a>
+  </div>
+</div>
+</section>
+
+<footer>
+<p>© 2026 Bookam Platform</p>
+</footer>
+
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.onclick = () => {
+  navLinks.classList.toggle("active");
+};
+</script>
 
 </body>
 </html>
