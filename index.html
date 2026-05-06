@@ -249,34 +249,26 @@ footer {
 /* MOBILE */
 @media (max-width: 768px) {
 
-  header {
-    padding: 20px;
-  }
-
-  nav {
-    position: absolute;
-    top: 70px;
-    right: 0;
-    width: 100%;
-    background: #fff;
-    display: none;
-    flex-direction: column;
-    text-align: center;
-  }
-
-  nav a {
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-    display: block;
-  }
-
-  nav.active {
-    display: flex;
-  }
-
   .menu-toggle {
     display: block;
   }
+
+  .nav-links {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    width: 75%;
+    height: 100vh;
+    background: white;
+    flex-direction: column;
+    padding: 80px 20px;
+    transition: 0.3s;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
   .hero {
     height: 70vh;
   }
