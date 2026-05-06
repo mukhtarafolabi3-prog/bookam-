@@ -2,28 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Flutterwave Voting Analytics</title>
+<title>Flutterwave Voting System</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script src="https://checkout.flutterwave.com/v3.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-:root{
-  --purple:#6c2bd9;
-  --dark:#4e1fa8;
-}
-
-/* RESET */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
 body{
   font-family: Arial;
-  background: linear-gradient(135deg, var(--purple), var(--dark));
+  background: linear-gradient(135deg,#6c2bd9,#4e1fa8);
   min-height:100vh;
   display:flex;
   justify-content:center;
@@ -31,15 +19,13 @@ body{
   padding:15px;
 }
 
-/* CONTAINER */
 .container{
   display:flex;
   gap:20px;
-  width:100%;
   max-width:900px;
+  width:100%;
 }
 
-/* CARDS */
 .card{
   background:#fff;
   padding:20px;
@@ -47,24 +33,12 @@ body{
   box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
-.left{
-  width:350px;
-}
+.left{ width:350px; }
+.right{ flex:1; }
 
-.right{
-  flex:1;
-}
+h2{text-align:center;}
 
-/* HEADINGS */
-h2{
-  text-align:center;
-  margin-bottom:15px;
-}
-
-/* OPTIONS */
-.option{
-  margin:12px 0;
-}
+.option{margin:12px 0;}
 
 label{
   display:flex;
@@ -74,11 +48,8 @@ label{
 
 .count{
   margin-left:auto;
-  font-size:13px;
-  color:#444;
 }
 
-/* PROGRESS BAR */
 .bar{
   height:6px;
   background:#ddd;
@@ -90,65 +61,34 @@ label{
 .fill{
   height:100%;
   width:0%;
-  background:var(--purple);
-  transition:0.3s;
+  background:#6c2bd9;
 }
 
-/* BUTTON */
 button{
   width:100%;
   padding:14px;
   margin-top:15px;
   border:none;
-  background:var(--purple);
+  background:#6c2bd9;
   color:white;
   border-radius:10px;
-  cursor:pointer;
   font-weight:bold;
-  font-size:15px;
+  cursor:pointer;
 }
 
 button:hover{
-  background:var(--dark);
+  background:#4e1fa8;
 }
 
 #status{
   text-align:center;
-  font-size:13px;
   margin-top:10px;
+  font-size:13px;
 }
 
-/* CHART */
-canvas{
-  max-width:100%;
-}
-
-/* ===================== */
-/* 📱 MOBILE */
-/* ===================== */
-@media (max-width:768px){
-  .container{
-    flex-direction:column;
-  }
-
-  .left,.right{
-    width:100%;
-  }
-
-  h2{
-    font-size:18px;
-  }
-}
-
-@media (max-width:480px){
-  h2{
-    font-size:16px;
-  }
-
-  button{
-    font-size:13px;
-    padding:10px;
-  }
+@media(max-width:768px){
+  .container{flex-direction:column;}
+  .left,.right{width:100%;}
 }
 </style>
 </head>
@@ -194,41 +134,34 @@ canvas{
 
 <!-- RIGHT -->
 <div class="card right">
-<h2>Payment Analytics</h2>
-<canvas id="pieChart"></canvas>
+<h2>Analytics</h2>
+<canvas id="chart"></canvas>
 </div>
 
 </div>
 
 <script>
 
-// LOAD DATA
 let votes = JSON.parse(localStorage.getItem("votes")) || {A:0,B:0,C:0};
 let voted = localStorage.getItem("voted");
 
-// CREATE CHART
-const chart = new Chart(document.getElementById("pieChart"), {
-  type: "pie",
-  data: {
-    labels: ["Option A", "Option B", "Option C"],
-    datasets: [{
-      data: [votes.A, votes.B, votes.C],
-      backgroundColor: ["#6c2bd9", "#f97316", "#10b981"]
+const chart = new Chart(document.getElementById("chart"),{
+  type:"pie",
+  data:{
+    labels:["A","B","C"],
+    datasets:[{
+      data:[votes.A,votes.B,votes.C],
+      backgroundColor:["#6c2bd9","#f97316","#10b981"]
     }]
-  },
-  options:{
-    responsive:true
   }
 });
 
 updateUI();
 
-// GENERATE TRANSACTION REF
 function generateRef(){
-  return "FWV-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+  return "FWV-" + Math.random().toString(36).substr(2,9).toUpperCase();
 }
 
-// VOTE FUNCTION
 function voteNow(){
 
   let selected = document.querySelector('input[name="vote"]:checked');
@@ -240,46 +173,38 @@ function voteNow(){
   }
 
   if(!selected){
-    status.innerText = "⚠️ Select an option first";
+    status.innerText = "⚠️ Select an option";
     return;
   }
 
   let option = selected.value;
-  let reference = generateRef();
+  let ref = generateRef();
 
   FlutterwaveCheckout({
-    public_key: "FLWPUBK-xxxxxxxxxxxxxxxxxxxxx-X", // 🔴 replace with your real key
-    tx_ref: reference,
+    public_key: "FLWPUBK-1f089f41dc074df0535643cda9bd2833-X",
+    tx_ref: ref,
     amount: 100,
     currency: "NGN",
-    payment_options: "card, banktransfer, ussd",
 
-    customer: {
-      email: "user@email.com",
-      name: "Voter"
+    customer:{
+      email:"user@email.com",
+      name:"Voter"
     },
 
-    callback: function(){
-
+    callback:function(){
       votes[option]++;
-      localStorage.setItem("votes", JSON.stringify(votes));
-      localStorage.setItem("voted", "true");
-
+      localStorage.setItem("votes",JSON.stringify(votes));
+      localStorage.setItem("voted","true");
       voted = true;
 
       updateUI();
       updateChart();
 
       status.innerText = "✅ Vote successful!";
-    },
-
-    onclose: function(){
-      status.innerText = "Payment closed";
     }
   });
 }
 
-// UPDATE UI
 function updateUI(){
 
   let total = votes.A + votes.B + votes.C;
@@ -293,9 +218,8 @@ function updateUI(){
   document.getElementById("fillC").style.width = total ? (votes.C/total*100)+"%" : "0%";
 }
 
-// UPDATE CHART
 function updateChart(){
-  chart.data.datasets[0].data = [votes.A, votes.B, votes.C];
+  chart.data.datasets[0].data = [votes.A,votes.B,votes.C];
   chart.update();
 }
 
