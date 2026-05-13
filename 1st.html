@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flutterwave Voting System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+  font-family: Arial;
+  background: linear-gradient(135deg,#6c2bd9,#4e1fa8);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:15px;
+}
+
+.container{
+  display:flex;
+  gap:20px;
+  max-width:900px;
+  width:100%;
+}
+
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.left{ width:350px; }
+.right{ flex:1; }
+
+h2{text-align:center;}
+
+.option{margin:12px 0;}
+
+label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.count{
+  margin-left:auto;
+}
+
+.bar{
+  height:6px;
+  background:#ddd;
+  border-radius:5px;
+  overflow:hidden;
+  margin-top:5px;
+}
+
+.fill{
+  height:100%;
+  width:0%;
+  background:#6c2bd9;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:15px;
+  border:none;
+  background:#6c2bd9;
+  color:white;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#4e1fa8;
+}
+
+#status{
+  text-align:center;
+  margin-top:10px;
+  font-size:13px;
+}
+
+@media(max-width:768px){
+  .container{flex-direction:column;}
+  .left,.right{width:100%;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LEFT -->
+<div class="card left">
+
+<h2>Vote System</h2>
+
+<div class="option">
+<label>
+<input type="radio" name="vote" value="A"> Damilola
+<span class="count" id="countA">0</span>
+</label>
+<div class="bar"><div class="fill" id="fillA"></div></div>
+</div>
+
+<div class="option">
+<label>
+<input type="radio" name="vote" value="B"> Elisha
+<span class="count" id="countB">0</span>
+</label>
+<div class="bar"><div class="fill" id="fillB"></div></div>
+</div>
+
+
+
+
+<button onclick="voteNow()">Vote (₦1000)</button>
+
+<p id="status"></p>
+
+</div>
+
+<!-- RIGHT -->
+<div class="card right">
+<h2>Analytics</h2>
+<canvas id="chart"></canvas>
+</div>
+
+</div>
+
+<script>
+
+let votes = JSON.parse(localStorage.getItem("votes")) || {A:0,B:0,C:0};
+let voted = localStorage.getItem("voted");
+
+const chart = new Chart(document.getElementById("chart"),{
+  type:"pie",
+  data:{
+    labels:["A","B","C"],
+    datasets:[{
+      data:[votes.A,votes.B,votes.C],
+      backgroundColor:["#6c2bd9","#f97316","#10b981"]
+    }]
+  }
+});
+
+updateUI();
+
+function generateRef(){
+  return "FWV-" + Math.random().toString(36).substr(2,9).toUpperCase();
+}
+
+function voteNow(){
+
+  let selected = document.querySelector('input[name="vote"]:checked');
+  let status = document.getElementById("status");
+
+  if(voted){
+    status.innerText = "❌ You already voted on this device";
+    return;
+  }
+
+  if(!selected){
+    status.innerText = "⚠️ Select an option";
+    return;
+  }
+
+  let option = selected.value;
+  let ref = generateRef();
+
+  FlutterwaveCheckout({
+    public_key: "FLWPUBK-1f089f41dc074df0535643cda9bd2833-X",
+    tx_ref: ref,
+    amount: 1000,
+    currency: "NGN",
+
+    customer:{
+      email:"user@email.com",
+      name:"Voter"
+    },
+
+    callback:function(){
+      votes[option]++;
+      localStorage.setItem("votes",JSON.stringify(votes));
+      localStorage.setItem("voted","true");
+      voted = true;
+
+      updateUI();
+      updateChart();
+
+      status.innerText = "✅ Vote successful!";
+    }
+  });
+}
+
+function updateUI(){
+
+  let total = votes.A + votes.B + votes.C;
+
+  document.getElementById("countA").innerText = votes.A;
+  document.getElementById("countB").innerText = votes.B;
+  document.getElementById("countC").innerText = votes.C;
+
+  document.getElementById("fillA").style.width = total ? (votes.A/total*100)+"%" : "0%";
+  document.getElementById("fillB").style.width = total ? (votes.B/total*100)+"%" : "0%";
+  document.getElementById("fillC").style.width = total ? (votes.C/total*100)+"%" : "0%";
+}
+
+function updateChart(){
+  chart.data.datasets[0].data = [votes.A,votes.B,votes.C];
+  chart.update();
+}
+
+</script>
+
+</body>
+</html>
