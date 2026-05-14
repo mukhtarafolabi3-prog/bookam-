@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bookam Event Form</title>
+<title>Bookam Event System</title>
 
 <style>
 :root{
@@ -27,33 +27,52 @@ body{
 
 .container{
   width:100%;
-  max-width:650px;
+  max-width:700px;
   background:#fff;
   padding:25px;
-  border-radius:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
 h2{
   text-align:center;
   color:var(--purple);
+  margin-bottom:20px;
+}
+
+h3{
+  color:var(--purple);
+  margin-top:20px;
+}
+
+label{
+  font-size:13px;
+  font-weight:bold;
+  color:#444;
 }
 
 input, textarea{
   width:100%;
   padding:12px;
-  margin:8px 0;
+  margin:8px 0 14px;
   border:1px solid #ddd;
   border-radius:8px;
+  outline:none;
+  transition:0.3s;
 }
 
 input:focus, textarea:focus{
   border-color:var(--purple);
-  outline:none;
+  box-shadow:0 0 0 3px rgba(124,58,237,0.1);
+}
+
+textarea{
+  resize:none;
+  min-height:120px;
 }
 
 button{
-  padding:12px;
+  padding:13px;
   border:none;
   border-radius:8px;
   cursor:pointer;
@@ -64,23 +83,14 @@ button{
   width:100%;
   background:var(--purple);
   color:white;
-  margin-top:10px;
+  margin-top:15px;
 }
 
 .btn:hover{
   background:var(--dark);
 }
 
-.small-btns{
-  display:flex;
-  gap:10px;
-}
-
-.small-btns button{
-  flex:1;
-  background:#eee;
-}
-
+/* PARTICIPANTS */
 .participants{
   margin-top:10px;
 }
@@ -88,20 +98,68 @@ button{
 .participant{
   display:flex;
   gap:10px;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .participant span{
   background:var(--purple);
   color:white;
   padding:10px;
-  border-radius:6px;
-  width:40px;
+  border-radius:8px;
+  width:45px;
   text-align:center;
+  font-weight:bold;
 }
 
 .participant input{
   flex:1;
+  margin:0;
+}
+
+/* BUTTONS */
+.small-btns{
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.small-btns button{
+  flex:1;
+  background:#eee;
+}
+
+/* IMAGE */
+#preview{
+  width:100%;
+  max-height:300px;
+  object-fit:cover;
+  border-radius:10px;
+  display:none;
+  margin-bottom:10px;
+  border:1px solid #ddd;
+}
+
+/* LOADING */
+.loader{
+  width:16px;
+  height:16px;
+  border:2px solid #fff;
+  border-top:2px solid transparent;
+  border-radius:50%;
+  display:inline-block;
+  animation:spin 1s linear infinite;
+  margin-right:8px;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .container{
+    padding:18px;
+  }
 }
 </style>
 </head>
@@ -110,30 +168,71 @@ button{
 
 <div class="container">
 
-<h2>Create Event</h2>
+<h2>Bookam Event System</h2>
 
 <form id="eventForm"
-action="https://formsubmit.co/mukhtarafolabi3@gmail.com"
-method="POST">
+action="https://formsubmit.co/bookam26@gmail.com"
+method="POST"
+enctype="multipart/form-data">
 
 <!-- SETTINGS -->
-<input type="hidden" name="_subject" value="🎉 New Event With Participants">
+<input type="hidden" name="_subject" value="🎉 New Event Submission">
 <input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_template" value="table">
 
 <!-- EVENT INFO -->
-<input type="text" name="Event Title" placeholder="Event Title" required>
-<input type="text" name="Organizer Name" placeholder="Organizer Name" required>
-<input type="email" name="Organizer Email" placeholder="Organizer Email" required>
+<label>Event Title</label>
+<input type="text" name="Event Title" required>
 
-<textarea name="Description" placeholder="Event Description"></textarea>
+<label>Organizer Name</label>
+<input type="text" name="Organizer Name" required>
+
+<label>Phone Number</label>
+<input type="tel" name="Phone Number" required>
+
+<label>Event Date</label>
+<input type="date" name="Event Date" required>
+
+<label>Event Address</label>
+<input type="text" name="Event Address">
+
+<!-- IMAGE -->
+<label>Event Poster</label>
+<input type="file" id="imageInput" accept="image/*">
+
+<img id="preview">
+
+<!-- DESCRIPTION -->
+<label>Description</label>
+<textarea name="Description"></textarea>
+
+<!-- 💰 PAYMENT SECTION -->
+<h3>Payment Details</h3>
+
+<label>Contract Amount (₦)</label>
+<input type="number" name="Contract Amount" required>
+
+<label>Bank Name</label>
+<input type="text" name="Bank Name" required>
+
+<label>Account Name</label>
+<input type="text" name="Account Name" required>
+
+<label>Account Number</label>
+<input 
+type="text"
+name="Account Number"
+placeholder="10-digit account number"
+maxlength="10"
+pattern="[0-9]{10}"
+required
+>
 
 <!-- PARTICIPANTS -->
 <h3>Participants</h3>
 
 <div class="small-btns">
-  <button type="button" onclick="addParticipant()">Add +</button>
-  <button type="button" onclick="removeParticipant()">Remove -</button>
+<button type="button" onclick="addParticipant()">Add +</button>
+<button type="button" onclick="removeParticipant()">Remove -</button>
 </div>
 
 <div id="participants" class="participants"></div>
@@ -145,10 +244,18 @@ method="POST">
 </div>
 
 <script>
+
 const container = document.getElementById("participants");
 
+// ADD PARTICIPANT
 function addParticipant(){
   const index = container.children.length;
+
+  if(index >= 26){
+    alert("Max participants reached");
+    return;
+  }
+
   const letter = String.fromCharCode(65 + index);
 
   const div = document.createElement("div");
@@ -156,26 +263,63 @@ function addParticipant(){
 
   div.innerHTML = `
     <span>${letter}</span>
-    <input type="text" name="Participant ${letter}" placeholder="Name" required>
+    <input type="text" name="Participant ${letter}" required>
   `;
 
   container.appendChild(div);
 }
 
+// REMOVE PARTICIPANT
 function removeParticipant(){
   if(container.children.length > 0){
     container.removeChild(container.lastChild);
   }
 }
 
-// default 4 participants
+// DEFAULT 4 PARTICIPANTS
 for(let i=0;i<4;i++){
   addParticipant();
 }
 
-document.getElementById("eventForm").addEventListener("submit", function(){
-  document.getElementById("btn").innerText = "Sending...";
+// IMAGE PREVIEW
+const imageInput = document.getElementById("imageInput");
+const preview = document.getElementById("preview");
+
+imageInput.addEventListener("change", function(){
+
+  const file = this.files[0];
+
+  if(file){
+
+    if(file.size > 2 * 1024 * 1024){
+      alert("Image must be less than 2MB");
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(){
+      preview.src = reader.result;
+      preview.style.display = "block";
+    }
+
+    reader.readAsDataURL(file);
+  }
 });
+
+// LOADING BUTTON
+document.getElementById("eventForm").addEventListener("submit", function(){
+
+  const btn = document.getElementById("btn");
+
+  btn.innerHTML = `
+    <span class="loader"></span>
+    Sending...
+  `;
+
+  btn.disabled = true;
+});
+
 </script>
 
 </body>

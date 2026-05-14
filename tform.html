@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bookam Event Pricing System</title>
 
 <style>
+
 *{
+  margin:0;
+  padding:0;
   box-sizing:border-box;
   font-family:Arial, sans-serif;
 }
 
 body{
-  margin:0;
   background:#f3f4f6;
   display:flex;
   justify-content:center;
+  align-items:flex-start;
   padding:20px;
+  min-height:100vh;
 }
 
 .box{
   width:100%;
-  max-width:650px;
+  max-width:700px;
   background:white;
   padding:25px;
-  border-radius:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
 h2{
@@ -35,26 +38,37 @@ h2{
   margin-bottom:20px;
 }
 
+h3{
+  color:#7c3aed;
+  margin:20px 0 10px;
+}
+
 label{
-  font-weight:bold;
+  display:block;
   font-size:13px;
+  font-weight:bold;
   color:#444;
+  margin-bottom:5px;
 }
 
 input,
-select,
-textarea{
+textarea,
+select{
   width:100%;
-  padding:12px;
-  margin:6px 0 12px;
+  padding:13px;
   border:1px solid #ddd;
-  border-radius:8px;
+  border-radius:10px;
+  margin-bottom:14px;
   outline:none;
+  transition:0.3s;
+  font-size:14px;
 }
 
 input:focus,
-textarea:focus{
+textarea:focus,
+select:focus{
   border-color:#7c3aed;
+  box-shadow:0 0 0 3px rgba(124,58,237,0.1);
 }
 
 textarea{
@@ -65,65 +79,82 @@ textarea{
 .price-box{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
+  gap:12px;
 }
 
 .price-card{
-  border:1px solid #ddd;
-  padding:12px;
-  border-radius:10px;
+  border:1px solid #eee;
   background:#fafafa;
+  border-radius:12px;
+  padding:14px;
 }
 
 .price-card h4{
-  margin:0 0 8px;
+  margin-bottom:8px;
   color:#7c3aed;
-  font-size:14px;
 }
 
 button{
   width:100%;
-  padding:14px;
+  padding:15px;
+  border:none;
+  border-radius:10px;
   background:#7c3aed;
   color:white;
-  border:none;
-  border-radius:8px;
+  font-size:15px;
   font-weight:bold;
   cursor:pointer;
-  margin-top:15px;
-  font-size:15px;
   transition:0.3s;
 }
 
 button:hover{
   background:#6d28d9;
+  transform:translateY(-2px);
 }
 
-/* IMAGE PREVIEW */
-#preview{
-  width:100%;
-  margin-top:10px;
-  display:none;
-  border-radius:10px;
-  border:1px solid #ddd;
-  max-height:300px;
-  object-fit:cover;
+button:disabled{
+  opacity:0.7;
+  cursor:not-allowed;
 }
 
-/* OPTIONAL TEXT */
 .small-text{
   font-size:12px;
   color:#777;
-  margin-top:-6px;
-  margin-bottom:10px;
+  margin-top:-8px;
+  margin-bottom:12px;
+}
+
+#preview{
+  width:100%;
+  max-height:300px;
+  object-fit:cover;
+  border-radius:10px;
+  display:none;
+  margin-bottom:15px;
+  border:1px solid #ddd;
+}
+
+/* LOADER */
+.loader{
+  width:16px;
+  height:16px;
+  border:2px solid #fff;
+  border-top:2px solid transparent;
+  border-radius:50%;
+  display:inline-block;
+  animation:spin 1s linear infinite;
+  vertical-align:middle;
+  margin-right:8px;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
 }
 
 /* MOBILE */
 @media(max-width:600px){
-
-  body{
-    padding:12px;
-  }
 
   .box{
     padding:18px;
@@ -133,12 +164,9 @@ button:hover{
     grid-template-columns:1fr;
   }
 
-  h2{
-    font-size:22px;
-  }
 }
-</style>
 
+</style>
 </head>
 
 <body>
@@ -164,55 +192,83 @@ enctype="multipart/form-data">
 <label>Organizer Name</label>
 <input type="text" name="Organizer Name" placeholder="Enter organizer name" required>
 
+<label>Phone Number</label>
+<input type="tel" name="Phone Number" placeholder="Enter phone number" required>
+
+<label>Event Date</label>
+<input type="date" name="Event Date" required>
+
 <label>Event Address</label>
 <input type="text" name="Event Address" placeholder="Enter venue or address" required>
 
-<!-- GRAPHIC -->
+<!-- EVENT IMAGE -->
 <label>Event Graphic / Poster</label>
 <input type="file" name="Event Graphic" accept="image/*">
 
 <p class="small-text">Upload flyer or event poster</p>
 
-<img id="preview" alt="Preview">
+<img id="preview" alt="Preview Image">
 
 <!-- DESCRIPTION -->
 <label>Description</label>
 <textarea name="Description" placeholder="Write event details"></textarea>
 
 <!-- PRICE SECTION -->
-<h3 style="color:#7c3aed;">Set Prices (Optional)</h3>
+<h3>Set Prices</h3>
 
 <div class="price-box">
 
-  <div class="price-card">
-    <h4>VIP Price</h4>
-    <input type="number" name="VIP Price" placeholder="Optional">
-  </div>
+<div class="price-card">
+<h4>VIP Price</h4>
+<input type="number" name="VIP Price" placeholder="Optional">
+</div>
 
-  <div class="price-card">
-    <h4>Regular Price</h4>
-    <input type="number" name="Regular Price" placeholder="Optional">
-  </div>
+<div class="price-card">
+<h4>Regular Price</h4>
+<input type="number" name="Regular Price" placeholder="Optional">
+</div>
 
-  <div class="price-card">
-    <h4>Premium Price</h4>
-    <input type="number" name="Premium Price" placeholder="Optional">
-  </div>
+<div class="price-card">
+<h4>Premium Price</h4>
+<input type="number" name="Premium Price" placeholder="Optional">
+</div>
 
-  <div class="price-card">
-    <h4>Other Price</h4>
-    <input type="number" name="Other Price" placeholder="Optional">
-  </div>
+<div class="price-card">
+<h4>Other Price</h4>
+<input type="number" name="Other Price" placeholder="Optional">
+</div>
 
 </div>
 
-<button type="submit">Send to Admin Email</button>
+<!-- PAYMENT DETAILS -->
+<h3>Payment Details</h3>
+
+<label>Bank Name</label>
+<input type="text" name="Bank Name" placeholder="Enter bank name">
+
+<label>Account Name</label>
+<input type="text" name="Account Name" placeholder="Enter account name">
+
+<label>Account Number</label>
+<input 
+type="text"
+name="Account Number"
+placeholder="Enter 10-digit account number"
+maxlength="10"
+pattern="[0-9]{10}"
+>
+
+<!-- SUBMIT -->
+<button type="submit">
+Submit Event
+</button>
 
 </form>
 
 </div>
 
 <script>
+
 // IMAGE PREVIEW
 const fileInput = document.querySelector('input[type="file"]');
 const preview = document.getElementById("preview");
@@ -223,25 +279,55 @@ fileInput.addEventListener("change", function(e){
 
   if(file){
 
+    // FILE SIZE LIMIT
+    if(file.size > 2 * 1024 * 1024){
+      alert("Image must be less than 2MB");
+      fileInput.value = "";
+      return;
+    }
+
+    // FILE TYPE VALIDATION
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp"
+    ];
+
+    if(!allowedTypes.includes(file.type)){
+      alert("Only JPG, PNG and WEBP allowed");
+      fileInput.value = "";
+      return;
+    }
+
     const reader = new FileReader();
 
     reader.onload = function(){
+
       preview.src = reader.result;
       preview.style.display = "block";
+
     }
 
     reader.readAsDataURL(file);
+
   }
+
 });
 
-// BUTTON LOADING STATE
+// FORM SUBMIT
 document.getElementById("eventForm").addEventListener("submit", function(){
 
   const btn = this.querySelector("button");
 
-  btn.innerText = "Sending...";
+  btn.innerHTML = `
+    <span class="loader"></span>
+    Sending...
+  `;
+
   btn.disabled = true;
+
 });
+
 </script>
 
 </body>
