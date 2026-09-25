@@ -488,6 +488,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (dropzone) {
+      dropzone.addEventListener('click', (e) => {
+        if (e.target.closest('#btn-org-remove-banner')) return;
+        if (fileInput) {
+          fileInput.click();
+        }
+      });
+
       ['dragenter', 'dragover'].forEach(eventName => {
         dropzone.addEventListener(eventName, (e) => {
           e.preventDefault();
