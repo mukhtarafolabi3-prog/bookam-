@@ -125,42 +125,21 @@
           <em>“We don’t just process tickets — <strong>we support the people behind the experiences.</strong> All tickets are completely optional — host free community meetups, exhibitions, or multi-tier ticketed events.”</em>
         </div>
 
-        <!-- Unified "Find Events" Search across all 36 States -->
-        <form class="hero-search-box" id="hero-search-form" style="display: flex; gap: 0.5rem; background: #ffffff; padding: 0.5rem; border-radius: 9999px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12); border: 2px solid #E2E8F0;">
-          <div class="search-field" style="flex: 1; display: flex; align-items: center; padding: 0 1.25rem; gap: 0.75rem;">
-            <i class="fa-solid fa-magnifying-glass" style="color: var(--primary); font-size: 1.15rem;"></i>
-            <input type="text" id="search-keyword" placeholder="Find events by state (e.g. Lagos, Oyo, Abuja) or title, artist & venue..." style="border: none; outline: none; width: 100%; font-size: 1rem; background: transparent; color: var(--dark); padding: 0.5rem 0;" />
+        <div style="background: rgba(255, 255, 255, 0.9); border: 1px solid #E2E8F0; border-left: 4px solid var(--primary); border-radius: 18px; padding: 1rem 1.15rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08); margin-top: 0.5rem; max-width: 620px;">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; font-weight: 800; color: var(--dark);">
+            <i class="fa-solid fa-bell" style="color: var(--primary);"></i>
+            Community status
           </div>
-          <button type="submit" class="btn btn-primary" id="hero-search-btn" style="border-radius: 9999px; padding: 0.75rem 2rem; font-weight: 700; font-size: 0.95rem; white-space: nowrap;">
-            <i class="fa-solid fa-magnifying-glass"></i> Find Events
-          </button>
-        </form>
-
-        <!-- Quick 36 States Explorer Pills -->
-        <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.85rem; font-size: 0.8rem; color: var(--gray-600);">
-          <span style="font-weight: 700; color: var(--dark);"><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> Browse 36 States:</span>
-          <a href="events.html?search=Lagos" style="background: #F1F5F9; border-radius: 9999px; padding: 0.2rem 0.65rem; color: #1E293B; font-weight: 600; text-decoration: none; border: 1px solid #CBD5E1;">Lagos</a>
-          <a href="events.html?search=Oyo" style="background: #F1F5F9; border-radius: 9999px; padding: 0.2rem 0.65rem; color: #1E293B; font-weight: 600; text-decoration: none; border: 1px solid #CBD5E1;">Oyo (Ibadan)</a>
-          <a href="events.html?search=Abuja" style="background: #F1F5F9; border-radius: 9999px; padding: 0.2rem 0.65rem; color: #1E293B; font-weight: 600; text-decoration: none; border: 1px solid #CBD5E1;">Abuja (FCT)</a>
-          <a href="events.html?search=Rivers" style="background: #F1F5F9; border-radius: 9999px; padding: 0.2rem 0.65rem; color: #1E293B; font-weight: 600; text-decoration: none; border: 1px solid #CBD5E1;">Rivers (PH)</a>
-          <a href="events.html?search=Kano" style="background: #F1F5F9; border-radius: 9999px; padding: 0.2rem 0.65rem; color: #1E293B; font-weight: 600; text-decoration: none; border: 1px solid #CBD5E1;">Kano</a>
-          <a href="events.html?search=Enugu" style="background: #F1F5F9; border-radius: 9999px; padding: 0.2rem 0.65rem; color: #1E293B; font-weight: 600; text-decoration: none; border: 1px solid #CBD5E1;">Enugu</a>
-          <a href="events.html?search=Delta" style="background: #F1F5F9; border-radius: 9999px; padding: 0.2rem 0.65rem; color: #1E293B; font-weight: 600; text-decoration: none; border: 1px solid #CBD5E1;">Delta</a>
-          <a href="events.html" style="color: var(--primary); font-weight: 700; text-decoration: underline; margin-left: 0.25rem;">+ All 36 States</a>
+          <p style="margin: 0; color: var(--gray-700); line-height: 1.6;">
+            There are currently no live event listings on the platform. The community and contest areas remain available while event feed updates are paused.
+          </p>
         </div>
 
-        <!-- Quick Host & Create Action Callouts -->
         <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.25rem;">
-          <span style="font-size: 0.85rem; font-weight: 700; color: var(--gray-600);">Get Started:</span>
-          <button type="button" class="btn btn-sm btn-primary" id="btn-hero-create-event" style="font-weight: 700;">
-            <i class="fa-solid fa-calendar-plus"></i> + Create Event (Tickets Optional)
-          </button>
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--gray-600);">Available now:</span>
           <button type="button" class="btn btn-sm" id="btn-hero-create-contest" style="background: #D97706; color: #fff; border: 1px solid #D97706; font-weight: 700;">
             <i class="fa-solid fa-trophy"></i> + Create Contest
           </button>
-          <a href="events.html" class="btn btn-sm btn-outline" style="font-weight: 700;">
-            <i class="fa-solid fa-compass"></i> Explore All Events
-          </a>
         </div>
 
         <!-- Slogan & Stats -->
@@ -222,35 +201,23 @@
     </div>
   </header>
 
-  <!-- Landmark Flagship Events & Exhibitions Grid -->
   <section class="container" style="padding-top: 2.5rem; padding-bottom: 3.5rem;">
     <div class="section-header" style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
       <div>
         <span class="section-tag">
-          <i class="fa-solid fa-star"></i> Featured Events & Experiences
+          <i class="fa-solid fa-calendar-xmark"></i> Event Feed Status
         </span>
-        <h2 class="section-title">Upcoming Events & Passes</h2>
-        <p class="section-subtitle">Official verified tickets, exhibition passes, and concert reservations with instant digital confirmation</p>
+        <h2 class="section-title">No Live Event Listings</h2>
+        <p class="section-subtitle">The platform is currently cleared of active event listings. New event content will appear here when available.</p>
       </div>
-      <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
-        <button type="button" class="btn btn-primary" id="btn-section-create-event" style="font-weight: 700;">
-          <i class="fa-solid fa-plus-circle"></i> + Create Event
-        </button>
-        <a href="events.html" class="btn btn-outline">Explore All Events <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
-    </div>
-
-    <!-- Filter chips for Event Categories -->
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;" id="hall-filter-chips">
-      <button type="button" class="btn btn-sm filter-tab active" data-category="all" style="border-radius: 9999px;">All Events</button>
-      <button type="button" class="btn btn-sm filter-tab" data-category="Exhibitions & Trade Expos" style="border-radius: 9999px;">Trade Expos & Exhibitions</button>
-      <button type="button" class="btn btn-sm filter-tab" data-category="Tech" style="border-radius: 9999px;">Tech & AI Summits</button>
-      <button type="button" class="btn btn-sm filter-tab" data-category="Music & Concerts" style="border-radius: 9999px;">Concerts & Festivals</button>
-      <button type="button" class="btn btn-sm filter-tab" data-category="Food & Drink" style="border-radius: 9999px;">Food & Culinary</button>
     </div>
 
     <div class="events-grid" id="featured-events-grid">
-      <!-- Injected dynamically from store.js via index.js -->
+      <div style="grid-column: 1 / -1; text-align: center; padding: 3.5rem 2rem; background: var(--white); border-radius: var(--radius-md); border: 1px dashed var(--gray-300);">
+        <i class="fa-solid fa-calendar-xmark" style="font-size: 3rem; color: var(--gray-400); margin-bottom: 1rem;"></i>
+        <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--dark); margin-bottom: 0.5rem;">No Live Events Listed</h3>
+        <p style="color: var(--dark-subtle); margin: 0;">Event listings have been removed from the site.</p>
+      </div>
     </div>
   </section>
 

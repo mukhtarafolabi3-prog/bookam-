@@ -244,15 +244,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <div style="grid-column: 1 / -1; text-align: center; padding: 3.5rem 2rem; background: var(--white); border-radius: var(--radius-md); border: 1px dashed var(--gray-300);">
             <i class="fa-solid fa-calendar-xmark" style="font-size: 3rem; color: var(--gray-400); margin-bottom: 1rem;"></i>
             <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--dark); margin-bottom: 0.5rem;">No Live Events Listed</h3>
-            <p style="color: var(--dark-subtle); margin-bottom: 1.5rem;">
-              Publish an event right now from the homepage or approve pending events in the Master Control Panel!
+            <p style="color: var(--dark-subtle); margin: 0;">
+              Event listings have been removed from the site.
             </p>
-            <button type="button" class="btn btn-primary btn-sm" id="btn-empty-create-event" style="font-weight: 800;">
-              <i class="fa-solid fa-plus-circle"></i> Create Event Now
-            </button>
           </div>
         `;
-        document.getElementById('btn-empty-create-event')?.addEventListener('click', openEventModal);
       } else {
         featuredEventsGrid.innerHTML = activeEvents.slice(0, 12).map(e => renderEventCard(e)).join('');
       }
