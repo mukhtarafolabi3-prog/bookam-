@@ -474,13 +474,13 @@
         }
       }
 
-      const orgName = (form.querySelector('#evt-reg-org-name') || document.getElementById('evt-reg-org-name'))?.value.trim() || 'BOOKAM Organizer';
-      const brandName = (form.querySelector('#evt-reg-brand-name') || document.getElementById('evt-reg-brand-name'))?.value.trim() || orgName;
+      const orgName = (form.querySelector('#evt-reg-org-name') || document.getElementById('evt-reg-org-name'))?.value.trim() || '';
+      const brandName = (form.querySelector('#evt-reg-brand-name') || document.getElementById('evt-reg-brand-name'))?.value.trim() || '';
       const phone = (form.querySelector('#evt-reg-phone') || document.getElementById('evt-reg-phone'))?.value.trim() || '';
       const email = (form.querySelector('#evt-reg-email') || document.getElementById('evt-reg-email'))?.value.trim() || '';
-      const whatsapp = (form.querySelector('#evt-reg-whatsapp') || document.getElementById('evt-reg-whatsapp'))?.value.trim() || phone;
+      const whatsapp = (form.querySelector('#evt-reg-whatsapp') || document.getElementById('evt-reg-whatsapp'))?.value.trim() || '';
       const instagram = (form.querySelector('#evt-reg-instagram') || document.getElementById('evt-reg-instagram'))?.value.trim() || '';
-      const orgType = (form.querySelector('#evt-reg-org-type') || document.getElementById('evt-reg-org-type'))?.value || 'Event Company';
+      const orgType = (form.querySelector('#evt-reg-org-type') || document.getElementById('evt-reg-org-type'))?.value || '';
 
       const title = (form.querySelector('#input-title') || document.getElementById('input-title')).value.trim();
       const category = (form.querySelector('#input-category') || document.getElementById('input-category')).value;
@@ -569,10 +569,10 @@
       const wristbands = (form.querySelector('#evt-reg-wristbands') || document.getElementById('evt-reg-wristbands'))?.value || 'No';
       const specialReqs = (form.querySelector('#evt-reg-special-reqs') || document.getElementById('evt-reg-special-reqs'))?.value.trim() || '';
 
-      const settleName = (form.querySelector('#evt-reg-settle-name') || document.getElementById('evt-reg-settle-name'))?.value.trim() || brandName || orgName;
+      const settleName = (form.querySelector('#evt-reg-settle-name') || document.getElementById('evt-reg-settle-name'))?.value.trim() || '';
       const settleBank = (form.querySelector('#evt-reg-settle-bank') || document.getElementById('evt-reg-settle-bank'))?.value.trim() || '';
       const settleAccount = (form.querySelector('#evt-reg-settle-account') || document.getElementById('evt-reg-settle-account'))?.value.trim() || '';
-      const settlePref = (form.querySelector('#evt-reg-settle-pref') || document.getElementById('evt-reg-settle-pref'))?.value || 'Event-Day Settlement';
+      const settlePref = (form.querySelector('#evt-reg-settle-pref') || document.getElementById('evt-reg-settle-pref'))?.value || '';
 
       // Influencers
       const pendingInfluencers = [];

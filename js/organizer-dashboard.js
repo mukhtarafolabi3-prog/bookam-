@@ -2703,13 +2703,13 @@ The BOOKAM Team`;
       }
 
       // Gather Event Form Data
-      const orgName = document.getElementById('evt-reg-org-name')?.value.trim() || organizer.name;
-      const brandName = document.getElementById('evt-reg-brand-name')?.value.trim() || organizer.organizationName;
+      const orgName = document.getElementById('evt-reg-org-name')?.value.trim() || '';
+      const brandName = document.getElementById('evt-reg-brand-name')?.value.trim() || '';
       const phone = document.getElementById('evt-reg-phone')?.value.trim();
-      const email = document.getElementById('evt-reg-email')?.value.trim() || organizer.email;
+      const email = document.getElementById('evt-reg-email')?.value.trim() || '';
       const whatsapp = document.getElementById('evt-reg-whatsapp')?.value.trim();
       const instagram = document.getElementById('evt-reg-instagram')?.value.trim();
-      const orgType = document.getElementById('evt-reg-org-type')?.value;
+      const orgType = document.getElementById('evt-reg-org-type')?.value || '';
 
       const title = document.getElementById('input-title').value.trim();
       const category = document.getElementById('input-category').value;
@@ -2784,10 +2784,10 @@ The BOOKAM Team`;
       const wristbands = document.getElementById('evt-reg-wristbands')?.value;
       const specialReqs = document.getElementById('evt-reg-special-reqs')?.value.trim();
 
-      const settleName = document.getElementById('evt-reg-settle-name')?.value.trim() || brandName || orgName;
+      const settleName = document.getElementById('evt-reg-settle-name')?.value.trim() || '';
       const settleBank = document.getElementById('evt-reg-settle-bank')?.value.trim();
       const settleAccount = document.getElementById('evt-reg-settle-account')?.value.trim();
-      const settlePref = document.getElementById('evt-reg-settle-pref')?.value;
+      const settlePref = document.getElementById('evt-reg-settle-pref')?.value || '';
 
       // Collect Influencers to provision
       pendingInfluencersToSave = [];
