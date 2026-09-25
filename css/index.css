@@ -4,7 +4,10 @@
 .hero-section {
   position: relative;
   padding: 5rem 0 6rem 0;
-  background: radial-gradient(100% 100% at 50% 0%, rgba(243, 232, 255, 0.7) 0%, var(--bg-color) 100%);
+  background:
+    radial-gradient(circle at top left, rgba(168, 85, 247, 0.18), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(243, 232, 255, 0.9) 0%, rgba(248, 249, 252, 1) 100%);
   overflow: hidden;
 }
 
@@ -19,10 +22,10 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.4rem 1rem;
-  background: var(--white);
-  border: 1px solid rgba(124, 58, 237, 0.2);
-  box-shadow: var(--shadow-sm);
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(124, 58, 237, 0.18);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.08);
   border-radius: var(--radius-pill);
   font-size: 0.85rem;
   font-weight: 700;
@@ -54,13 +57,13 @@
 
 /* Hero Search Box */
 .hero-search-box {
-  background: var(--white);
-  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 24px;
   padding: 0.75rem;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--gray-200);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.25);
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr auto;
+  grid-template-columns: 1.5fr auto;
   gap: 0.75rem;
   align-items: center;
 }
@@ -352,8 +355,8 @@
 /* Events Grid */
 .events-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.6rem;
 }
 
 /* Organizer Banner Callout */

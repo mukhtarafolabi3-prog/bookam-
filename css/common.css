@@ -5,9 +5,12 @@
   --primary: #7C3AED;
   --primary-hover: #6D28D9;
   --primary-light: #F3E8FF;
+  --primary-strong: #4C1D95;
   --secondary: #5B21B6;
+  --secondary-soft: #8B5CF6;
   --white: #FFFFFF;
   --bg-color: #F8F9FC;
+  --bg-soft: #F4F1FF;
   --dark: #1F2937;
   --dark-subtle: #4B5563;
   --gray-100: #F3F4F6;
@@ -283,15 +286,15 @@ button, input, select, textarea {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary) 0%, #6D28D9 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
   color: var(--white);
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+  box-shadow: 0 10px 24px rgba(124, 58, 237, 0.28);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--primary-hover) 0%, #5B21B6 100%);
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-strong) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45);
+  box-shadow: 0 14px 28px rgba(124, 58, 237, 0.34);
 }
 
 .btn-secondary {
@@ -374,7 +377,7 @@ button, input, select, textarea {
 .mobile-nav-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(15, 23, 42, 0.56);
   backdrop-filter: blur(4px);
   z-index: 1095;
   opacity: 0;
@@ -717,16 +720,16 @@ button, input, select, textarea {
   background: var(--white);
   border-radius: var(--radius-md);
   border: 1px solid var(--gray-200);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
   overflow: hidden;
   transition: all 0.3s ease;
   height: 100%;
 }
 
 .event-card:hover {
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 22px 45px rgba(124, 58, 237, 0.12);
   transform: translateY(-5px);
-  border-color: rgba(124, 58, 237, 0.4);
+  border-color: rgba(124, 58, 237, 0.35);
 }
 
 .event-card-banner {

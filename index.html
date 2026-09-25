@@ -74,6 +74,8 @@
     </div>
   </nav>
 
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+
   <!-- Mobile Drawer -->
   <div class="mobile-nav-drawer" id="mobile-nav">
     <button class="mobile-nav-close" id="mobile-nav-close">&times;</button>
@@ -1095,7 +1097,7 @@
 
         <!-- SECTION 9: SUBMIT BUTTON -->
         <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--gray-200); padding-top: 1.25rem; flex-wrap: wrap; gap: 1rem;">
-          <button type="button" class="btn btn-outline" id="cancel-create-modal" onclick="document.getElementById('home-create-event-modal').classList.remove('active'); document.getElementById('home-create-event-modal').style.display='none';">Cancel</button>
+          <button type="button" class="btn btn-outline" id="cancel-create-modal">Cancel</button>
           <button type="submit" id="btn-publish-event-modal" class="btn btn-primary btn-lg" style="padding: 0.95rem 2.25rem; font-weight: 900; font-size: 1.05rem; background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%); box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.5); border: none; letter-spacing: 0.2px;">
             <i class="fa-solid fa-bolt" style="color: #FBBF24;"></i> Publish Event &amp; Go Live Immediately
           </button>

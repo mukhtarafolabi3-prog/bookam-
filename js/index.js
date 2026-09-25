@@ -14,12 +14,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileToggle = document.getElementById('mobile-toggle');
   const mobileNav = document.getElementById('mobile-nav');
   const mobileNavClose = document.getElementById('mobile-nav-close');
+  const mobileNavBackdrop = document.getElementById('mobile-nav-backdrop');
+
+  function closeMobileNav() {
+    if (mobileNav) mobileNav.classList.remove('active');
+    if (mobileNavBackdrop) mobileNavBackdrop.classList.remove('active');
+  }
 
   if (mobileToggle && mobileNav) {
-    mobileToggle.addEventListener('click', () => mobileNav.classList.add('active'));
+    mobileToggle.addEventListener('click', () => {
+      mobileNav.classList.add('active');
+      if (mobileNavBackdrop) mobileNavBackdrop.classList.add('active');
+    });
   }
   if (mobileNavClose && mobileNav) {
-    mobileNavClose.addEventListener('click', () => mobileNav.classList.remove('active'));
+    mobileNavClose.addEventListener('click', closeMobileNav);
+  }
+  if (mobileNavBackdrop) {
+    mobileNavBackdrop.addEventListener('click', closeMobileNav);
   }
 
   // --- Hero Carousel Slider Logic ---
@@ -261,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openEventModal() {
     if (eventModal) {
+      eventModal.style.display = 'flex';
       eventModal.classList.add('active');
       const dateInput = document.getElementById('home-event-date');
       if (dateInput && !dateInput.value) {
@@ -272,11 +285,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeEventModal() {
-    if (eventModal) eventModal.classList.remove('active');
+    if (eventModal) {
+      eventModal.classList.remove('active');
+      eventModal.style.display = 'none';
+    }
   }
 
   function openContestModal() {
     if (contestModal) {
+      contestModal.style.display = 'flex';
       contestModal.classList.add('active');
       const endDateInput = document.getElementById('home-contest-end-date');
       if (endDateInput && !endDateInput.value) {
@@ -288,11 +305,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeContestModal() {
-    if (contestModal) contestModal.classList.remove('active');
+    if (contestModal) {
+      contestModal.classList.remove('active');
+      contestModal.style.display = 'none';
+    }
   }
 
   function openTicketModal() {
     if (ticketModal) {
+      ticketModal.style.display = 'flex';
       ticketModal.classList.add('active');
       const queryInput = document.getElementById('input-ticket-query');
       if (queryInput) {
@@ -302,11 +323,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeTicketModal() {
-    if (ticketModal) ticketModal.classList.remove('active');
+    if (ticketModal) {
+      ticketModal.classList.remove('active');
+      ticketModal.style.display = 'none';
+    }
   }
 
   function openVenueRfpModal(hallName = '') {
     if (venueRfpModal) {
+      venueRfpModal.style.display = 'flex';
       venueRfpModal.classList.add('active');
       if (hallName) {
         const hallSelect = document.getElementById('rfp-hall');
@@ -329,7 +354,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeVenueRfpModal() {
-    if (venueRfpModal) venueRfpModal.classList.remove('active');
+    if (venueRfpModal) {
+      venueRfpModal.classList.remove('active');
+      venueRfpModal.style.display = 'none';
+    }
   }
 
   // Expose globally for inline onclick handlers on venue cards
@@ -402,6 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Close buttons
   document.getElementById('btn-close-home-event-modal')?.addEventListener('click', closeEventModal);
   document.getElementById('btn-cancel-home-event')?.addEventListener('click', closeEventModal);
+  document.getElementById('cancel-create-modal')?.addEventListener('click', closeEventModal);
   document.getElementById('btn-close-home-contest-modal')?.addEventListener('click', closeContestModal);
   document.getElementById('btn-cancel-home-contest')?.addEventListener('click', closeContestModal);
   document.getElementById('btn-close-ticket-modal')?.addEventListener('click', closeTicketModal);
