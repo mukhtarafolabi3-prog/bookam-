@@ -19,11 +19,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileToggle = document.getElementById('mobile-toggle');
   const mobileNav = document.getElementById('mobile-nav');
   const mobileClose = document.getElementById('mobile-nav-close');
+  const mobileBackdrop = document.getElementById('mobile-nav-backdrop');
+
+  function closeMobileNav() {
+    if (mobileNav) {
+      mobileNav.classList.remove('active', 'open');
+    }
+    if (mobileBackdrop) {
+      mobileBackdrop.classList.remove('active');
+    }
+  }
+
   if (mobileToggle && mobileNav) {
-    mobileToggle.addEventListener('click', () => mobileNav.classList.add('open'));
+    mobileToggle.addEventListener('click', () => {
+      mobileNav.classList.add('active', 'open');
+      if (mobileBackdrop) mobileBackdrop.classList.add('active');
+    });
   }
   if (mobileClose && mobileNav) {
-    mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+    mobileClose.addEventListener('click', closeMobileNav);
+  }
+  if (mobileBackdrop) {
+    mobileBackdrop.addEventListener('click', closeMobileNav);
   }
 
   function renderContests() {

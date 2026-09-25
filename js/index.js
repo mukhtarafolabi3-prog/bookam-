@@ -17,13 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileNavBackdrop = document.getElementById('mobile-nav-backdrop');
 
   function closeMobileNav() {
-    if (mobileNav) mobileNav.classList.remove('active');
+    if (mobileNav) mobileNav.classList.remove('active', 'open');
     if (mobileNavBackdrop) mobileNavBackdrop.classList.remove('active');
   }
 
   if (mobileToggle && mobileNav) {
     mobileToggle.addEventListener('click', () => {
-      mobileNav.classList.add('active');
+      mobileNav.classList.add('active', 'open');
       if (mobileNavBackdrop) mobileNavBackdrop.classList.add('active');
     });
   }
@@ -448,9 +448,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isLikelyImageFile = (file) => {
       if (!file) return false;
-      const hasImageType = !!(file.type && file.type.startsWith('image/'));
-      const hasImageExtension = /\.(png|jpe?g|webp|gif|bmp|svg)$/i.test(file.name || '');
-      return hasImageType || hasImageExtension;
+      const name = String(file.name || '').toLowerCase();
+      const type = String(file.type || '').toLowerCase();
+      return type.startsWith('image/') || /\.(png|jpe?g|webp|gif|bmp|svg)$/i.test(name) || (type === 'application/octet-stream' && /\.(png|jpe?g|webp|gif|bmp|svg)$/i.test(name));
     };
 
     function updatePreview(src) {
@@ -523,6 +523,12 @@ document.addEventListener('DOMContentLoaded', () => {
           fileInput.click();
         }
       });
+
+      if (fileInput) {
+        fileInput.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+      }
 
       ['dragenter', 'dragover'].forEach(eventName => {
         dropzone.addEventListener(eventName, (e) => {

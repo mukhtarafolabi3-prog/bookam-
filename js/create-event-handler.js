@@ -45,15 +45,21 @@
     const removeBtn = form.querySelector('#btn-org-remove-banner') || document.getElementById('btn-org-remove-banner');
     const urlInput = form.querySelector('#input-banner') || document.getElementById('input-banner');
 
+    const isLikelyImageFile = (file) => {
+      if (!file) return false;
+      const name = String(file.name || '').toLowerCase();
+      const type = String(file.type || '').toLowerCase();
+      return type.startsWith('image/') || /\.(png|jpe?g|webp|gif|bmp|svg)$/i.test(name) || (type === 'application/octet-stream' && /\.(png|jpe?g|webp|gif|bmp|svg)$/i.test(name));
+    };
+
     if (dropzone && fileInput) {
       dropzone.addEventListener('click', (e) => {
         if (e.target.closest('#btn-org-remove-banner')) return;
-        fileInput.click();
+        if (fileInput) fileInput.click();
       });
 
       const handleBannerFile = async (file) => {
-        const isLikelyImage = (file && ((file.type && file.type.startsWith('image/')) || /\.(png|jpe?g|webp|gif|bmp|svg)$/i.test(file.name || '')));
-        if (!file || !isLikelyImage) {
+        if (!isLikelyImageFile(file)) {
           alert('Please upload a valid image file (JPG, PNG, WebP).');
           return;
         }

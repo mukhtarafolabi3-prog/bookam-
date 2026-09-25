@@ -24,12 +24,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileToggle = document.getElementById('mobile-toggle');
   const mobileNav = document.getElementById('mobile-nav');
   const mobileNavClose = document.getElementById('mobile-nav-close');
+  const mobileNavBackdrop = document.getElementById('mobile-nav-backdrop');
+
+  function closeMobileNav() {
+    if (mobileNav) {
+      mobileNav.classList.remove('active', 'open');
+    }
+    if (mobileNavBackdrop) {
+      mobileNavBackdrop.classList.remove('active');
+    }
+  }
 
   if (mobileToggle && mobileNav) {
-    mobileToggle.addEventListener('click', () => mobileNav.classList.add('active'));
+    mobileToggle.addEventListener('click', () => {
+      mobileNav.classList.add('active', 'open');
+      if (mobileNavBackdrop) mobileNavBackdrop.classList.add('active');
+    });
   }
   if (mobileNavClose && mobileNav) {
-    mobileNavClose.addEventListener('click', () => mobileNav.classList.remove('active'));
+    mobileNavClose.addEventListener('click', closeMobileNav);
+  }
+  if (mobileNavBackdrop) {
+    mobileNavBackdrop.addEventListener('click', closeMobileNav);
   }
 
   // Parse URL Parameters
