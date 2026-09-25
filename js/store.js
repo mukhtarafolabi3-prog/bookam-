@@ -936,9 +936,16 @@ const DEFAULT_TICKETS = [];
 // --- IMAGE COMPRESSION UTILITY ---
 window.compressImageFile = function(file, maxWidth = 1200, maxHeight = 1200, quality = 0.82) {
   return new Promise((resolve, reject) => {
-    if (!file || !file.type.startsWith('image/')) {
+    if (!file) {
       return reject(new Error('Invalid image file'));
     }
+
+    const hasImageMime = !!file.type && file.type.startsWith('image/');
+    const hasImageExtension = /\.(png|jpe?g|webp|gif|bmp|svg)$/i.test(file.name || '');
+    if (!hasImageMime && !hasImageExtension) {
+      return reject(new Error('Invalid image file'));
+    }
+
     const reader = new FileReader();
     reader.onerror = (e) => reject(e);
     reader.onload = (e) => {

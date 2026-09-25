@@ -2398,7 +2398,8 @@ The BOOKAM Team`;
     });
 
     const handleOrgBannerFile = async (file) => {
-      if (!file || !file.type.startsWith('image/')) {
+      const isLikelyImage = (file && ((file.type && file.type.startsWith('image/')) || /\.(png|jpe?g|webp|gif|bmp|svg)$/i.test(file.name || '')));
+      if (!file || !isLikelyImage) {
         alert('Please upload a valid image file (JPG, PNG, WebP).');
         return;
       }
