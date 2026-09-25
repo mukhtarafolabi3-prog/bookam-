@@ -1,0 +1,207 @@
+/* Event Details Page Styles - event-details.css */
+
+.details-hero-banner {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  background-color: var(--dark);
+  overflow: hidden;
+}
+
+.details-hero-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+.details-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(31, 41, 55, 0.95) 0%, rgba(31, 41, 55, 0.3) 60%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 3rem;
+}
+
+.details-header-card {
+  color: var(--white);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  padding: 3rem 0 6rem 0;
+}
+
+.details-content-box {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-200);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+}
+
+.details-section-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--primary-light);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.details-section-title i {
+  color: var(--primary);
+}
+
+.highlights-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.highlights-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-weight: 600;
+  color: var(--dark);
+  background: var(--bg-color);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
+}
+
+.highlights-list li i {
+  color: var(--primary);
+  margin-top: 0.2rem;
+}
+
+/* Sidebar Ticket Selection Sticky Card */
+.sidebar-ticket-card {
+  position: sticky;
+  top: 100px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--primary-light);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+}
+
+.ticket-type-option {
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.ticket-type-option:hover, .ticket-type-option.selected {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.ticket-type-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.ticket-type-title {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--dark);
+}
+
+.btn-reveal-price {
+  background: var(--white);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+}
+
+.btn-reveal-price:hover {
+  background: var(--primary);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+.ticket-type-benefits {
+  font-size: 0.85rem;
+  color: var(--dark-subtle);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.ticket-type-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.ticket-type-benefits li i {
+  color: var(--green-500);
+  font-size: 0.75rem;
+}
+
+@media (max-width: 992px) {
+  .details-hero-banner {
+    height: 300px;
+  }
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0 4rem 0;
+  }
+  .sidebar-ticket-card {
+    position: static;
+  }
+  .highlights-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .details-hero-banner {
+    height: 220px;
+  }
+  .details-hero-overlay {
+    padding-bottom: 1.25rem;
+  }
+  .details-content-box, .sidebar-ticket-card {
+    padding: 1.25rem 1rem;
+    border-radius: var(--radius-md);
+  }
+  .details-section-title {
+    font-size: 1.2rem;
+  }
+  .ticket-type-option {
+    padding: 1rem 0.85rem;
+  }
+  .sidebar-ticket-card .btn {
+    width: 100%;
+    min-height: 48px;
+  }
+}

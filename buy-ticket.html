@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buyer Information — BOOKAM</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- App Styles -->
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/events.css" />
+  <link rel="stylesheet" href="css/buy-ticket.css" />
+</head>
+<body>
+
+  <!-- Sticky Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-ticket"></i>
+        <span>BOOK<span class="highlight">AM</span></span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="events.html" class="nav-link active">Explore Events</a></li>
+        <li><a href="organizer-dashboard.html" class="nav-link">Organizer Dashboard</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="events.html" class="btn btn-outline btn-sm">Cancel Order</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close">&times;</button>
+    <a href="index.html" class="brand-logo" style="margin-bottom: 1rem;">
+      <i class="fa-solid fa-ticket"></i>
+      <span>BOOK<span class="highlight">AM</span></span>
+    </a>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="events.html" class="nav-link">Explore Events</a>
+    <a href="organizer-dashboard.html" class="btn btn-primary" style="margin-top: 1rem;">Organizer Dashboard</a>
+  </div>
+
+  <!-- Main Buy Ticket Container -->
+  <main class="container">
+    <div class="buy-layout">
+      <!-- Form Column -->
+      <div class="buy-card">
+        <div style="margin-bottom: 2rem;">
+          <span class="section-tag">Step 1 of 3</span>
+          <h1 class="section-title" style="font-size: 2rem;">Buyer Information</h1>
+          <p class="section-subtitle">Please enter the contact details where your approved ticket will be sent.</p>
+        </div>
+
+        <form id="buy-ticket-form">
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label class="form-label" for="buyer-name"><i class="fa-solid fa-user" style="color: var(--primary);"></i> Full Name *</label>
+              <input type="text" id="buyer-name" class="form-control" placeholder="e.g. Alex Morgan" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="buyer-email"><i class="fa-solid fa-envelope" style="color: var(--primary);"></i> Email Address *</label>
+              <input type="email" id="buyer-email" class="form-control" placeholder="alex.morgan@example.com" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="buyer-phone"><i class="fa-solid fa-phone" style="color: var(--primary);"></i> Phone Number *</label>
+              <input type="tel" id="buyer-phone" class="form-control" placeholder="+1 (555) 000-0000" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="buyer-ticket-type"><i class="fa-solid fa-ticket" style="color: var(--primary);"></i> Ticket Type *</label>
+              <select id="buyer-ticket-type" class="form-control" required>
+                <!-- Populated via buy-ticket.js -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="buyer-qty"><i class="fa-solid fa-arrow-up-1-9" style="color: var(--primary);"></i> Quantity *</label>
+              <div class="qty-control">
+                <button type="button" class="qty-btn" id="qty-minus">-</button>
+                <input type="number" id="buyer-qty" class="qty-input" value="1" min="1" max="10" readonly />
+                <button type="button" class="qty-btn" id="qty-plus">+</button>
+              </div>
+            </div>
+
+            <!-- Promo / Influencer Referral Code Input -->
+            <div class="form-group full-width">
+              <label class="form-label" for="buyer-promo-code">
+                <i class="fa-solid fa-tag" style="color: var(--primary);"></i> Influencer Promo Code / Referral
+                <span style="font-size: 0.8rem; font-weight: 500; color: var(--gray-500);">(Optional)</span>
+              </label>
+              <div style="display: flex; gap: 0.5rem;">
+                <input type="text" id="buyer-promo-code" class="form-control" placeholder="e.g. TUNDE10" style="text-transform: uppercase; font-weight: 700; font-family: monospace;" />
+                <button type="button" id="btn-apply-promo" class="btn btn-outline" style="white-space: nowrap; font-weight: 700;">
+                  Apply
+                </button>
+              </div>
+              <div id="promo-feedback" style="margin-top: 0.4rem; font-size: 0.85rem; display: none;"></div>
+            </div>
+          </div>
+
+          <div style="margin-top: 2.5rem; border-top: 1px solid var(--gray-200); padding-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+            <a href="javascript:history.back()" class="btn btn-outline">
+              <i class="fa-solid fa-arrow-left"></i> Back
+            </a>
+            <button type="submit" class="btn btn-primary btn-lg">
+              Continue to Checkout <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Live Order Summary Column -->
+      <aside class="summary-card">
+        <h3 style="font-weight: 800; font-size: 1.25rem; color: var(--dark); margin-bottom: 1rem;">Order Summary</h3>
+        <img id="sum-banner" src="" alt="Event Banner" class="summary-event-banner" />
+        <h4 id="sum-title" style="font-weight: 700; font-size: 1.1rem; color: var(--dark); margin-bottom: 0.5rem;">Event Title</h4>
+        <p style="font-size: 0.85rem; color: var(--gray-500); margin-bottom: 1rem;">
+          <i class="fa-regular fa-calendar"></i> <span id="sum-date">Date</span><br />
+          <i class="fa-solid fa-location-dot"></i> <span id="sum-venue">Venue</span>
+        </p>
+
+        <!-- Referral Attribution Tag -->
+        <div id="sum-influencer-tag" style="display: none; background: #FAF5FF; border: 1px solid #E9D5FF; border-radius: var(--radius-sm); padding: 0.6rem 0.85rem; margin-bottom: 1rem; font-size: 0.825rem; color: #581C87;">
+          <i class="fa-solid fa-bullhorn" style="color: var(--primary);"></i>
+          <span>Referred by: <strong id="sum-influencer-name">Promoter</strong> (<span id="sum-influencer-handle">@handle</span>)</span>
+        </div>
+
+        <div style="border-top: 1px solid var(--gray-200); padding-top: 1rem; margin-top: 1rem;">
+          <div class="summary-row">
+            <span>Ticket Price</span>
+            <span id="sum-unit-price" style="font-weight: 700; color: var(--dark);">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Quantity</span>
+            <span id="sum-qty-text" style="font-weight: 700; color: var(--dark);">1</span>
+          </div>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="sum-subtotal" style="font-weight: 700; color: var(--dark);">$0.00</span>
+          </div>
+          <div class="summary-row" id="sum-discount-row" style="display: none; color: #15803D;">
+            <span><i class="fa-solid fa-tag"></i> Promo Discount (<span id="sum-discount-code"></span>)</span>
+            <span id="sum-discount-amount" style="font-weight: 800;">-$0.00</span>
+          </div>
+          <div class="summary-row" id="sum-net-subtotal-row" style="display: none;">
+            <span>Net Subtotal</span>
+            <span id="sum-net-subtotal" style="font-weight: 700; color: var(--dark);">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Service Charge (₦400)</span>
+            <span id="sum-service-charge">₦400.00</span>
+          </div>
+          <div class="summary-total">
+            <span>Total Amount</span>
+            <span id="sum-total-amount" style="color: var(--primary);">$0.00</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <i class="fa-solid fa-ticket"></i>
+            <span>BOOK<span class="highlight">AM</span></span>
+          </a>
+          <p>The modern, reliable event discovery & ticket management platform built for creators and attendees.</p>
+          <div class="footer-socials">
+            <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer" class="social-icon social-whatsapp" aria-label="Official WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer" class="social-icon social-tiktok" aria-label="Official TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer" class="social-icon social-twitter" aria-label="Official Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Browse All Events</a></li>
+            <li><a href="organizer-dashboard.html">Organizer Portal</a></li>
+            <li><a href="influencer-dashboard.html">Promoter Hub</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Official Social Reach</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 0.35rem;"></i> WhatsApp: +234 916 290 1356</a></li>
+            <li><a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok" style="margin-right: 0.35rem;"></i> TikTok: @justbookam</a></li>
+            <li><a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter" style="margin-right: 0.35rem;"></i> Twitter / X: @justbookam</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Support & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Support" target="_blank">24/7 WhatsApp Support</a></li>
+            <li><a href="organizer-register.html#terms">Exclusive Ticketing Agreement</a></li>
+            <li><a href="index.html">Terms of Service</a></li>
+            <li><a href="index.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BOOKAM Event Platform. All rights reserved.</p>
+        <p>Built for Nigeria's vibrant event ecosystem</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/store.js"></script>
+  <script type="module" src="js/buy-ticket.js"></script>
+</body>
+</html>

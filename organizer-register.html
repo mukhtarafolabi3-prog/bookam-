@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organizer Portal Sign In & Registration — BOOKAM</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- App Styles -->
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/organizer-register.css" />
+</head>
+<body>
+
+  <!-- Sticky Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-ticket"></i>
+        <span>BOOK<span class="highlight">AM</span></span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="events.html" class="nav-link">Explore Events</a></li>
+        <li><a href="organizer-register.html" class="nav-link active">Organizer Portal</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="index.html" class="btn btn-outline btn-sm">Return Home</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close">&times;</button>
+    <a href="index.html" class="brand-logo" style="margin-bottom: 1rem;">
+      <i class="fa-solid fa-ticket"></i>
+      <span>BOOK<span class="highlight">AM</span></span>
+    </a>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="events.html" class="nav-link">Explore Events</a>
+    <a href="organizer-register.html" class="btn btn-primary" style="margin-top: 1rem;">Organizer Portal</a>
+  </div>
+
+  <!-- Registration / Sign In Container -->
+  <main class="container auth-wrapper">
+    <div class="auth-split-layout">
+      
+      <!-- LEFT SIDE: Brand Hero & Value Proposition -->
+      <div class="auth-brand-side">
+        <div>
+          <div class="brand-badge">
+            <i class="fa-solid fa-sparkles"></i> Why Choose Bookam?
+          </div>
+          <h1 class="brand-hero-title">More Than Tickets. <span>It’s a Community.</span></h1>
+          <p class="brand-hero-desc">
+            Bookam is more than an event ticketing platform. We’re building an ecosystem designed to help <strong>organisers, creatives, brands, and audiences</strong> connect, participate, and grow.
+          </p>
+
+          <div style="background: rgba(255, 255, 255, 0.1); border-left: 3px solid #10B981; padding: 0.6rem 0.85rem; border-radius: 6px; margin-bottom: 1.25rem; font-size: 0.85rem; color: rgba(255, 255, 255, 0.9);">
+            <i class="fa-solid fa-bolt" style="color: #10B981; margin-right: 0.35rem;"></i>
+            <strong>Instant Publishing:</strong> As soon as you upload, your event goes <strong>LIVE immediately</strong> with zero review delays!
+          </div>
+
+          <!-- Feature Bullets (Why Choose Bookam?) -->
+          <div class="brand-features-list">
+            <div class="brand-feature-item">
+              <div class="brand-feature-icon">
+                <i class="fa-solid fa-ticket"></i>
+              </div>
+              <div class="brand-feature-text">
+                <strong>🎟️ Simple Event Ticketing</strong>
+                <p>Create your event, set your ticket prices, and start selling. Simple for organisers and seamless for attendees.</p>
+              </div>
+            </div>
+
+            <div class="brand-feature-item">
+              <div class="brand-feature-icon">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+              </div>
+              <div class="brand-feature-text">
+                <strong>💰 Fast & Transparent Payments</strong>
+                <p>Receive payments from ticket sales with clear transaction tracking and straightforward revenue management.</p>
+              </div>
+            </div>
+
+            <div class="brand-feature-item">
+              <div class="brand-feature-icon">
+                <i class="fa-solid fa-chart-pie"></i>
+              </div>
+              <div class="brand-feature-text">
+                <strong>📊 Know Your Audience</strong>
+                <p>Access useful event insights to understand ticket sales, audience activity, and overall event performance.</p>
+              </div>
+            </div>
+
+            <div class="brand-feature-item">
+              <div class="brand-feature-icon">
+                <i class="fa-solid fa-check-to-slot"></i>
+              </div>
+              <div class="brand-feature-text">
+                <strong>🗳️ Powerful Contest & Voting Tools</strong>
+                <p>Run competitions, awards, polls, and elections with simple, transparent voting tools.</p>
+              </div>
+            </div>
+
+            <div class="brand-feature-item">
+              <div class="brand-feature-icon">
+                <i class="fa-solid fa-bullhorn"></i>
+              </div>
+              <div class="brand-feature-text">
+                <strong>📣 More Visibility</strong>
+                <p>Discoverability across an entertainment ecosystem where events, contests, and creators connect.</p>
+              </div>
+            </div>
+
+            <div class="brand-feature-item">
+              <div class="brand-feature-icon">
+                <i class="fa-solid fa-handshake"></i>
+              </div>
+              <div class="brand-feature-text">
+                <strong>🤝 Built Around Creatives</strong>
+                <p>Opportunities and support for event organisers, artists, influencers, creators, and brands.</p>
+              </div>
+            </div>
+
+            <div class="brand-feature-item">
+              <div class="brand-feature-icon">
+                <i class="fa-solid fa-gift"></i>
+              </div>
+              <div class="brand-feature-text">
+                <strong>🎁 More Than a Platform</strong>
+                <p>Partnerships, ambassador opportunities, promotional support, and community initiatives that grow together.</p>
+              </div>
+            </div>
+
+            <div class="brand-feature-item">
+              <div class="brand-feature-icon">
+                <i class="fa-solid fa-rocket"></i>
+              </div>
+              <div class="brand-feature-text">
+                <strong>🚀 Built to Help You Grow</strong>
+                <p>Everything you need to <strong>Create, Sell, Manage, and Grow</strong> your brand and community.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Proof Metrics Bar -->
+        <div class="brand-stats-grid">
+          <div class="brand-stat-box">
+            <div class="brand-stat-num">500+</div>
+            <div class="brand-stat-lbl">Live Events</div>
+          </div>
+          <div class="brand-stat-box">
+            <div class="brand-stat-num">$2.4M+</div>
+            <div class="brand-stat-lbl">Payouts Handled</div>
+          </div>
+          <div class="brand-stat-box">
+            <div class="brand-stat-num">99.9%</div>
+            <div class="brand-stat-lbl">Fast Approval</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE: Auth Card (Tabs for Registration & Sign In) -->
+      <div class="auth-form-side">
+        
+        <!-- Auth Tabs Switcher -->
+        <div class="auth-tabs-wrapper" id="auth-tabs-wrapper">
+          <button type="button" class="auth-tab-btn active" id="tab-btn-register">
+            <i class="fa-solid fa-user-plus"></i> Register as Event Host
+          </button>
+          <button type="button" class="auth-tab-btn" id="tab-btn-login">
+            <i class="fa-solid fa-right-to-bracket"></i> Host Sign In
+          </button>
+        </div>
+
+        <div class="auth-header">
+          <h2 class="auth-header-title" id="form-heading-title">Create Host Account</h2>
+          <p class="auth-header-subtitle" id="form-heading-sub">
+            Join Nigeria's premier event platform. Accept the exclusive ticketing agreement to publish events and sell passes.
+          </p>
+        </div>
+
+        <!-- Dynamic Alert Message Box -->
+        <div class="auth-alert" id="auth-alert"></div>
+
+        <!-- 1. ORGANIZER REGISTRATION FORM (WITH EXCLUSIVE TERMS ACCEPTANCE) -->
+        <form id="form-register" style="display: block;">
+          
+          <!-- Section A: Host & Organization Profile -->
+          <div style="margin-bottom: 1.25rem;">
+            <div style="font-size: 0.8rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+              <i class="fa-solid fa-id-card"></i> 1. Host & Organization Info
+            </div>
+
+            <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <div>
+                <label class="form-label" for="reg-name">Lead Organizer Full Name *</label>
+                <div class="input-icon-group">
+                  <i class="fa-solid fa-user field-icon"></i>
+                  <input type="text" id="reg-name" class="form-input" placeholder="e.g. KAIWE DIGITAL" required />
+                </div>
+              </div>
+              <div>
+                <label class="form-label" for="reg-org-name">Brand / Organization Name *</label>
+                <div class="input-icon-group">
+                  <i class="fa-solid fa-building field-icon"></i>
+                  <input type="text" id="reg-org-name" class="form-input" placeholder="e.g. Vibes Lagos Entertainment" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-grid" style="grid-template-columns: 1.2fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <div>
+                <label class="form-label" for="reg-email">Official Email Address *</label>
+                <div class="input-icon-group">
+                  <i class="fa-solid fa-envelope field-icon"></i>
+                  <input type="email" id="reg-email" class="form-input" placeholder="organizer@vibeslagos.com" required />
+                </div>
+              </div>
+              <div>
+                <label class="form-label" for="reg-phone">Phone / WhatsApp *</label>
+                <div class="input-icon-group">
+                  <i class="fa-solid fa-phone field-icon"></i>
+                  <input type="tel" id="reg-phone" class="form-input" placeholder="09162901356" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <div>
+                <label class="form-label" for="reg-instagram">Instagram Handle (@)</label>
+                <div class="input-icon-group">
+                  <i class="fa-brands fa-instagram field-icon"></i>
+                  <input type="text" id="reg-instagram" class="form-input" placeholder="@vibeslagos" />
+                </div>
+              </div>
+              <div>
+                <label class="form-label" for="reg-org-type">Organizer Category *</label>
+                <select id="reg-org-type" class="form-input" style="padding-left: 0.85rem;" required>
+                  <option value="Concerts & Music Festivals">Concerts & Music Festivals</option>
+                  <option value="Nightlife & Parties">Nightlife & Parties</option>
+                  <option value="Campus & University Events">Campus & University Events</option>
+                  <option value="Tech & Business Summits">Tech & Business Summits</option>
+                  <option value="Pageants & Contests">Pageants & Award Contests</option>
+                  <option value="Sports & Fitness">Sports & Fitness</option>
+                  <option value="Food & Culinary Expos">Food & Culinary Expos</option>
+                  <option value="Private Host">Private Event Host</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section B: Account Security -->
+          <div style="margin-bottom: 1.25rem;">
+            <div style="font-size: 0.8rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+              <i class="fa-solid fa-lock"></i> 2. Account Security
+            </div>
+
+            <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.5rem;">
+              <div>
+                <label class="form-label" for="reg-password">Create Password *</label>
+                <div class="input-icon-group">
+                  <i class="fa-solid fa-key field-icon"></i>
+                  <input type="password" id="reg-password" class="form-input has-toggle" placeholder="Min. 6 characters" required />
+                  <button type="button" class="password-toggle-btn" data-target="reg-password" aria-label="Toggle password visibility">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <label class="form-label" for="reg-password-confirm">Confirm Password *</label>
+                <div class="input-icon-group">
+                  <i class="fa-solid fa-check-double field-icon"></i>
+                  <input type="password" id="reg-password-confirm" class="form-input has-toggle" placeholder="Re-enter password" required />
+                  <button type="button" class="password-toggle-btn" data-target="reg-password-confirm" aria-label="Toggle password visibility">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Password Strength Bar -->
+            <div class="password-strength-wrap">
+              <div class="password-strength-bar">
+                <div class="password-strength-fill" id="pass-strength-fill"></div>
+              </div>
+              <span class="password-strength-text" id="pass-strength-text">Password strength</span>
+            </div>
+          </div>
+
+          <!-- Section C: Settlement Bank Account -->
+          <div class="bank-vault-card" style="margin: 1.25rem 0;">
+            <div class="bank-vault-header">
+              <div class="bank-vault-title">
+                <i class="fa-solid fa-building-columns" style="color: var(--primary);"></i> 3. Settlement Bank Account (Moniepoint Supported)
+              </div>
+              <span class="bank-vault-badge"><i class="fa-solid fa-bolt"></i> Fast Payouts</span>
+            </div>
+            <p class="bank-vault-desc">
+              Ticket sales revenue and contestant voting payouts will be disbursed to this bank account.
+            </p>
+
+            <div class="form-grid" style="grid-template-columns: 1.2fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <div>
+                <label class="form-label" for="reg-bank-name">Settlement Bank *</label>
+                <select id="reg-bank-name" class="form-input" style="padding-left: 0.85rem;" required>
+                  <option value="Moniepoint Microfinance Bank" selected>Moniepoint Microfinance Bank</option>
+                  <option value="Access Bank">Access Bank</option>
+                  <option value="Guaranty Trust Bank (GTB)">Guaranty Trust Bank (GTB)</option>
+                  <option value="Zenith Bank">Zenith Bank</option>
+                  <option value="United Bank for Africa (UBA)">United Bank for Africa (UBA)</option>
+                  <option value="First Bank of Nigeria">First Bank of Nigeria</option>
+                  <option value="Kuda Bank">Kuda Bank</option>
+                  <option value="OPay">OPay</option>
+                  <option value="PalmPay">PalmPay</option>
+                </select>
+              </div>
+              <div>
+                <label class="form-label" for="reg-account-number">Account Number *</label>
+                <input type="text" id="reg-account-number" class="form-input" placeholder="8021174926" value="8021174926" maxlength="10" required />
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label" for="reg-account-name">Account Name (Beneficiary) *</label>
+              <input type="text" id="reg-account-name" class="form-input" placeholder="KAIWE DIGITAL" value="KAIWE DIGITAL" required />
+            </div>
+          </div>
+
+          <!-- Section D: BOOKAM EVENT SUBMISSION & EXCLUSIVE TICKETING TERMS -->
+          <div style="background: #FAF5FF; border: 1.5px solid #D8B4FE; border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
+              <div style="font-size: 0.875rem; font-weight: 800; color: #581C87; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-file-contract" style="color: var(--primary);"></i> 4. Event Submission & Exclusive Ticketing Agreement
+              </div>
+              <button type="button" id="btn-view-terms-modal-reg" class="btn btn-outline btn-sm" style="font-size: 0.75rem; padding: 0.3rem 0.6rem; color: var(--primary); border-color: #D8B4FE; background: #fff;">
+                <i class="fa-solid fa-eye"></i> View Full Legal Agreement
+              </button>
+            </div>
+
+            <!-- Scrollable Agreement Summary Box -->
+            <div style="max-height: 180px; overflow-y: auto; background: #fff; border: 1px solid #E9D5FF; border-radius: var(--radius-sm); padding: 0.9rem; font-size: 0.8rem; line-height: 1.5; color: var(--dark); margin-bottom: 1rem;">
+              <p style="margin-top: 0; font-weight: 700; color: #6B21A8;">
+                By registering as an Event Host on BOOKAM, you enter into a legally binding Exclusive Ticketing Agreement:
+              </p>
+              <ol style="padding-left: 1.25rem; margin-bottom: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                <li><strong>100% Exclusive Ticketing Mandate:</strong> BOOKAM is appointed as the sole, exclusive ticketing and payment provider for all events and voting contests submitted under this account.</li>
+                <li><strong>Zero Multi-Listing Policy:</strong> Organizers agree NOT to sell, list, or distribute duplicate tickets on competing ticketing portals or parallel links to prevent counterfeit passes.</li>
+                <li><strong>Social Media & Bio Integration:</strong> The official Bookam event link (<code>bookam.ng/e/...</code>) must be placed as the primary ticketing link across flyers, Instagram bios, Twitter/X, and WhatsApp promotions.</li>
+                <li><strong>Encrypted QR Gate Check-in:</strong> Venue admission must be executed via Bookam's real-time QR code validator for instant check-in.</li>
+                <li><strong>Direct Settlement & Moniepoint Reconciliation:</strong> Ticket proceeds will be reconciled and disbursed to your registered settlement bank account.</li>
+                <li><strong>Automated Influencer & Affiliate Tracking:</strong> Promoter codes and commissions will be tracked and reconciled in real-time through the platform.</li>
+                <li><strong>Host Authenticity Guarantee:</strong> The Host guarantees accurate event information, physical venue booking, and attendee safety.</li>
+              </ol>
+            </div>
+
+            <!-- Mandatory Confirmation Checkboxes -->
+            <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.8rem; color: var(--dark);">
+              <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer; font-weight: 600;">
+                <input type="checkbox" id="reg-chk-exclusive" required checked style="margin-top: 3px; accent-color: var(--primary); width: 16px; height: 16px;" />
+                <span>1. I agree to use Bookam as the <strong>exclusive ticketing, registration, and payment platform</strong> for all my events.</span>
+              </label>
+
+              <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer; font-weight: 600;">
+                <input type="checkbox" id="reg-chk-nomulti" required checked style="margin-top: 3px; accent-color: var(--primary); width: 16px; height: 16px;" />
+                <span>2. I agree <strong>not to sell or list duplicate tickets on third-party ticketing platforms</strong> or parallel accounts.</span>
+              </label>
+
+              <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer; font-weight: 600;">
+                <input type="checkbox" id="reg-chk-settlement" required checked style="margin-top: 3px; accent-color: var(--primary); width: 16px; height: 16px;" />
+                <span>3. I authorize Bookam to collect ticket payments and disburse settlements to my registered bank account.</span>
+              </label>
+
+              <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer; font-weight: 600;">
+                <input type="checkbox" id="reg-chk-terms" required checked style="margin-top: 3px; accent-color: var(--primary); width: 16px; height: 16px;" />
+                <span>4. I have read, understood, and accept the <strong>Bookam Host Terms of Service & Event Submission Policy</strong>.</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary auth-submit-btn" id="btn-submit-register">
+            <i class="fa-solid fa-circle-check"></i> Accept Terms & Create Host Account
+          </button>
+
+          <div style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: var(--gray-500);">
+            Already have an organizer account? 
+            <a href="#" id="link-switch-login" style="color: var(--primary); font-weight: 700; text-decoration: underline;">Sign In here</a>
+          </div>
+        </form>
+
+        <!-- 2. ORGANIZER LOGIN FORM -->
+        <form id="form-login" style="display: none;">
+
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label class="form-label" for="login-email">Organizer Email Address</label>
+            <div class="input-icon-group">
+              <i class="fa-solid fa-envelope field-icon"></i>
+              <input type="email" id="login-email" class="form-input" placeholder="Enter owner email address" required />
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label class="form-label" for="login-password">Password</label>
+            <div class="input-icon-group">
+              <i class="fa-solid fa-lock field-icon"></i>
+              <input type="password" id="login-password" class="form-input has-toggle" placeholder="Enter password" required />
+              <button type="button" class="password-toggle-btn" data-target="login-password" aria-label="Toggle password visibility">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-checkbox-row">
+            <label class="checkbox-label">
+              <input type="checkbox" id="login-remember" checked />
+              <span>Remember me for 30 days</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary auth-submit-btn" id="btn-submit-login">
+            <i class="fa-solid fa-right-to-bracket"></i> Sign In to Organizer Dashboard
+          </button>
+
+          <div style="text-align: center; margin-top: 1.25rem; font-size: 0.85rem; color: var(--gray-500);">
+            New organizer or event host? 
+            <a href="#" id="link-switch-register" style="color: var(--primary); font-weight: 700; text-decoration: underline;">Register & Accept Terms</a>
+          </div>
+        </form>
+
+        <!-- Trust Badges Footer -->
+        <div class="auth-trust-footer">
+          <div class="auth-trust-item">
+            <i class="fa-solid fa-shield-halved"></i> 256-Bit SSL Encrypted
+          </div>
+          <div class="auth-trust-item">
+            <i class="fa-solid fa-circle-check"></i> PCI-DSS Verified
+          </div>
+          <div class="auth-trust-item">
+            <i class="fa-solid fa-headset"></i> 24/7 Host Support
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Dedicated Full Legal Terms Document Modal -->
+  <div id="full-terms-modal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; padding: 1.25rem;">
+    <div style="background: #fff; border-radius: var(--radius-lg); max-width: 800px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; box-shadow: var(--shadow-xl); border: 1px solid var(--gray-200); overflow: hidden;">
+      
+      <!-- Modal Header -->
+      <div style="padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--gray-200); background: linear-gradient(135deg, #2E1065 0%, #4C1D95 100%); color: #fff; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em; color: #DDD6FE; display: flex; align-items: center; gap: 0.4rem;">
+            <i class="fa-solid fa-shield-halved"></i> Official Partner Agreement
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0.2rem 0 0 0; color: #fff;">
+            BOOKAM Event Submission & Exclusive Ticketing Terms
+          </h3>
+        </div>
+        <button id="close-full-terms-modal" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #fff; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer;">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable Legal Text) -->
+      <div style="padding: 1.75rem; overflow-y: auto; font-size: 0.875rem; line-height: 1.6; color: var(--dark);">
+        
+        <div style="background: #FAF5FF; border: 1px solid #D8B4FE; border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1.25rem;">
+          <h4 style="color: #6B21A8; font-size: 0.95rem; font-weight: 800; margin: 0 0 0.4rem 0;">Agreement Overview</h4>
+          <p style="margin: 0; color: var(--dark-subtle); font-size: 0.825rem;">
+            This Event Submission & Exclusive Ticketing Terms Agreement governs the submission, hosting, ticketing, voting, and payment collection for all events listed on BOOKAM by registered organizers and event creators.
+          </p>
+        </div>
+
+        <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin: 1.25rem 0 0.5rem 0;">1. Exclusive Ticketing & Payment Platform</h4>
+        <p>The Organizer hereby appoints BOOKAM as the exclusive authorized provider of online ticket sales, digital registrations, voting contests, and payment collections for the designated event(s). All digital passes, VIP packages, and general admission tickets must be routed and purchased via the official Bookam platform.</p>
+
+        <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin: 1.25rem 0 0.5rem 0;">2. Prohibition of Duplicate / Third-Party Listings</h4>
+        <p>To prevent ticket counterfeiting, entry disputes, and inventory synchronization errors, the Organizer agrees NOT to list, publish, or sell duplicate tickets for the same event on competing ticketing aggregators or unauthorized payment links during the active ticketing campaign.</p>
+
+        <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin: 1.25rem 0 0.5rem 0;">3. Social Media & Promotional Bio Requirement</h4>
+        <p>The Organizer agrees to prominently display and feature the official Bookam event link (<code>bookam.ng/e/[event-id]</code>) as the primary ticketing link in the official Instagram bio, Twitter/X bio, promotional posters, digital flyers, and marketing campaigns.</p>
+
+        <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin: 1.25rem 0 0.5rem 0;">4. Gate Admission & QR Scanner Protocol</h4>
+        <p>All attendee tickets issued by Bookam contain unique, cryptographically signed 2D QR codes. Entry verification at the venue gates must be conducted using the Bookam Organizer Check-in Scanner to prevent duplicate admissions and fraudulent entries.</p>
+
+        <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin: 1.25rem 0 0.5rem 0;">5. Revenue Settlement & Direct Bank Payouts</h4>
+        <p>Ticket sales proceeds and contestant voting revenues are recorded in real-time on the Organizer Dashboard and reconciled for settlement to the registered Nigerian bank account (e.g. Moniepoint Microfinance Bank). Settlements are processed according to the selected payout preference (Daily, Weekly, or Post-Event).</p>
+
+        <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin: 1.25rem 0 0.5rem 0;">6. Influencer Commissions & Affiliate Tracking</h4>
+        <p>When an Organizer configures tracked influencer promo codes or referral links, Bookam automatically computes attendee discounts and influencer commission splits from completed orders.</p>
+
+        <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin: 1.25rem 0 0.5rem 0;">7. Host Integrity, Event Delivery & Attendee Safety</h4>
+        <p>The Organizer guarantees that the event details, lineup, date, and venue are authentic, and undertakes full responsibility for event delivery, attendee security, and venue compliance.</p>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div style="padding: 1rem 1.75rem; border-top: 1px solid var(--gray-200); background: var(--gray-50); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+        <button type="button" onclick="window.print()" class="btn btn-outline btn-sm">
+          <i class="fa-solid fa-print"></i> Print Agreement
+        </button>
+        <button type="button" id="btn-accept-terms-modal-close" class="btn btn-primary btn-sm" style="padding: 0.6rem 1.25rem; font-weight: 700;">
+          <i class="fa-solid fa-check"></i> I Understand & Accept
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <i class="fa-solid fa-ticket"></i>
+            <span>BOOK<span class="highlight">AM</span></span>
+          </a>
+          <p>Nigeria's trusted event hosting platform with automated settlements, exclusive ticketing, and promoter management.</p>
+          <div class="footer-socials">
+            <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer" class="social-icon social-whatsapp" aria-label="Official WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer" class="social-icon social-tiktok" aria-label="Official TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer" class="social-icon social-twitter" aria-label="Official Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Organizer Portal</h4>
+          <ul class="footer-links">
+            <li><a href="organizer-register.html">Host Registration</a></li>
+            <li><a href="organizer-dashboard.html">Organizer Dashboard</a></li>
+            <li><a href="influencer-dashboard.html">Promoter Hub</a></li>
+            <li><a href="events.html">Explore Events</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Official Social Reach</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 0.35rem;"></i> WhatsApp: +234 916 290 1356</a></li>
+            <li><a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok" style="margin-right: 0.35rem;"></i> TikTok: @justbookam</a></li>
+            <li><a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter" style="margin-right: 0.35rem;"></i> Twitter / X: @justbookam</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Support & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Host%20Support" target="_blank">Host Onboarding Support</a></li>
+            <li><a href="#terms">Exclusive Agreement Terms</a></li>
+            <li><a href="index.html">Terms of Service</a></li>
+            <li><a href="index.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BOOKAM Event Platform. All rights reserved.</p>
+        <p>Built for Nigeria's vibrant event ecosystem</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/store.js"></script>
+  <script type="module" src="js/organizer-register.js"></script>
+</body>
+</html>

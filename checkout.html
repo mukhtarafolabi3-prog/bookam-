@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Checkout & Review — BOOKAM</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- App Styles -->
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/checkout.css" />
+</head>
+<body>
+
+  <!-- Sticky Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-ticket"></i>
+        <span>BOOK<span class="highlight">AM</span></span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="events.html" class="nav-link active">Explore Events</a></li>
+        <li><a href="organizer-dashboard.html" class="nav-link">Organizer Dashboard</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="events.html" class="btn btn-outline btn-sm">Cancel Order</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close">&times;</button>
+    <a href="index.html" class="brand-logo" style="margin-bottom: 1rem;">
+      <i class="fa-solid fa-ticket"></i>
+      <span>BOOK<span class="highlight">AM</span></span>
+    </a>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="events.html" class="nav-link">Explore Events</a>
+    <a href="organizer-dashboard.html" class="btn btn-primary" style="margin-top: 1rem;">Organizer Dashboard</a>
+  </div>
+
+  <!-- Main Checkout Container -->
+  <main class="container checkout-container">
+    <div class="checkout-card">
+      <div style="margin-bottom: 2rem; text-align: center;">
+        <span class="section-tag">Step 2 of 3</span>
+        <h1 class="section-title" style="font-size: 2.25rem;">Checkout & Review Order</h1>
+        <p class="section-subtitle">Please verify your order details before making manual bank payment.</p>
+      </div>
+
+      <!-- Customer Summary -->
+      <div class="summary-box">
+        <div class="summary-header">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Customer Details</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; font-size: 0.95rem;">
+          <div>
+            <span style="color: var(--gray-500); display: block; font-size: 0.8rem; font-weight: 600;">FULL NAME</span>
+            <strong id="chk-buyer-name" style="color: var(--dark);">Loading...</strong>
+          </div>
+          <div>
+            <span style="color: var(--gray-500); display: block; font-size: 0.8rem; font-weight: 600;">EMAIL ADDRESS</span>
+            <strong id="chk-buyer-email" style="color: var(--dark);">Loading...</strong>
+          </div>
+          <div>
+            <span style="color: var(--gray-500); display: block; font-size: 0.8rem; font-weight: 600;">PHONE NUMBER</span>
+            <strong id="chk-buyer-phone" style="color: var(--dark);">Loading...</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Summary -->
+      <div class="summary-box">
+        <div class="summary-header">
+          <i class="fa-solid fa-calendar-star"></i>
+          <span>Event Summary</span>
+        </div>
+        <h3 id="chk-event-name" style="font-size: 1.2rem; font-weight: 800; color: var(--dark); margin-bottom: 0.5rem;">Event Title</h3>
+        <p style="font-size: 0.9rem; color: var(--dark-subtle); margin-bottom: 0.25rem;">
+          <i class="fa-regular fa-calendar"></i> <span id="chk-event-date">Date & Time</span>
+        </p>
+        <p style="font-size: 0.9rem; color: var(--dark-subtle); margin-bottom: 0.75rem;">
+          <i class="fa-solid fa-location-dot"></i> <span id="chk-event-venue">Venue</span>
+        </p>
+
+        <!-- Influencer Attribution Banner in Checkout -->
+        <div id="chk-influencer-banner" style="display: none; background: #FAF5FF; border: 1.5px solid #E9D5FF; border-radius: var(--radius-sm); padding: 0.75rem 1rem; font-size: 0.85rem; color: #581C87;">
+          <i class="fa-solid fa-bullhorn" style="color: var(--primary);"></i>
+          <span>Promoted by: <strong id="chk-influencer-name">Promoter</strong> (<span id="chk-influencer-handle">@handle</span>) • Promo Code: <code id="chk-promo-code" style="background: white; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 800; color: var(--primary);">CODE</code></span>
+        </div>
+      </div>
+
+      <!-- Ticket Breakdown Summary -->
+      <div class="summary-box">
+        <div class="summary-header">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <span>Ticket Breakdown</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem;">
+          <div style="display: flex; justify-content: space-between;">
+            <span id="chk-ticket-type">Regular Ticket (1x)</span>
+            <span id="chk-unit-price" style="font-weight: 700; color: var(--dark);">$0.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>Subtotal</span>
+            <span id="chk-subtotal" style="font-weight: 700; color: var(--dark);">$0.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; color: #15803D;" id="chk-discount-row" style="display: none;">
+            <span><i class="fa-solid fa-tag"></i> Promo Discount (<span id="chk-discount-label">CODE</span>)</span>
+            <span id="chk-discount-amount" style="font-weight: 800;">-$0.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;" id="chk-net-subtotal-row" style="display: none;">
+            <span>Net Subtotal</span>
+            <span id="chk-net-subtotal" style="font-weight: 700; color: var(--dark);">$0.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>Service & Processing Fee (₦400)</span>
+            <span id="chk-service-charge" style="color: var(--dark-subtle);">₦400.00</span>
+          </div>
+          <div style="border-top: 2px solid var(--gray-300); padding-top: 0.85rem; margin-top: 0.5rem; display: flex; justify-content: space-between; font-weight: 800; font-size: 1.3rem;">
+            <span>Total Payable Amount</span>
+            <span id="chk-total-amount" style="color: var(--primary);">$0.00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Method & Reference Number Selection -->
+      <div style="margin-bottom: 2rem;">
+        <label style="font-weight: 700; font-size: 0.95rem; color: var(--dark); margin-bottom: 0.75rem; display: block;">Payment Details & Reference Code</label>
+        <div class="payment-method-card" style="margin-bottom: 1.25rem;">
+          <div class="payment-icon">
+            <i class="fa-solid fa-bolt" style="color: #F59E0B;"></i>
+          </div>
+          <div>
+            <h4 style="font-weight: 800; font-size: 1.1rem; color: var(--dark); margin-bottom: 0.2rem;">Direct Transfer with Instant Online Verification</h4>
+            <p style="font-size: 0.85rem; color: var(--dark-subtle);">Direct transfer to BOOKAM Moniepoint account with automatic real-time online verification & instant active QR ticket issuance.</p>
+          </div>
+        </div>
+
+        <!-- Reference Code Box -->
+        <div style="background: var(--bg-color); border: 1.5px solid var(--gray-300); border-radius: var(--radius-md); padding: 1.25rem;">
+          <label class="form-label" for="chk-payment-ref" style="font-weight: 800; font-size: 0.9rem; color: var(--dark); display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.35rem;">
+            <i class="fa-solid fa-receipt" style="color: var(--primary);"></i> Keep / Input Your Payment Reference Number *
+          </label>
+          <p style="font-size: 0.825rem; color: var(--dark-subtle); margin-bottom: 0.75rem;">
+            Keep this reference code for your bank transfer memo or type your bank transfer transaction reference below:
+          </p>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <input type="text" id="chk-payment-ref" class="form-control" placeholder="e.g. REF-849201" required style="font-family: monospace; font-weight: 800; font-size: 1.1rem; letter-spacing: 0.05em; color: var(--primary); flex: 1; min-width: 220px;" />
+            <button type="button" id="chk-gen-ref-btn" class="btn btn-outline btn-sm" style="white-space: nowrap; font-size: 0.8rem; padding: 0.6rem 0.9rem;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Auto Generate
+            </button>
+            <button type="button" id="chk-copy-ref-btn" class="btn btn-outline btn-sm" style="white-space: nowrap; font-size: 0.8rem; padding: 0.6rem 0.9rem;">
+              <i class="fa-regular fa-copy"></i> Copy Code
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+        <a href="buy-ticket.html" class="btn btn-outline">
+          <i class="fa-solid fa-arrow-left"></i> Edit Information
+        </a>
+        <button id="chk-continue-btn" class="btn btn-primary btn-lg">
+          Continue to Payment <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <i class="fa-solid fa-ticket"></i>
+            <span>BOOK<span class="highlight">AM</span></span>
+          </a>
+          <p>The modern, reliable event discovery & ticket management platform built for creators and attendees.</p>
+          <div class="footer-socials">
+            <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer" class="social-icon social-whatsapp" aria-label="Official WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer" class="social-icon social-tiktok" aria-label="Official TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer" class="social-icon social-twitter" aria-label="Official Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Browse All Events</a></li>
+            <li><a href="organizer-dashboard.html">Organizer Portal</a></li>
+            <li><a href="influencer-dashboard.html">Promoter Hub</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Official Social Reach</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 0.35rem;"></i> WhatsApp: +234 916 290 1356</a></li>
+            <li><a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok" style="margin-right: 0.35rem;"></i> TikTok: @justbookam</a></li>
+            <li><a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter" style="margin-right: 0.35rem;"></i> Twitter / X: @justbookam</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Support & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Support" target="_blank">24/7 WhatsApp Support</a></li>
+            <li><a href="organizer-register.html#terms">Exclusive Ticketing Agreement</a></li>
+            <li><a href="index.html">Terms of Service</a></li>
+            <li><a href="index.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BOOKAM Event Platform. All rights reserved.</p>
+        <p>Built for Nigeria's vibrant event ecosystem</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/store.js"></script>
+  <script type="module" src="js/checkout.js"></script>
+</body>
+</html>

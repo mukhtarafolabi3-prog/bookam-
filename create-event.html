@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create &amp; Publish Event — BOOKAM</title>
+  <meta name="description" content="Register and publish your event on BOOKAM. Automatic ticketing tiers, ambassador QR tracking, instant RSVPs, and automated settlements." />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- App Styles -->
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/index.css" />
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #31104B 100%);
+      color: #fff;
+      padding: 3.5rem 1rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(124, 58, 237, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .form-wrapper {
+      max-width: 900px;
+      margin: -2rem auto 4rem;
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-200);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+    }
+    .form-header-bar {
+      padding: 1.75rem 2rem;
+      background: linear-gradient(135deg, #1e1b4b 0%, #31104b 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Global Navbar -->
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-ticket"></i>
+        <span>BOOK<span class="highlight">AM</span></span>
+      </a>
+
+      <nav class="nav-desktop">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="events.html" class="nav-link">Explore Events</a></li>
+          <li><a href="buy-ticket.html" class="nav-link">Buy Tickets</a></li>
+          <li><a href="contests.html" class="nav-link">Contests &amp; Voting</a></li>
+          <li><a href="create-event.html" class="nav-link active"><i class="fa-solid fa-calendar-plus" style="color: var(--primary); margin-right: 0.25rem;"></i> Create Event</a></li>
+          <li><a href="organizer-dashboard.html" class="nav-link">Organizer Portal</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="organizer-dashboard.html" class="btn btn-outline btn-sm">
+          <i class="fa-solid fa-gauge-high"></i> Dashboard
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="page-hero">
+    <div style="max-width: 760px; margin: 0 auto; position: relative; z-index: 2;">
+      <span class="badge" style="background: rgba(124, 58, 237, 0.3); color: #C084FC; font-size: 0.8rem; font-weight: 800; padding: 0.35rem 1rem; border-radius: 9999px; margin-bottom: 1rem; display: inline-block; border: 1px solid rgba(192, 132, 252, 0.4);">
+        <i class="fa-solid fa-bolt" style="color: #FBBF24;"></i> INSTANT LIVE HOSTING &amp; TICKETING
+      </span>
+      <h1 style="font-size: 2.25rem; font-weight: 900; margin-bottom: 0.75rem; letter-spacing: -0.02em;">
+        Host Your Event on BOOKAM
+      </h1>
+      <p style="font-size: 1.05rem; color: #CBD5E1; line-height: 1.6; margin: 0;">
+        Complete the form below to configure ticket tiers, dynamic promo codes, influencer attribution, and same-day settlements. Your event goes live immediately!
+      </p>
+    </div>
+  </section>
+
+  <!-- Form Container -->
+  <main class="container" style="padding: 0 1rem;">
+    <div class="form-wrapper">
+      <div class="form-header-bar">
+        <div>
+          <span class="badge" style="background: rgba(124, 58, 237, 0.4); color: #c084fc; font-size: 0.725rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.35rem; display: inline-block;">
+            Bookam Event Host Portal
+          </span>
+          <h2 style="font-size: 1.45rem; font-weight: 800; color: #fff; margin: 0;">
+            Event Host Registration &amp; Creation Form
+          </h2>
+          <p style="font-size: 0.85rem; color: #cbd5e1; margin: 0.25rem 0 0 0;">
+            Create. Sell. Manage. Grow — Setup your event and configure ticketing tiers.
+          </p>
+        </div>
+        <div>
+          <a href="organizer-dashboard.html" class="btn btn-sm btn-outline" style="color: #fff; border-color: rgba(255,255,255,0.3); font-size: 0.8rem;">
+            <i class="fa-solid fa-arrow-left"></i> Organizer Dashboard
+          </a>
+        </div>
+      </div>
+
+      <form id="create-event-form" style="padding: 2rem;">
+
+        <!-- SECTION 1: ORGANISER INFORMATION -->
+        <div style="background: #F8FAFC; border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 0.5rem;">
+            <span style="background: var(--primary); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">1</span>
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin: 0;">ORGANISER INFORMATION</h4>
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 0.85rem;">
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Full Name *</label>
+              <input type="text" id="evt-reg-org-name" class="form-control" placeholder="e.g. John Doe" required />
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Organisation / Event Brand Name *</label>
+              <input type="text" id="evt-reg-brand-name" class="form-control" placeholder="e.g. Horizon Entertainment" required />
+            </div>
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 0.85rem;">
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Phone Number *</label>
+              <input type="tel" id="evt-reg-phone" class="form-control" placeholder="e.g. +234 800 000 0000" required />
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Email Address *</label>
+              <input type="email" id="evt-reg-email" class="form-control" placeholder="e.g. organizer@example.com" required />
+            </div>
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr; gap: 0.85rem;">
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">WhatsApp Number</label>
+              <input type="tel" id="evt-reg-whatsapp" class="form-control" placeholder="e.g. +234 800 000 0000" />
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Instagram Handle</label>
+              <div style="display: flex; align-items: center;">
+                <span style="background: #F1F5F9; border: 1px solid var(--gray-300); border-right: none; padding: 0.55rem 0.65rem; border-radius: var(--radius-sm) 0 0 var(--radius-sm); font-size: 0.8rem; color: var(--gray-500);">@</span>
+                <input type="text" id="evt-reg-instagram" class="form-control" placeholder="username" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" />
+              </div>
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Organiser Type *</label>
+              <select id="evt-reg-org-type" class="form-control" required>
+                <option value="" disabled selected>Select Organiser Type...</option>
+                <option value="Individual">Individual</option>
+                <option value="Event Company">Event Company</option>
+                <option value="Brand">Brand</option>
+                <option value="School / Institution">School / Institution</option>
+                <option value="Organisation">Organisation</option>
+                <option value="Community">Community</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: EVENT INFORMATION -->
+        <div style="background: #F8FAFC; border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 0.5rem;">
+            <span style="background: var(--primary); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">2</span>
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin: 0;">EVENT INFORMATION</h4>
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: 2fr 1fr; gap: 0.85rem; margin-bottom: 0.85rem;">
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Event Name *</label>
+              <input type="text" id="input-title" class="form-control" placeholder="e.g. Lagos Afrobeats Festival 2026" required />
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Event Category *</label>
+              <select id="input-category" class="form-control" required>
+                <option value="Concert">Concert</option>
+                <option value="Party / Club Event">Party / Club Event</option>
+                <option value="Conference">Conference</option>
+                <option value="Seminar">Seminar</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Networking">Networking</option>
+                <option value="Comedy Show">Comedy Show</option>
+                <option value="Festival">Festival</option>
+                <option value="Sports">Sports</option>
+                <option value="Religious">Religious</option>
+                <option value="Campus Event">Campus Event</option>
+                <option value="Exhibition">Exhibition</option>
+                <option value="Tech">Tech &amp; AI</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Event Description *</label>
+            <textarea id="input-description" class="form-control" rows="3" placeholder="Tell attendees what to expect, special guests, performances, dress code, etc..." required></textarea>
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: 1.2fr 1fr 1fr; gap: 0.85rem; margin-bottom: 0.85rem;">
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Event Date *</label>
+              <input type="date" id="input-date" class="form-control" required />
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Start Time *</label>
+              <input type="text" id="input-time" class="form-control" placeholder="e.g. 06:00 PM WAT" value="06:00 PM WAT" required />
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">End Time</label>
+              <input type="text" id="evt-reg-end-time" class="form-control" placeholder="e.g. 11:30 PM WAT" />
+            </div>
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: 1fr 1.5fr 1fr; gap: 0.85rem;">
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Venue Name *</label>
+              <input type="text" id="evt-reg-venue-name" class="form-control" placeholder="e.g. Eko Convention Centre" required />
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Venue Address *</label>
+              <input type="text" id="evt-reg-venue-address" class="form-control" placeholder="Plot 1415 Adetokunbo Ademola St" required />
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">City *</label>
+              <input type="text" id="input-venue" class="form-control" placeholder="e.g. Victoria Island, Lagos" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: EVENT MEDIA -->
+        <div style="background: #F8FAFC; border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 0.5rem;">
+            <span style="background: var(--primary); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">3</span>
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin: 0;">EVENT MEDIA</h4>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label class="form-label" style="font-size: 0.8rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center;">
+              <span>Event Flyer / Ticket Image *</span>
+              <span style="font-size: 0.725rem; font-weight: normal; color: var(--gray-500);">Max 10MB (PNG, JPG, WebP)</span>
+            </label>
+
+            <!-- Upload Dropzone -->
+            <div id="org-banner-dropzone" style="border: 2px dashed #CBD5E1; border-radius: var(--radius-md); padding: 1.25rem 1rem; text-align: center; background: #fff; cursor: pointer; transition: all 0.2s ease; margin-bottom: 0.65rem;">
+              <input type="file" id="org-banner-file" accept="image/*" style="display: none;" />
+              <div id="org-banner-placeholder" style="display: flex; flex-direction: column; align-items: center; gap: 0.35rem;">
+                <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.5rem; color: var(--primary);"></i>
+                <div style="font-size: 0.85rem; font-weight: 700; color: var(--dark);">
+                  Click to upload or drag &amp; drop event flyer / ticket image
+                </div>
+                <div style="font-size: 0.75rem; color: var(--gray-500);">This image will be used for tickets, passes, and public booking cards</div>
+                <div style="margin-top: 0.45rem;">
+                  <span class="btn btn-outline btn-sm" style="pointer-events: none; border-color: var(--primary); color: var(--primary); font-size: 0.8rem; font-weight: 700; padding: 0.3rem 0.85rem; border-radius: 6px;">
+                    <i class="fa-solid fa-folder-open"></i> Browse or Take Photo
+                  </span>
+                </div>
+              </div>
+              <div id="org-banner-preview-box" style="display: none; margin-top: 0.75rem;">
+                <img id="org-banner-preview-img" src="" alt="Preview" style="max-height: 140px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); object-fit: cover;" />
+                <div style="margin-top: 0.35rem;">
+                  <button type="button" id="btn-org-remove-banner" class="btn btn-sm" style="background: #FEE2E2; color: #DC2626; border: none; font-size: 0.725rem; padding: 0.15rem 0.5rem;">
+                    <i class="fa-solid fa-trash-can"></i> Remove Image
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <input type="text" id="input-banner" class="form-control" placeholder="Or paste flyer/ticket image URL..." />
+            <span style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.2rem; display: block;">High resolution image (16:9 or 4:3 recommended)</span>
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Additional Images (Optional)</label>
+              <input type="text" id="evt-reg-extra-images" class="form-control" placeholder="Comma separated URLs..." />
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Promo Video URL (Optional)</label>
+              <input type="url" id="evt-reg-video" class="form-control" placeholder="YouTube or Vimeo link..." />
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: TICKET SETUP & DYNAMIC TIER BUILDER (OPTIONAL) -->
+        <div style="background: #FAF5FF; border: 1.5px solid #E9D5FF; border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; border-bottom: 1px solid #E9D5FF; padding-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span style="background: var(--primary); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">4</span>
+              <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--primary); margin: 0;">TICKET SETUP &amp; PACKAGE TIERS</h4>
+            </div>
+            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.8rem; font-weight: 700; color: var(--primary); background: #EDE9FE; padding: 0.25rem 0.6rem; border-radius: 9999px;">
+              <input type="checkbox" id="chk-enable-all-tickets" checked style="accent-color: var(--primary);" />
+              <span>Enable Ticket Passes (Optional)</span>
+            </label>
+          </div>
+
+          <div id="org-tickets-wrapper">
+            <!-- Early Bird Display Rule Notice -->
+            <div style="background: #fff; border-left: 4px solid var(--primary); padding: 0.75rem 1rem; border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: 0.8rem; color: var(--gray-700);">
+              <strong>💡 Early Bird Display Rule:</strong> If ticket passes are enabled, Bookam automatically displays Early Bird first. If tickets are disabled or optional, event displays with Free Community Admission / Instant RSVP.
+            </div>
+
+            <!-- Ticket Types Checkboxes -->
+            <div style="margin-bottom: 1rem;">
+              <label style="font-size: 0.8rem; font-weight: 700; color: var(--dark); display: block; margin-bottom: 0.4rem;">Select Ticket Types to Offer:</label>
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.825rem;">
+                <label style="display: flex; align-items: center; gap: 0.35rem; cursor: pointer;">
+                  <input type="checkbox" id="chk-tier-early" checked /> Early Bird
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.35rem; cursor: pointer;">
+                  <input type="checkbox" id="chk-tier-first" checked /> First Wave
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.35rem; cursor: pointer;">
+                  <input type="checkbox" id="chk-tier-group" checked /> Group of 4
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.35rem; cursor: pointer;">
+                  <input type="checkbox" id="chk-tier-second" checked /> Second Wave
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.35rem; cursor: pointer;">
+                  <input type="checkbox" id="chk-tier-entrance" checked /> At Entrance
+                </label>
+              </div>
+            </div>
+
+            <!-- Ticket Price Inputs Grid -->
+            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin-bottom: 1rem;">
+              <div>
+                <label class="form-label" style="font-size: 0.75rem; font-weight: 700;">Early Bird (₦)</label>
+                <input type="number" id="input-early-bird" class="form-control" value="5000" min="0" placeholder="Optional" />
+              </div>
+              <div>
+                <label class="form-label" style="font-size: 0.75rem; font-weight: 700;">First Wave (₦)</label>
+                <input type="number" id="input-first-wave" class="form-control" value="5000" min="0" placeholder="Optional" />
+              </div>
+              <div>
+                <label class="form-label" style="font-size: 0.75rem; font-weight: 700;">Group of 4 (₦)</label>
+                <input type="number" id="input-group-4" class="form-control" value="26200" min="0" placeholder="Optional" />
+              </div>
+              <div>
+                <label class="form-label" style="font-size: 0.75rem; font-weight: 700;">Second Wave (₦)</label>
+                <input type="number" id="input-second-wave" class="form-control" value="10200" min="0" placeholder="Optional" />
+              </div>
+              <div>
+                <label class="form-label" style="font-size: 0.75rem; font-weight: 700;">At Entrance (₦)</label>
+                <input type="number" id="input-entrance" class="form-control" value="12200" min="0" placeholder="Optional" />
+              </div>
+            </div>
+
+            <!-- Early Bird Expiry Date & Time Field -->
+            <div style="margin-top: 0.85rem; padding-top: 0.85rem; border-top: 1px dashed rgba(124, 58, 237, 0.25); margin-bottom: 1rem;">
+              <label class="form-label" for="input-early-bird-end" style="color: var(--primary); font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
+                <i class="fa-solid fa-hourglass-half"></i> Early Bird Expiry Date &amp; Time (Optional)
+              </label>
+              <input type="datetime-local" id="input-early-bird-end" class="form-control" />
+              <p style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.35rem; margin-bottom: 0;">
+                Set when Early Bird discount pricing expires. Once expired, the next tier (First Wave) becomes the primary active ticket.
+              </p>
+            </div>
+
+            <!-- Dynamic Additional Custom Tickets Container -->
+            <div id="custom-ticket-tiers-container" style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <!-- Added dynamically -->
+            </div>
+
+            <button type="button" id="btn-add-custom-tier" class="btn btn-outline btn-sm" style="font-size: 0.8rem; background: #fff;">
+              <i class="fa-solid fa-plus"></i> + ADD ANOTHER TICKET TIER
+            </button>
+          </div>
+        </div>
+
+        <!-- SECTION 5: CALL FOR AMBASSADORS & PROMOTER NETWORK -->
+        <div style="background: #F8FAFC; border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span style="background: var(--primary); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">5</span>
+              <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin: 0;">CALL FOR AMBASSADORS &amp; PROMOTER NETWORK</h4>
+            </div>
+            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.8rem; font-weight: 700; color: #7C3AED; background: #FAF5FF; border: 1px solid #D8B4FE; padding: 0.25rem 0.65rem; border-radius: 9999px;">
+              <input type="checkbox" id="chk-modal-enable-ambassadors" checked style="accent-color: var(--primary);" />
+              <span>Enable Call for Ambassadors</span>
+            </label>
+          </div>
+
+          <!-- Advertisement Side Flyer & Personal Ticket Link Preview Suite -->
+          <div id="modal-ambassador-suite" style="display: grid; grid-template-columns: 1fr; md:grid-template-columns: 290px 1fr; gap: 1.25rem; margin-bottom: 1.25rem; background: #0F172A; border-radius: 14px; padding: 1.25rem; color: #fff; border: 1px solid rgba(255,255,255,0.1);">
+            
+            <!-- Advertisement Side Flyer Card -->
+            <div>
+              <div style="font-size: 0.75rem; font-weight: 800; color: #C084FC; text-transform: uppercase; margin-bottom: 0.65rem; display: flex; align-items: center; gap: 0.35rem;">
+                <i class="fa-solid fa-rectangle-ad"></i> Advertisement Side Flyer (Preview)
+              </div>
+
+              <div class="poster-showcase-card" style="box-shadow: 0 10px 25px rgba(0,0,0,0.5); border-radius: 14px; overflow: hidden; background: #fff; max-width: 290px; margin: 0 auto;">
+                <!-- Top Half: Poster Scene -->
+                <div id="modal-flyer-top-scene" style="min-height: 150px; background: linear-gradient(rgba(0,0,0,0.4), rgba(15,23,42,0.85)), url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80') center/cover; padding: 0.85rem; display: flex; flex-direction: column; justify-content: space-between;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="background: rgba(255,255,255,0.2); backdrop-filter: blur(6px); color: #fff; padding: 0.2rem 0.5rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 800;">
+                      <i class="fa-solid fa-book-open"></i> BookAm
+                    </span>
+                    <span id="modal-flyer-event-badge" style="background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); color: #fff; padding: 0.2rem 0.5rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.25); max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                      Your Event Name
+                    </span>
+                  </div>
+
+                  <div style="text-align: center; margin: 0.35rem 0;">
+                    <div style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.35rem; color: #FAF5FF; line-height: 1.1;">Call For</div>
+                    <div style="font-size: 1.6rem; font-weight: 900; letter-spacing: 1.5px; color: #fff; line-height: 1;">AMBASSADORS</div>
+                  </div>
+                </div>
+
+                <!-- Bottom Half: Lavender Card -->
+                <div style="background: #E9D5FF; color: #3B0764; padding: 1rem 0.85rem; text-align: center;">
+                  <div style="display: inline-flex; align-items: center; gap: 0.3rem; background: rgba(124, 58, 237, 0.15); color: #4C1D95; padding: 0.2rem 0.6rem; border-radius: 9999px; font-size: 0.725rem; font-weight: 800; margin-bottom: 0.4rem;">
+                    <i class="fa-solid fa-id-badge" style="color: var(--primary);"></i> Rep: @<span id="modal-flyer-rep-name">ambassador</span>
+                  </div>
+
+                  <!-- 0 QR Code / Free vs Paid Ticket Badge -->
+                  <div id="modal-flyer-price-badge" style="display: block; font-size: 0.725rem; font-weight: 800; margin-bottom: 0.5rem;">
+                    <span id="modal-flyer-price-tag" style="background: #DCFCE7; color: #15803D; padding: 0.2rem 0.55rem; border-radius: 9999px; border: 1px solid #86EFAC;">
+                      <i class="fa-solid fa-qrcode"></i> ₦0 Free Ticket QR Pass
+                    </span>
+                  </div>
+
+                  <h3 style="font-size: 0.85rem; font-weight: 900; line-height: 1.2; margin: 0 0 0.3rem; color: #2E1065;">DON'T JUST ATTEND. REPRESENT.</h3>
+
+                  <!-- Scannable QR Code on Advertisement Flyer Side -->
+                  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.3rem; margin-top: 0.5rem;">
+                    <div style="background: #fff; padding: 6px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: inline-block;">
+                      <img id="modal-flyer-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&amp;data=https%3A%2F%2Fbookam.ng%2Fbuy-ticket.html%3Fref%3Dambassador" alt="Ticket QR Code" style="width: 120px; height: 120px; display: block;" />
+                    </div>
+                    <span id="modal-flyer-qr-caption" style="font-size: 0.68rem; font-weight: 800; color: #4C1D95;">
+                      <i class="fa-solid fa-qrcode"></i> SCAN TO GET TICKET
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.5rem; margin-top: 0.65rem;">
+                <a id="btn-modal-download-flyer-qr" href="https://api.qrserver.com/v1/create-qr-code/?size=300x300&amp;data=https%3A%2F%2Fbookam.ng%2Fbuy-ticket.html%3Fref%3Dambassador" download="flyer-qr.png" class="btn btn-sm btn-primary" style="flex: 1; font-size: 0.725rem; font-weight: 800; justify-content: center;">
+                  <i class="fa-solid fa-download"></i> Save QR
+                </a>
+                <button type="button" id="btn-modal-print-flyer" class="btn btn-sm btn-outline" style="flex: 1; font-size: 0.725rem; color: #fff; border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.06); justify-content: center;">
+                  <i class="fa-solid fa-print"></i> Print Flyer
+                </button>
+              </div>
+            </div>
+
+            <!-- Personal Link To The Ticket Tool -->
+            <div style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="font-size: 0.75rem; font-weight: 800; color: #C084FC; text-transform: uppercase; margin-bottom: 0.65rem; display: flex; align-items: center; gap: 0.35rem;">
+                  <i class="fa-solid fa-link"></i> Personal Link To The Ticket
+                </div>
+
+                <p style="font-size: 0.825rem; color: #cbd5e1; margin-bottom: 1rem; line-height: 1.4;">
+                  Every promoter and ambassador gets their own personal ticket link. The scannable QR code on the flyer side directs attendees right into the ticket checkout with automatic commission tracking.
+                </p>
+
+                <!-- Ambassador Handle Input -->
+                <div style="margin-bottom: 1rem;">
+                  <label style="font-size: 0.78rem; font-weight: 700; color: #e2e8f0; display: block; margin-bottom: 0.35rem;">
+                    Ambassador Handle / Test Referral Rep:
+                  </label>
+                  <div style="display: flex; align-items: center; max-width: 360px;">
+                    <span style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-right: none; color: #C084FC; padding: 0.5rem 0.75rem; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-weight: 800;">@</span>
+                    <input type="text" id="modal-amb-handle-input" value="ambassador" placeholder="e.g. rep_name, campus_rep" class="form-control" style="border-top-left-radius: 0; border-bottom-left-radius: 0; background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.2); font-size: 0.825rem;" />
+                  </div>
+                </div>
+
+                <!-- Generated Personal Ticket Link -->
+                <div style="margin-bottom: 1rem;">
+                  <label style="font-size: 0.78rem; font-weight: 700; color: #e2e8f0; display: block; margin-bottom: 0.35rem;">
+                    Generated Personal Link to the Ticket:
+                  </label>
+                  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <input type="text" readonly id="modal-personal-ticket-url" class="form-control" style="background: rgba(0,0,0,0.45); color: #38BDF8; font-family: monospace; font-size: 0.8rem; border-color: rgba(255,255,255,0.2); flex: 1; min-width: 220px;" />
+                    <button type="button" id="btn-modal-copy-personal-url" class="btn btn-primary btn-sm" style="font-weight: 800; font-size: 0.8rem; white-space: nowrap;">
+                      <i class="fa-solid fa-copy"></i> Copy Link
+                    </button>
+                  </div>
+                </div>
+
+                <div style="display: flex; gap: 0.65rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                  <a id="btn-modal-test-ticket-link" href="#" target="_blank" class="btn btn-sm btn-outline" style="color: #fff; border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.05); font-size: 0.78rem;">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Test Ticket Link
+                  </a>
+                  <a id="btn-modal-share-wa" href="#" target="_blank" class="btn btn-sm" style="background: #25D366; color: #fff; font-weight: 700; font-size: 0.78rem;">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Share
+                  </a>
+                </div>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 0.75rem; font-size: 0.78rem; color: #cbd5e1;">
+                <i class="fa-solid fa-check-circle" style="color: #10B981;"></i> <strong>Zero-Config QR Code:</strong> Works for both paid events and ₦0 free passes with automated referral attribution.
+              </div>
+            </div>
+          </div>
+
+          <div id="influencers-builder-section">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+              <p style="font-size: 0.8rem; color: var(--gray-500); margin: 0;">
+                Assign specific named influencers to promote this event with custom discount promo codes.
+              </p>
+              <div style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.825rem; font-weight: 700;">
+                <span>Enable Specific Promo Codes?</span>
+                <label style="cursor: pointer;"><input type="radio" name="use-influencers" value="yes" id="rad-inf-yes" checked /> Yes</label>
+                <label style="cursor: pointer;"><input type="radio" name="use-influencers" value="no" id="rad-inf-no" /> No</label>
+              </div>
+            </div>
+
+            <div id="event-influencers-list" style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <!-- Influencer Slot 1 -->
+              <div class="inf-tier-row" style="background: #fff; padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--gray-200); display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 0.5rem; align-items: center;">
+                <div>
+                  <label style="font-size: 0.7rem; font-weight: 700; color: var(--gray-500); display: block; margin-bottom: 0.2rem;">Influencer Name</label>
+                  <input type="text" class="form-control inf-name-field" placeholder="e.g. Tunde Adeleke" value="Tunde Adeleke" style="font-size: 0.8rem;" />
+                </div>
+                <div>
+                  <label style="font-size: 0.7rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 0.2rem;">Promo Code (Auto)</label>
+                  <input type="text" class="form-control inf-code-field" placeholder="PROMO CODE" value="TUNDE10" style="font-size: 0.8rem; text-transform: uppercase; font-weight: 800; font-family: monospace; background: #FAF5FF; border-color: #D8B4FE; color: var(--primary);" title="Promo code is automatically generated" />
+                </div>
+                <div>
+                  <label style="font-size: 0.7rem; font-weight: 700; color: var(--gray-500); display: block; margin-bottom: 0.2rem;">Customer Discount</label>
+                  <select class="form-control inf-discount-type" style="font-size: 0.8rem;">
+                    <option value="percent">10% Discount</option>
+                    <option value="percent15">15% Discount</option>
+                    <option value="fixed">₦1,000 Off</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="font-size: 0.7rem; font-weight: 700; color: var(--gray-500); display: block; margin-bottom: 0.2rem;">Commission %</label>
+                  <input type="number" class="form-control inf-comm-field" placeholder="Commission %" value="10" min="0" max="100" style="font-size: 0.8rem;" />
+                </div>
+              </div>
+            </div>
+
+            <button type="button" id="btn-add-event-influencer" class="btn btn-outline btn-sm" style="font-size: 0.8rem; background: #fff;">
+              <i class="fa-solid fa-plus"></i> + Add Influencer (Max 5)
+            </button>
+          </div>
+        </div>
+
+        <!-- SECTION 6: EVENT SUPPORT & LOGISTICS -->
+        <div style="background: #F8FAFC; border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 0.5rem;">
+            <span style="background: var(--primary); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">6</span>
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin: 0;">EVENT SUPPORT &amp; SERVICES</h4>
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr; gap: 0.85rem; margin-bottom: 0.85rem;">
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Expected Attendance *</label>
+              <select id="evt-reg-attendance" class="form-control" required>
+                <option value="50 - 200">50 - 200 Attendees</option>
+                <option value="200 - 500" selected>200 - 500 Attendees</option>
+                <option value="500 - 1,000">500 - 1,000 Attendees</option>
+                <option value="1,000 - 5,000">1,000 - 5,000 Attendees</option>
+                <option value="5,000+">5,000+ Attendees</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Bookam On-Site Tech Support?</label>
+              <select id="evt-reg-tech-support" class="form-control">
+                <option value="Yes" selected>Yes, QR Check-in Team</option>
+                <option value="No">No, Self Check-in</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Wristbands / Hand Tags?</label>
+              <select id="evt-reg-wristbands" class="form-control">
+                <option value="Yes">Yes, Request Physical Tags</option>
+                <option value="No" selected>No, Digital Only</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Special Requirements / Setup Notes</label>
+            <input type="text" id="evt-reg-special-reqs" class="form-control" placeholder="e.g. VIP backstage passes, custom scanner apps..." />
+          </div>
+        </div>
+
+        <!-- SECTION 7: PAYMENT & SETTLEMENT -->
+        <div style="background: #F8FAFC; border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 0.5rem;">
+            <span style="background: var(--primary); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">7</span>
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin: 0;">PAYMENT &amp; SETTLEMENT DETAILS</h4>
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: 1.2fr 1.2fr 1fr; gap: 0.85rem; margin-bottom: 0.85rem;">
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Account Name *</label>
+              <input type="text" id="evt-reg-settle-name" class="form-control" placeholder="Account Holder Name" required />
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Bank Name *</label>
+              <select id="evt-reg-settle-bank" class="form-control" required>
+                <option value="" disabled selected>Select Bank...</option>
+                <option value="Moniepoint Microfinance Bank">Moniepoint Microfinance Bank</option>
+                <option value="Access Bank">Access Bank</option>
+                <option value="Guaranty Trust Bank (GTB)">Guaranty Trust Bank (GTB)</option>
+                <option value="Zenith Bank">Zenith Bank</option>
+                <option value="United Bank for Africa (UBA)">United Bank for Africa (UBA)</option>
+                <option value="First Bank of Nigeria">First Bank of Nigeria</option>
+                <option value="Kuda Bank">Kuda Bank</option>
+                <option value="OPay">OPay</option>
+                <option value="PalmPay">PalmPay</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Account Number *</label>
+              <input type="text" id="evt-reg-settle-account" class="form-control" placeholder="10-digit Account Number" maxlength="10" required />
+            </div>
+          </div>
+
+          <div>
+            <label class="form-label" style="font-size: 0.8rem; font-weight: 700;">Settlement Preference *</label>
+            <select id="evt-reg-settle-pref" class="form-control" required>
+              <option value="" disabled selected>Select Settlement Preference...</option>
+              <option value="Event-Day Settlement">Event-Day Settlement (Same-day payout)</option>
+              <option value="Post-Event Settlement">Post-Event Settlement (24-48 hours after event)</option>
+              <option value="As Agreed With Bookam">As Agreed With Bookam</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- SECTION 8: BOOKAM EVENT HOST AGREEMENT (7 MANDATORY CHECKBOXES) -->
+        <div style="background: #FAF5FF; border: 1.5px solid #D8B4FE; border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; border-bottom: 1px solid #D8B4FE; padding-bottom: 0.5rem;">
+            <span style="background: var(--primary); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">8</span>
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--primary); margin: 0;">BOOKAM EVENT HOST AGREEMENT</h4>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.825rem; color: var(--dark);">
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="chk-host-agree-1" required checked style="margin-top: 3px;" />
+              <span>1. I confirm that all information provided in this submission is accurate.</span>
+            </label>
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="chk-host-agree-2" required checked style="margin-top: 3px;" />
+              <span>2. I confirm that I have the authority to organise this event and sell tickets for it.</span>
+            </label>
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="chk-host-agree-3" required checked style="margin-top: 3px;" />
+              <span>3. I authorise Bookam to list and process ticket sales for this event.</span>
+            </label>
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="chk-host-agree-4" required checked style="margin-top: 3px;" />
+              <span>4. I agree to Bookam's ticketing, payment, refund and settlement policies.</span>
+            </label>
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="chk-host-agree-5" required checked style="margin-top: 3px;" />
+              <span>5. Where an exclusivity arrangement applies, I agree not to use another ticketing or payment platform for the same event.</span>
+            </label>
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="chk-host-agree-6" required checked style="margin-top: 3px;" />
+              <span>6. I understand that Bookam may suspend ticket sales in cases involving suspected fraud, inaccurate information, regulatory concerns or breach of agreement.</span>
+            </label>
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="chk-host-agree-7" required checked style="margin-top: 3px;" />
+              <span>7. I agree to the Bookam Event Host Terms and Conditions.</span>
+            </label>
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer; background: #FAF5FF; padding: 0.65rem 0.75rem; border-radius: 6px; border: 1.5px solid #D8B4FE; color: var(--primary); font-weight: 700;">
+              <input type="checkbox" id="chk-host-agree-exclusive" required checked style="margin-top: 3px; accent-color: var(--primary);" />
+              <span>8. I agree that Bookam is the exclusive ticketing &amp; online payment platform for this event.</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- SECTION 9: SUBMIT BUTTON -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--gray-200); padding-top: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+          <a href="index.html" class="btn btn-outline">Cancel</a>
+          <button type="submit" id="btn-publish-event-modal" class="btn btn-primary btn-lg" style="padding: 0.95rem 2.25rem; font-weight: 900; font-size: 1.05rem; background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%); box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.5); border: none; letter-spacing: 0.2px;">
+            <i class="fa-solid fa-bolt" style="color: #FBBF24;"></i> Publish Event &amp; Go Live Immediately
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <i class="fa-solid fa-ticket"></i>
+            <span>BOOK<span class="highlight">AM</span></span>
+          </a>
+          <p>Nigeria's trusted event hosting platform with automated settlements, promoter management, and real-time ticketing.</p>
+          <div class="footer-socials">
+            <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer" class="social-icon social-whatsapp" aria-label="Official WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@justbookam?_r=1&amp;_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer" class="social-icon social-tiktok" aria-label="Official TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://x.com/justbookam?s=11&amp;t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer" class="social-icon social-twitter" aria-label="Official Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links-group">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="events.html">Browse Events</a></li>
+            <li><a href="contests.html">Vote in Contests</a></li>
+            <li><a href="buy-ticket.html">Ticket Checkout</a></li>
+            <li><a href="create-event.html">Create Event</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-group">
+          <h4>Hosts &amp; Promoters</h4>
+          <ul>
+            <li><a href="organizer-dashboard.html">Organizer Portal</a></li>
+            <li><a href="influencer-dashboard.html">Promoter Dashboard</a></li>
+            <li><a href="organizer-register.html">Host Registration</a></li>
+            <li><a href="contact.html">Support Desk</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-group">
+          <h4>Contact Us</h4>
+          <ul class="contact-list">
+            <li><i class="fa-solid fa-phone"></i> +234 916 290 1356</li>
+            <li><i class="fa-solid fa-envelope"></i> help@bookam.ng</li>
+            <li><i class="fa-solid fa-location-dot"></i> Lagos &bull; Ibadan &bull; Abuja</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BOOKAM Event Platform. All rights reserved.</p>
+        <p>Built for Nigeria's vibrant event ecosystem</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/store.js"></script>
+  <script src="js/create-event-handler.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.initBookamCreateEventForm) {
+        window.initBookamCreateEventForm({
+          formId: 'create-event-form',
+          redirectUrl: 'index.html#featured-events'
+        });
+      }
+    });
+  </script>
+</body>
+</html>

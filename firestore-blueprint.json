@@ -1,0 +1,160 @@
+{
+  "entities": {
+    "Event": {
+      "title": "Event",
+      "description": "Events created by organizers",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "coverImage": { "type": "string" },
+        "banner": { "type": "string" },
+        "organizer": { "type": "string" },
+        "organizerId": { "type": "string" },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "startTime": { "type": "string" },
+        "endTime": { "type": "string" },
+        "venueName": { "type": "string" },
+        "address": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "country": { "type": "string" },
+        "mapCoordinates": { "type": "object" },
+        "status": { "type": "string" },
+        "speakers": { "type": "array" },
+        "terms": { "type": "string" },
+        "refundPolicy": { "type": "string" },
+        "importantInfo": { "type": "string" },
+        "maxAttendees": { "type": "number" },
+        "settings": { "type": "object" },
+        "ticketTypes": { "type": "array" }
+      },
+      "required": ["id", "title", "category", "startDate"]
+    },
+    "TicketType": {
+      "title": "TicketType",
+      "description": "Ticket types belonging to an event",
+      "properties": {
+        "id": { "type": "string" },
+        "eventId": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "description": { "type": "string" },
+        "quantityAvailable": { "type": "number" },
+        "soldQuantity": { "type": "number" },
+        "maxPerCustomer": { "type": "number" },
+        "saleStartDate": { "type": "string" },
+        "saleEndDate": { "type": "string" },
+        "status": { "type": "string" },
+        "benefits": { "type": "array" }
+      },
+      "required": ["id", "name", "price"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "Customer ticket bookings and reservations",
+      "properties": {
+        "id": { "type": "string" },
+        "reference": { "type": "string" },
+        "eventId": { "type": "string" },
+        "eventName": { "type": "string" },
+        "eventDate": { "type": "string" },
+        "eventTime": { "type": "string" },
+        "eventVenue": { "type": "string" },
+        "customerInfo": { "type": "object" },
+        "attendees": { "type": "array" },
+        "specialRequirements": { "type": "string" },
+        "ticketLineItems": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "bookingFee": { "type": "number" },
+        "discount": { "type": "number" },
+        "total": { "type": "number" },
+        "paymentStatus": { "type": "string" },
+        "bookingStatus": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "reference", "eventId", "total", "paymentStatus", "bookingStatus"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "Bank transfer payment submissions and verification records",
+      "properties": {
+        "id": { "type": "string" },
+        "bookingReference": { "type": "string" },
+        "bookingId": { "type": "string" },
+        "amountPaid": { "type": "number" },
+        "bankName": { "type": "string" },
+        "senderAccountName": { "type": "string" },
+        "transferReference": { "type": "string" },
+        "paymentDate": { "type": "string" },
+        "receiptUpload": { "type": "string" },
+        "verificationStatus": { "type": "string" },
+        "adminReviewer": { "type": "string" },
+        "rejectionReason": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "bookingReference", "amountPaid", "verificationStatus"]
+    },
+    "Ticket": {
+      "title": "Ticket",
+      "description": "Generated digital entry tickets with QR codes",
+      "properties": {
+        "id": { "type": "string" },
+        "ticketId": { "type": "string" },
+        "bookingReference": { "type": "string" },
+        "paymentId": { "type": "string" },
+        "qrCodePayload": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerEmail": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "ticketType": { "type": "string" },
+        "quantity": { "type": "number" },
+        "eventDetails": { "type": "object" },
+        "paymentStatus": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "bookingReference", "customerName", "status"]
+    },
+    "PaymentAccount": {
+      "title": "PaymentAccount",
+      "description": "Admin configurable bank transfer settlement account",
+      "properties": {
+        "bankName": { "type": "string" },
+        "accountName": { "type": "string" },
+        "accountNumber": { "type": "string" },
+        "activeInstructions": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["bankName", "accountName", "accountNumber"]
+    },
+    "Organizer": {
+      "title": "Organizer",
+      "description": "Organizer accounts and permissions",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "organizationName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "registeredAt": { "type": "string" }
+      },
+      "required": ["id", "email"]
+    },
+    "Influencer": {
+      "title": "Influencer",
+      "description": "Event promoter and influencer commission profiles",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "promoCode": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "name", "promoCode"]
+    }
+  }
+}

@@ -1,0 +1,160 @@
+/* Ticket Display Page Styles - ticket.css */
+
+.ticket-page-container {
+  max-width: 750px;
+  margin: 3rem auto 5rem auto;
+}
+
+.ticket-card-pass {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 2px dashed rgba(124, 58, 237, 0.3);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  position: relative;
+}
+
+.ticket-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: var(--white);
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.ticket-number-badge {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-pill);
+  font-family: monospace;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.ticket-body {
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.ticket-qr-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--bg-color);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
+}
+
+.ticket-qr-code {
+  width: 160px;
+  height: 160px;
+  margin-bottom: 0.75rem;
+}
+
+.ticket-qr-code img, .ticket-qr-code canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.ticket-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.ticket-field-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.ticket-field-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.ticket-status-approved {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--green-100);
+  color: var(--green-500);
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+}
+
+.ticket-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+/* Print Optimization Styles */
+@media print {
+  body {
+    background: #fff !important;
+  }
+  .navbar, .footer, .ticket-actions-bar, .mobile-nav-drawer {
+    display: none !important;
+  }
+  .ticket-page-container {
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+  .ticket-card-pass {
+    box-shadow: none !important;
+    border: 2px solid #000 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .ticket-page-container {
+    margin: 1.5rem auto 3.5rem auto;
+  }
+  .ticket-header {
+    padding: 1.5rem 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ticket-body {
+    grid-template-columns: 1fr;
+    padding: 1.5rem 1.25rem;
+    gap: 1.5rem;
+  }
+  .ticket-info-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .ticket-actions-bar {
+    flex-direction: column;
+    width: 100%;
+  }
+  .ticket-actions-bar .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .ticket-info-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Support & Contact - BOOKAM 24/7 Helpdesk & Ambassador Call</title>
+  <meta name="description" content="Official 24/7 Support & Contact for BOOKAM ticket buyers, organizers, and Call For Ambassadors. We are here to assist you." />
+  <meta property="og:title" content="Support & Contact - BOOKAM Helpdesk" />
+  <meta property="og:description" content="Official 24/7 Support & Contact for BOOKAM ticket buyers, organizers, and Call For Ambassadors." />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- App Styles -->
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/index.css" />
+  <style>
+    .contact-hero {
+      background: linear-gradient(135deg, #0B0F19 0%, #1E1B4B 50%, #0F172A 100%);
+      color: #fff;
+      padding: 4.5rem 0 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Ambassador Showcase Box in Contact */
+    .ambassador-contact-banner {
+      background: #000;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      box-shadow: 0 20px 40px -15px rgba(124, 58, 237, 0.35);
+      margin-bottom: 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 900px) {
+      .ambassador-contact-banner {
+        grid-template-columns: 1.15fr 1fr;
+      }
+    }
+    .amb-banner-flyer {
+      position: relative;
+      min-height: 340px;
+      background: url('assets/images/ambassador_call.jpg') center top / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.75rem;
+    }
+    .amb-banner-flyer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(15,23,42,0.85) 100%);
+    }
+    .amb-banner-flyer > * {
+      position: relative;
+      z-index: 2;
+    }
+    .amb-banner-details {
+      background: #EFE4F8;
+      color: #3B0764;
+      padding: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .support-card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .support-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.08);
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" id="brand-logo-nav">
+        <i class="fa-solid fa-ticket" style="color: var(--primary);"></i>
+        <span>BOOK<span class="highlight">AM</span></span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="event-onboarding.html" class="nav-link"><i class="fa-solid fa-calendar-plus" style="color: var(--primary); margin-right: 0.25rem;"></i> Create Event</a></li>
+        <li><a href="create-contest.html" class="nav-link"><i class="fa-solid fa-trophy" style="color: #f59e0b; margin-right: 0.25rem;"></i> Create Contest Page</a></li>
+        <li><a href="events.html" class="nav-link"><i class="fa-solid fa-calendar-check" style="color: var(--primary); margin-right: 0.25rem;"></i> Explore Events</a></li>
+        <li><a href="contests.html" class="nav-link"><i class="fa-solid fa-trophy" style="color: #f59e0b; margin-right: 0.25rem;"></i> Live Contests</a></li>
+        <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-star" style="color: #A855F7; margin-right: 0.25rem;"></i> Call For Ambassadors</a></li>
+        <li class="nav-item-dropdown">
+          <a href="organizer-dashboard.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.35rem;">
+            <span>Organizer Suite</span>
+            <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; opacity: 0.7;"></i>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="organizer-dashboard.html" class="nav-dropdown-item">
+              <i class="fa-solid fa-gauge-high" style="color: var(--primary);"></i>
+              <div>
+                <div style="font-weight: 700; color: var(--dark); font-size: 0.9rem;">Organizer Dashboard</div>
+                <div style="font-size: 0.75rem; color: var(--dark-subtle);">Manage your events & contests</div>
+              </div>
+            </a>
+            <a href="control-panel.html" class="nav-dropdown-item admin-link">
+              <i class="fa-solid fa-shield-halved" style="color: #818CF8;"></i>
+              <div>
+                <div style="font-weight: 700; color: #818CF8; font-size: 0.88rem;">Master Control Panel</div>
+                <div style="font-size: 0.72rem; color: #94A3B8;">Super Admin governance</div>
+              </div>
+            </a>
+          </div>
+        </li>
+        <li><a href="influencer-dashboard.html" class="nav-link">Influencer Portal</a></li>
+        <li><a href="contact.html" class="nav-link active"><i class="fa-solid fa-headset" style="color: var(--primary); margin-right: 0.25rem;"></i> Support & Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="careers.html" class="btn btn-primary btn-sm" style="font-weight: 800; background: linear-gradient(135deg, #7C3AED, #9333EA);">
+          <i class="fa-solid fa-star"></i> Call For Ambassadors
+        </a>
+        <a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Support" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="border-color: #25D366; color: #16A34A; font-weight: 800;">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp Help
+        </a>
+      </div>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close">&times;</button>
+    <a href="index.html" class="brand-logo" style="margin-bottom: 1rem;">
+      <i class="fa-solid fa-ticket" style="color: var(--primary);"></i>
+      <span>BOOK<span class="highlight">AM</span></span>
+    </a>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="event-onboarding.html" class="nav-link"><i class="fa-solid fa-calendar-plus" style="color: var(--primary);"></i> Create Event</a>
+    <a href="create-contest.html" class="nav-link"><i class="fa-solid fa-trophy" style="color: #f59e0b;"></i> Create Contest Page</a>
+    <a href="events.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i> Explore Events & Tickets</a>
+    <a href="contests.html" class="nav-link"><i class="fa-solid fa-trophy"></i> Live Contests & Voting</a>
+    <a href="careers.html" class="nav-link"><i class="fa-solid fa-star" style="color: #A855F7;"></i> Call For Ambassadors</a>
+    <a href="contact.html" class="nav-link active"><i class="fa-solid fa-headset"></i> Support & Contact</a>
+    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; border-top: 1px solid var(--gray-200); padding-top: 1rem;">
+      <div style="font-size: 0.72rem; font-weight: 800; color: var(--gray-500); text-transform: uppercase; margin-bottom: 0.35rem; letter-spacing: 0.05em;">Organizer Suite</div>
+      <a href="organizer-dashboard.html" class="btn btn-outline" style="justify-content: center; width: 100%;">
+        <i class="fa-solid fa-gauge-high"></i> Organizer Dashboard
+      </a>
+      <a href="control-panel.html" class="btn" style="background: #0F172A; color: #818CF8; border: 1px solid #334155; font-weight: 700; text-align: center; justify-content: center; width: 100%; margin-top: 0.4rem;">
+        <i class="fa-solid fa-shield-halved"></i> Master Control Panel
+      </a>
+      <a href="influencer-dashboard.html" class="btn btn-outline" style="justify-content: center; margin-top: 0.25rem;">
+        <i class="fa-solid fa-bullhorn"></i> Influencer Portal
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero Header -->
+  <header class="contact-hero">
+    <div class="container" style="position: relative; z-index: 2; text-align: center; max-width: 800px;">
+      <span class="badge" style="background: rgba(168, 85, 247, 0.2); color: #D8B4FE; font-size: 0.85rem; font-weight: 800; padding: 0.4rem 1rem; border-radius: 9999px; text-transform: uppercase;">
+        24/7 Official Help & Contact
+      </span>
+      <h1 style="font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 900; margin: 0.85rem 0 0.5rem; letter-spacing: -0.03em;">
+        How Can We Assist You Today?
+      </h1>
+      <p style="font-size: 1.1rem; color: #CBD5E1; line-height: 1.6; margin: 0 auto;">
+        From ticket resolution and event management to the official <strong>Ambassador Network</strong>, our team is active 24/7 across Nigeria.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="container" style="padding: 4rem 0 5rem;">
+
+    <!-- PROMINENT CALL FOR AMBASSADORS IN SUPPORT & CONTACT (User Request) -->
+    <section class="ambassador-contact-banner">
+      <div class="amb-banner-flyer">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(8px); padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.3); color: #fff;">
+            <i class="fa-solid fa-star" style="color: #F59E0B;"></i> Featured Opportunity
+          </span>
+          <div style="background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(8px); padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.3); color: #fff;">
+            <i class="fa-solid fa-book-open"></i> BookAm
+          </div>
+        </div>
+
+        <div>
+          <div style="font-family: 'Dancing Script', 'Caveat', cursive; font-size: 2.25rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: -0.25rem;">Call For</div>
+          <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 900; color: #fff; line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase;">
+            AMBASSADORS
+          </div>
+        </div>
+      </div>
+
+      <div class="amb-banner-details">
+        <h3 style="font-size: 1.45rem; font-weight: 900; color: #3B0764; margin-bottom: 0.5rem; text-transform: uppercase;">
+          DON'T JUST ATTEND. REPRESENT.
+        </h3>
+        <p style="font-size: 1rem; color: #4C1D95; line-height: 1.55; margin-bottom: 1.5rem;">
+          We're looking for confident, charismatic individuals to <strong>join</strong> our Ambassador Network across campuses, nightlife, and festivals.
+        </p>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.75rem; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span style="font-size: 1.15rem; font-style: italic; color: #3B0764; font-weight: 600;">
+              Think You've Got What It <strong>Takes</strong>?
+            </span>
+            <span style="font-size: 1.25rem; font-weight: 900; color: #3B0764;">
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+          </div>
+
+          <!-- Advertisement QR Code Badge -->
+          <a href="careers.html#ambassador-form-section" style="background: #fff; padding: 0.45rem 0.65rem 0.35rem; border-radius: 14px; border: 2px solid #7C3AED; display: flex; flex-direction: column; align-items: center; gap: 0.25rem; text-decoration: none; box-shadow: 0 8px 20px rgba(124, 58, 237, 0.25); transition: transform 0.2s;" title="Scan with camera or click to create your personal ticket link">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fbookam.ng%2Fbuy-ticket.html%3Fref%3Dambassador" alt="Ticket QR Code" style="width: 76px; height: 76px; display: block; border-radius: 6px;" />
+            <span style="font-size: 0.6rem; font-weight: 900; color: #3B0764; white-space: nowrap;"><i class="fa-solid fa-qrcode"></i> SCAN TICKET LINK</span>
+          </a>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="careers.html" class="btn btn-primary" style="background: #3B0764; border-color: #3B0764; font-weight: 800; padding: 0.8rem 1.75rem;">
+            <i class="fa-solid fa-paper-plane"></i> Apply on Ambassador Page
+          </a>
+          <a href="https://wa.me/2349162901356?text=Hi%20BOOKAM,%20I'm%20contacting%20you%20about%20the%20Ambassador%20Call!" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="border-color: #3B0764; color: #3B0764; font-weight: 800;">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp Talent Lead
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 Core Support & Location Channels Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
+      
+      <!-- Event Location & Headquarters -->
+      <div class="support-card" style="border: 2px solid rgba(124, 58, 237, 0.15);">
+        <div style="width: 52px; height: 52px; border-radius: 14px; background: rgba(124, 58, 237, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem;">
+          <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--dark); margin-bottom: 0.4rem;">
+          📍 Event Location
+        </h3>
+        <p style="color: var(--dark-subtle); font-size: 0.92rem; line-height: 1.55; margin-bottom: 1rem; flex-grow: 1;">
+          Official platform event headquarters & physical operations center in Ibadan.
+        </p>
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 0.85rem; border-radius: 10px; font-size: 0.88rem; color: #1E293B; margin-bottom: 1.25rem; line-height: 1.45;">
+          <strong style="color: var(--primary); font-size: 0.95rem; display: block; margin-bottom: 0.2rem;">Oyo State, Ibadan</strong>
+          Wakajeje, First Floor, Abiola Building,<br/>
+          Opposite Government College
+        </div>
+        <a href="https://maps.google.com/?q=Government+College+Ibadan+Apata+Oyo+State" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-weight: 800; justify-content: center;">
+          <i class="fa-solid fa-map-location-dot"></i> View on Google Maps
+        </a>
+      </div>
+
+      <!-- WhatsApp Support -->
+      <div class="support-card">
+        <div style="width: 52px; height: 52px; border-radius: 14px; background: #DCFCE7; color: #16A34A; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 1.25rem;">
+          <i class="fa-brands fa-whatsapp"></i>
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--dark); margin-bottom: 0.4rem;">
+          24/7 WhatsApp Hotline
+        </h3>
+        <p style="color: var(--dark-subtle); font-size: 0.92rem; line-height: 1.55; margin-bottom: 1.5rem; flex-grow: 1;">
+          Get instant replies from our dedicated support coordinators regarding ticket access, event entry barcodes, or ambassador inquiries.
+        </p>
+        <div style="margin-bottom: 1.25rem; font-weight: 800; font-size: 1.05rem; color: #16A34A;">
+          +234 916 290 1356
+        </div>
+        <a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Support" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background: #25D366; border-color: #25D366; font-weight: 800; justify-content: center;">
+          <i class="fa-brands fa-whatsapp"></i> Open WhatsApp Chat
+        </a>
+      </div>
+
+      <!-- Email Helpdesk -->
+      <div class="support-card">
+        <div style="width: 52px; height: 52px; border-radius: 14px; background: #EDE9FE; color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem;">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--dark); margin-bottom: 0.4rem;">
+          Official Email Helpdesk
+        </h3>
+        <p style="color: var(--dark-subtle); font-size: 0.92rem; line-height: 1.55; margin-bottom: 1.5rem; flex-grow: 1;">
+          Send us event partnership requests, sponsorship proposals, organizer settlement questions, or press communications.
+        </p>
+        <div style="margin-bottom: 1.25rem; font-weight: 800; font-size: 1.05rem; color: var(--primary);">
+          Bookam26@gmail.com
+        </div>
+        <a href="mailto:Bookam26@gmail.com?subject=BOOKAM%20Support%20Inquiry" class="btn btn-outline" style="font-weight: 800; justify-content: center;">
+          <i class="fa-solid fa-envelope"></i> Email Us
+        </a>
+      </div>
+
+      <!-- Phone Direct -->
+      <div class="support-card">
+        <div style="width: 52px; height: 52px; border-radius: 14px; background: #FEF3C7; color: #D97706; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem;">
+          <i class="fa-solid fa-phone"></i>
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--dark); margin-bottom: 0.4rem;">
+          Direct Phone Helpline
+        </h3>
+        <p style="color: var(--dark-subtle); font-size: 0.92rem; line-height: 1.55; margin-bottom: 1.5rem; flex-grow: 1;">
+          Speak to a human representative for urgent event gate issues, VIP ticket verification, and organizer emergencies.
+        </p>
+        <div style="margin-bottom: 1.25rem; font-weight: 800; font-size: 1.05rem; color: #D97706;">
+          +234 916 290 1356
+        </div>
+        <a href="tel:+2349162901356" class="btn btn-outline" style="font-weight: 800; justify-content: center;">
+          <i class="fa-solid fa-phone"></i> Call Support Line
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Quick Message Inquiry Form -->
+    <div style="background: #F8FAFC; border: 1px solid var(--gray-200); border-radius: 24px; padding: 2.5rem; max-width: 840px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--dark); margin-bottom: 0.4rem;">
+          Send an Online Inquiry
+        </h2>
+        <p style="color: var(--dark-subtle); font-size: 0.95rem;">
+          We reply within 30 minutes during active event hours.
+        </p>
+      </div>
+
+      <form id="contact-inquiry-form" onsubmit="event.preventDefault(); window.bookamStore?.showToast?.('Inquiry received! We will reach out on WhatsApp/Email.', 'success'); this.reset();">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem;">Your Name *</label>
+            <input type="text" required placeholder="Full Name" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--gray-300); font-family: inherit;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem;">WhatsApp / Phone *</label>
+            <input type="tel" required placeholder="08012345678" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--gray-300); font-family: inherit;" />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem;">Email Address *</label>
+            <input type="email" required placeholder="name@example.com" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--gray-300); font-family: inherit;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem;">Topic *</label>
+            <select style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--gray-300); font-family: inherit;">
+              <option value="ambassador">Call For Ambassadors Inquiry</option>
+              <option value="ticket">Ticket Payment & Delivery Help</option>
+              <option value="organizer">Organizer Event Hosting & Payouts</option>
+              <option value="contest">Voting Contest Inquiry</option>
+              <option value="general">General Question</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem;">Message / Details *</label>
+          <textarea rows="4" required placeholder="How can our support team assist you?" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--gray-300); font-family: inherit; resize: vertical;"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; font-weight: 800; font-size: 1.05rem; padding: 0.85rem;">
+          <i class="fa-solid fa-paper-plane"></i> Submit Inquiry
+        </button>
+      </form>
+    </div>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <i class="fa-solid fa-ticket"></i>
+            <span>BOOK<span class="highlight">AM</span></span>
+          </a>
+          <p class="footer-desc">
+            Nigeria's most reliable, trusted event discovery and high-speed digital ticketing ecosystem.
+          </p>
+          <div class="footer-socials">
+            <a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Explore Events</h4>
+          <ul class="footer-links">
+            <li><a href="events.html?category=Concerts">Music Concerts</a></li>
+            <li><a href="events.html?category=Festivals">Cultural Festivals</a></li>
+            <li><a href="events.html?category=Tech">Tech Summits</a></li>
+            <li><a href="events.html?category=Nightlife">Nightlife & Clubbing</a></li>
+            <li><a href="contests.html">Live Voting Contests</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">For Organizers</h4>
+          <ul class="footer-links">
+            <li><a href="index.html?action=create-event">Create Event</a></li>
+            <li><a href="index.html?action=create-contest">Create Contest</a></li>
+            <li><a href="organizer-dashboard.html">Organizer Portal</a></li>
+            <li><a href="influencer-dashboard.html">Influencer Affiliate Program</a></li>
+            <li><a href="control-panel.html">Master Control Panel</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Support & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="careers.html" style="color: #A855F7; font-weight: 800;"><i class="fa-solid fa-star" style="color: #F59E0B; margin-right: 0.35rem;"></i> Call For Ambassadors</a></li>
+            <li><a href="contact.html" style="font-weight: 700; color: var(--primary);">24/7 Support & Contact Center</a></li>
+            <li><a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Support" target="_blank">WhatsApp: +234 916 290 1356</a></li>
+            <li><a href="mailto:Bookam26@gmail.com">Email: Bookam26@gmail.com</a></li>
+            <li style="color: var(--gray-400); font-size: 0.8rem; line-height: 1.4; margin-top: 0.25rem;">
+              <span style="color: #CBD5E1; font-weight: 700;"><i class="fa-solid fa-location-dot" style="color: var(--primary); margin-right: 0.25rem;"></i> Oyo State, Ibadan</span><br/>
+              Wakajeje, First Floor, Abiola Building, Opp. Government College
+            </li>
+            <li><a href="organizer-register.html#terms">Exclusive Ticketing Agreement</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BOOKAM Technologies Inc. All rights reserved. Registered in Nigeria.</p>
+        <p>Helpline: <a href="https://wa.me/2349162901356" style="color: var(--primary);">+234 916 290 1356</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/store.js"></script>
+</body>
+</html>

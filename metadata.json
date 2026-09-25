@@ -1,0 +1,6 @@
+{
+  "name": "BOOKAM",
+  "description": "Bookam — More Than Tickets. It’s a Community. An entertainment and creative platform built to discover, create, sell, manage, and experience events, contests, and creative opportunities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

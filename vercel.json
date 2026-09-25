@@ -1,0 +1,20 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/contests", "destination": "/contests.html" },
+    { "source": "/contest", "destination": "/contest.html" },
+    { "source": "/contest-details", "destination": "/contest-details.html" },
+    { "source": "/events", "destination": "/events.html" },
+    { "source": "/event-details", "destination": "/event-details.html" },
+    { "source": "/buy-ticket", "destination": "/buy-ticket.html" },
+    { "source": "/checkout", "destination": "/checkout.html" },
+    { "source": "/payment", "destination": "/payment.html" },
+    { "source": "/ticket", "destination": "/ticket.html" },
+    { "source": "/organizer-dashboard", "destination": "/organizer-dashboard.html" },
+    { "source": "/organizer-register", "destination": "/organizer-register.html" },
+    { "source": "/influencer-dashboard", "destination": "/influencer-dashboard.html" }
+  ]
+}

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual Bank Transfer Payment — BOOKAM</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- App Styles -->
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/payment.css" />
+</head>
+<body>
+
+  <!-- Sticky Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-ticket"></i>
+        <span>BOOK<span class="highlight">AM</span></span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="events.html" class="nav-link active">Explore Events</a></li>
+        <li><a href="organizer-dashboard.html" class="nav-link">Organizer Dashboard</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="events.html" class="btn btn-outline btn-sm">Cancel Order</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close">&times;</button>
+    <a href="index.html" class="brand-logo" style="margin-bottom: 1rem;">
+      <i class="fa-solid fa-ticket"></i>
+      <span>BOOK<span class="highlight">AM</span></span>
+    </a>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="events.html" class="nav-link">Explore Events</a>
+    <a href="organizer-dashboard.html" class="btn btn-primary" style="margin-top: 1rem;">Organizer Dashboard</a>
+  </div>
+
+  <!-- Main Payment Container -->
+  <main class="container payment-container">
+    <div class="payment-card">
+      
+      <!-- Main Content (Before Click) -->
+      <div id="payment-main-content">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <span class="section-tag">Step 3 of 3</span>
+          <h1 class="section-title" style="font-size: 2.25rem;">Manual Bank Transfer</h1>
+          <p class="section-subtitle">Please transfer the exact amount using the payment reference code below.</p>
+        </div>
+
+        <!-- Bank Account Card -->
+        <div class="bank-details-box">
+          <div class="bank-card-header" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255, 255, 255, 0.12); padding-bottom: 1rem; margin-bottom: 1.25rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 700; color: #34D399; letter-spacing: 0.03em;">
+              <i class="fa-solid fa-shield-halved"></i> Official Verified Merchant
+            </div>
+            <span style="font-size: 0.8rem; background: rgba(255, 255, 255, 0.12); padding: 0.25rem 0.65rem; border-radius: 9999px; color: #E2E8F0; font-weight: 600;">Moniepoint MFB</span>
+          </div>
+
+          <div class="bank-row">
+            <span class="bank-label">Account Name (Beneficiary)</span>
+            <span class="bank-value" id="pay-account-name" style="font-size: 1.2rem; color: #FFFFFF; font-weight: 800; letter-spacing: -0.01em;">
+              KAIWE DIGITAL <i class="fa-solid fa-circle-check" style="color: #34D399; font-size: 1rem;" title="Verified Business Name"></i>
+            </span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">Bank Name</span>
+            <span class="bank-value" id="pay-bank-name">Moniepoint</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">Account Number</span>
+            <div class="bank-value" style="display: flex; align-items: center; gap: 0.75rem;">
+              <span id="pay-account-number" style="font-family: monospace; font-size: 1.35rem; font-weight: 800; letter-spacing: 0.08em; color: #FBBF24;">8021174926</span>
+              <button type="button" id="copy-acc-btn" class="copy-btn" onclick="copyText(document.getElementById('pay-account-number').textContent, 'copy-acc-btn')">
+                <i class="fa-regular fa-copy"></i> Copy Account
+              </button>
+            </div>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">Exact Amount to Transfer</span>
+            <span class="bank-value" id="pay-amount" style="font-size: 1.45rem; color: #34D399; font-weight: 800;">₦0.00</span>
+          </div>
+          <div class="bank-row" style="background: rgba(251, 191, 36, 0.08); margin: 0.5rem -1rem -0.5rem -1rem; padding: 1rem; border-radius: 8px; border: 1px dashed rgba(251, 191, 36, 0.3);">
+            <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+              <span class="bank-label" style="color: #FBBF24; font-weight: 700;">Payment Reference Code</span>
+              <span style="font-size: 0.75rem; color: #CBD5E1;">Must be included in transfer remarks / narration</span>
+            </div>
+            <div class="bank-value" style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+              <input type="text" id="pay-reference-input" readonly style="background: rgba(0,0,0,0.4); border: 1.5px solid #F59E0B; color: #FBBF24; font-family: monospace; font-size: 1.15rem; font-weight: 800; padding: 0.45rem 0.75rem; border-radius: 6px; width: 180px; text-align: center; letter-spacing: 0.05em;" />
+              <button type="button" id="copy-ref-btn" class="copy-btn" onclick="copyText(document.getElementById('pay-reference-input').value, 'copy-ref-btn')" style="background: #F59E0B; color: #000; font-weight: 700;">
+                <i class="fa-regular fa-copy"></i> Copy Ref
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Callout Notice -->
+        <div class="notice-callout">
+          <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.25rem; margin-top: 0.15rem; color: #D97706;"></i>
+          <div style="font-size: 0.9rem; line-height: 1.5;">
+            <strong>Important Transfer Rule:</strong> Please enter your Reference Code (<span style="font-family: monospace; font-weight: 700; color: #B45309;" id="pay-ref-notice">REF-XXXXXX</span>) into the transfer narration/remark in your mobile banking app. This allows instant automated matching to your order.
+          </div>
+        </div>
+
+        <!-- Customer Order Summary Box -->
+        <div class="order-summary-card" style="background: #F8FAFC; border-radius: var(--radius-md); padding: 1.5rem; border: 1.5px solid #E2E8F0; margin-bottom: 1.5rem;">
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: #0F172A; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; text-transform: uppercase; letter-spacing: 0.04em;">
+            <i class="fa-solid fa-receipt" style="color: var(--primary);"></i> Order & Customer Summary
+          </h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.85rem; font-size: 0.875rem;">
+            <div><span style="color: #64748B; font-size: 0.8rem; display: block;">Customer Name</span><strong id="pay-customer-name" style="color: #0F172A;">Customer Name</strong></div>
+            <div><span style="color: #64748B; font-size: 0.8rem; display: block;">Customer Email</span><strong id="pay-customer-email" style="color: #0F172A;">email@example.com</strong></div>
+            <div><span style="color: #64748B; font-size: 0.8rem; display: block;">Customer Phone</span><strong id="pay-customer-phone" style="color: #0F172A;">Phone Number</strong></div>
+            <div><span style="color: #64748B; font-size: 0.8rem; display: block;">Event</span><strong id="pay-event-title" style="color: #0F172A;">Event Name</strong></div>
+            <div><span style="color: #64748B; font-size: 0.8rem; display: block;">Ticket Package</span><strong id="pay-ticket-details" style="color: var(--primary); font-weight: 800;">Package</strong></div>
+          </div>
+        </div>
+
+        <!-- Presentable Sender Proof Details (Optional Form) -->
+        <div class="form-card" style="margin-bottom: 2rem; padding: 1.5rem; background: #FFFFFF; border: 1.5px solid #E2E8F0;">
+          <div class="form-section-title" style="margin-bottom: 1rem;">
+            <i class="fa-solid fa-money-bill-transfer" style="color: var(--primary);"></i> Payment Sender Information <span style="font-size: 0.75rem; font-weight: 600; color: #64748B; margin-left: auto;">(Speeds up approval)</span>
+          </div>
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.75rem;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="pay-sender-name">Sender Account Name</label>
+              <div class="input-icon-group">
+                <i class="fa-solid fa-user field-icon"></i>
+                <input type="text" id="pay-sender-name" class="form-control" placeholder="e.g. Name on debiting bank account" />
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="pay-sender-bank">Sender Bank</label>
+              <div class="input-icon-group">
+                <i class="fa-solid fa-building-columns field-icon"></i>
+                <input type="text" id="pay-sender-bank" class="form-control" placeholder="e.g. GTBank, Zenith, OPay, PalmPay" />
+              </div>
+            </div>
+          </div>
+          <p class="form-hint" style="margin-top: 0.5rem; color: #64748B; font-size: 0.8rem;">
+            <i class="fa-solid fa-circle-info"></i> Providing the sending account name assists our accounting team to confirm your transfer instantly.
+          </p>
+        </div>
+
+        <!-- Payment Confirmation Button with Organizer Approval Flow -->
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <button type="button" id="confirm-payment-btn" class="btn btn-primary btn-lg" style="width: 100%; font-size: 1.15rem; padding: 1.15rem; font-weight: 800; letter-spacing: 0.02em; box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.4); display: flex; align-items: center; justify-content: center; gap: 0.6rem;">
+            <i class="fa-solid fa-paper-plane" style="color: #FBBF24;"></i> I HAVE PAID — SUBMIT FOR ORGANIZER APPROVAL
+          </button>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.85rem; color: #475569; font-weight: 600;">
+            <i class="fa-solid fa-shield-halved" style="color: #F59E0B;"></i> Organizer verifies and manually accepts/rejects payments on the dashboard before pass activation
+          </div>
+        </div>
+      </div>
+
+      <!-- Success / Submission State (After Click) -->
+      <div id="payment-success-state" class="success-state">
+        <div class="success-icon" id="success-state-icon">
+          <i class="fa-solid fa-clock" style="color: #F59E0B;"></i>
+        </div>
+        <span id="success-status-badge" class="badge badge-amber" style="font-size: 0.9rem; padding: 0.5rem 1rem; margin-bottom: 1rem;">
+          <i class="fa-solid fa-clock"></i> Payment Status: Awaiting Organizer Approval
+        </span>
+        <h2 id="success-heading" style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 0.75rem;">Payment Notice Submitted!</h2>
+        <p style="color: var(--dark-subtle); font-size: 1.05rem; max-width: 550px; margin: 0 auto 1.5rem auto; line-height: 1.6;">
+          Your transfer notice with reference <strong id="success-ref-code" style="color: var(--primary);">REF-000000</strong> has been delivered to the event organizer.
+        </p>
+        <p id="success-subtext" style="font-size: 0.9rem; color: var(--gray-500); margin-bottom: 1.5rem;">
+          The organizer will verify your transfer and approve your payment. Once approved, your official QR-coded ticket pass will unlock instantly.
+        </p>
+
+        <!-- Live Payment Verification Status Box -->
+        <div id="payment-status-tracker-box" style="background: white; border: 2px dashed #CBD5E1; border-radius: var(--radius-lg); padding: 1.5rem; max-width: 540px; margin: 0 auto 2rem; text-align: left; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+            <span style="font-weight: 800; font-size: 0.95rem; color: var(--dark); display: flex; align-items: center; gap: 0.5rem;">
+              <i class="fa-solid fa-satellite-dish" style="color: var(--primary);"></i> Live Real-Time Status
+            </span>
+            <span id="live-payment-status-badge" class="badge badge-amber">
+              <i class="fa-solid fa-spinner fa-spin"></i> Pending Organizer Approval
+            </span>
+          </div>
+          <p id="live-tracker-msg" style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 1rem; line-height: 1.45;">
+            Your transfer notice has been sent to the event organizer dashboard. As soon as the organizer accepts your payment, your pass will be unlocked right here.
+          </p>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <button type="button" id="btn-verify-online-now" class="btn btn-primary btn-sm" style="display: none; flex: 1.2;">
+              <i class="fa-solid fa-rotate"></i> Check Status Now
+            </button>
+            <button type="button" id="btn-check-live-status" class="btn btn-outline btn-sm" style="flex: 1;">
+              <i class="fa-solid fa-rotate"></i> Re-check Status
+            </button>
+            <a id="btn-view-approved-ticket" href="#" class="btn btn-primary btn-sm" style="display: none; flex: 1.3; justify-content: center; align-items: center; gap: 0.35rem;">
+              <i class="fa-solid fa-ticket"></i> View Official Ticket Pass
+            </a>
+            <a id="btn-email-approved-ticket" href="#" target="_blank" class="btn btn-outline btn-sm" style="display: none; color: #EA4335; border-color: #FCA5A5; flex: 1.2; justify-content: center; align-items: center; gap: 0.35rem; font-weight: 700; text-decoration: none;">
+              <i class="fa-brands fa-google"></i> Open Pass in Gmail
+            </a>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+          <a href="index.html" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-house"></i> Return to Home Page
+          </a>
+          <a href="events.html" class="btn btn-outline btn-lg">
+            <i class="fa-solid fa-compass"></i> Explore More Events
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Payment Confirmation Lookup Card (For returning users) -->
+      <div style="margin-top: 3rem; background: white; border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #EEF2FF; color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+            <i class="fa-solid fa-magnifying-glass-dollar"></i>
+          </div>
+          <div>
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--dark); margin: 0;">Check Payment Confirmation Status</h3>
+            <p style="font-size: 0.825rem; color: var(--gray-500); margin: 0;">Already made a bank transfer? Enter your payment reference or email to verify approval.</p>
+          </div>
+        </div>
+
+        <form id="payment-lookup-form" style="display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap;">
+          <input 
+            type="text" 
+            id="lookup-ref-input" 
+            class="form-control" 
+            placeholder="Enter Payment Reference (e.g. REF-123456) or Email" 
+            style="flex: 1; min-width: 260px;" 
+            required 
+          />
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-circle-check"></i> Check Status
+          </button>
+        </form>
+
+        <div id="lookup-result-box" style="display: none; margin-top: 1.25rem; padding: 1rem; border-radius: var(--radius-md);"></div>
+      </div>
+
+    </div>
+
+    <!-- Online Verification Modal / Overlay -->
+    <div id="online-verify-modal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(4px); padding: 1rem;">
+      <div style="background: #FFFFFF; border-radius: 16px; max-width: 480px; width: 100%; padding: 2rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); text-align: center; border: 1px solid #E2E8F0;">
+        <div id="verify-spinner-box" style="width: 64px; height: 64px; border-radius: 50%; background: #EEF2FF; color: var(--primary); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem auto; font-size: 1.75rem;">
+          <i class="fa-solid fa-spinner fa-spin"></i>
+        </div>
+        <h3 id="verify-modal-title" style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin-bottom: 0.5rem;">
+          Submitting Payment to Organizer
+        </h3>
+        <p id="verify-modal-desc" style="font-size: 0.875rem; color: #64748B; margin-bottom: 1.5rem; line-height: 1.5;">
+          Delivering your bank transfer reference directly to the event organizer dashboard...
+        </p>
+
+        <!-- Stepper -->
+        <div style="text-align: left; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.85rem;">
+          <div id="step-connect" style="display: flex; align-items: center; gap: 0.75rem; color: #0F172A; font-weight: 600;">
+            <span class="step-icon" style="color: var(--primary);"><i class="fa-solid fa-spinner fa-spin"></i></span>
+            <span>Connecting to BOOKAM Organizer Network</span>
+          </div>
+          <div id="step-match" style="display: flex; align-items: center; gap: 0.75rem; color: #94A3B8;">
+            <span class="step-icon"><i class="fa-regular fa-circle"></i></span>
+            <span>Registering payment reference & sender info</span>
+          </div>
+          <div id="step-approve" style="display: flex; align-items: center; gap: 0.75rem; color: #94A3B8;">
+            <span class="step-icon"><i class="fa-regular fa-circle"></i></span>
+            <span>Delivered to organizer approval queue</span>
+          </div>
+          <div id="step-ticket" style="display: flex; align-items: center; gap: 0.75rem; color: #94A3B8;">
+            <span class="step-icon"><i class="fa-regular fa-circle"></i></span>
+            <span>Awaiting organizer review & approval</span>
+          </div>
+        </div>
+
+        <div id="verify-modal-footer" style="display: none;">
+          <button type="button" id="btn-modal-view-ticket" class="btn btn-primary btn-lg" style="width: 100%; font-weight: 800;">
+            <i class="fa-solid fa-ticket"></i> View Official Entry Pass
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <i class="fa-solid fa-ticket"></i>
+            <span>BOOK<span class="highlight">AM</span></span>
+          </a>
+          <p>The modern, reliable event discovery & ticket management platform built for creators and attendees.</p>
+          <div class="footer-socials">
+            <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer" class="social-icon social-whatsapp" aria-label="Official WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer" class="social-icon social-tiktok" aria-label="Official TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer" class="social-icon social-twitter" aria-label="Official Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Browse All Events</a></li>
+            <li><a href="organizer-dashboard.html">Organizer Portal</a></li>
+            <li><a href="influencer-dashboard.html">Promoter Hub</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Official Social Reach</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 0.35rem;"></i> WhatsApp: +234 916 290 1356</a></li>
+            <li><a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok" style="margin-right: 0.35rem;"></i> TikTok: @justbookam</a></li>
+            <li><a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter" style="margin-right: 0.35rem;"></i> Twitter / X: @justbookam</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Support & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Support" target="_blank">24/7 WhatsApp Support</a></li>
+            <li><a href="organizer-register.html#terms">Exclusive Ticketing Agreement</a></li>
+            <li><a href="index.html">Terms of Service</a></li>
+            <li><a href="index.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BOOKAM Event Platform. All rights reserved.</p>
+        <p>Built for Nigeria's vibrant event ecosystem</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/store.js"></script>
+  <script type="module" src="js/payment.js"></script>
+</body>
+</html>

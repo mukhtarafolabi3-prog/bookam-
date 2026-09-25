@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Details — BOOKAM</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- App Styles -->
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/event-details.css" />
+</head>
+<body>
+
+  <!-- Sticky Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-ticket"></i>
+        <span>BOOK<span class="highlight">AM</span></span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="event-onboarding.html" class="nav-link"><i class="fa-solid fa-calendar-plus" style="color: var(--primary); margin-right: 0.25rem;"></i> Create Event</a></li>
+        <li><a href="create-contest.html" class="nav-link"><i class="fa-solid fa-trophy" style="color: #f59e0b; margin-right: 0.25rem;"></i> Create Contest Page</a></li>
+        <li><a href="events.html" class="nav-link active">Explore Events</a></li>
+        <li><a href="contests.html" class="nav-link">Live Contests</a></li>
+        <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-star" style="color: #A855F7; margin-right: 0.25rem;"></i> Call For Ambassadors</a></li>
+        <li class="nav-item-dropdown">
+          <a href="organizer-dashboard.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.35rem;">
+            <span>Organizer Suite</span>
+            <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; opacity: 0.7;"></i>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="organizer-dashboard.html" class="nav-dropdown-item">
+              <i class="fa-solid fa-gauge-high" style="color: var(--primary);"></i>
+              <div>
+                <div style="font-weight: 700; color: var(--dark); font-size: 0.9rem;">Organizer Dashboard</div>
+                <div style="font-size: 0.75rem; color: var(--dark-subtle);">Manage your events & contests</div>
+              </div>
+            </a>
+            <a href="control-panel.html" class="nav-dropdown-item admin-link">
+              <i class="fa-solid fa-shield-halved" style="color: #818CF8;"></i>
+              <div>
+                <div style="font-weight: 700; color: #818CF8; font-size: 0.88rem;">Master Control Panel</div>
+                <div style="font-size: 0.72rem; color: #94A3B8;">Super Admin governance</div>
+              </div>
+            </a>
+          </div>
+        </li>
+        <li><a href="influencer-dashboard.html" class="nav-link">Influencer Portal</a></li>
+        <li><a href="contact.html" class="nav-link"><i class="fa-solid fa-headset" style="color: var(--primary); margin-right: 0.25rem;"></i> Support & Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="events.html" class="btn btn-outline btn-sm">
+          <i class="fa-solid fa-arrow-left"></i> Back to Events
+        </a>
+      </div>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close">&times;</button>
+    <a href="index.html" class="brand-logo" style="margin-bottom: 1rem;">
+      <i class="fa-solid fa-ticket"></i>
+      <span>BOOK<span class="highlight">AM</span></span>
+    </a>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="event-onboarding.html" class="nav-link"><i class="fa-solid fa-calendar-plus" style="color: var(--primary);"></i> Create Event</a>
+    <a href="create-contest.html" class="nav-link"><i class="fa-solid fa-trophy" style="color: #f59e0b;"></i> Create Contest Page</a>
+    <a href="events.html" class="nav-link">Explore Events</a>
+    <a href="contests.html" class="nav-link"><i class="fa-solid fa-trophy"></i> Live Contests</a>
+    <a href="careers.html" class="nav-link"><i class="fa-solid fa-star" style="color: #A855F7;"></i> Call For Ambassadors</a>
+    <a href="contact.html" class="nav-link"><i class="fa-solid fa-headset"></i> Support & Contact</a>
+    <div style="border-top: 1px solid var(--gray-200); padding-top: 0.5rem; margin-top: 1rem;">
+      <div style="font-size: 0.72rem; font-weight: 800; color: var(--gray-500); text-transform: uppercase; margin-bottom: 0.35rem; letter-spacing: 0.05em;">Organizer Suite</div>
+      <a href="organizer-dashboard.html" class="btn btn-primary" style="justify-content: center; width: 100%;">
+        <i class="fa-solid fa-gauge-high"></i> Organizer Dashboard
+      </a>
+      <a href="control-panel.html" class="btn" style="background: #0F172A; color: #818CF8; border: 1px solid #334155; font-weight: 700; text-align: center; justify-content: center; width: 100%; margin-top: 0.4rem;">
+        <i class="fa-solid fa-shield-halved"></i> Master Control Panel
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero Large Banner -->
+  <section class="details-hero-banner">
+    <img id="details-banner-img" src="" alt="Event Banner" />
+    <div class="details-hero-overlay">
+      <div class="container details-header-card">
+        <span class="badge badge-purple" id="details-category-badge" style="margin-bottom: 1rem; font-size: 0.85rem;">Category</span>
+        <h1 id="details-title" style="font-size: 2.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.75rem;">Loading Event Title...</h1>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 1rem; font-weight: 600; color: var(--gray-200);">
+          <span><i class="fa-regular fa-calendar" style="color: var(--primary-light);"></i> <span id="details-date">Date</span></span>
+          <span><i class="fa-regular fa-clock" style="color: var(--primary-light);"></i> <span id="details-time">Time</span></span>
+          <span><i class="fa-solid fa-location-dot" style="color: var(--primary-light);"></i> <span id="details-venue">Venue</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Event Details Content Grid -->
+  <main class="container">
+    <div class="details-grid">
+      <!-- Main Column -->
+      <div>
+        <!-- Overview Box -->
+        <div class="details-content-box">
+          <h2 class="details-section-title"><i class="fa-solid fa-align-left"></i> Event Description</h2>
+          <p id="details-description" style="color: var(--dark-subtle); line-height: 1.8; font-size: 1.05rem; white-space: pre-line;">
+            Loading event description...
+          </p>
+        </div>
+
+        <!-- Event Highlights -->
+        <div class="details-content-box">
+          <h2 class="details-section-title"><i class="fa-solid fa-star"></i> What to Expect</h2>
+          <ul class="highlights-list" id="details-highlights">
+            <!-- Injected via event-details.js -->
+          </ul>
+        </div>
+
+        <!-- Organizer Details Box -->
+        <div class="details-content-box" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 54px; height: 54px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+              <i class="fa-solid fa-building"></i>
+            </div>
+            <div>
+              <p style="font-size: 0.85rem; color: var(--gray-500); font-weight: 600;">Hosted By</p>
+              <h3 id="details-organizer" style="font-size: 1.2rem; font-weight: 800; color: var(--dark);">Organizer Name</h3>
+            </div>
+          </div>
+          <a href="#select-tickets" class="btn btn-secondary btn-sm">Verified Organizer</a>
+        </div>
+
+        <!-- Call For Ambassadors: Create Personal Link to Ticket & QR Code -->
+        <div class="details-content-box" id="ambassador-event-box" style="background: linear-gradient(135deg, #FAF5FF 0%, #F5F3FF 100%); border: 1.5px solid #DDD6FE; border-radius: var(--radius-md); padding: 1.5rem; margin-top: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap;">
+            <div>
+              <span class="badge" style="background: var(--primary); color: #fff; font-size: 0.75rem; font-weight: 800; padding: 0.25rem 0.65rem; border-radius: 9999px; text-transform: uppercase;">
+                <i class="fa-solid fa-star"></i> Call For Ambassadors
+              </span>
+              <h3 style="font-size: 1.25rem; font-weight: 900; color: #3B0764; margin: 0.5rem 0 0.25rem;">
+                Promote This Event & Earn Commission
+              </h3>
+              <p style="font-size: 0.88rem; color: #6B21A8; margin: 0; line-height: 1.5;">
+                Create your personal link directly to the ticket with your own tracked QR code for your social media bios, posters & WhatsApp!
+              </p>
+            </div>
+            <a id="btn-full-ambassador-portal" href="careers.html" class="btn btn-primary btn-sm" style="font-weight: 800; white-space: nowrap; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);">
+              <i class="fa-solid fa-qrcode"></i> View Advertisement Flyer & QR
+            </a>
+          </div>
+
+          <!-- Interactive Generator Form inside event details -->
+          <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px dashed #C4B5FD;">
+            <div style="display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <div>
+                <label style="display: block; font-size: 0.75rem; font-weight: 800; color: #4C1D95; text-transform: uppercase; margin-bottom: 0.3rem;">
+                  Enter Your Name or Handle for Personal Ticket Link:
+                </label>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                  <div style="position: relative; flex: 1; min-width: 200px;">
+                    <span style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: #8B5CF6; font-weight: 700; font-size: 0.9rem;">@</span>
+                    <input type="text" id="inline-ambassador-handle" placeholder="e.g. chioma or tunde" style="width: 100%; padding: 0.6rem 0.75rem 0.6rem 2rem; border-radius: 8px; border: 1px solid #CBD5E1; font-size: 0.9rem; font-family: inherit;" />
+                  </div>
+                  <button type="button" id="btn-inline-gen-link" class="btn btn-primary" style="font-weight: 800; white-space: nowrap; padding: 0.6rem 1.25rem;">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Create Personal Link
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Result Box -->
+            <div id="inline-link-result" style="display: none; background: #FFFFFF; border: 1.5px solid #A7F3D0; border-radius: 12px; padding: 1rem; margin-top: 0.75rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+                <span style="font-size: 0.78rem; font-weight: 800; color: #047857; display: flex; align-items: center; gap: 0.35rem;">
+                  <i class="fa-solid fa-circle-check" style="color: #10B981;"></i> Your Personal Link to the Ticket is Ready:
+                </span>
+                <span class="badge badge-purple" style="font-size: 0.7rem; padding: 0.2rem 0.5rem;">
+                  Auto-tracks Referral Sales
+                </span>
+              </div>
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+                <input type="text" id="inline-ticket-url" readonly style="flex: 1; padding: 0.55rem 0.75rem; border-radius: 8px; border: 1px solid #CBD5E1; font-size: 0.8rem; font-family: monospace; background: #F8FAFC; color: #1E293B; font-weight: 600;" />
+                <button type="button" id="btn-inline-copy" class="btn btn-primary btn-sm" style="font-weight: 800; white-space: nowrap;">
+                  <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+              </div>
+
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; padding-top: 0.65rem; border-top: 1px solid #F1F5F9;">
+                <div style="display: flex; align-items: center; gap: 0.65rem;">
+                  <img id="inline-qr-preview" src="" alt="Ticket QR" style="width: 48px; height: 48px; border-radius: 6px; border: 1px solid #E2E8F0;" />
+                  <span style="font-size: 0.78rem; color: #475569;">
+                    Includes your personal QR code synced with advertisement side flyer
+                  </span>
+                </div>
+                <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                  <a id="inline-share-wa" href="#" target="_blank" class="btn btn-sm" style="background: #25D366; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.35rem 0.65rem; border-radius: 6px;">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                  </a>
+                  <a id="inline-view-ad-poster" href="#" class="btn btn-outline btn-sm" style="font-size: 0.75rem; font-weight: 700; padding: 0.35rem 0.65rem; border-radius: 6px;">
+                    <i class="fa-solid fa-image"></i> View Advertisement Flyer
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Ticket Selection Box -->
+      <aside>
+        <div class="sidebar-ticket-card" id="select-tickets">
+          <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--dark); margin-bottom: 0.5rem;">
+            Select Ticket Package
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--dark-subtle); margin-bottom: 1.5rem;">
+            Choose your preferred ticket tier below to proceed to buyer details.
+          </p>
+
+          <!-- Ticket Options Container -->
+          <div id="ticket-options-container">
+            <!-- Injected via event-details.js -->
+          </div>
+
+          <button id="buy-ticket-btn" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 1rem;">
+            <i class="fa-solid fa-ticket"></i> Buy Ticket Now
+          </button>
+
+          <p style="text-align: center; font-size: 0.8rem; color: var(--gray-500); margin-top: 1rem;">
+            <i class="fa-solid fa-lock" style="color: var(--green-500);"></i> Guaranteed Authentic • Bank Transfer Verification
+          </p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <i class="fa-solid fa-ticket"></i>
+            <span>BOOK<span class="highlight">AM</span></span>
+          </a>
+          <p>The modern, reliable event discovery & ticket management platform built for creators and attendees.</p>
+          <div class="footer-socials">
+            <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer" class="social-icon social-whatsapp" aria-label="Official WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer" class="social-icon social-tiktok" aria-label="Official TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer" class="social-icon social-twitter" aria-label="Official Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Browse All Events</a></li>
+            <li><a href="organizer-dashboard.html">Organizer Portal</a></li>
+            <li><a href="influencer-dashboard.html">Promoter & Influencer Hub</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Official Social Reach</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 0.35rem;"></i> WhatsApp: +234 916 290 1356</a></li>
+            <li><a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok" style="margin-right: 0.35rem;"></i> TikTok: @justbookam</a></li>
+            <li><a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter" style="margin-right: 0.35rem;"></i> Twitter / X: @justbookam</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Support & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Support" target="_blank">24/7 WhatsApp Support</a></li>
+            <li><a href="organizer-register.html#terms">Exclusive Ticketing Agreement</a></li>
+            <li><a href="index.html">Terms of Service</a></li>
+            <li><a href="index.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BOOKAM Event Platform. All rights reserved.</p>
+        <p>Built for Nigeria's vibrant event ecosystem</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/store.js"></script>
+  <script type="module" src="js/event-details.js"></script>
+</body>
+</html>

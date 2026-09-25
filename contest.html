@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOOKAM — Live Contests & Voting</title>
+  <script>
+    // Smart router: If ID is provided, route to contest-details.html; otherwise route to contests.html
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('id')) {
+      window.location.replace('contest-details.html' + window.location.search);
+    } else {
+      window.location.replace('contests.html' + window.location.search);
+    }
+  </script>
+</head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #0f172a; color: #fff;">
+  <div style="text-align: center;">
+    <div style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">BOOKAM Contests</div>
+    <p style="color: #94a3b8; font-size: 0.9rem;">Redirecting to live contest page...</p>
+  </div>
+</body>
+</html>

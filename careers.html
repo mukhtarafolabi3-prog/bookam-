@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Call For Ambassadors - BOOKAM Ambassador Network</title>
+  <meta name="description" content="Call For Ambassadors. DON'T JUST ATTEND. REPRESENT. Join the BOOKAM Ambassador Network for VIP access, commissions, and exclusive event perks." />
+  <meta property="og:title" content="Call For Ambassadors - BOOKAM Ambassador Network" />
+  <meta property="og:description" content="DON'T JUST ATTEND. REPRESENT. We're looking for confident, charismatic individuals to join our Ambassador Network." />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- App Styles -->
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/index.css" />
+  <style>
+    /* Ambassador Page Dedicated Styles */
+    .ambassador-hero-wrap {
+      background: #0B0F19;
+      color: #fff;
+      padding: 3.5rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .ambassador-hero-bg-glow {
+      position: absolute;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(124, 58, 237, 0.1) 40%, rgba(11, 15, 25, 0) 75%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Poster Card Frame */
+    .poster-showcase-card {
+      background: #000;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.12);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .poster-showcase-card:hover {
+      box-shadow: 0 30px 60px -10px rgba(168, 85, 247, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.25);
+    }
+
+    /* Top Half of Poster: Nightlife Crowd & Call For AMBASSADORS */
+    .poster-top-scene {
+      position: relative;
+      min-height: 380px;
+      background: url('assets/images/ambassador_call.jpg') center top / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.75rem 2rem;
+      overflow: hidden;
+    }
+    .poster-top-scene::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(11, 15, 25, 0.35) 0%, rgba(88, 28, 135, 0.25) 50%, rgba(15, 23, 42, 0.85) 100%);
+      z-index: 1;
+    }
+    .poster-top-scene > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .poster-bookam-pill {
+      align-self: flex-end;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #fff;
+      padding: 0.4rem 0.95rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.02em;
+    }
+
+    .poster-title-wrap {
+      margin-top: auto;
+      padding-top: 3.5rem;
+    }
+    .poster-call-for {
+      font-family: 'Dancing Script', 'Caveat', cursive;
+      font-size: 2.75rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1;
+      margin-bottom: -0.35rem;
+      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.75);
+    }
+    .poster-ambassadors {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      font-weight: 900;
+      color: #F8FAFC;
+      letter-spacing: -0.02em;
+      line-height: 0.92;
+      text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0, 0, 0, 0.85);
+    }
+
+    /* Bottom Half of Poster: Lavender Card */
+    .poster-bottom-card {
+      background: #EFE4F8;
+      color: #3B0764;
+      padding: 2.25rem 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .poster-headline {
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      color: #3B0764;
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
+      line-height: 1.2;
+    }
+    .poster-subtitle {
+      font-size: 1.08rem;
+      color: #4C1D95;
+      line-height: 1.55;
+      margin-bottom: 1.75rem;
+      max-width: 520px;
+    }
+    .poster-subtitle strong {
+      font-weight: 900;
+      color: #2E1065;
+    }
+    .poster-prompt-row {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .poster-prompt-text {
+      font-size: 1.22rem;
+      font-style: italic;
+      color: #3B0764;
+      font-weight: 500;
+    }
+    .poster-prompt-text strong {
+      font-weight: 900;
+      font-style: italic;
+    }
+    .poster-arrow-line {
+      display: inline-flex;
+      align-items: center;
+      color: #3B0764;
+      font-size: 1.35rem;
+      font-weight: 900;
+    }
+    .poster-arrow-line::before {
+      content: '';
+      display: inline-block;
+      width: 72px;
+      height: 3px;
+      background: #3B0764;
+      border-radius: 2px;
+      margin-right: -4px;
+    }
+
+    /* Scannable QR Code on Advertisement Flyer Side */
+    .poster-qr-badge {
+      position: absolute;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      background: #FFFFFF;
+      border: 2px solid #7C3AED;
+      border-radius: 18px;
+      padding: 0.5rem 0.65rem 0.45rem;
+      box-shadow: 0 12px 28px rgba(124, 58, 237, 0.28), 0 4px 10px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      z-index: 5;
+      text-decoration: none;
+    }
+    .poster-qr-badge:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 18px 36px rgba(124, 58, 237, 0.4);
+      border-color: #9333EA;
+    }
+    .poster-qr-badge img {
+      width: 96px;
+      height: 96px;
+      display: block;
+      border-radius: 8px;
+      background: #fff;
+    }
+    .poster-qr-label {
+      font-size: 0.62rem;
+      font-weight: 900;
+      color: #3B0764;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      white-space: nowrap;
+    }
+    @media (max-width: 640px) {
+      .poster-qr-badge {
+        position: static;
+        margin-top: 1.25rem;
+        align-self: flex-start;
+      }
+      .poster-bottom-card {
+        padding: 1.75rem 1.25rem;
+      }
+    }
+
+    /* Ambassador Tab Buttons */
+    .amb-tab-btn {
+      transition: all 0.2s ease;
+    }
+    .amb-tab-btn:hover {
+      opacity: 0.95;
+    }
+
+    /* Application Form Card */
+    .ambassador-form-card {
+      background: #FFFFFF;
+      border: 1px solid var(--gray-200);
+      border-radius: 24px;
+      padding: 2.25rem;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+
+    .form-pill-select {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .form-pill-btn {
+      padding: 0.45rem 0.95rem;
+      border-radius: 9999px;
+      border: 1px solid var(--gray-300);
+      background: #F8FAFC;
+      color: var(--dark-subtle);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .form-pill-btn:hover, .form-pill-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Perks Grid */
+    .ambassador-perk-card {
+      background: #FFFFFF;
+      border: 1px solid var(--gray-200);
+      border-radius: 18px;
+      padding: 1.75rem;
+      transition: all 0.25s ease;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+    .ambassador-perk-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -6px rgba(124, 58, 237, 0.12);
+    }
+    .perk-icon-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    /* Support & Contact Card */
+    .support-contact-box {
+      background: linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%);
+      border-radius: 24px;
+      color: #fff;
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #334155;
+    }
+    .support-contact-box::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-item-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: #fff;
+    }
+    .contact-item-row:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(168, 85, 247, 0.5);
+      transform: translateX(4px);
+    }
+
+    /* Success state modal or alert */
+    .app-success-banner {
+      display: none;
+      background: #ECFDF5;
+      border: 2px solid #10B981;
+      border-radius: 18px;
+      padding: 1.75rem;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" id="brand-logo-nav">
+        <i class="fa-solid fa-ticket" style="color: var(--primary);"></i>
+        <span>BOOK<span class="highlight">AM</span></span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="event-onboarding.html" class="nav-link"><i class="fa-solid fa-calendar-plus" style="color: var(--primary); margin-right: 0.25rem;"></i> Create Event</a></li>
+        <li><a href="create-contest.html" class="nav-link"><i class="fa-solid fa-trophy" style="color: #f59e0b; margin-right: 0.25rem;"></i> Create Contest Page</a></li>
+        <li><a href="events.html" class="nav-link"><i class="fa-solid fa-calendar-check" style="color: var(--primary); margin-right: 0.25rem;"></i> Explore Events</a></li>
+        <li><a href="contests.html" class="nav-link"><i class="fa-solid fa-trophy" style="color: #f59e0b; margin-right: 0.25rem;"></i> Live Contests</a></li>
+        <li><a href="careers.html" class="nav-link active"><i class="fa-solid fa-star" style="color: #A855F7; margin-right: 0.25rem;"></i> Call For Ambassadors</a></li>
+        <li class="nav-item-dropdown">
+          <a href="organizer-dashboard.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.35rem;">
+            <span>Organizer Suite</span>
+            <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; opacity: 0.7;"></i>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="organizer-dashboard.html" class="nav-dropdown-item">
+              <i class="fa-solid fa-gauge-high" style="color: var(--primary);"></i>
+              <div>
+                <div style="font-weight: 700; color: var(--dark); font-size: 0.9rem;">Organizer Dashboard</div>
+                <div style="font-size: 0.75rem; color: var(--dark-subtle);">Manage your events & contests</div>
+              </div>
+            </a>
+            <a href="control-panel.html" class="nav-dropdown-item admin-link">
+              <i class="fa-solid fa-shield-halved" style="color: #818CF8;"></i>
+              <div>
+                <div style="font-weight: 700; color: #818CF8; font-size: 0.88rem;">Master Control Panel</div>
+                <div style="font-size: 0.72rem; color: #94A3B8;">Super Admin governance</div>
+              </div>
+            </a>
+          </div>
+        </li>
+        <li><a href="influencer-dashboard.html" class="nav-link">Influencer Portal</a></li>
+        <li><a href="contact.html" class="nav-link"><i class="fa-solid fa-headset" style="color: var(--primary); margin-right: 0.25rem;"></i> Support & Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#ambassador-form-section" class="btn btn-primary btn-sm" style="font-weight: 800; background: linear-gradient(135deg, #7C3AED, #9333EA);">
+          <i class="fa-solid fa-paper-plane"></i> Apply Now
+        </a>
+        <a href="contact.html" class="btn btn-outline btn-sm">
+          <i class="fa-solid fa-headset"></i> Support & Contact
+        </a>
+      </div>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close">&times;</button>
+    <a href="index.html" class="brand-logo" style="margin-bottom: 1rem;">
+      <i class="fa-solid fa-ticket" style="color: var(--primary);"></i>
+      <span>BOOK<span class="highlight">AM</span></span>
+    </a>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="event-onboarding.html" class="nav-link"><i class="fa-solid fa-calendar-plus" style="color: var(--primary);"></i> Create Event</a>
+    <a href="create-contest.html" class="nav-link"><i class="fa-solid fa-trophy" style="color: #f59e0b;"></i> Create Contest Page</a>
+    <a href="events.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i> Explore Events & Tickets</a>
+    <a href="contests.html" class="nav-link"><i class="fa-solid fa-trophy"></i> Live Contests & Voting</a>
+    <a href="careers.html" class="nav-link active"><i class="fa-solid fa-star" style="color: #A855F7;"></i> Call For Ambassadors</a>
+    <a href="contact.html" class="nav-link"><i class="fa-solid fa-headset" style="color: var(--primary);"></i> Support & Contact</a>
+    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; border-top: 1px solid var(--gray-200); padding-top: 1rem;">
+      <div style="font-size: 0.72rem; font-weight: 800; color: var(--gray-500); text-transform: uppercase; margin-bottom: 0.35rem; letter-spacing: 0.05em;">Organizer Suite</div>
+      <a href="organizer-dashboard.html" class="btn btn-outline" style="justify-content: center; width: 100%;">
+        <i class="fa-solid fa-gauge-high"></i> Organizer Dashboard
+      </a>
+      <a href="control-panel.html" class="btn" style="background: #0F172A; color: #818CF8; border: 1px solid #334155; font-weight: 700; text-align: center; justify-content: center; width: 100%; margin-top: 0.4rem;">
+        <i class="fa-solid fa-shield-halved"></i> Master Control Panel
+      </a>
+      <a href="influencer-dashboard.html" class="btn btn-outline" style="justify-content: center; margin-top: 0.25rem;">
+        <i class="fa-solid fa-bullhorn"></i> Influencer Portal
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Hero Section: The Exact Flyer Presentation -->
+  <main class="ambassador-hero-wrap">
+    <div class="ambassador-hero-bg-glow"></div>
+    <div class="container" style="position: relative; z-index: 2;">
+      
+      <!-- Top Announcement Pill -->
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.35); color: #D8B4FE; font-size: 0.85rem; font-weight: 800; padding: 0.45rem 1.15rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.05em;">
+          <i class="fa-solid fa-sparkles" style="color: #F59E0B;"></i> Official 2026 Ambassador Recruitment
+        </div>
+      </div>
+
+      <!-- Two-Column Layout: Visual Poster & Instant Application Form -->
+      <div style="display: grid; grid-template-columns: 1fr; lg:grid-template-columns: 1.05fr 1fr; gap: 2.5rem; align-items: start; max-width: 1120px; margin: 0 auto;">
+        
+        <!-- LEFT COLUMN: The Ambassador Flyer (Exact Match to User Image) -->
+        <div>
+          <div class="poster-showcase-card" id="ambassador-poster-card">
+            <!-- Top Half: Nightlife & Concert Crowd with Cursive Call For and Bold AMBASSADORS -->
+            <div class="poster-top-scene" id="ad-poster-top-scene" style="position: relative;">
+              <div class="poster-bookam-pill">
+                <i class="fa-solid fa-book-open"></i> BookAm
+              </div>
+
+              <!-- Dynamic Event Badge on Advertisement Side -->
+              <div id="ad-poster-event-badge" style="position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(0,0,0,0.65); backdrop-filter: blur(8px); color: #fff; padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.25); max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                <i class="fa-solid fa-calendar-check" style="color: #A855F7;"></i> <span id="ad-poster-event-title">Sixteen Beach Festival</span>
+              </div>
+
+              <div class="poster-title-wrap">
+                <div class="poster-call-for">Call For</div>
+                <div class="poster-ambassadors">AMBASSADORS</div>
+              </div>
+            </div>
+
+            <!-- Bottom Half: Lavender Card with Dark Purple Typography -->
+            <div class="poster-bottom-card" style="position: relative;">
+              <!-- Personalized Ambassador Rep Pill -->
+              <div id="ad-poster-handle-pill" style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(124, 58, 237, 0.14); color: #4C1D95; padding: 0.3rem 0.75rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 800; margin-bottom: 0.85rem; border: 1px solid rgba(124, 58, 237, 0.25);">
+                <i class="fa-solid fa-id-badge" style="color: var(--primary);"></i> Official Rep: @<span id="ad-poster-handle-text">ambassador</span>
+              </div>
+
+              <h2 class="poster-headline">DON'T JUST ATTEND. REPRESENT.</h2>
+              <p class="poster-subtitle">
+                We're looking for confident, charismatic individuals to <strong>join</strong> our Ambassador Network.
+              </p>
+
+              <div class="poster-prompt-row">
+                <span class="poster-prompt-text">Think You've Got What It <strong>Takes</strong>?</span>
+                <span class="poster-arrow-line">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </span>
+              </div>
+
+              <!-- Scannable QR Code on Advertisement Flyer Side -->
+              <a href="#ambassador-form-section" class="poster-qr-badge" id="ad-qr-badge" title="Scan with phone camera or click to view personal ticket link">
+                <img id="ad-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fbookam.ng%2Fbuy-ticket.html%3Fref%3Dambassador" alt="Ticket QR Code" />
+                <span class="poster-qr-label"><i class="fa-solid fa-qrcode"></i> SCAN FOR TICKETS</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Flyer Actions & Quick Share Row -->
+          <div style="margin-top: 1rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a id="btn-download-flyer-qr" href="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fbookam.ng%2Fbuy-ticket.html%3Fref%3Dambassador" download="advertisement-flyer-qr.png" class="btn btn-primary btn-sm" style="flex: 1; min-width: 170px; font-weight: 800; justify-content: center; background: linear-gradient(135deg, #7C3AED, #9333EA);">
+              <i class="fa-solid fa-download"></i> Save Flyer QR Code
+            </a>
+            <button type="button" id="btn-print-flyer" class="btn btn-outline btn-sm" style="flex: 1; min-width: 140px; font-weight: 700; justify-content: center; background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.2);">
+              <i class="fa-solid fa-print"></i> Print Flyer
+            </button>
+          </div>
+
+          <!-- Quick WhatsApp Hotline Callout under poster -->
+          <div style="margin-top: 1.5rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <div style="width: 40px; height: 40px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.25rem;">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div>
+                <div style="font-weight: 800; font-size: 0.9rem; color: #fff;">Questions or Instant Pitch?</div>
+                <div style="font-size: 0.78rem; color: #94A3B8;">Chat directly with Ambassador Team on WhatsApp</div>
+              </div>
+            </div>
+            <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM,%20I%20want%20to%20apply%20as%20an%20Ambassador!" target="_blank" rel="noopener noreferrer" class="btn btn-sm" style="background: #25D366; color: #fff; font-weight: 800; border-radius: 9999px;">
+              <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Ambassador Suite (Personal Link Generator & Application Form) -->
+        <div id="ambassador-form-section">
+          <div class="ambassador-form-card">
+            
+            <!-- Mode Switcher Tabs -->
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem; background: #F1F5F9; padding: 0.35rem; border-radius: 14px;">
+              <button type="button" id="tab-btn-create-link" class="amb-tab-btn active" style="flex: 1; padding: 0.7rem 0.85rem; border-radius: 10px; border: none; font-weight: 800; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.45rem; background: var(--primary); color: #fff; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);">
+                <i class="fa-solid fa-link"></i> Personal Ticket Link
+              </button>
+              <button type="button" id="tab-btn-apply-form" class="amb-tab-btn" style="flex: 1; padding: 0.7rem 0.85rem; border-radius: 10px; border: none; font-weight: 700; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.45rem; background: transparent; color: var(--dark-subtle);">
+                <i class="fa-solid fa-id-badge"></i> Apply as Ambassador
+              </button>
+            </div>
+
+            <!-- VIEW 1: Interactive Personal Ticket Link Generator -->
+            <div id="view-personal-ticket-link">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 1rem;">
+                <div>
+                  <span class="badge" style="background: rgba(124, 58, 237, 0.12); color: var(--primary); font-weight: 800; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 9999px; text-transform: uppercase;">
+                    <i class="fa-solid fa-sparkles"></i> Ambassador Engine
+                  </span>
+                  <h3 style="font-size: 1.4rem; font-weight: 900; color: var(--dark); margin: 0.4rem 0 0.15rem;">
+                    Personal Link to Ticket
+                  </h3>
+                  <p style="font-size: 0.85rem; color: var(--dark-subtle); margin: 0;">
+                    Generate your tracked ticket link & QR code for WhatsApp, TikTok, and Instagram.
+                  </p>
+                </div>
+                <div style="width: 48px; height: 48px; border-radius: 50%; background: #F3E8FF; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.25rem; flex-shrink: 0;">
+                  <i class="fa-solid fa-ticket"></i>
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.25rem;">
+                <div>
+                  <label style="display: block; font-size: 0.82rem; font-weight: 800; color: var(--dark); margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.03em;">
+                    1. Select Event *
+                  </label>
+                  <select id="tool-event-select" style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--gray-300); font-family: inherit; font-size: 0.92rem; background: #fff; font-weight: 600;">
+                    <option value="">Loading events...</option>
+                  </select>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+                  <div>
+                    <label style="display: block; font-size: 0.82rem; font-weight: 800; color: var(--dark); margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.03em;">
+                      2. Your Name or Handle *
+                    </label>
+                    <input type="text" id="tool-ambassador-handle" placeholder="e.g. chioma or tunde" value="ambassador" style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--gray-300); font-family: inherit; font-size: 0.92rem;" />
+                  </div>
+                  <div>
+                    <label style="display: block; font-size: 0.82rem; font-weight: 800; color: var(--dark); margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.03em;">
+                      3. Promo Code (Optional)
+                    </label>
+                    <input type="text" id="tool-promo-code" placeholder="e.g. VIP10" value="VIP10" style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--gray-300); font-family: inherit; font-size: 0.92rem; text-transform: uppercase;" />
+                  </div>
+                </div>
+
+                <button type="button" id="btn-generate-tool-link" class="btn btn-primary" style="width: 100%; justify-content: center; font-weight: 800; padding: 0.8rem; background: linear-gradient(135deg, #7C3AED, #9333EA); box-shadow: 0 8px 18px -4px rgba(124, 58, 237, 0.35);">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Personal Ticket Link & QR Code
+                </button>
+              </div>
+
+              <!-- Output Card -->
+              <div id="tool-result-card" style="background: #F8FAFC; border: 1px solid var(--gray-200); border-radius: 16px; padding: 1.25rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                  <span style="font-size: 0.8rem; font-weight: 800; color: #3B0764; text-transform: uppercase; display: flex; align-items: center; gap: 0.35rem;">
+                    <i class="fa-solid fa-link" style="color: var(--primary);"></i> Direct Ticket Checkout Link:
+                  </span>
+                  <span class="badge badge-purple" style="font-size: 0.72rem; padding: 0.2rem 0.55rem;">10% Comm. + Discount</span>
+                </div>
+
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                  <input type="text" id="tool-ticket-url" readonly value="" style="flex: 1; padding: 0.65rem 0.85rem; border-radius: 8px; border: 1px solid var(--gray-300); font-size: 0.82rem; font-family: monospace; background: #fff; color: var(--dark); font-weight: 600;" />
+                  <button type="button" id="btn-copy-ticket-url" class="btn btn-primary btn-sm" style="white-space: nowrap; padding: 0.5rem 0.9rem; font-weight: 800;">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                  </button>
+                </div>
+
+                <!-- QR Code & Quick Scan Showcase -->
+                <div style="display: grid; grid-template-columns: 105px 1fr; gap: 1rem; align-items: center; background: #FFFFFF; border: 1px solid var(--gray-200); border-radius: 12px; padding: 0.85rem; margin-bottom: 1rem;">
+                  <div style="text-align: center;">
+                    <img id="tool-qr-image" src="" alt="Personal Ticket QR Code" style="width: 100px; height: 100px; border-radius: 8px; border: 1px solid var(--gray-200); display: block; margin: 0 auto 0.35rem;" />
+                    <a id="btn-download-tool-qr" href="#" download="bookam-ticket-qr.png" class="btn btn-outline btn-sm" style="padding: 0.2rem 0.5rem; font-size: 0.7rem; width: 100%; justify-content: center;">
+                      <i class="fa-solid fa-download"></i> Save QR
+                    </a>
+                  </div>
+                  <div>
+                    <div style="font-weight: 800; font-size: 0.88rem; color: var(--dark); margin-bottom: 0.25rem;">
+                      Personal Ticket QR Code Ready
+                    </div>
+                    <p style="font-size: 0.78rem; color: var(--dark-subtle); margin-bottom: 0.65rem; line-height: 1.4;">
+                      When attendees scan this QR code on flyers or stories, they land directly on ticket checkout with your referral attached.
+                    </p>
+                    <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                      <a id="tool-test-ticket-link" href="#" target="_blank" class="btn btn-outline btn-sm" style="padding: 0.35rem 0.7rem; font-size: 0.75rem;">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Test Buy Ticket
+                      </a>
+                      <a id="tool-event-details-link" href="#" target="_blank" class="btn btn-outline btn-sm" style="padding: 0.35rem 0.7rem; font-size: 0.75rem;">
+                        <i class="fa-solid fa-eye"></i> View Event
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Instant Share Row -->
+                <div style="padding-top: 0.85rem; border-top: 1px solid var(--gray-200);">
+                  <span style="font-size: 0.76rem; font-weight: 800; color: var(--dark); text-transform: uppercase; margin-bottom: 0.5rem; display: block;">
+                    Share Directly With Your Audience:
+                  </span>
+                  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <a href="#" id="tool-share-whatsapp" target="_blank" class="btn btn-sm" style="background: #25D366; color: #fff; font-weight: 800; font-size: 0.78rem; padding: 0.45rem 0.8rem; border-radius: 8px;">
+                      <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="#" id="tool-share-x" target="_blank" class="btn btn-sm" style="background: #000; color: #fff; font-weight: 800; font-size: 0.78rem; padding: 0.45rem 0.8rem; border-radius: 8px;">
+                      <i class="fa-brands fa-x-twitter"></i> X (Twitter)
+                    </a>
+                    <button type="button" id="tool-copy-tiktok-helper" class="btn btn-outline btn-sm" style="font-weight: 800; font-size: 0.78rem; padding: 0.45rem 0.8rem; border-radius: 8px;">
+                      <i class="fa-brands fa-tiktok"></i> Copy Bio Link
+                    </button>
+                    <a href="influencer-dashboard.html" class="btn btn-outline btn-sm" style="font-weight: 700; font-size: 0.78rem; padding: 0.45rem 0.8rem; border-radius: 8px; margin-left: auto;">
+                      <i class="fa-solid fa-chart-line"></i> Track Sales
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Sync Notification -->
+                <div style="margin-top: 0.85rem; font-size: 0.75rem; color: #047857; background: #ECFDF5; border: 1px solid #A7F3D0; padding: 0.5rem 0.75rem; border-radius: 8px; display: flex; align-items: center; gap: 0.4rem;">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span><strong>Advertisement Flyer Synced:</strong> The poster QR code on the left now points to your personal ticket link.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- VIEW 2: Ambassador Application Form -->
+            <div id="view-ambassador-application" style="display: none;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 1rem;">
+                <div>
+                  <span class="badge" style="background: rgba(124, 58, 237, 0.12); color: var(--primary); font-weight: 800; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 9999px; text-transform: uppercase;">
+                    Ambassador Application
+                  </span>
+                  <h3 style="font-size: 1.45rem; font-weight: 900; color: var(--dark); margin: 0.4rem 0 0.15rem;">
+                    Join The Network
+                  </h3>
+                  <p style="font-size: 0.85rem; color: var(--dark-subtle); margin: 0;">
+                    Fill out the form below. Takes only 60 seconds.
+                  </p>
+                </div>
+                <div style="width: 48px; height: 48px; border-radius: 50%; background: #F3E8FF; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.25rem;">
+                  <i class="fa-solid fa-id-badge"></i>
+                </div>
+              </div>
+
+              <!-- Success State -->
+              <div id="ambassador-success-box" class="app-success-banner">
+                <div style="width: 56px; height: 56px; border-radius: 50%; background: #10B981; color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.6rem;">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 style="font-size: 1.35rem; font-weight: 900; color: #065F46; margin-bottom: 0.5rem;">
+                  Application Received!
+                </h3>
+                <p style="font-size: 0.92rem; color: #047857; margin-bottom: 1.25rem; line-height: 1.5;">
+                  Welcome to the BOOKAM Ambassador Network! Your personal ticket link has been activated below:
+                </p>
+
+                <!-- Activated Ticket Link in Success Box -->
+                <div style="background: #fff; border: 1px solid #A7F3D0; border-radius: 12px; padding: 1rem; margin-bottom: 1.25rem; text-align: left;">
+                  <div style="font-size: 0.78rem; font-weight: 800; color: #065F46; text-transform: uppercase; margin-bottom: 0.35rem;">
+                    Your Personal Link to the Ticket:
+                  </div>
+                  <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+                    <input type="text" id="success-personal-ticket-url" readonly value="" style="flex: 1; padding: 0.6rem; border-radius: 6px; border: 1px solid var(--gray-300); font-family: monospace; font-size: 0.8rem; background: #F8FAFC;" />
+                    <button type="button" id="btn-copy-success-ticket-link" class="btn btn-primary btn-sm" style="white-space: nowrap; font-weight: 800;">
+                      <i class="fa-regular fa-copy"></i> Copy
+                    </button>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <img id="success-personal-qr-img" src="" alt="Personal QR" style="width: 60px; height: 60px; border-radius: 6px; border: 1px solid var(--gray-200);" />
+                    <div style="font-size: 0.78rem; color: #047857;">
+                      Share this ticket link with your friends and audience. You earn 10% commission on every ticket sold.
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+                  <a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Team,%20I%20just%20submitted%20my%20Ambassador%20Application!" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background: #25D366; border-color: #25D366; font-weight: 800; justify-content: center;">
+                    <i class="fa-brands fa-whatsapp"></i> Expedite via WhatsApp Chat
+                  </a>
+                  <button type="button" class="btn btn-outline btn-sm" id="btn-submit-another-ambassador" style="justify-content: center;">
+                    Submit Another Application
+                  </button>
+                </div>
+              </div>
+
+              <!-- Main Application Form -->
+              <form id="ambassador-application-form">
+                <!-- Ambassador Persona Selector -->
+                <label style="display: block; font-size: 0.82rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem;">
+                  Your Primary Vibe / Role *
+                </label>
+                <div class="form-pill-select" id="role-pill-group">
+                  <button type="button" class="form-pill-btn active" data-role="Campus Ambassador">🎓 Campus Ambassador</button>
+                  <button type="button" class="form-pill-btn" data-role="Nightlife & Party Host">🍾 Nightlife & Club Host</button>
+                  <button type="button" class="form-pill-btn" data-role="Creator & Influencer">📸 Content Creator</button>
+                  <button type="button" class="form-pill-btn" data-role="Music & DJ Connector">🎧 Music & DJ Host</button>
+                  <button type="button" class="form-pill-btn" data-role="Event Promoter">🎟️ Event Promoter</button>
+                </div>
+                <input type="hidden" id="amb-selected-role" value="Campus Ambassador" />
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                  <div>
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem;">Full Name *</label>
+                    <input type="text" id="amb-full-name" required placeholder="e.g. Chioma Adeyemi" style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--gray-300); font-family: inherit; font-size: 0.95rem;" />
+                  </div>
+                  <div>
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem;">WhatsApp / Phone *</label>
+                    <input type="tel" id="amb-phone" required placeholder="08012345678" style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--gray-300); font-family: inherit; font-size: 0.95rem;" />
+                  </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                  <div>
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem;">Instagram or TikTok Handle *</label>
+                    <input type="text" id="amb-social" required placeholder="@yourhandle" style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--gray-300); font-family: inherit; font-size: 0.95rem;" />
+                  </div>
+                  <div>
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem;">City / Campus / Location *</label>
+                    <input type="text" id="amb-location" required placeholder="e.g. Lagos (Unilag) / Abuja" style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--gray-300); font-family: inherit; font-size: 0.95rem;" />
+                  </div>
+                </div>
+
+                <div style="margin-bottom: 1.25rem;">
+                  <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem;">Why do you want to represent BOOKAM? *</label>
+                  <textarea id="amb-note" rows="3" required placeholder="Tell us why you are passionate about events, concerts, or nightlife, and what makes you confident & charismatic..." style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--gray-300); font-family: inherit; font-size: 0.92rem; resize: vertical;"></textarea>
+                </div>
+
+                <button type="submit" id="btn-submit-ambassador" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 1.05rem; font-weight: 800; padding: 0.85rem; background: linear-gradient(135deg, #7C3AED, #9333EA); box-shadow: 0 8px 20px -4px rgba(124, 58, 237, 0.4);">
+                  <i class="fa-solid fa-paper-plane"></i> Represent BOOKAM - Submit Application
+                </button>
+
+                <div style="margin-top: 0.75rem; text-align: center; font-size: 0.78rem; color: var(--gray-500);">
+                  <i class="fa-solid fa-shield-check" style="color: #10B981;"></i> Submissions reviewed within 24 hours · Immediate notifications
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Ambassador Perks & Lifestyle Section -->
+  <section style="background: #F8FAFC; padding: 4.5rem 0; border-bottom: 1px solid var(--gray-200);">
+    <div class="container">
+      <div style="text-align: center; max-width: 650px; margin: 0 auto 3rem;">
+        <span class="badge" style="background: rgba(124, 58, 237, 0.1); color: var(--primary); font-size: 0.8rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 9999px; text-transform: uppercase;">
+          Ambassador Privileges
+        </span>
+        <h2 style="font-size: 2.25rem; font-weight: 900; color: var(--dark); margin: 0.6rem 0 0.5rem; letter-spacing: -0.02em;">
+          Don't Just Attend. Live The VIP Experience.
+        </h2>
+        <p style="color: var(--dark-subtle); font-size: 1rem; line-height: 1.6;">
+          As an official BOOKAM Ambassador, you are the face of Nigeria's premier events and ticketing ecosystem.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+        <!-- Perk 1 -->
+        <div class="ambassador-perk-card">
+          <div class="perk-icon-badge" style="background: rgba(124, 58, 237, 0.1); color: var(--primary);">
+            <i class="fa-solid fa-ticket"></i>
+          </div>
+          <div>
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--dark); margin-bottom: 0.35rem;">Free VIP & Backstage Passes</h3>
+            <p style="font-size: 0.88rem; color: var(--dark-subtle); line-height: 1.5; margin: 0;">
+              Get complimentary VIP entry, all-access guest passes, and backstage privileges at top concerts, festivals, and parties.
+            </p>
+          </div>
+        </div>
+
+        <!-- Perk 2 -->
+        <div class="ambassador-perk-card">
+          <div class="perk-icon-badge" style="background: rgba(16, 185, 129, 0.1); color: #059669;">
+            <i class="fa-solid fa-sack-dollar"></i>
+          </div>
+          <div>
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--dark); margin-bottom: 0.35rem;">Cash Commission & Rewards</h3>
+            <p style="font-size: 0.88rem; color: var(--dark-subtle); line-height: 1.5; margin: 0;">
+              Earn direct bank payouts for every ticket purchased, voter referred, and attendee you bring through your personalized affiliate code.
+            </p>
+          </div>
+        </div>
+
+        <!-- Perk 3 -->
+        <div class="ambassador-perk-card">
+          <div class="perk-icon-badge" style="background: rgba(245, 158, 11, 0.1); color: #D97706;">
+            <i class="fa-solid fa-shirt"></i>
+          </div>
+          <div>
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--dark); margin-bottom: 0.35rem;">Official Merch & Digital ID</h3>
+            <p style="font-size: 0.88rem; color: var(--dark-subtle); line-height: 1.5; margin: 0;">
+              Receive custom BOOKAM Ambassador apparel, varsity jackets, lanyard ID, and a verified ambassador badge on the platform.
+            </p>
+          </div>
+        </div>
+
+        <!-- Perk 4 -->
+        <div class="ambassador-perk-card">
+          <div class="perk-icon-badge" style="background: rgba(236, 72, 153, 0.1); color: #DB2777;">
+            <i class="fa-solid fa-handshake-angle"></i>
+          </div>
+          <div>
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--dark); margin-bottom: 0.35rem;">Network With Creators & DJs</h3>
+            <p style="font-size: 0.88rem; color: var(--dark-subtle); line-height: 1.5; margin: 0;">
+              Connect directly with high-profile event organizers, headline DJs, artist management teams, and fellow culture leaders.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support & Contact Section -->
+  <section id="support-contact-section" style="background: #FFFFFF; padding: 4.5rem 0;">
+    <div class="container">
+      <div class="support-contact-box">
+        <div style="display: grid; grid-template-columns: 1fr; md:grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center;">
+          
+          <div>
+            <span class="badge" style="background: rgba(168, 85, 247, 0.25); color: #D8B4FE; font-weight: 800; font-size: 0.8rem; padding: 0.35rem 0.85rem; border-radius: 9999px; text-transform: uppercase;">
+              Support & Contact
+            </span>
+            <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900; color: #fff; margin: 0.75rem 0 0.75rem; line-height: 1.2;">
+              Have Questions? We’re Here 24/7.
+            </h2>
+            <p style="color: #CBD5E1; font-size: 1rem; line-height: 1.6; margin-bottom: 2rem; max-width: 500px;">
+              Whether you want to inquire about Ambassador onboarding, event partnerships, ticket assistance, or promoter payouts, our team is standing by to help you immediately.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Team,%20I%20need%20support%20regarding%20Ambassadors%20and%20Events" target="_blank" rel="noopener noreferrer" class="contact-item-row">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; color: #fff; flex-shrink: 0;">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <div>
+                  <div style="font-weight: 800; font-size: 0.95rem;">24/7 Official WhatsApp Hotline</div>
+                  <div style="font-size: 0.82rem; color: #94A3B8;">+234 916 290 1356 (Instant Response)</div>
+                </div>
+              </a>
+
+              <a href="mailto:Bookam26@gmail.com?subject=BOOKAM%20Ambassador%20Inquiry" class="contact-item-row">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(124, 58, 237, 0.4); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: #D8B4FE; flex-shrink: 0;">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div>
+                  <div style="font-weight: 800; font-size: 0.95rem;">Official Email Helpdesk</div>
+                  <div style="font-size: 0.82rem; color: #94A3B8;">Bookam26@gmail.com</div>
+                </div>
+              </a>
+
+              <a href="tel:+2349162901356" class="contact-item-row">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(16, 185, 129, 0.4); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: #6EE7B7; flex-shrink: 0;">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div>
+                  <div style="font-weight: 800; font-size: 0.95rem;">Direct Phone Support</div>
+                  <div style="font-size: 0.82rem; color: #94A3B8;">Available Monday – Sunday 8am – 11pm WAT</div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- FAQ Card for Ambassadors -->
+          <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 18px; padding: 2rem;">
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+              <i class="fa-solid fa-circle-question" style="color: #A855F7;"></i> Ambassador Quick FAQ
+            </h3>
+
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              <div>
+                <h4 style="font-size: 0.92rem; font-weight: 800; color: #D8B4FE; margin-bottom: 0.25rem;">Who can join the Ambassador Network?</h4>
+                <p style="font-size: 0.84rem; color: #CBD5E1; margin: 0; line-height: 1.5;">
+                  Anyone who is passionate about music concerts, festivals, nightlife, or campus lifestyle with a charismatic social presence!
+                </p>
+              </div>
+
+              <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1rem;">
+                <h4 style="font-size: 0.92rem; font-weight: 800; color: #D8B4FE; margin-bottom: 0.25rem;">How quickly will I be contacted?</h4>
+                <p style="font-size: 0.84rem; color: #CBD5E1; margin: 0; line-height: 1.5;">
+                  Our talent team reviews submissions within 24 hours. You will receive an immediate WhatsApp message with your onboarding kit.
+                </p>
+              </div>
+
+              <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1rem;">
+                <h4 style="font-size: 0.92rem; font-weight: 800; color: #D8B4FE; margin-bottom: 0.25rem;">How do ambassador payouts work?</h4>
+                <p style="font-size: 0.84rem; color: #CBD5E1; margin: 0; line-height: 1.5;">
+                  Commissions are tracked automatically in your Ambassador / Promoter Dashboard with direct settlements to your bank account.
+                </p>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.5rem; text-align: center;">
+              <a href="#ambassador-form-section" class="btn btn-primary" style="width: 100%; justify-content: center; font-weight: 800;">
+                <i class="fa-solid fa-bolt"></i> Apply Now & Represent
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <i class="fa-solid fa-ticket"></i>
+            <span>BOOK<span class="highlight">AM</span></span>
+          </a>
+          <p class="footer-desc">
+            Nigeria's most reliable, trusted event discovery and high-speed digital ticketing ecosystem.
+          </p>
+          <div class="footer-socials">
+            <a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Explore Events</h4>
+          <ul class="footer-links">
+            <li><a href="events.html?category=Concerts">Music Concerts</a></li>
+            <li><a href="events.html?category=Festivals">Cultural Festivals</a></li>
+            <li><a href="events.html?category=Tech">Tech Summits</a></li>
+            <li><a href="events.html?category=Nightlife">Nightlife & Clubbing</a></li>
+            <li><a href="contests.html">Live Voting Contests</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">For Organizers</h4>
+          <ul class="footer-links">
+            <li><a href="index.html?action=create-event">Create Event</a></li>
+            <li><a href="index.html?action=create-contest">Create Contest</a></li>
+            <li><a href="organizer-dashboard.html">Organizer Portal</a></li>
+            <li><a href="influencer-dashboard.html">Influencer Affiliate Program</a></li>
+            <li><a href="control-panel.html">Master Control Panel</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Support & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="careers.html" style="color: #A855F7; font-weight: 800;"><i class="fa-solid fa-star" style="color: #F59E0B; margin-right: 0.35rem;"></i> Call For Ambassadors</a></li>
+            <li><a href="contact.html" style="font-weight: 700; color: var(--primary);">24/7 Support & Contact Center</a></li>
+            <li><a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Support" target="_blank">24/7 WhatsApp Support</a></li>
+            <li><a href="mailto:Bookam26@gmail.com">Direct Email: Bookam26@gmail.com</a></li>
+            <li><a href="tel:+2349162901356">Helpline: +234 916 290 1356</a></li>
+            <li><a href="organizer-register.html#terms">Exclusive Ticketing Agreement</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BOOKAM Technologies Inc. All rights reserved. Registered in Nigeria.</p>
+        <p>Call For Ambassadors: <a href="https://wa.me/2349162901356" style="color: var(--primary);">+234 916 290 1356</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/careers.js"></script>
+</body>
+</html>

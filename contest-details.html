@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contest Details & Live Voting — BOOKAM</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- App Styles -->
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/event-details.css" />
+  <style>
+    .contest-hero-banner {
+      position: relative;
+      background: #0f172a;
+      color: #fff;
+      padding: 3rem 0;
+      overflow: hidden;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .contest-hero-bg {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
+      filter: blur(8px);
+      transform: scale(1.05);
+    }
+    .contest-hero-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    @media (max-width: 868px) {
+      .contest-hero-content {
+        grid-template-columns: 1fr;
+      }
+    }
+    .contest-banner-box {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      border: 2px solid rgba(255,255,255,0.15);
+      aspect-ratio: 16/10;
+    }
+    .contestant-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .contestant-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-light);
+    }
+    .contestant-photo-wrap {
+      position: relative;
+      height: 260px;
+      overflow: hidden;
+      background: #0f172a;
+    }
+    .contestant-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .contestant-card:hover .contestant-photo {
+      transform: scale(1.05);
+    }
+    .contestant-code-badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .contestant-rank-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .rank-1 { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .rank-2 { background: linear-gradient(135deg, #94a3b8, #64748b); }
+    .rank-3 { background: linear-gradient(135deg, #b45309, #78350f); }
+    .rank-other { background: rgba(15, 23, 42, 0.75); color: #94a3b8; }
+
+    .qty-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--gray-300);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .qty-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .preset-vote-btn {
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--gray-300);
+      background: var(--gray-50);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .preset-vote-btn:hover, .preset-vote-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .voting-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .voting-modal.active {
+      display: flex;
+    }
+    .voting-modal-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      max-width: 520px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      border: 1px solid var(--gray-200);
+      animation: modalSlideUp 0.3s ease;
+    }
+    @keyframes modalSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-ticket" style="color: var(--primary);"></i>
+        <span>BOOK<span class="highlight">AM</span> <span style="font-size:0.75rem; background: var(--primary-light); color: var(--primary); padding: 0.15rem 0.4rem; border-radius: 4px; font-weight:800; margin-left: 0.2rem;">VOTEX</span></span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="event-onboarding.html" class="nav-link"><i class="fa-solid fa-calendar-plus" style="color: var(--primary); margin-right: 0.25rem;"></i> Create Event</a></li>
+        <li><a href="create-contest.html" class="nav-link"><i class="fa-solid fa-trophy" style="color: #f59e0b; margin-right: 0.25rem;"></i> Create Contest Page</a></li>
+        <li><a href="events.html" class="nav-link">Explore Events</a></li>
+        <li><a href="contests.html" class="nav-link active">Live Contests</a></li>
+        <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-star" style="color: #A855F7; margin-right: 0.25rem;"></i> Call For Ambassadors</a></li>
+        <li class="nav-item-dropdown">
+          <a href="organizer-dashboard.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.35rem;">
+            <span>Organizer Suite</span>
+            <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; opacity: 0.7;"></i>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="organizer-dashboard.html" class="nav-dropdown-item">
+              <i class="fa-solid fa-gauge-high" style="color: var(--primary);"></i>
+              <div>
+                <div style="font-weight: 700; color: var(--dark); font-size: 0.9rem;">Organizer Dashboard</div>
+                <div style="font-size: 0.75rem; color: var(--dark-subtle);">Manage your events & contests</div>
+              </div>
+            </a>
+            <a href="control-panel.html" class="nav-dropdown-item admin-link">
+              <i class="fa-solid fa-shield-halved" style="color: #818CF8;"></i>
+              <div>
+                <div style="font-weight: 700; color: #818CF8; font-size: 0.88rem;">Master Control Panel</div>
+                <div style="font-size: 0.72rem; color: #94A3B8;">Super Admin governance</div>
+              </div>
+            </a>
+          </div>
+        </li>
+        <li><a href="influencer-dashboard.html" class="nav-link">Influencer Portal</a></li>
+        <li><a href="contact.html" class="nav-link"><i class="fa-solid fa-headset" style="color: var(--primary); margin-right: 0.25rem;"></i> Support & Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="contests.html" class="btn btn-outline btn-sm">
+          <i class="fa-solid fa-arrow-left"></i> All Contests
+        </a>
+        <button id="btn-open-nominate-top" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-user-plus"></i> Nominate / Register
+        </button>
+      </div>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close">&times;</button>
+    <a href="index.html" class="brand-logo" style="margin-bottom: 1rem;">
+      <i class="fa-solid fa-ticket" style="color: var(--primary);"></i>
+      <span>BOOK<span class="highlight">AM</span></span>
+    </a>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="event-onboarding.html" class="nav-link"><i class="fa-solid fa-calendar-plus" style="color: var(--primary);"></i> Create Event</a>
+    <a href="create-contest.html" class="nav-link"><i class="fa-solid fa-trophy" style="color: #f59e0b;"></i> Create Contest Page</a>
+    <a href="events.html" class="nav-link">Explore Events</a>
+    <a href="contests.html" class="nav-link active">Live Contests</a>
+    <a href="careers.html" class="nav-link"><i class="fa-solid fa-star" style="color: #A855F7;"></i> Call For Ambassadors</a>
+    <a href="contact.html" class="nav-link"><i class="fa-solid fa-headset" style="color: var(--primary);"></i> Support & Contact</a>
+    <div style="border-top: 1px solid var(--gray-200); padding-top: 0.5rem; margin-top: 1rem;">
+      <div style="font-size: 0.72rem; font-weight: 800; color: var(--gray-500); text-transform: uppercase; margin-bottom: 0.35rem; letter-spacing: 0.05em;">Organizer Suite</div>
+      <a href="organizer-dashboard.html" class="btn btn-primary" style="justify-content: center; width: 100%;">
+        <i class="fa-solid fa-gauge-high"></i> Organizer Dashboard
+      </a>
+      <a href="control-panel.html" class="btn" style="background: #0F172A; color: #818CF8; border: 1px solid #334155; font-weight: 700; text-align: center; justify-content: center; width: 100%; margin-top: 0.4rem;">
+        <i class="fa-solid fa-shield-halved"></i> Master Control Panel
+      </a>
+    </div>
+  </div>
+
+  <!-- Contest Hero Banner -->
+  <header class="contest-hero-banner">
+    <img id="cnt-bg-img" src="" class="contest-hero-bg" alt="Contest Background" />
+    <div class="container contest-hero-content">
+      <div class="contest-banner-box">
+        <img id="cnt-banner" src="" alt="Contest Banner" style="width: 100%; height: 100%; object-fit: cover;" />
+      </div>
+
+      <div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+          <span id="cnt-category" class="badge" style="background: rgba(168, 85, 247, 0.25); color: #d8b4fe; border: 1px solid rgba(216, 180, 254, 0.3); padding: 0.3rem 0.75rem;">Category</span>
+          <span id="cnt-status" class="badge" style="background: rgba(16, 185, 129, 0.25); color: #6ee7b7; border: 1px solid rgba(110, 231, 183, 0.3); padding: 0.3rem 0.75rem;">Active</span>
+        </div>
+
+        <h1 id="cnt-title" style="font-size: 2.2rem; font-weight: 800; color: #fff; line-height: 1.25; margin-bottom: 0.75rem;">
+          Contest Title Loading...
+        </h1>
+
+        <p id="cnt-desc" style="font-size: 0.95rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 1.25rem; max-width: 680px;">
+          Contest description...
+        </p>
+
+        <!-- Stat Highlights & Live Countdown -->
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.12); align-items: center;">
+          <div>
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: #94a3b8;">Price / Vote</div>
+            <div id="cnt-vote-price" style="font-size: 1.25rem; font-weight: 800; color: #38bdf8;">₦100</div>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: #94a3b8;">Total Votes Cast</div>
+            <div id="cnt-total-votes" style="font-size: 1.25rem; font-weight: 800; color: #4ade80;">0</div>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: #94a3b8;">Total Nominees</div>
+            <div id="cnt-nominee-count" style="font-size: 1.25rem; font-weight: 800; color: #f472b6;">0</div>
+          </div>
+          <!-- Live Countdown Box -->
+          <div id="cnt-countdown-container" style="background: rgba(255,255,255,0.08); padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
+            <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: #cbd5e1; margin-bottom: 0.2rem;">
+              <i class="fa-solid fa-hourglass-half" style="color: #fbbf24;"></i> Voting Deadline
+            </div>
+            <div id="cnt-countdown-timer" style="font-size: 1rem; font-weight: 800; color: #fbbf24; font-family: monospace;">
+              --d : --h : --m : --s
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container" style="margin-top: 2.5rem; margin-bottom: 4rem;">
+    <!-- Navigation Tabs, Filters & Action Buttons -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+      <div style="display: flex; gap: 0.5rem; background: var(--gray-100); padding: 0.3rem; border-radius: var(--radius-md);">
+        <button id="tab-btn-contestants" class="btn btn-sm btn-primary">
+          <i class="fa-solid fa-users"></i> Contestants (<span id="cnt-nominee-badge">0</span>)
+        </button>
+        <button id="tab-btn-leaderboard" class="btn btn-sm btn-outline" style="border: none; color: var(--gray-600);">
+          <i class="fa-solid fa-trophy"></i> Live Leaderboard
+        </button>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+        <div style="position: relative; width: 100%; max-width: 260px;">
+          <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--gray-400);"></i>
+          <input type="text" id="search-contestant" class="form-control" placeholder="Search name or code..." style="padding-left: 2.5rem;" />
+        </div>
+
+        <select id="sort-contestant" class="form-control" style="width: auto; font-size: 0.85rem; padding: 0.5rem 0.8rem;">
+          <option value="votes">🔥 Most Votes</option>
+          <option value="code">🔢 Contestant Code</option>
+          <option value="name">🔤 Name (A-Z)</option>
+        </select>
+
+        <button id="btn-open-nominate" class="btn btn-outline btn-sm" style="color: var(--primary); border-color: var(--primary); font-weight: 700;">
+          <i class="fa-solid fa-user-plus"></i> Register Nominee
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW 1: Contestants Grid -->
+    <div id="view-contestants">
+      <div id="contestants-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem;">
+        <!-- Populated via JS -->
+      </div>
+    </div>
+
+    <!-- VIEW 2: Leaderboard View -->
+    <div id="view-leaderboard" style="display: none;">
+      <!-- Top 3 Podium Box -->
+      <div id="podium-box" style="display: flex; justify-content: center; align-items: flex-end; gap: 1.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; padding: 2rem 1rem; background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%); border-radius: var(--radius-lg); border: 1px solid var(--gray-200);">
+        <!-- Generated via JS -->
+      </div>
+
+      <!-- Ranked Table -->
+      <div style="background: #fff; border-radius: var(--radius-lg); border: 1px solid var(--gray-200); overflow: hidden; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background: var(--gray-50); border-bottom: 1px solid var(--gray-200);">
+          <h4 style="margin: 0; font-weight: 800; font-size: 1rem; color: var(--dark); display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-chart-simple" style="color: var(--primary);"></i> Complete Standings & Vote Statistics
+          </h4>
+          <button id="btn-print-leaderboard" class="btn btn-outline btn-sm" style="font-size: 0.775rem;">
+            <i class="fa-solid fa-print"></i> Print Standings
+          </button>
+        </div>
+        <div class="table-responsive">
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="background: var(--gray-50); border-bottom: 2px solid var(--gray-200); font-size: 0.8rem; text-transform: uppercase; color: var(--gray-600);">
+                <th style="padding: 1rem;">Rank</th>
+                <th style="padding: 1rem;">Contestant</th>
+                <th style="padding: 1rem;">Code</th>
+                <th style="padding: 1rem; text-align: right;">Total Votes</th>
+                <th style="padding: 1rem; text-align: right;">Share %</th>
+                <th style="padding: 1rem; text-align: center;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-table-body">
+              <!-- JS Populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- NOMINATE / REGISTER CONTESTANT MODAL -->
+  <div id="nominate-modal" class="voting-modal">
+    <div class="voting-modal-card" style="max-width: 520px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--gray-200); background: var(--gray-50);">
+        <h3 style="margin: 0; font-weight: 800; font-size: 1.15rem; color: var(--dark); display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-user-plus" style="color: var(--primary);"></i> Nominate / Register Contestant
+        </h3>
+        <button id="nominate-close-btn" style="background: none; border: none; font-size: 1.5rem; color: var(--gray-400); cursor: pointer;">&times;</button>
+      </div>
+
+      <div style="padding: 1.5rem;">
+        <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 1.25rem; line-height: 1.5;">
+          Submit your profile or nominate an outstanding talent to compete in this contest. Submissions are reviewed and activated by the contest organizer.
+        </p>
+
+        <form id="nomination-form">
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label class="form-label" style="font-size: 0.825rem;">Contestant Full Name *</label>
+            <input type="text" id="nom-name" class="form-control" placeholder="e.g. Chioma Eze" required />
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+            <div>
+              <label class="form-label" style="font-size: 0.825rem;">Contact Email *</label>
+              <input type="email" id="nom-email" class="form-control" placeholder="contestant@gmail.com" required />
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.825rem;">Phone Number *</label>
+              <input type="tel" id="nom-phone" class="form-control" placeholder="08012345678" required />
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label class="form-label" style="font-size: 0.825rem;">Photo Image URL</label>
+            <input type="url" id="nom-photo" class="form-control" placeholder="https://images.unsplash.com/..." />
+            <small style="font-size: 0.75rem; color: var(--gray-500);">Direct link to high-res profile photo or avatar</small>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label class="form-label" style="font-size: 0.825rem;">Short Bio / Project Description *</label>
+            <textarea id="nom-bio" class="form-control" rows="2" placeholder="Brief background, talent, or campaign statement..." required></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label class="form-label" style="font-size: 0.825rem;">Preferred Voting Code (Optional)</label>
+            <input type="text" id="nom-pref-code" class="form-control" placeholder="e.g. 108" />
+          </div>
+
+          <button type="submit" class="btn btn-primary w-full" style="padding: 0.85rem; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            <i class="fa-solid fa-paper-plane"></i> Submit Registration
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHARE CONTESTANT LINK MODAL -->
+  <div id="share-modal" class="voting-modal">
+    <div class="voting-modal-card" style="max-width: 480px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--gray-200); background: var(--gray-50);">
+        <h3 style="margin: 0; font-weight: 800; font-size: 1.15rem; color: var(--dark); display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-share-nodes" style="color: var(--primary);"></i> Share Direct Voting Link
+        </h3>
+        <button id="share-close-btn" style="background: none; border: none; font-size: 1.5rem; color: var(--gray-400); cursor: pointer;">&times;</button>
+      </div>
+
+      <div style="padding: 1.5rem;">
+        <div style="display: flex; gap: 1rem; align-items: center; background: #f8fafc; padding: 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--gray-200); margin-bottom: 1.25rem;">
+          <img id="share-cst-img" src="" alt="Nominee" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" />
+          <div>
+            <div id="share-cst-code" style="font-size: 0.75rem; font-weight: 800; color: var(--primary);">CODE: 000</div>
+            <strong id="share-cst-name" style="font-size: 1rem; color: var(--dark);">Contestant Name</strong>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1.25rem;">
+          <label style="display: block; font-size: 0.8rem; font-weight: 700; color: var(--dark); margin-bottom: 0.4rem;">Direct Voting URL</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="text" id="share-url-input" class="form-control" readonly style="font-size: 0.85rem; background: var(--gray-50);" />
+            <button id="btn-copy-share-url" class="btn btn-primary btn-sm" style="white-space: nowrap;">
+              <i class="fa-regular fa-copy"></i> Copy
+            </button>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+          <button id="btn-share-whatsapp" class="btn btn-outline" style="border-color: #25D366; color: #128C7E; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            <i class="fa-brands fa-whatsapp" style="font-size: 1.1rem; color: #25D366;"></i> WhatsApp
+          </button>
+          <button id="btn-share-twitter" class="btn btn-outline" style="border-color: #1DA1F2; color: #1DA1F2; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            <i class="fa-brands fa-x-twitter" style="font-size: 1.1rem;"></i> Share on X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VOTING MODAL -->
+  <div id="voting-modal" class="voting-modal">
+    <div class="voting-modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--gray-200); background: var(--gray-50);">
+        <h3 style="margin: 0; font-weight: 800; font-size: 1.15rem; color: var(--dark);">Cast Your Votes</h3>
+        <button id="modal-close-btn" style="background: none; border: none; font-size: 1.5rem; color: var(--gray-400); cursor: pointer;">&times;</button>
+      </div>
+
+      <div style="padding: 1.5rem;">
+        <!-- Contestant Info Card -->
+        <div style="display: flex; gap: 1rem; align-items: center; background: #f1f5f9; padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1.25rem;">
+          <img id="mdl-contestant-img" src="" alt="Contestant" style="width: 64px; height: 64px; object-fit: cover; border-radius: 50%; border: 2px solid var(--primary);" />
+          <div>
+            <div id="mdl-contestant-code" style="font-size: 0.75rem; font-weight: 800; color: var(--primary);">CODE: 001</div>
+            <h4 id="mdl-contestant-name" style="margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--dark);">Contestant Name</h4>
+            <div id="mdl-contestant-votes" style="font-size: 0.825rem; color: var(--gray-600);">Current Votes: 0</div>
+          </div>
+        </div>
+
+        <!-- Quantity Selector -->
+        <div style="margin-bottom: 1.25rem;">
+          <label style="display: block; font-weight: 700; font-size: 0.875rem; color: var(--dark); margin-bottom: 0.5rem;">
+            Number of Votes to Cast:
+          </label>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+            <button type="button" class="qty-btn" id="qty-minus">-</button>
+            <input type="number" id="qty-input" class="form-control" value="10" min="1" step="1" style="width: 100px; text-align: center; font-weight: 800; font-size: 1.1rem;" />
+            <button type="button" class="qty-btn" id="qty-plus">+</button>
+          </div>
+
+          <!-- Presets -->
+          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+            <button type="button" class="preset-vote-btn" data-qty="1">1 Vote</button>
+            <button type="button" class="preset-vote-btn" data-qty="5">5 Votes</button>
+            <button type="button" class="preset-vote-btn active" data-qty="10">10 Votes</button>
+            <button type="button" class="preset-vote-btn" data-qty="25">25 Votes</button>
+            <button type="button" class="preset-vote-btn" data-qty="50">50 Votes</button>
+            <button type="button" class="preset-vote-btn" data-qty="100">100 Votes</button>
+            <button type="button" class="preset-vote-btn" data-qty="250">250 Votes</button>
+            <button type="button" class="preset-vote-btn" data-qty="500">500 Votes</button>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div style="background: var(--gray-50); padding: 1rem; border-radius: var(--radius-md); border: 1px dashed var(--gray-300); margin-bottom: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.4rem; color: var(--gray-600);">
+            <span>Votes Subtotal (<span id="sum-vote-qty">10</span> × <span id="sum-vote-unit">₦100</span>):</span>
+            <span id="sum-subtotal" style="font-weight: 700; color: var(--dark);">₦1,000.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.4rem; color: var(--gray-600);">
+            <span>Service & Verification Fee (5%):</span>
+            <span id="sum-service-charge" style="font-weight: 700; color: var(--dark);">₦50.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 1.15rem; font-weight: 800; color: var(--dark); border-top: 1px solid var(--gray-300); padding-top: 0.5rem; margin-top: 0.5rem;">
+            <span>Total Amount:</span>
+            <span id="sum-total" style="color: var(--primary);">₦1,050.00</span>
+          </div>
+        </div>
+
+        <!-- Voter Information Form -->
+        <form id="voter-form">
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label class="form-label" style="font-size: 0.825rem;">Your Full Name *</label>
+            <input type="text" id="voter-name" class="form-control" placeholder="e.g. Samuel Adebayo" required />
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+            <div>
+              <label class="form-label" style="font-size: 0.825rem;">Email Address *</label>
+              <input type="email" id="voter-email" class="form-control" placeholder="samuel@gmail.com" required />
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.825rem;">Phone Number *</label>
+              <input type="tel" id="voter-phone" class="form-control" placeholder="08012345678" required />
+            </div>
+          </div>
+
+          <!-- Payment Method Selector -->
+          <div style="margin-bottom: 0.85rem;">
+            <label class="form-label" style="font-size: 0.825rem;">Select Payment Method *</label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+              <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.8rem; border: 1px solid var(--primary); background: #f0fdf4; border-radius: 6px; cursor: pointer; font-size: 0.825rem; font-weight: 700; color: var(--dark);">
+                <input type="radio" name="vote-pay-method" value="Bank Transfer" checked />
+                <span><i class="fa-solid fa-building-columns" style="color: var(--primary);"></i> Direct Transfer</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.8rem; border: 1px solid var(--gray-300); background: #fff; border-radius: 6px; cursor: pointer; font-size: 0.825rem; font-weight: 700; color: var(--dark);">
+                <input type="radio" name="vote-pay-method" value="Debit Card" />
+                <span><i class="fa-regular fa-credit-card" style="color: var(--primary);"></i> Instant Card</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Organizer Bank Account Box -->
+          <div id="bank-details-box" style="background: #e0f2fe; border: 1px solid #7dd3fc; border-radius: var(--radius-md); padding: 0.85rem; margin-bottom: 1.25rem;">
+            <div style="font-size: 0.775rem; font-weight: 800; color: #0369a1; text-transform: uppercase; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
+              <span><i class="fa-solid fa-building-columns"></i> Official Bank Transfer Details</span>
+              <button type="button" id="btn-copy-account" style="background: #0284c7; color: #fff; border: none; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; cursor: pointer;">
+                <i class="fa-regular fa-copy"></i> Copy Account
+              </button>
+            </div>
+            <div style="font-size: 0.85rem; color: #0c4a6e; line-height: 1.45;">
+              <div>Bank Name: <strong id="bank-name">Moniepoint</strong></div>
+              <div>Account Name: <strong id="bank-account-name">KAIWE DIGITAL</strong></div>
+              <div>Account Number: <strong id="bank-account-number" style="font-size: 1.05rem; letter-spacing: 0.5px;">8021174926</strong></div>
+            </div>
+          </div>
+
+          <button type="submit" id="btn-submit-vote" class="btn btn-primary w-full" style="padding: 0.85rem; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            <i class="fa-solid fa-vote-yea"></i> Confirm & Submit Votes
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS & DIGITAL VOTING RECEIPT MODAL -->
+  <div id="vote-success-modal" class="voting-modal">
+    <div class="voting-modal-card" style="max-width: 480px; text-align: center; padding: 2rem 1.5rem;">
+      <div style="width: 64px; height: 64px; background: #dcfce7; color: #16a34a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1rem auto;">
+        <i class="fa-solid fa-check-circle"></i>
+      </div>
+      <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--dark); margin-bottom: 0.25rem;">Votes Cast Successfully!</h3>
+      <p id="success-msg" style="color: var(--gray-600); font-size: 0.875rem; margin-bottom: 1.25rem; line-height: 1.4;">
+        Your votes have been officially verified and added to the contestant's live tally.
+      </p>
+
+      <!-- Digital Receipt Card -->
+      <div id="digital-receipt-card" style="background: #f8fafc; border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 1.25rem; text-align: left; margin-bottom: 1.25rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gray-200); padding-bottom: 0.75rem; margin-bottom: 0.75rem;">
+          <div>
+            <div style="font-size: 0.7rem; font-weight: 800; color: var(--primary); text-transform: uppercase;">Official Voting Receipt</div>
+            <strong id="rcpt-ref" style="font-size: 0.85rem; color: var(--dark); font-family: monospace;">VOTE-PAY-000000</strong>
+          </div>
+          <span class="badge badge-green" style="font-size: 0.75rem;"><i class="fa-solid fa-check"></i> VERIFIED</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.825rem; margin-bottom: 0.75rem;">
+          <div>
+            <span style="color: var(--gray-500); display: block; font-size: 0.725rem;">Nominee</span>
+            <strong id="rcpt-contestant-name" style="color: var(--dark);">Contestant Name</strong>
+          </div>
+          <div>
+            <span style="color: var(--gray-500); display: block; font-size: 0.725rem;">Voting Code</span>
+            <strong id="rcpt-contestant-code" style="color: var(--primary);">CODE: 000</strong>
+          </div>
+          <div>
+            <span style="color: var(--gray-500); display: block; font-size: 0.725rem;">Votes Cast</span>
+            <strong id="rcpt-votes" style="color: #10b981; font-size: 0.95rem;">10 Votes</strong>
+          </div>
+          <div>
+            <span style="color: var(--gray-500); display: block; font-size: 0.725rem;">Total Paid</span>
+            <strong id="rcpt-total" style="color: var(--dark);">₦1,050.00</strong>
+          </div>
+        </div>
+
+        <div style="font-size: 0.75rem; color: var(--gray-500); border-top: 1px dashed var(--gray-300); padding-top: 0.5rem; display: flex; justify-content: space-between;">
+          <span>Voter: <strong id="rcpt-voter" style="color: var(--dark);">Voter Name</strong></span>
+          <span id="rcpt-date">Just now</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 0.85rem;">
+        <button id="btn-share-vote-status" class="btn btn-outline" style="border-color: #25D366; color: #128C7E; font-size: 0.825rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
+          <i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 1rem;"></i> Share Vote
+        </button>
+        <button id="btn-print-receipt" class="btn btn-outline" style="font-size: 0.825rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
+          <i class="fa-solid fa-print"></i> Print Receipt
+        </button>
+      </div>
+
+      <button id="success-close-btn" class="btn btn-primary w-full" style="padding: 0.75rem;">
+        <i class="fa-solid fa-trophy"></i> Back to Leaderboard
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <i class="fa-solid fa-ticket"></i>
+            <span>BOOK<span class="highlight">AM</span></span>
+          </a>
+          <p>The ultimate platform for ticketing, live event management, and official voting contests.</p>
+          <div class="footer-socials">
+            <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer" class="social-icon social-whatsapp" aria-label="Official WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer" class="social-icon social-tiktok" aria-label="Official TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer" class="social-icon social-twitter" aria-label="Official Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Explore Events</a></li>
+            <li><a href="contests.html">Live Contests</a></li>
+            <li><a href="influencer-dashboard.html">Promoter Hub</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Official Social Reach</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 0.35rem;"></i> WhatsApp: +234 916 290 1356</a></li>
+            <li><a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok" style="margin-right: 0.35rem;"></i> TikTok: @justbookam</a></li>
+            <li><a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter" style="margin-right: 0.35rem;"></i> Twitter / X: @justbookam</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Support & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Support" target="_blank">24/7 WhatsApp Support</a></li>
+            <li><a href="organizer-register.html#terms">Exclusive Ticketing Agreement</a></li>
+            <li><a href="index.html">Terms of Service</a></li>
+            <li><a href="index.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BOOKAM Event Platform. All rights reserved.</p>
+        <p>Built for Nigeria's vibrant event ecosystem</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/store.js"></script>
+  <script type="module" src="js/contest-details.js"></script>
+</body>
+</html>

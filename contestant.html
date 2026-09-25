@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contestant Dashboard & Voting Hub — BOOKAM</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- App Styles -->
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/event-details.css" />
+  <style>
+    .cst-dashboard-header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #31104b 50%, #0f172a 100%);
+      color: #fff;
+      padding: 3rem 0 2rem 0;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .cst-dashboard-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .cst-profile-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-md);
+      padding: 1.75rem;
+      display: grid;
+      grid-template-columns: 180px 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      margin-top: -3.5rem;
+      position: relative;
+      z-index: 10;
+    }
+    @media (max-width: 868px) {
+      .cst-profile-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        margin-top: -2rem;
+        gap: 1.25rem;
+      }
+    }
+    .cst-avatar-wrap {
+      width: 170px;
+      height: 170px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      border: 4px solid #fff;
+      background: #0f172a;
+      margin: 0 auto;
+    }
+    .cst-avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .cst-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    @media (max-width: 900px) {
+      .cst-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 500px) {
+      .cst-stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .cst-stat-card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    .cst-stat-card .icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .share-tray {
+      background: #FAF5FF;
+      border: 1.5px dashed #D8B4FE;
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .share-btn-group {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-ticket" style="color: var(--primary);"></i>
+        <span>BOOK<span class="highlight">AM</span></span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="events.html" class="nav-link">Explore Events</a></li>
+        <li><a href="contests.html" class="nav-link">Live Contests</a></li>
+        <li><a href="organizer-dashboard.html" class="nav-link">Organizer Portal</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a id="btn-back-to-contest" href="contests.html" class="btn btn-outline btn-sm">
+          <i class="fa-solid fa-arrow-left"></i> View Full Contest
+        </a>
+      </div>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Header Banner -->
+  <header class="cst-dashboard-header">
+    <div class="container">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge" style="background: rgba(168, 85, 247, 0.3); color: #e9d5ff; border: 1px solid rgba(233, 213, 255, 0.4); margin-bottom: 0.5rem; display: inline-block;">
+            <i class="fa-solid fa-trophy"></i> Official Contestant Portal
+          </span>
+          <h1 id="cst-contest-title" style="font-size: 1.85rem; font-weight: 800; color: #fff; margin: 0.25rem 0;">
+            Contest Title Loading...
+          </h1>
+          <p id="cst-contest-category" style="color: #cbd5e1; font-size: 0.9rem; margin: 0;">
+            Live Voting Campaign
+          </p>
+        </div>
+
+        <!-- Live Countdown Widget -->
+        <div style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 0.85rem 1.25rem; border-radius: var(--radius-md); text-align: right;">
+          <div style="font-size: 0.75rem; text-transform: uppercase; color: #cbd5e1; letter-spacing: 0.5px;">
+            <i class="fa-solid fa-hourglass-half" style="color: #fbbf24;"></i> Voting Closes In
+          </div>
+          <div id="cst-countdown" style="font-size: 1.25rem; font-weight: 800; color: #fbbf24; font-family: monospace; margin-top: 0.2rem;">
+            --d : --h : --m : --s
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container" style="margin-bottom: 4rem;">
+
+    <!-- Switch Contestant Selector Bar (For preview & multi-contestant browsing) -->
+    <div style="margin-top: 1rem; margin-bottom: 0.5rem; display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem;">
+      <label style="font-size: 0.8rem; font-weight: 700; color: var(--gray-600);">Switch Nominee Profile:</label>
+      <select id="select-active-contestant" class="form-control" style="width: auto; font-size: 0.825rem; padding: 0.35rem 0.75rem; background: #fff;">
+        <!-- Populated via JS -->
+      </select>
+    </div>
+
+    <!-- Contestant Profile Card -->
+    <div class="cst-profile-card">
+      <div class="cst-avatar-wrap">
+        <img id="cst-photo" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Contestant Avatar" />
+      </div>
+
+      <div>
+        <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-bottom: 0.4rem;">
+          <span id="cst-code-pill" class="badge" style="background: var(--primary); color: #fff; font-size: 0.85rem; padding: 0.3rem 0.75rem; font-weight: 800; font-family: monospace;">
+            CONTESTANT #001
+          </span>
+          <span id="cst-rank-pill" class="badge badge-yellow" style="font-size: 0.85rem; padding: 0.3rem 0.75rem; font-weight: 800;">
+            👑 Current Position: #1
+          </span>
+        </div>
+        <h2 id="cst-name" style="font-size: 1.75rem; font-weight: 800; color: var(--dark); margin-bottom: 0.4rem;">
+          Contestant Full Name
+        </h2>
+        <p id="cst-bio" style="font-size: 0.925rem; color: var(--gray-600); line-height: 1.6; max-width: 680px; margin-bottom: 0;">
+          Contestant bio and project statement...
+        </p>
+      </div>
+
+      <div style="text-align: right; min-width: 200px;">
+        <button id="btn-vote-self" class="btn btn-primary btn-lg" style="width: 100%; justify-content: center; gap: 0.5rem; box-shadow: var(--shadow-purple);">
+          <i class="fa-solid fa-bolt"></i> Vote For Me Now
+        </button>
+        <span style="font-size: 0.75rem; color: var(--gray-500); display: block; margin-top: 0.5rem; text-align: center;">
+          <i class="fa-solid fa-shield-halved" style="color: var(--green-500);"></i> Instant QR & Bank Verification
+        </span>
+      </div>
+    </div>
+
+    <!-- Metrics Bar -->
+    <div class="cst-stats-grid">
+      <div class="cst-stat-card">
+        <div class="icon-box" style="background: #FAF5FF; color: var(--primary);">
+          <i class="fa-solid fa-check-to-slot"></i>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--gray-500); font-weight: 700; text-transform: uppercase;">Total Votes Cast</div>
+        <div id="stat-total-votes" style="font-size: 1.85rem; font-weight: 900; color: var(--dark); margin-top: 0.2rem;">0</div>
+        <div id="stat-vote-share" style="font-size: 0.75rem; color: var(--green-600); font-weight: 700; margin-top: 0.25rem;">0% of total contest votes</div>
+      </div>
+
+      <div class="cst-stat-card">
+        <div class="icon-box" style="background: #FEF3C7; color: #D97706;">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--gray-500); font-weight: 700; text-transform: uppercase;">Leaderboard Rank</div>
+        <div id="stat-leaderboard-pos" style="font-size: 1.85rem; font-weight: 900; color: #D97706; margin-top: 0.2rem;">#1</div>
+        <div id="stat-total-nominees" style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">Out of 0 nominees</div>
+      </div>
+
+      <div class="cst-stat-card">
+        <div class="icon-box" style="background: #ECFDF5; color: #059669;">
+          <i class="fa-solid fa-coins"></i>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--gray-500); font-weight: 700; text-transform: uppercase;">Amount Generated</div>
+        <div id="stat-revenue" style="font-size: 1.85rem; font-weight: 900; color: #059669; margin-top: 0.2rem;">₦0</div>
+        <div id="stat-vote-unit-price" style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">At ₦100 per vote</div>
+      </div>
+
+      <div class="cst-stat-card">
+        <div class="icon-box" style="background: #EFF6FF; color: #2563EB;">
+          <i class="fa-solid fa-people-group"></i>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--gray-500); font-weight: 700; text-transform: uppercase;">Supporters & Fans</div>
+        <div id="stat-supporters-count" style="font-size: 1.85rem; font-weight: 900; color: #2563EB; margin-top: 0.2rem;">0</div>
+        <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">Verified voters</div>
+      </div>
+    </div>
+
+    <!-- Personal Shareable Link Section -->
+    <div class="share-tray">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+        <div>
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--primary); margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-share-nodes"></i> Your Personal Voting Link
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--gray-600); margin: 0.25rem 0 0 0;">
+            Share this unique link on social media. When voters click it, it opens your profile and direct voting ballot immediately!
+          </p>
+        </div>
+        <span class="badge" style="background: #EDE9FE; color: var(--primary); font-weight: 700;">
+          <i class="fa-solid fa-link"></i> Auto-Targeted Ballot
+        </span>
+      </div>
+
+      <!-- URL Copy Bar -->
+      <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+        <input type="text" id="personal-voting-url" class="form-control" readonly style="background: #fff; font-weight: 600; font-family: monospace; font-size: 0.9rem;" />
+        <button id="btn-copy-my-link" class="btn btn-primary" style="white-space: nowrap; padding: 0.65rem 1.25rem; font-weight: 800;">
+          <i class="fa-regular fa-copy"></i> COPY MY VOTING LINK
+        </button>
+      </div>
+
+      <!-- Share Action Buttons -->
+      <div class="share-btn-group">
+        <button id="btn-share-wa" class="btn btn-outline" style="border-color: #25D366; color: #128C7E; font-weight: 700; background: #fff; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem; color: #25D366;"></i> SHARE ON WHATSAPP
+        </button>
+        <button id="btn-share-x" class="btn btn-outline" style="border-color: #000; color: #000; font-weight: 700; background: #fff; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-brands fa-x-twitter" style="font-size: 1.1rem;"></i> POST ON X (TWITTER)
+        </button>
+        <button id="btn-share-fb" class="btn btn-outline" style="border-color: #1877F2; color: #1877F2; font-weight: 700; background: #fff; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-brands fa-facebook" style="font-size: 1.1rem; color: #1877F2;"></i> SHARE ON FACEBOOK
+        </button>
+        <button id="btn-share-ig" class="btn btn-outline" style="border-color: #E1306C; color: #E1306C; font-weight: 700; background: #fff; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-brands fa-instagram" style="font-size: 1.1rem; color: #E1306C;"></i> INSTAGRAM STORY
+        </button>
+        <button id="btn-share-tiktok" class="btn btn-outline" style="border-color: #000; color: #000; font-weight: 700; background: #fff; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-brands fa-tiktok" style="font-size: 1.1rem;"></i> TIKTOK BIO
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Supporter Vote Feed & Leaderboard Table -->
+    <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.5rem;">
+      
+      <!-- Vote History Card -->
+      <div style="background: #fff; border-radius: var(--radius-lg); border: 1px solid var(--gray-200); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 0.75rem;">
+          <h4 style="margin: 0; font-weight: 800; font-size: 1.05rem; color: var(--dark); display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i> Recent Vote Transactions
+          </h4>
+          <span class="badge badge-green" id="badge-live-feed">Live Feed</span>
+        </div>
+
+        <div class="table-responsive">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+            <thead>
+              <tr style="background: var(--gray-50); border-bottom: 2px solid var(--gray-200); text-align: left; color: var(--gray-500); font-size: 0.75rem; text-transform: uppercase;">
+                <th style="padding: 0.65rem 0.75rem;">Supporter</th>
+                <th style="padding: 0.65rem 0.75rem; text-align: center;">Votes</th>
+                <th style="padding: 0.65rem 0.75rem; text-align: right;">Amount</th>
+                <th style="padding: 0.65rem 0.75rem; text-align: right;">Time</th>
+              </tr>
+            </thead>
+            <tbody id="vote-history-tbody">
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Live Contest Leaderboard Card -->
+      <div style="background: #fff; border-radius: var(--radius-lg); border: 1px solid var(--gray-200); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 0.75rem;">
+          <h4 style="margin: 0; font-weight: 800; font-size: 1.05rem; color: var(--dark); display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-trophy" style="color: #F59E0B;"></i> Contest Leaderboard
+          </h4>
+          <a id="link-view-all-rankings" href="contests.html" style="font-size: 0.8rem; font-weight: 700; color: var(--primary);">
+            Full Standings &rarr;
+          </a>
+        </div>
+
+        <div id="cst-leaderboard-list" style="display: flex; flex-direction: column; gap: 0.65rem;">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <i class="fa-solid fa-ticket"></i>
+            <span>BOOK<span class="highlight">AM</span></span>
+          </a>
+          <p>The ultimate platform for ticketing, live event management, and official voting contests.</p>
+          <div class="footer-socials">
+            <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer" class="social-icon social-whatsapp" aria-label="Official WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer" class="social-icon social-tiktok" aria-label="Official TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer" class="social-icon social-twitter" aria-label="Official Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Explore Events</a></li>
+            <li><a href="contests.html">Live Contests</a></li>
+            <li><a href="influencer-dashboard.html">Promoter Hub</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Official Social Reach</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 0.35rem;"></i> WhatsApp: +234 916 290 1356</a></li>
+            <li><a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok" style="margin-right: 0.35rem;"></i> TikTok: @justbookam</a></li>
+            <li><a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter" style="margin-right: 0.35rem;"></i> Twitter / X: @justbookam</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Support & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Support" target="_blank">24/7 WhatsApp Support</a></li>
+            <li><a href="organizer-register.html#terms">Exclusive Ticketing Agreement</a></li>
+            <li><a href="index.html">Terms of Service</a></li>
+            <li><a href="index.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BOOKAM Event Platform. All rights reserved.</p>
+        <p>Built for Nigeria's vibrant event ecosystem</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/store.js"></script>
+  <script type="module" src="js/contestant.js"></script>
+</body>
+</html>

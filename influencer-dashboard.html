@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Promoter Sales & Commission Dashboard — BOOKAM</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- App Styles -->
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/organizer-dashboard.css" />
+  <link rel="stylesheet" href="css/influencer-dashboard.css" />
+</head>
+<body class="dashboard-body">
+
+  <!-- Main Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-ticket"></i>
+        <span>BOOK<span class="highlight">AM</span></span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="events.html" class="nav-link">Explore Events</a></li>
+        <li><a href="contests.html" class="nav-link">Live Contests</a></li>
+        <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-briefcase" style="color: #10B981; margin-right: 0.25rem;"></i> Careers</a></li>
+        <li class="nav-item-dropdown">
+          <a href="organizer-dashboard.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.35rem;">
+            <span>Organizer Suite</span>
+            <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; opacity: 0.7;"></i>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="organizer-dashboard.html" class="nav-dropdown-item">
+              <i class="fa-solid fa-gauge-high" style="color: var(--primary);"></i>
+              <div>
+                <div style="font-weight: 700; color: var(--dark); font-size: 0.9rem;">Organizer Dashboard</div>
+                <div style="font-size: 0.75rem; color: var(--dark-subtle);">Manage your events & contests</div>
+              </div>
+            </a>
+            <a href="control-panel.html" class="nav-dropdown-item admin-link">
+              <i class="fa-solid fa-shield-halved" style="color: #818CF8;"></i>
+              <div>
+                <div style="font-weight: 700; color: #818CF8; font-size: 0.88rem;">Master Control Panel</div>
+                <div style="font-size: 0.72rem; color: #94A3B8;">Super Admin governance</div>
+              </div>
+            </a>
+          </div>
+        </li>
+        <li><a href="influencer-dashboard.html" class="nav-link active">Promoter Portal</a></li>
+      </ul>
+
+      <div class="nav-actions" id="influencer-nav-actions">
+        <span class="badge badge-purple" id="promoter-badge" style="font-size: 0.85rem; padding: 0.45rem 0.85rem;">
+          <i class="fa-solid fa-bullhorn"></i> Promoter & Influencer Hub
+        </span>
+        <button id="btn-inf-top-logout" class="btn btn-outline btn-sm" style="display: none; font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </button>
+      </div>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close">&times;</button>
+    <a href="index.html" class="brand-logo" style="margin-bottom: 1rem;">
+      <i class="fa-solid fa-ticket"></i>
+      <span>BOOK<span class="highlight">AM</span></span>
+    </a>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="events.html" class="nav-link">Explore Events</a>
+    <div style="border-top: 1px solid var(--gray-200); padding-top: 0.5rem; margin-top: 1rem;">
+      <div style="font-size: 0.72rem; font-weight: 800; color: var(--gray-500); text-transform: uppercase; margin-bottom: 0.35rem; letter-spacing: 0.05em;">Organizer Suite</div>
+      <a href="organizer-dashboard.html" class="nav-link" style="font-weight: 700;">
+        <i class="fa-solid fa-gauge-high" style="color: var(--primary);"></i> Organizer Dashboard
+      </a>
+      <a href="control-panel.html" class="nav-link" style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #818CF8; background: #0F172A; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); margin-top: 0.4rem; border: 1px solid #334155; font-weight: 700; text-decoration: none;">
+        <i class="fa-solid fa-shield-halved"></i> Master Control Panel
+      </a>
+    </div>
+    <a href="influencer-dashboard.html" class="nav-link active" style="margin-top: 0.75rem;">Promoter Portal</a>
+    <button id="btn-inf-drawer-logout" class="btn btn-outline btn-sm" style="display: none; margin-top: 1rem; width: 100%;">
+      <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+    </button>
+    
+    <!-- Mobile Social Links in Drawer -->
+    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-200);">
+      <p style="font-size: 0.8rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase; margin-bottom: 0.75rem;">Official BOOKAM Channels</p>
+      <div style="display: flex; gap: 0.75rem;">
+        <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer" class="social-icon social-whatsapp" style="background: #25D366; color: white;" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer" class="social-icon social-tiktok" style="background: #000; color: white;" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer" class="social-icon social-twitter" style="background: #000; color: white;" aria-label="Twitter X"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Container -->
+  <main class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
+
+    <!-- ==================== AUTH LOGIN VIEW (SHOWN IF NOT LOGGED IN) ==================== -->
+    <div id="influencer-auth-container" style="display: none;">
+      <div class="influencer-auth-wrapper">
+        <div class="influencer-auth-header">
+          <div style="width: 52px; height: 52px; background: rgba(255, 255, 255, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">
+            <i class="fa-solid fa-bullhorn"></i>
+          </div>
+          <h2 id="inf-auth-main-title" style="font-size: 1.45rem; font-weight: 800; margin: 0 0 0.5rem 0;">Promoter Portal</h2>
+          <p id="inf-auth-main-subtitle" style="font-size: 0.85rem; color: #E0E7FF; margin: 0; line-height: 1.4;">
+            Sign in or register to track live referral clicks, attendee promo code sales, and get paid 10% ticket commissions.
+          </p>
+        </div>
+
+        <div class="influencer-auth-body">
+          <!-- Auth Mode Toggle Tabs -->
+          <div class="influencer-auth-tabs">
+            <button type="button" id="tab-btn-inf-login" class="influencer-tab-btn active">
+              <i class="fa-solid fa-right-to-bracket"></i> Sign In
+            </button>
+            <button type="button" id="tab-btn-inf-register" class="influencer-tab-btn">
+              <i class="fa-solid fa-user-plus"></i> Register as Promoter
+            </button>
+          </div>
+
+          <!-- Alert message -->
+          <div id="inf-auth-alert" class="influencer-auth-alert"></div>
+
+          <!-- ================= VIEW 1: LOGIN FORM ================= -->
+          <div id="view-inf-login">
+            <!-- Login Form -->
+            <form id="influencer-login-form">
+              <div class="form-group">
+                <label for="inf-login-email" style="font-size: 0.875rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem; display: block;">
+                  Promoter Email or Username <span class="required">*</span>
+                </label>
+                <div class="influencer-auth-input-group">
+                  <i class="fa-solid fa-envelope field-icon"></i>
+                  <input 
+                    type="text" 
+                    id="inf-login-email" 
+                    class="form-control" 
+                    placeholder="Enter your promoter email or username" 
+                    required 
+                    autocomplete="username"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top: 1rem;">
+                <label for="inf-login-password" style="font-size: 0.875rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem; display: block;">
+                  Password <span class="required">*</span>
+                </label>
+                <div class="influencer-auth-input-group">
+                  <i class="fa-solid fa-lock field-icon"></i>
+                  <input 
+                    type="password" 
+                    id="inf-login-password" 
+                    class="form-control" 
+                    placeholder="••••••••••••" 
+                    required 
+                    autocomplete="current-password"
+                  />
+                  <button type="button" id="btn-toggle-inf-password" class="influencer-pass-toggle" title="Toggle password visibility">
+                    <i class="fa-regular fa-eye" id="inf-eye-icon"></i>
+                  </button>
+                </div>
+              </div>
+
+              <button type="submit" id="btn-submit-inf-login" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1rem; font-weight: 700; margin-top: 1.5rem; justify-content: center;">
+                <i class="fa-solid fa-right-to-bracket"></i> Sign In to Promoter Portal
+              </button>
+            </form>
+          </div>
+
+          <!-- ================= VIEW 2: PROMOTER REGISTRATION FORM ================= -->
+          <div id="view-inf-register" style="display: none;">
+            <div style="background: #EEF2FF; border: 1px solid #C7D2FE; border-radius: var(--radius-md); padding: 0.85rem 1rem; margin-bottom: 1.25rem; font-size: 0.825rem; color: var(--primary); display: flex; gap: 0.5rem; align-items: flex-start;">
+              <i class="fa-solid fa-gift" style="font-size: 1.1rem; margin-top: 2px;"></i>
+              <div>
+                <strong>Earn 10% Commission on Every Ticket Sold!</strong>
+                <p style="margin: 2px 0 0 0; color: #4338CA;">Get an instant unique referral link and custom discount promo code for your audience.</p>
+              </div>
+            </div>
+
+            <form id="influencer-register-form">
+              <div class="form-group" style="margin-bottom: 1rem;">
+                <label for="reg-inf-name" style="font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem; display: block;">
+                  Full Name <span class="required">*</span>
+                </label>
+                <div class="influencer-auth-input-group">
+                  <i class="fa-solid fa-user field-icon"></i>
+                  <input type="text" id="reg-inf-name" class="form-control" placeholder="e.g. Adeola Johnson" required />
+                </div>
+              </div>
+
+              <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
+                <div>
+                  <label for="reg-inf-username" style="font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem; display: block;">
+                    Promoter Handle <span class="required">*</span>
+                  </label>
+                  <div class="influencer-auth-input-group">
+                    <i class="fa-solid fa-at field-icon"></i>
+                    <input type="text" id="reg-inf-username" class="form-control" placeholder="adeolavibes" required />
+                  </div>
+                </div>
+                <div>
+                  <label for="reg-inf-phone" style="font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem; display: block;">
+                    Phone Number <span class="required">*</span>
+                  </label>
+                  <div class="influencer-auth-input-group">
+                    <i class="fa-solid fa-phone field-icon"></i>
+                    <input type="tel" id="reg-inf-phone" class="form-control" placeholder="+234 801 234 5678" required />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 1rem;">
+                <label for="reg-inf-email" style="font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem; display: block;">
+                  Email Address <span class="required">*</span>
+                </label>
+                <div class="influencer-auth-input-group">
+                  <i class="fa-solid fa-envelope field-icon"></i>
+                  <input type="email" id="reg-inf-email" class="form-control" placeholder="adeola@example.com" required />
+                </div>
+              </div>
+
+              <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
+                <div>
+                  <label for="reg-inf-password" style="font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem; display: block;">
+                    Password <span class="required">*</span>
+                  </label>
+                  <div class="influencer-auth-input-group">
+                    <i class="fa-solid fa-lock field-icon"></i>
+                    <input type="password" id="reg-inf-password" class="form-control" placeholder="Min 6 characters" required />
+                  </div>
+                </div>
+                <div>
+                  <label for="reg-inf-confirm-password" style="font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem; display: block;">
+                    Confirm Password <span class="required">*</span>
+                  </label>
+                  <div class="influencer-auth-input-group">
+                    <i class="fa-solid fa-lock field-icon"></i>
+                    <input type="password" id="reg-inf-confirm-password" class="form-control" placeholder="Confirm password" required />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 1rem;">
+                <label for="reg-inf-event" style="font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem; display: block;">
+                  Primary Event to Promote <span class="required">*</span>
+                </label>
+                <select id="reg-inf-event" class="form-control" style="font-size: 0.85rem;" required>
+                  <!-- Populated dynamically with active events -->
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 1.25rem;">
+                <label for="reg-inf-code" style="font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem; display: block;">
+                  Preferred Custom Promo Code (Optional)
+                </label>
+                <div style="display: flex; gap: 0.5rem;">
+                  <input type="text" id="reg-inf-code" class="form-control" placeholder="e.g. ADEOLA10" style="text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em;" />
+                  <button type="button" id="btn-reg-gen-code" class="btn btn-outline btn-sm" style="white-space: nowrap;">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Auto-Gen
+                  </button>
+                </div>
+                <small style="color: var(--gray-500); font-size: 0.75rem;">If left blank, BOOKAM will automatically generate a code with 10% discount for your buyers.</small>
+              </div>
+
+              <!-- Payout Bank Account -->
+              <div style="background: #F8FAFC; border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.25rem;">
+                <div style="font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+                  <i class="fa-solid fa-building-columns" style="color: var(--primary);"></i> Payout Bank Details (For Commission Settlements)
+                </div>
+                <div class="form-group" style="margin-bottom: 0.75rem;">
+                  <input type="text" id="reg-inf-bank-name" class="form-control" placeholder="Bank Name (e.g. Moniepoint, OPay, GTBank)" required />
+                </div>
+                <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                  <input type="text" id="reg-inf-account-num" class="form-control" placeholder="10-digit Account Number" maxlength="10" required />
+                  <input type="text" id="reg-inf-account-name" class="form-control" placeholder="Account Name" required />
+                </div>
+              </div>
+
+              <div style="margin-bottom: 1.25rem;">
+                <label style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.8rem; color: var(--gray-600); cursor: pointer;">
+                  <input type="checkbox" id="reg-inf-terms" required style="margin-top: 3px;" />
+                  <span>I agree to the BOOKAM Promoter Terms, 10% ticket sales commission policy, and direct bank settlement schedule.</span>
+                </label>
+              </div>
+
+              <button type="submit" id="btn-submit-inf-register" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1rem; font-weight: 700; justify-content: center;">
+                <i class="fa-solid fa-user-plus"></i> Complete Registration & Launch Dashboard
+              </button>
+            </form>
+          </div>
+
+          <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--gray-200); text-align: center;">
+            <p style="font-size: 0.8rem; color: var(--gray-500); margin-bottom: 0.5rem;">
+              Need promoter access or technical assistance?
+            </p>
+            <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM%20Support,%20I%20need%20help%20with%20my%20Promoter%20Portal%20access." target="_blank" class="btn btn-outline btn-sm" style="font-size: 0.8rem;">
+              <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> Contact Support on WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== AUTHENTICATED DASHBOARD VIEW ==================== -->
+    <div id="influencer-dashboard-main">
+
+      <!-- Top Authenticated User Banner -->
+      <div style="background: white; border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 0.75rem 1.25rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: #EEF2FF; color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--dark);" id="auth-promoter-name">Promoter Portal</div>
+            <div style="font-size: 0.75rem; color: var(--gray-500);" id="auth-promoter-email">promoter@bookam.ng</div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span class="badge badge-green" style="font-size: 0.75rem; padding: 0.25rem 0.6rem;">
+            <i class="fa-solid fa-circle" style="font-size: 0.5rem; margin-right: 0.25rem;"></i> Verified Promoter
+          </span>
+          <button type="button" id="btn-inf-logout" class="btn btn-outline btn-sm" style="font-size: 0.8rem; padding: 0.35rem 0.75rem; color: #DC2626; border-color: #FECACA;">
+            <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+          </button>
+        </div>
+      </div>
+
+    <!-- Influencer Selector / Header -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <h1 style="font-size: 1.65rem; font-weight: 800; color: var(--dark); margin: 0;">
+            Promoter Sales & Commission Dashboard
+          </h1>
+        </div>
+        <p style="font-size: 0.875rem; color: var(--gray-500); margin: 0.25rem 0 0 0;">
+          Real-time tracking of your referral link clicks, buyer promo code uses, ticket commissions, and direct bank payouts.
+        </p>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+        <label for="influencer-select" style="font-size: 0.85rem; font-weight: 700; color: var(--dark);">
+          <i class="fa-solid fa-user-tag" style="color: var(--primary);"></i> Switch Profile:
+        </label>
+        <select id="influencer-select" class="form-control" style="width: auto; min-width: 220px; font-weight: 600; padding: 0.45rem 0.85rem; font-size: 0.875rem;">
+          <!-- Dynamically populated -->
+        </select>
+        <button type="button" id="btn-toggle-guide" class="btn btn-outline btn-sm" style="font-size: 0.825rem; padding: 0.45rem 0.85rem;">
+          <i class="fa-regular fa-circle-question"></i> How It Works
+        </button>
+      </div>
+    </div>
+
+    <!-- Onboarding / First-Time Visitor Explainer Banner -->
+    <div class="promoter-guide-card" id="promoter-guide-box">
+      <div class="promoter-guide-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #EEF2FF; color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+            <i class="fa-solid fa-lightbulb"></i>
+          </div>
+          <div>
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--dark); margin: 0;">
+              First Time Here? How BOOKAM Promoter Commissions Work
+            </h3>
+            <p style="font-size: 0.8rem; color: var(--gray-500); margin: 0.15rem 0 0 0;">
+              Earn instant money promoting top events in Nigeria with 4 simple steps.
+            </p>
+          </div>
+        </div>
+        <button type="button" id="btn-dismiss-guide" style="background: none; border: none; font-size: 1.1rem; color: var(--gray-400); cursor: pointer;" title="Dismiss Guide">&times;</button>
+      </div>
+
+      <div class="promoter-steps-grid">
+        <div class="promoter-step-item">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="promoter-step-num">1</span>
+            <h4 class="promoter-step-title">Get Your Code & Link</h4>
+          </div>
+          <p class="promoter-step-desc">
+            You receive a dedicated promo code (e.g. <strong>TUNDE10</strong>) and custom referral link giving attendees discounts on ticket checkouts.
+          </p>
+        </div>
+
+        <div class="promoter-step-item">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="promoter-step-num">2</span>
+            <h4 class="promoter-step-title">Share With Audience</h4>
+          </div>
+          <p class="promoter-step-desc">
+            Share on WhatsApp, X (Twitter), TikTok bio, Instagram stories, or group chats. Every click is recorded automatically.
+          </p>
+        </div>
+
+        <div class="promoter-step-item">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="promoter-step-num">3</span>
+            <h4 class="promoter-step-title">Earn On Every Ticket</h4>
+          </div>
+          <p class="promoter-step-desc">
+            Whenever a fan purchases a ticket using your link or code, your commission (e.g. 5% - 15%) is instantly credited in real-time.
+          </p>
+        </div>
+
+        <div class="promoter-step-item">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="promoter-step-num">4</span>
+            <h4 class="promoter-step-title">Direct Bank Payout</h4>
+          </div>
+          <p class="promoter-step-desc">
+            The event host approves your sales ledger and settles your earnings directly to your bank account (Moniepoint, GTB, Zenith, etc.).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Profile & Event Card -->
+    <div class="influencer-hero-card" id="hero-card">
+      <div class="hero-flex-wrapper" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem; position: relative; z-index: 1;">
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <div id="hero-avatar" style="width: 64px; height: 64px; min-width: 64px; border-radius: 50%; background: #6366F1; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: 800; border: 3px solid rgba(255,255,255,0.3); box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+            T
+          </div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+              <h2 id="hero-name" style="font-size: 1.4rem; font-weight: 800; margin: 0; color: white;">Tunde Ednut</h2>
+              <span id="hero-status-badge" class="badge badge-green" style="font-size: 0.75rem;">Active Promoter</span>
+            </div>
+            <p id="hero-handle" style="font-size: 0.875rem; opacity: 0.85; margin: 0.2rem 0 0.4rem 0;">@tunde • tunde@example.com</p>
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+              <span style="font-size: 0.775rem; background: rgba(255,255,255,0.18); padding: 0.25rem 0.65rem; border-radius: 20px; color: #fff;">
+                <i class="fa-regular fa-calendar"></i> Promoting: <strong id="hero-event-title">Sixteen Beach Festival</strong>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-comm-box" style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem;">
+          <span style="font-size: 0.775rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.85;">Total Commission Earned</span>
+          <h3 id="hero-total-commission" style="font-size: 2rem; font-weight: 800; margin: 0; color: #4ADE80;">₦0</h3>
+          <span id="hero-commission-rate" style="font-size: 0.825rem; opacity: 0.9; background: rgba(0,0,0,0.25); padding: 0.2rem 0.6rem; border-radius: 12px;">Commission Rate: 5% per sale</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Referral Link & Share Box -->
+    <div class="share-pill-card">
+      <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+        <i class="fa-solid fa-share-nodes" style="color: var(--primary);"></i> Your Custom Promo Code & Tracked Referral Link
+      </h3>
+
+      <div class="share-grid" style="margin-bottom: 1.25rem;">
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase; margin-bottom: 0.35rem; display: block;">
+            Direct Personal Link to the Ticket:
+          </label>
+          <div class="share-link-input-group">
+            <input type="text" id="promoter-ticket-url" readonly value="" />
+            <button type="button" id="btn-copy-ticket-url" class="btn btn-primary btn-sm" style="white-space: nowrap; padding: 0.45rem 0.9rem; font-weight: 800;">
+              <i class="fa-regular fa-copy"></i> Copy Ticket Link
+            </button>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.35rem; margin-bottom: 0;">
+            <i class="fa-solid fa-bolt" style="color: var(--primary);"></i> Direct checkout link! Takes attendees straight to ticket selection with your referral pre-applied.
+          </p>
+        </div>
+
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase; margin-bottom: 0.35rem; display: block;">
+            Your Promo Code & Attendee Discount:
+          </label>
+          <div style="display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap;">
+            <div class="promo-badge-large" id="promoter-promo-code-display">
+              <i class="fa-solid fa-tag"></i> <span id="promoter-promo-code">TUNDE10</span>
+            </div>
+            <button type="button" id="btn-copy-promo-code" class="btn btn-outline btn-sm" style="padding: 0.45rem 0.85rem;">
+              <i class="fa-regular fa-copy"></i> Copy Code
+            </button>
+            <span id="promoter-discount-pill" class="badge badge-purple" style="font-size: 0.825rem; padding: 0.4rem 0.75rem;">
+              10% Buyer Discount
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ticket QR Code & Event Link Row -->
+      <div style="display: grid; grid-template-columns: 90px 1fr; gap: 1rem; align-items: center; background: #FFFFFF; border: 1px solid var(--gray-200); border-radius: 12px; padding: 0.85rem; margin-bottom: 1.25rem;">
+        <div style="text-align: center;">
+          <img id="promoter-ticket-qr" src="" alt="Ticket QR Code" style="width: 84px; height: 84px; border-radius: 8px; border: 1px solid var(--gray-200); display: block; margin: 0 auto 0.25rem;" />
+          <a id="btn-download-promoter-qr" href="#" download="promoter-ticket-qr.png" class="btn btn-outline btn-sm" style="padding: 0.15rem 0.45rem; font-size: 0.68rem; width: 100%; justify-content: center;">
+            <i class="fa-solid fa-download"></i> Save QR
+          </a>
+        </div>
+        <div>
+          <div style="font-weight: 800; font-size: 0.88rem; color: var(--dark); margin-bottom: 0.25rem;">
+            Your Scannable Personal Ticket QR Code
+          </div>
+          <p style="font-size: 0.78rem; color: var(--dark-subtle); margin-bottom: 0.5rem; line-height: 1.4;">
+            Download or add this QR code to posters, flyers, and social stories. Anyone scanning will be directed to buy tickets with your referral tracking.
+          </p>
+          <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+            <span style="font-size: 0.75rem; color: var(--gray-500);">Event Overview:</span>
+            <input type="text" id="promoter-share-url" readonly value="" style="padding: 0.35rem 0.65rem; border-radius: 6px; border: 1px solid var(--gray-300); font-size: 0.75rem; font-family: monospace; max-width: 260px;" />
+            <button type="button" id="btn-copy-share-url" class="btn btn-outline btn-sm" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;">
+              <i class="fa-regular fa-copy"></i> Copy
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Share Buttons with TikTok, WhatsApp, X -->
+      <div style="margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--gray-200);">
+        <span style="font-size: 0.825rem; font-weight: 700; color: var(--dark); display: block; margin-bottom: 0.65rem;">
+          Share Directly to Your Channels:
+        </span>
+        <div class="quick-share-buttons" style="display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap;">
+          <a href="#" id="btn-whatsapp-share" target="_blank" class="btn-whatsapp">
+            <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
+          </a>
+          <a href="#" id="btn-twitter-share" target="_blank" class="btn-x-share">
+            <i class="fa-brands fa-x-twitter"></i> Share on X (Twitter)
+          </a>
+          <button type="button" id="btn-tiktok-copy-helper" class="btn-tiktok-share">
+            <i class="fa-brands fa-tiktok"></i> Copy Bio Link for TikTok
+          </button>
+          <a href="#" id="btn-view-public-event" target="_blank" class="btn btn-outline btn-sm" style="padding: 0.6rem 1rem;">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Event Page
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Potential Earnings Calculator -->
+    <div class="promoter-calculator-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+        <div>
+          <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--dark); margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-calculator" style="color: var(--primary);"></i> Live Earnings Estimator
+          </h3>
+          <p style="font-size: 0.8rem; color: var(--gray-500); margin: 0.15rem 0 0 0;">
+            See how much you can make based on your expected ticket sales.
+          </p>
+        </div>
+        <span class="badge badge-purple" style="font-size: 0.75rem;">Instant Projection</span>
+      </div>
+
+      <div class="calc-grid">
+        <div>
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--gray-500); display: block; margin-bottom: 0.25rem;">Tickets You Plan to Sell</label>
+          <input type="number" id="calc-tickets" class="form-control" value="20" min="1" max="1000" style="font-size: 0.9rem; font-weight: 700;" />
+        </div>
+        <div>
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--gray-500); display: block; margin-bottom: 0.25rem;">Average Ticket Price (₦)</label>
+          <input type="number" id="calc-price" class="form-control" value="10000" min="500" step="500" style="font-size: 0.9rem; font-weight: 700;" />
+        </div>
+        <div>
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--gray-500); display: block; margin-bottom: 0.25rem;">Your Commission Rate (%)</label>
+          <input type="number" id="calc-rate" class="form-control" value="10" min="1" max="50" style="font-size: 0.9rem; font-weight: 700;" />
+        </div>
+        <div class="calc-result-box">
+          <span style="font-size: 0.725rem; font-weight: 700; text-transform: uppercase; color: #065F46; display: block;">Estimated Payout</span>
+          <strong id="calc-result-text" style="font-size: 1.35rem; color: #047857;">₦20,000</strong>
+          <span id="calc-subtext" style="font-size: 0.725rem; color: #065F46; display: block; margin-top: 0.15rem;">on ₦200,000 volume</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 KPI Metrics Grid -->
+    <div class="kpi-grid-6">
+      <div class="promoter-kpi-card">
+        <div class="promoter-kpi-top">
+          <span class="promoter-kpi-label">Link Clicks</span>
+          <div class="promoter-kpi-icon" style="background: #E0E7FF; color: #4338CA;">
+            <i class="fa-solid fa-arrow-pointer"></i>
+          </div>
+        </div>
+        <h3 class="promoter-kpi-value" id="kpi-clicks">0</h3>
+        <span class="promoter-kpi-sub">Total referral link visits</span>
+      </div>
+
+      <div class="promoter-kpi-card">
+        <div class="promoter-kpi-top">
+          <span class="promoter-kpi-label">Tickets Sold</span>
+          <div class="promoter-kpi-icon" style="background: #DCFCE7; color: #15803D;">
+            <i class="fa-solid fa-ticket"></i>
+          </div>
+        </div>
+        <h3 class="promoter-kpi-value" id="kpi-tickets-sold">0</h3>
+        <span class="promoter-kpi-sub">Verified attendee passes</span>
+      </div>
+
+      <div class="promoter-kpi-card">
+        <div class="promoter-kpi-top">
+          <span class="promoter-kpi-label">Conversion</span>
+          <div class="promoter-kpi-icon" style="background: #FEF3C7; color: #B45309;">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+        </div>
+        <h3 class="promoter-kpi-value" id="kpi-conversion-rate">0.0%</h3>
+        <span class="promoter-kpi-sub">Clicks converted to buys</span>
+      </div>
+
+      <div class="promoter-kpi-card">
+        <div class="promoter-kpi-top">
+          <span class="promoter-kpi-label">Sales Volume</span>
+          <div class="promoter-kpi-icon" style="background: #F3E8FF; color: #7E22CE;">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+        </div>
+        <h3 class="promoter-kpi-value" id="kpi-sales-volume">₦0</h3>
+        <span class="promoter-kpi-sub">Gross tickets generated</span>
+      </div>
+
+      <div class="promoter-kpi-card">
+        <div class="promoter-kpi-top">
+          <span class="promoter-kpi-label">Commission</span>
+          <div class="promoter-kpi-icon" style="background: #ECFCCB; color: #4D7C0F;">
+            <i class="fa-solid fa-money-bill-wave"></i>
+          </div>
+        </div>
+        <h3 class="promoter-kpi-value" id="kpi-total-commission" style="color: #15803D;">₦0</h3>
+        <span class="promoter-kpi-sub">Your gross cash earnings</span>
+      </div>
+
+      <div class="promoter-kpi-card">
+        <div class="promoter-kpi-top">
+          <span class="promoter-kpi-label">Promo Uses</span>
+          <div class="promoter-kpi-icon" style="background: #F1F5F9; color: #475569;">
+            <i class="fa-solid fa-percent"></i>
+          </div>
+        </div>
+        <h3 class="promoter-kpi-value" id="kpi-promo-uses">0</h3>
+        <span class="promoter-kpi-sub">Discount applied at cart</span>
+      </div>
+    </div>
+
+    <!-- Payout Status Breakdown -->
+    <div class="payout-status-bar">
+      <div class="payout-item">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase;">
+          <i class="fa-solid fa-clock" style="color: #F59E0B;"></i> Pending Settlement
+        </span>
+        <strong id="payout-pending" style="font-size: 1.25rem; color: #D97706;">₦0</strong>
+        <span style="font-size: 0.725rem; color: var(--gray-500);">Awaiting host payout verification</span>
+      </div>
+
+      <div class="payout-item">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase;">
+          <i class="fa-solid fa-circle-check" style="color: #10B981;"></i> Approved (Ready)
+        </span>
+        <strong id="payout-approved" style="font-size: 1.25rem; color: #059669;">₦0</strong>
+        <span style="font-size: 0.725rem; color: var(--gray-500);">Verified ticket sales</span>
+      </div>
+
+      <div class="payout-item">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase;">
+          <i class="fa-solid fa-wallet" style="color: #6366F1;"></i> Paid Out
+        </span>
+        <strong id="payout-paid" style="font-size: 1.25rem; color: #4338CA;">₦0</strong>
+        <span style="font-size: 0.725rem; color: var(--gray-500);">Disbursed to your bank account</span>
+      </div>
+
+      <div class="payout-item">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase;">
+          <i class="fa-solid fa-arrow-rotate-left" style="color: #EF4444;"></i> Reversed / Refunds
+        </span>
+        <strong id="payout-reversed" style="font-size: 1.25rem; color: #DC2626;">₦0</strong>
+        <span style="font-size: 0.725rem; color: var(--gray-500);">Cancelled/refunded orders</span>
+      </div>
+    </div>
+
+    <!-- Referral Sales Activity Table -->
+    <div class="table-container" style="background: white; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); padding: 1.5rem; border: 1px solid var(--gray-200);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+        <div>
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--dark); margin: 0;">
+            <i class="fa-solid fa-list-check" style="color: var(--primary);"></i> Referral Sales & Commission History
+          </h3>
+          <p style="font-size: 0.8rem; color: var(--gray-500); margin: 0.2rem 0 0 0;">
+            Itemized transactions attributed to your referral link or promo code.
+          </p>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <label for="filter-status" style="font-size: 0.8rem; font-weight: 700; color: var(--gray-500);">Filter:</label>
+          <select id="filter-status" class="form-control" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.85rem;">
+            <option value="All">All Statuses</option>
+            <option value="Approved">Approved</option>
+            <option value="Pending">Pending</option>
+            <option value="Paid">Paid</option>
+            <option value="Reversed">Reversed</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Desktop / Tablet Table View -->
+      <div class="table-responsive desktop-sales-table">
+        <table class="table" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--gray-200); text-align: left; font-size: 0.775rem; color: var(--gray-500); text-transform: uppercase;">
+              <th style="padding: 0.75rem;">Date & Time</th>
+              <th style="padding: 0.75rem;">Buyer</th>
+              <th style="padding: 0.75rem;">Ticket Type</th>
+              <th style="padding: 0.75rem;">Qty</th>
+              <th style="padding: 0.75rem;">Order Value</th>
+              <th style="padding: 0.75rem;">Promo Code</th>
+              <th style="padding: 0.75rem;">Commission</th>
+              <th style="padding: 0.75rem;">Status</th>
+            </tr>
+          </thead>
+          <tbody id="referral-sales-tbody">
+            <!-- Populated dynamically via js/influencer-dashboard.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile Transaction Cards View (Prevents horizontal clumping on phones) -->
+      <div class="mobile-sales-cards" id="referral-sales-mobile-cards">
+        <!-- Populated dynamically via js/influencer-dashboard.js -->
+      </div>
+    </div>
+    </div> <!-- End #influencer-dashboard-main -->
+
+  </main>
+
+  <!-- Footer with Active Social Reach Links -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <i class="fa-solid fa-ticket"></i>
+            <span>BOOK<span class="highlight">AM</span></span>
+          </a>
+          <p>Nigeria's trusted event ticketing, organizer hosting, and promoter commission platform.</p>
+          
+          <div class="footer-socials">
+            <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer" class="social-icon social-whatsapp" aria-label="Official WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer" class="social-icon social-tiktok" aria-label="Official TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer" class="social-icon social-twitter" aria-label="Official Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Promoter Resources</h4>
+          <ul class="footer-links">
+            <li><a href="influencer-dashboard.html">Promoter Hub</a></li>
+            <li><a href="organizer-register.html">Host Registration</a></li>
+            <li><a href="events.html">Browse Active Events</a></li>
+            <li><a href="organizer-dashboard.html">Organizer Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Official Social Reach</h4>
+          <ul class="footer-links">
+            <li>
+              <a href="https://wa.me/2349162901356?text=Hello%20BOOKAM" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 0.35rem;"></i> WhatsApp: +234 916 290 1356
+              </a>
+            </li>
+            <li>
+              <a href="https://www.tiktok.com/@justbookam?_r=1&_t=ZS-99NR8WgrafV" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-tiktok" style="color: #fff; margin-right: 0.35rem;"></i> TikTok: @justbookam
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/justbookam?s=11&t=JXm_PAOpg8bFJ3RtzTFTTg" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-x-twitter" style="color: #fff; margin-right: 0.35rem;"></i> Twitter / X: @justbookam
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Support & Verification</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/2349162901356?text=Hi%20BOOKAM%20Support" target="_blank">24/7 Promoter Support</a></li>
+            <li><a href="organizer-register.html#terms">Exclusive Ticketing Agreement</a></li>
+            <li><a href="index.html">Terms & Conditions</a></li>
+            <li><a href="index.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BOOKAM Event Platform. All rights reserved.</p>
+        <p>Direct Commission Settlement & Promoter Ecosystem</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/store.js"></script>
+  <script type="module" src="js/influencer-dashboard.js"></script>
+</body>
+</html>
