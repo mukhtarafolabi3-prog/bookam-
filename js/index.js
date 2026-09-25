@@ -417,6 +417,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const previewImg = document.getElementById(previewImgId);
     const removeBtn = document.getElementById(removeBtnId);
 
+    const isLikelyImageFile = (file) => {
+      if (!file) return false;
+      const hasImageType = !!(file.type && file.type.startsWith('image/'));
+      const hasImageExtension = /\.(png|jpe?g|webp|gif|bmp|svg)$/i.test(file.name || '');
+      return hasImageType || hasImageExtension;
+    };
+
     function updatePreview(src) {
       if (src) {
         if (previewImg) previewImg.src = src;
@@ -434,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fileInput.addEventListener('change', async (e) => {
         const file = e.target.files?.[0];
         if (!file) return;
-        if (!file.type.startsWith('image/')) {
+        if (!isLikelyImageFile(file)) {
           alert('Please select a valid image file (PNG, JPG, WebP, SVG).');
           return;
         }
@@ -499,13 +506,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       dropzone.addEventListener('drop', (e) => {
         const file = e.dataTransfer?.files?.[0];
-        if (file && file.type.startsWith('image/')) {
+        if (file && isLikelyImageFile(file)) {
           if (fileInput) {
             const dt = new DataTransfer();
             dt.items.add(file);
             fileInput.files = dt.files;
             fileInput.dispatchEvent(new Event('change'));
           }
+        } else {
+          alert('Please drop a valid image file (PNG, JPG, WebP, SVG).');
         }
       });
     }
